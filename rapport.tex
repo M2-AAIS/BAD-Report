@@ -1,0 +1,113 @@
+\documentclass[a4paper,10pt]{article}
+
+% Définition des marges du document
+\usepackage[xetex,
+a4paper,
+margin=2cm,
+headheight=0.4cm,
+headsep=0.8cm,
+footskip=1.2cm,
+nomarginpar]
+{geometry}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX,RawFeature={-calt,+tnum,+lnum}}
+\setmainfont[BoldFont={Adobe Garamond Pro Semibold},BoldItalicFont={Adobe Garamond Pro Semibold Italic}]{EB Garamond}
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+
+% Configuration du fichier PDF de sortie.
+\usepackage{xcolor} % Gestion de différentes couleurs
+\definecolor{linkcolor}{rgb}{0, 0, 0.6} % Définition de la couleur des liens pdf
+\definecolor{brandeisblue}{rgb}{0, 0.44, 1.0}
+\definecolor{capri}{rgb}{0, 0.75, 1.0}
+\definecolor{dgreen}{rgb}{0.1, 0.6, 0.1}
+\definecolor{caribbeangreen}{rgb}{0, 0.8, 0.6}
+ 
+% Style graphique des sections
+\usepackage{sectsty}
+\sectionfont{\color{blue}}
+\subsectionfont{\color{brandeisblue}}
+\subsubsectionfont{\color{capri}}
+\paragraphfont{\color{dgreen}}
+
+\usepackage[xetex,
+unicode=true,
+pdfstartview=FitV,
+pdftitle=M2\ AAIS\ –\ Projet\ Méthodes\ Numériques\ BAD,
+pdfauthor=M2\ AAIS,
+pdfsubject=Projet\ BlackHole\ Accretion\ Disk,
+pdfkeywords=methodes\ numeriques\ –\ trou\ noir\ –\ disque\ d’accrétion,
+colorlinks=true,
+linkcolor=linkcolor,
+citecolor=linkcolor,
+urlcolor=linkcolor,
+hyperindex=true]
+{hyperref}
+
+% En‑têtes et pieds‑de‑pages personnalisés
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[L]{\scriptsize\textsc{Méthodes Numériques – Projet BlackHole Accretion Disk}}
+\fancyhead[R]{\scriptsize\textsc{M2 AAIS}}
+\fancyfoot[C]{\thepage}
+
+% Inclusion de figures
+\usepackage{graphicx}
+%\usepackage[abs]{overpic}
+\graphicspath{{figures/}}
+ 
+% Quelques packages utiles pour les mathématiques
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage[nameinlink]{cleveref}
+% Mise en formes des unités
+\usepackage{siunitx}
+\sisetup{
+number-unit-product = \,,
+inter-unit-product = \ensuremath{{}\cdot{}},
+separate-uncertainty = true,
+multi-part-units = single}
+
+\usepackage{tabularx} % Gestion avancée des tableaux
+
+ 
+% Gestion avancée des listes
+\usepackage{enumitem}
+\setlist{noitemsep, topsep=3pt, partopsep=0pt}
+
+\title{\textsc{Méthodes Numériques – Projet BlackHole Accretion Disk}}
+\author{\textsc{M2 AAIS}}
+%\date{18 décembre 2015}
+\date{\today} 
+
+% Début du document proprement dit
+\begin{document}
+
+% Premières pages : i, ii, iii, iv, ...
+\pagenumbering{roman}
+ 
+% Pour faciliter la mise en forme des pages de garde, on supprime l’indentation
+% automatique en début de paragraphe
+\setlength{\parindent}{0pt}
+
+\include{page_garde} 
+
+\newpage
+
+% Première page du rapport
+\pagenumbering{arabic} % 1, 2, 3, ...
+
+% On rétablit l’indentation automatique en début de paragraphe
+\setlength{\parindent}{16pt}
+\setlength{\parskip}{1ex}
+
+\include{introduction}
+
+\include{partie1_adimensionnement}
+
+\include{conclusion}
+
+\end{document}
