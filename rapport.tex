@@ -62,6 +62,12 @@ hyperindex=true]
 \usepackage{amsfonts}
 \usepackage{amssymb}
 
+% Corrections de l’espacement autour des \left et \right
+\let\originalleft\left
+\let\originalright\right
+\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
+\renewcommand{\right}{\aftergroup\egroup\originalright}
+
 \usepackage[nameinlink]{cleveref}
 % Mise en formes des unités
 \usepackage{siunitx}
