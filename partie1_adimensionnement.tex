@@ -1,11 +1,16 @@
 \section{Adimensionnement des variables et équations}
 
-\subsection{Équations et variables originales}
+\subsection{Description physique du modèle}
 
-Le modèle va dépendre de 6 paramètres : $M$, $r_{max}$, $\dot{M_0}$, $\alpha$,
-$X$ et $Y$.
+Cette partie est fortement inspirée du document original fourni par Didier
+\textsc{Pelat}, qui se base lui-même
 
-Le trou noir est décrit par sa masse $M$, qui donne également son rayon de Schwarzschild :
+Le modèle va dépendre de 6 paramètres d’entrée : $M$, $r_{max}$, $\dot{M_0}$, $\alpha$,
+$X$ et $Y$. Ceux-ci sont décrits par la suite.
+
+\subsubsection{Paramètres du trou noir}
+
+Nous considérons un trou noir de Schwarzschild est décrit par sa masse $M$, qui donne également son rayon de Schwarzschild :
 
 \begin{equation}
     r_s = \frac{2 G M}{c^2} \approx \SI{3.0}{\kilo\meter} \frac{M}{M_{\odot}}
@@ -79,7 +84,7 @@ Vitesse locale d’accrétion :
 
 Taux d’accrétion :
 \begin{equation}
-    \dot{M} = − 2 \pi r \Sigma \nu
+    \dot{M} = − 2 \pi r \Sigma v
 \end{equation}
 
 Température :
@@ -112,223 +117,172 @@ Profondeur optique :
 Où :
 
 \begin{align}
-    \kappa_e &= \num{0.2} (1+X) \si{\square\centi\meter\per\gram} \approx \SI{0.34}{\square\centi\meter\per\gram} \\
-    \kappa_\mathrm{ff} &= \num{6.13e22} \rho T^{-\frac{7}{2}} \si{\square\centi\meter\per\gram}\\
-    \epsilon_\mathrm{ff} &= \num{6.22e20} \rho^2 T^½ \\
+    \kappa_e &= \num{0.2} × (1+X) \si{\square\centi\meter\per\gram} \approx \SI{0.34}{\square\centi\meter\per\gram} \\
+    \kappa_\mathrm{ff} &= \num{6.13e22} × \rho T^{-\frac{7}{2}} \si{\square\centi\meter\per\gram}\\
+    \epsilon_\mathrm{ff} &= \num{6.22e20} × \rho^2 T^½ \\
     A &= 1
 \end{align}
 
 \subsection{Variables et équations adimensionnées}
 
 Adimensionnement du temps :
-
 \begin{equation}
-    t^\star = t \Omega_\mathrm{max}
+    t^\star = t × \Omega_\mathrm{max}
 \end{equation}
 
+Où :
 \begin{equation}
     \Omega_\mathrm{max} = \left( \frac{G M}{r^3_\mathrm{min}} \right)^½
 \end{equation}
 
 Adimensionnement de $r$ :
-
 \begin{equation}
     x = \left( \frac{r}{r_s} \right)^½
 \end{equation}
 
+On introduit $S$ :
 \begin{equation}
-    S = \Sigma × x
+    S = \Sigma x
 \end{equation}
 
 Donc :
 \begin{equation}
-    \frac{\partial S}{\partial t^\star} = \frac{3}{4} \frac{1}{\Omega_\mathrm{max} x^2 r_s^2} \frac{\partial^2}{\partial x^2} \left(\nu S\right)
+    \frac{\partial S}{\partial t^\star} = \frac{3}{4} \frac{1}{\Omega_\mathrm{max} r_s^2 x^2} \frac{\partial^2}{\partial x^2} \left(\nu S\right)
+\end{equation}
+
+On introduit $S^\star$, la grandeur adimensionnée correspondant à $S$ (qu’on définira plus tard puisque cela ne change rien ici) :
+\begin{equation}
+    \frac{\partial S^\star}{\partial t^\star} = \frac{3}{4} \frac{1}{\Omega_\mathrm{max} r_s^2 x^2} \frac{\partial^2}{\partial x^2} \left(\nu S^\star\right)
 \end{equation}
 
 On choisit donc :
 \begin{equation}
-    \nu^\star = \frac{3}{4} \frac{\nu}{\Omega_\mathrm{max} r_s^2}
+    \nu^\star = \frac{3}{4} \frac{\nu}{\Omega_\mathrm{max} r_s^2} = \frac{\nu}{\nu_0}
 \end{equation}
 
 Ce qui donne :
 \begin{equation}
-    \frac{\partial S}{\partial t^\star} = \frac{1}{x^2} \frac{\partial^2}{\partial x^2} \left(\nu^\star S\right)
+    \frac{\partial S^\star}{\partial t^\star} = \frac{1}{x^2} \frac{\partial^2}{\partial x^2} \left(\nu^\star S^\star\right)
 \end{equation}
 
-On en déduit l’expression de la vitesse radiale :
+On regarde les conséquences de ces choix pour l’expression de la vitesse radiale :
 \begin{equation}
-    v = − \frac{2 \Omega_\mathrm{max} r_s}{S x} \frac{\partial}{\partial x} \left(\nu^\star S\right)
+    v = − \frac{2 \Omega_\mathrm{max} r_s}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right)
 \end{equation}
 
-On compare à la vitesse du son $c_s = \Omega H$ :
+On pose donc :
 \begin{equation}
-    \frac{v}{c_s} = − \frac{2 \Omega_\mathrm{max} r_s}{\Omega H S x} \frac{\partial}{\partial x} \left(\nu^\star S\right)
+    v_0 = \Omega_\mathrm{max} r_s \Rightarrow v^\star = \frac{v}{v_0} = − \frac{2}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right)
 \end{equation}
 
-On introduit deux adimensionnements supplémentaires :
-\begin{align}
-    \Omega^\star &= \frac{\Omega}{\Omega_\mathrm{max}} = \frac{3\sqrt{3}}{x^3} \\
-    H^\star &= \frac{H}{r_s}
-\end{align}
-
-Ce qui donne :
+On en profite pour adimensionner $c_s = \Omega H$ :
 \begin{equation}
-    \frac{v}{c_s} = − \frac{1}{\Omega^\star H^\star S x} \frac{\partial}{\partial x} \left(\nu^\star S\right)
+    c_s^\star = \frac{c_s}{v_0} = \frac{\Omega H}{\Omega_\mathrm{max} r_s}
+\end{equation}
+
+On pose donc logiquement :
+\begin{equation}
+    \Omega^\star = \frac{\Omega}{\Omega_\mathrm{max}} = \frac{3\sqrt{3}}{x^3}
+\end{equation}
+
+Et par conséquent :
+\begin{equation}
+    H^\star = \frac{H}{r_s}
+\end{equation}
+
+Ce qui nous donne bien :
+\begin{equation}
+    c_s^\star = \Omega^\star H^\star
 \end{equation}
 
 Pour le taux d’accrétion :
 \begin{equation}
-    \dot{M}^\star = \frac{\dot{M}}{\dot{M_0}} = − 2 \pi \sqrt{27} \frac{\Omega_\mathrm{max} r_s^2}{\dot{M_0}} x^{-2} S \frac{v}{c_s} H^\star 
+    \dot{M}^\star = \frac{\dot{M}}{\dot{M_0}} = − \frac{2 \pi x^2 r_s v^\star v_0 \Sigma}{\dot{M_0}} = − \frac{2 \pi r_s^2 \Omega_\mathrm{max} v^\star x^2 \Sigma}{\dot{M_0}} 
 \end{equation}
 
-Température :
+Ce qui nous amène à poser :
+\begin{equation}
+    \Sigma^\star = \frac{\Sigma}{\Sigma_0} = \Sigma × \frac{2 \pi r_s^2 \Omega_\mathrm{max}}{\dot{M_0}}
+\end{equation}
 
+On en profite pour adimensionner naturellement $S$ :
+\begin{equation}
+    S^\star = \frac{S}{\Sigma_0} = \Sigma^\star x
+\end{equation}
+
+On obtient donc :
+\begin{equation}
+    \dot{M}^\star = v^\star S^\star x
+\end{equation}
+
+Pour la température, on pose :
 \begin{equation}
     T^{\star} = \frac{T}{T_0}
 \end{equation}
 
+Où :
 \begin{equation}
-    T_0 = \left(\frac{1}{9} × \frac{L_{tot}}{4 \pi r_s^2 \sigma} \right)^{\frac{1}{4}}
+    T_0 = \left(\frac{1}{\sqrt{27}} × \frac{L_{tot}}{4 \pi r_s^2 \sigma} \right)^{\frac{1}{4}}
 \end{equation}
 
+Et :
 \begin{equation}
     L_{tot} = \frac{1}{12} \dot{M_0} c^2
 \end{equation}
 
-\begin{align}
-    \left\{
-        \begin{aligned}
-            \partial T &= \partial T^{\star} × T_0 \\
-            \partial t &= \frac{\partial t^{\star}}{\Omega_{max}}
-        \end{aligned}
-    \right.
-\end{align}
-
-\begin{equation}
-    T_0 \Omega_\mathrm{max} C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
-    3 \Omega^2 \nu^\star \Omega_\mathrm{max} r_s^2 − \frac{2 F_z x}{S} +
-    \frac{R}{\mu} \left(\frac{4−3\beta}{\beta}\right) \frac{T^\star T_0 x}{S}
-    \left( \frac{\partial S}{\partial t^\star} \frac{\Omega_\mathrm{max}}{x} + v \frac{\partial}{\partial x} \left(\frac{S}{x}\right) \frac{1}{2 r^½ r_s^½}  \right) –
-    C_v v \frac{\partial T^\star}{\partial x} \frac{T_0}{2 r^½ r_s^½}
-\end{equation}
-
-\begin{equation}
-    T_0 C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
-    3 \Omega^2 \nu^\star r_s^2 − \frac{2 F_z x}{S \Omega_\mathrm{max}} +
-    \frac{R}{\mu} \left(\frac{4−3\beta}{\beta}\right) \frac{T^\star T_0 x}{S}
-    \left( \frac{\partial S}{\partial t^\star} \frac{1}{x} + \frac{v}{\Omega_\mathrm{max}} \frac{\partial}{\partial x} \left(\frac{S}{x}\right) \frac{1}{2 r^½ r_s^½}  \right) –
-    \frac{C_v v}{\Omega_\mathrm{max}} \frac{\partial T^\star}{\partial x} \frac{T_0}{2 r^½ r_s^½}
-\end{equation}
-
-\begin{equation}
-    T_0 C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
-    3 \Omega^2 \nu^\star r_s^2 − \frac{2 F_z x}{S \Omega_\mathrm{max}} +
-    \frac{R}{\mu} \left(\frac{4−3\beta}{\beta}\right) \frac{T^\star T_0 x}{S}
-    \left( \frac{\partial S}{\partial t^\star} \frac{1}{x} − \frac{r_s}{S x} \frac{\partial}{\partial x} \left(\nu^\star S\right) \frac{\partial}{\partial x} \left(\frac{S}{x}\right) \frac{1}{r^½ r_s^½}  \right) –
-    \frac{C_v r_s}{S x} \frac{\partial}{\partial x} \left(\nu^\star S\right) \frac{\partial T^\star}{\partial x} \frac{T_0}{r^½ r_s^½}
-\end{equation}
-
-\begin{equation}
-    T_0 C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
-    3 \Omega^2 \nu^\star r_s^2 − \frac{2 F_z x}{S \Omega_\mathrm{max}} +
-    \frac{R}{\mu} \left(\frac{4−3\beta}{\beta}\right) \frac{T^\star T_0 x}{S}
-    \left( \frac{\partial S}{\partial t^\star} \frac{1}{x} − \frac{1}{S x^2} \frac{\partial}{\partial x} \left(\nu^\star S\right) \frac{\partial}{\partial x} \left(\frac{S}{x}\right) \right) –
-    \frac{C_v T_0}{S x^2} \frac{\partial}{\partial x} \left(\nu^\star S\right) \frac{\partial T^\star}{\partial x}
-\end{equation}
-
-On regarde le premier terme :
-\begin{equation}
-    3 \Omega^2 \nu^\star r_s^2 = 3 \frac{\Omega^2}{\Omega_\mathrm{max}^2} \frac{G M \nu^\star}{27 r_s} = {\Omega^\star}^2 \frac{G M \nu^\star}{3 r_\mathrm{min}}
-\end{equation}
-
-Soit :
-\begin{equation}
-    T_0 C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
-    {\Omega^\star}^2 \frac{G M \nu^\star}{3 r_\mathrm{min}} − \frac{2 F_z x}{S \Omega_\mathrm{max}} +
-    \frac{R}{\mu} \left(\frac{4−3\beta}{\beta}\right) \frac{T^\star T_0 x}{S}
-    \left( \frac{\partial S}{\partial t^\star} \frac{1}{x} − \frac{1}{S x^2} \frac{\partial}{\partial x} \left(\nu^\star S\right) \frac{\partial}{\partial x} \left(\frac{S}{x}\right) \right) –
-    \frac{C_v T_0}{S x^2} \frac{\partial}{\partial x} \left(\nu^\star S\right) \frac{\partial T^\star}{\partial x}
-\end{equation}
-
-Puis :
-\begin{equation}
-    S^\star = \frac{S}{\Sigma_0}
-\end{equation}
-
-Où :
-
-\begin{equation}
-    \Sigma_0 = \frac{\dot{M_0}}{4 \pi \nu} = \frac{\dot{M_0}}{4 \pi} \frac{3}{4} \frac{1}{\Omega_\mathrm{max} r_s^2}
-\end{equation}
-
-(Note : je pense qu’il manque un $\nu^\star$ et il y avait une autre expression dans un autre coin du tableau, mais peu déchiffrable)
-
-\begin{equation}
-    T_0 C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
-    {\Omega^\star}^2 \frac{G M \nu^\star}{3 r_\mathrm{min}} − \frac{2 F_z x}{S^\star \Omega_\mathrm{max}} +
-    \frac{R}{\mu} \left(\frac{4−3\beta}{\beta}\right) \frac{T^\star T_0 x}{S^\star}
-    \left( \frac{\partial S^\star}{\partial t^\star} \frac{1}{x} − \frac{1}{S^\star x^2} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right) \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) –
-    \frac{C_v T_0}{S^\star x^2} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right) \frac{\partial T^\star}{\partial x}
-\end{equation}
-
-Par rapport aux photos, je simplifie un $x$ en plus dans le terme central (si ça vous va sous cette forme, je propose de le simplifier plus tôt) :
-
-\begin{equation}
-    T_0 C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
-    {\Omega^\star}^2 \frac{G M \nu^\star}{3 r_\mathrm{min}} − \frac{2 F_z x}{S^\star \Omega_\mathrm{max}} +
-    \frac{R}{\mu} \left(\frac{4−3\beta}{\beta}\right) \frac{T^\star T_0}{S^\star}
-    \left( \frac{\partial S^\star}{\partial t^\star} − \frac{1}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right) \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) –
-    \frac{C_v T_0}{S^\star x^2} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right) \frac{\partial T^\star}{\partial x}
-\end{equation}
-
-On pourrait aussi envisager de remplacer $\frac{\partial S^\star}{\partial t^\star}$ pour avoir une dérivée que selon $x$ à droite (qui se simplifie peut-être en plus).
-
 Pour $F_z$ :
-
-\begin{align}
-    \kappa_\mathrm{ff} &= \num{6.13e22} \rho_0 \rho^\star \left(T^\star T_0\right)^{-\frac{7}{2}} \si{\square\centi\meter\per\gram} \\
-    \tau_\mathrm{eff} &= ½ \left[ \num{0.2} (1+X) \num{6.13e22} \rho_0 \rho^\star \left(T^\star T_0\right)^{-\frac{7}{2}} \right]^½ \Sigma_0 \Sigma^\star \\
-    \epsilon_\mathrm{eff} &= \num{6.22e20} (\rho_0 \rho^\star)^2 (T_0 T^\star)^{-½} \text{cgs}
-\end{align}
-
-Où :
-
-\begin{align}
-    \rho_0 &= \frac{\Sigma_0}{r_s} \\
-    \rho^\star &= \frac{\rho}{\rho_0} = \frac{\rho r_s}{\Sigma_0}
-\end{align}
-
-(Pas trouvé de définition de $\Sigma^\star$, mais bon ça se déduit facilement comme étant $\Sigma/\Sigma_0$.)
-
 \begin{equation}
     F_z =
     \begin{cases}
-        \frac{2 a c T_0^4 {T^\star}^4}{3 (\kappa_\mathrm{ff} + \kappa_e)\Sigma^\star \Sigma_0}, &\text{si $\tau_\mathrm{eff} \geq 1$} \\
-        \epsilon_\mathrm{ff} H, &\text{si $\tau_\mathrm{eff} < 1$}
+        \frac{2 a c \left(T_0 T^\star\right)^4}{3 (\kappa_\mathrm{ff} + \kappa_e)\Sigma^\star \Sigma_0}, &\text{si $\tau_\mathrm{eff} \geq 1$} \\
+        \epsilon_\mathrm{ff} r_s H^\star, &\text{si $\tau_\mathrm{eff} < 1$}
     \end{cases}
+\end{equation}
+
+Où :
+\begin{align}
+    \kappa_\mathrm{ff} &= \num{6.13e22} \rho_0 \rho^\star \left(T^\star T_0\right)^{-\frac{7}{2}} \si{\square\centi\meter\per\gram} \\
+    \tau_\mathrm{eff} &= \frac{1}{2} \left[ \num{0.2} × (1 + X) × \num{6.13e22} \left(\rho_0 \rho^\star\right) \left(T^\star T_0\right)^{-\frac{7}{2}} \right]^½ \Sigma_0 \Sigma^\star \\
+    \epsilon_\mathrm{eff} &= \num{6.22e20} (\rho_0 \rho^\star)^2 (T_0 T^\star)^½ \text{cgs}
+\end{align}
+
+Et :
+\begin{equation}
+    \rho^\star = \frac{\rho}{\rho_0} = \frac{\rho r_s}{\Sigma_0}
 \end{equation}
 
 Enfin :
 
 \begin{equation}
-    {P_\mathrm{gaz}}_0 = \frac{\rho_0}{\mu m_p} k_B T_0
+    {P_\mathrm{gaz}}_0 = \frac{\rho_0}{\mu m_p} k_B T_0 \Rightarrow P_\mathrm{gaz}^\star = \frac{P_\mathrm{gaz}}{{P_\mathrm{gaz}}_0} = \rho^\star T^\star
 \end{equation}
 
 \begin{equation}
-    {P_\mathrm{rad}}_0 = \frac{1}{3} a T_0^4
+    {P_\mathrm{rad}}_0 = \frac{1}{3} a T_0^4 \Rightarrow P_\mathrm{rad}^\star = \frac{P_\mathrm{rad}}{{P_\mathrm{rad}}_0} = {T^\star}^4
 \end{equation}
+
+Ce qui donne pour $\beta$ :
+\begin{equation}
+    \beta = \frac{1}{1 + \frac{P_\mathrm{rad}^\star {P_\mathrm{rad}}_0}{P_\mathrm{gaz}^\star {P_\mathrm{gaz}}_0}} = \frac{1}{1 + \frac{{T^\star}^3}{\rho^\star} \frac{\mu m_p a T_0^3}{3 \rho_0 k_B}}
+\end{equation}
+
+On posera donc :
+\begin{equation}
+    B = \frac{\mu m_p a T_0^3}{3 \rho_0 k_B}
+\end{equation}
+
+Pour écrire :
+\begin{equation}
+    \beta = \frac{1}{1 + B \frac{{T^\star}^3}{\rho^\star}}
+\end{equation}
+
+La grande équation adimensionnée :
 
 \begin{equation}
-    c_s = \left(\frac{P^\star}{\rho^\star}\right)^½ \left(\frac{P_0}{\rho_0}\right)^½
+    C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
+    {\Omega^\star}^2 \frac{9 \Omega_\mathrm{max}}{4 T_0} − \frac{2 F_z x}{S^\star \Sigma_0 \Omega_\mathrm{max} T_0} +
+    \frac{R}{\mu} \frac{4−3\beta}{\beta} \frac{T^\star}{S^\star} ×
+    \left( \frac{\partial S^\star}{\partial t^\star} + \frac{v^\star}{2} \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) –
+    \frac{C_v v^\star}{2 x} \frac{\partial T^\star}{\partial x}
 \end{equation}
 
-\begin{equation}
-    c_s^\star = \left(\frac{P^\star}{\rho^\star}\right)^½
-\end{equation}
-
-Fermeture :
-
-\begin{align}
-    \nu &= \frac{2}{3} \alpha \left(\frac{P_0}{\rho_0}\right)^½ c_s^\star r_s H^\star = \frac{4}{3} \Omega_\mathrm{max} r_s^3 \nu^\star \\
-    \hookrightarrow P_0 &= \rho_0 r_s^2 \Omega_\mathrm{max}^2
-\end{align}

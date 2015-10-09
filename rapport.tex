@@ -79,11 +79,9 @@ multi-part-units = single}
 
 \usepackage{tabularx} % Gestion avancée des tableaux
 
+% Bibliographie ########################################################## Voir pour les options à mettre.
+\usepackage[numbers]{natbib}
  
-% Gestion avancée des listes
-\usepackage{enumitem}
-\setlist{noitemsep, topsep=3pt, partopsep=0pt}
-
 \title{\textsc{Méthodes Numériques – Projet BlackHole Accretion Disk}}
 \author{\textsc{M2 AAIS}}
 %\date{18 décembre 2015}
@@ -115,5 +113,10 @@ multi-part-units = single}
 \include{partie1_adimensionnement}
 
 \include{conclusion}
+
+\newpage
+\addcontentsline{toc}{section}{Bibliographie}
+\bibliographystyle{unsrtnat-fr}
+\bibliography{bad}
 
 \end{document}
