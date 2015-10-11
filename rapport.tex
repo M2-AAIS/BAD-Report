@@ -116,6 +116,14 @@ multi-part-units = single}
 
 \include{conclusion}
 
+\appendix
+
+\makeatletter
+\def\@seccntformat#1{Annexe~\csname the#1\endcsname:\quad}
+\makeatother
+
+\include{annexea_adimensionnement}
+
 \newpage
 \NoAutoSpaceBeforeFDP
 \addcontentsline{toc}{section}{Bibliographie}
