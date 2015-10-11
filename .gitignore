@@ -10,7 +10,9 @@
 # *.ps
 # *.eps
 # *.pdf
-rapport.pdf # Don’t track changes on this file
+
+# Don’t track changes on this file
+rapport.pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
