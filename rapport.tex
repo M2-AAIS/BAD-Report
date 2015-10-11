@@ -13,8 +13,10 @@ nomarginpar]
 \usepackage{fontspec}
 \defaultfontfeatures{Ligatures=TeX,RawFeature={-calt,+tnum,+lnum}}
 %\setmainfont[BoldFont={Adobe Garamond Pro Semibold},BoldItalicFont={Adobe Garamond Pro Semibold Italic}]{EB Garamond}
-\usepackage{polyglossia}
-\setdefaultlanguage{french}
+\usepackage[frenchb]{babel}
+\frenchbsetup{ItemLabels=\textendash}
+%\usepackage{polyglossia}
+%\setdefaultlanguage{french}
 
 % Configuration du fichier PDF de sortie.
 \usepackage{xcolor} % Gestion de différentes couleurs
@@ -115,6 +117,7 @@ multi-part-units = single}
 \include{conclusion}
 
 \newpage
+\NoAutoSpaceBeforeFDP
 \addcontentsline{toc}{section}{Bibliographie}
 \bibliographystyle{unsrtnat-fr}
 \bibliography{bad}
