@@ -10,13 +10,15 @@
             nomarginpar,
             ]{geometry}
 
-\usepackage{fontspec}
+% Paquet très utile pour les maths, à charger avant mathspec
+\usepackage{amsmath}
+
+\usepackage{mathspec}
 \defaultfontfeatures{Ligatures=TeX,RawFeature={-calt,+tnum,+lnum}}
 %\setmainfont[BoldFont={Adobe Garamond Pro Semibold},BoldItalicFont={Adobe Garamond Pro Semibold Italic}]{EB Garamond}
 \usepackage{babel}
 \frenchbsetup{ItemLabels=\textendash}
-%\usepackage{polyglossia}
-%\setdefaultlanguage{french}
+%\setmathfont(Digits){EB Garamond}
 
 % Gestion de différentes couleurs
 \usepackage{xcolor}
@@ -56,23 +58,14 @@
 \fancyhead[R]{\scriptsize\textsc{M2 AAIS}}
 \fancyfoot[C]{\thepage}
 
+% Références croisées
+\usepackage[nameinlink]{cleveref}
+
 % Inclusion de figures
 \usepackage{graphicx}
 %\usepackage[abs]{overpic}
 \graphicspath{{figures/}}
  
-% Quelques packages utiles pour les mathématiques
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-
-% Corrections de l’espacement autour des \left et \right
-\let\originalleft\left
-\let\originalright\right
-\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
-\renewcommand{\right}{\aftergroup\egroup\originalright}
-
-\usepackage[nameinlink]{cleveref}
 % Mise en formes des unités
 \usepackage{siunitx}
 \sisetup{
@@ -82,11 +75,18 @@ separate-uncertainty = true,
 multi-part-units = single}
 \DeclareSIUnit\cgs{cgs}
 
-\usepackage{tabularx} % Gestion avancée des tableaux
+% Gestion avancée des tableaux
+\usepackage{tabularx}
 
-% Bibliographie ########################################################## Voir pour les options à mettre.
+% Bibliographie
 \usepackage{natbib}
  
+% Corrections de l’espacement autour des \left et \right
+\let\originalleft\left
+\let\originalright\right
+\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
+\renewcommand{\right}{\aftergroup\egroup\originalright}
+
 \title{\textsc{Méthodes Numériques – Projet BlackHole Accretion Disk}}
 \author{\textsc{M2 AAIS}}
 %\date{18 décembre 2015}
