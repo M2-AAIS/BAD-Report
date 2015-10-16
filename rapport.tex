@@ -2,13 +2,13 @@
 
 % Définition des marges du document
 \usepackage[xetex,
-a4paper,
-margin=2cm,
-headheight=0.4cm,
-headsep=0.8cm,
-footskip=1.2cm,
-nomarginpar]
-{geometry}
+            a4paper,
+            margin=2cm,
+            headheight=0.4cm,
+            headsep=0.8cm,
+            footskip=1.2cm,
+            nomarginpar,
+            ]{geometry}
 
 \usepackage{fontspec}
 \defaultfontfeatures{Ligatures=TeX,RawFeature={-calt,+tnum,+lnum}}
@@ -34,18 +34,19 @@ nomarginpar]
 \paragraphfont{\color{dgreen}}
 
 \usepackage[xetex,
-unicode=true,
-pdfstartview=FitV,
-pdftitle=M2\ AAIS\ –\ Projet\ Méthodes\ Numériques\ BAD,
-pdfauthor=M2\ AAIS,
-pdfsubject=Projet\ BlackHole\ Accretion\ Disk,
-pdfkeywords=methodes\ numeriques\ –\ trou\ noir\ –\ disque\ d’accrétion,
-colorlinks=true,
-linkcolor=linkcolor,
-citecolor=linkcolor,
-urlcolor=linkcolor,
-hyperindex=true]
-{hyperref}
+            unicode=true,
+            pdfstartview=FitV,
+            colorlinks=true,
+            linkcolor=linkcolor,
+            citecolor=linkcolor,
+            urlcolor=linkcolor,
+            hyperindex=true,
+            ]{hyperref}
+
+\hypersetup{pdfauthor={M2 AAIS},
+            pdftitle={M2 AAIS – Projet Méthodes Numériques BAD},
+            pdfsubject={Projet Blackhole Accretion Disk},
+            pdfkeywords={methodes numeriques, trou noir, disque d’accrétion}}
 
 % En‑têtes et pieds‑de‑pages personnalisés
 \usepackage{fancyhdr}
