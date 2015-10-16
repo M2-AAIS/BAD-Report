@@ -2,101 +2,233 @@
 
 \subsection{Description physique du modèle}
 
-Cette partie est fortement inspirée du document original fourni par Didier
+Cette partie est très fortement inspirée du document original fourni par Didier
 \textsc{Pelat}, qui se base lui-même sur \citet{1984}.
 
-Le modèle va dépendre de 6 paramètres d’entrée : $M$, $r_{max}$, $\dot{M_0}$, $\alpha$,
-$X$ et $Y$. Ceux-ci sont décrits par la suite.
+Le modèle va dépendre de 6 paramètres d’entrée : $M$, $r_{max}$, $\dot{M_0}$,
+$\alpha$, $X$ et $Y$. Ceux-ci sont décrits par la suite.
+
+Nous nous intéressons à la description du disque à l’instant $t$ et au
+voisinage d’un point $r$ ; celui-ci est décrit par sa température $T$, sa
+densité de surface $\Sigma$ et son taux d’accrétion local $\dot{M}$.
+$\dot{M_0}$ représente le taux d’accrétion au bord du disque, c’est-à-dire la
+quantité de matière apportée par le milieu extérieur par unité de temps.
+
+Les équations régissant les différentes grandeurs applicables au disque sont
+pour la plupart simplement algébriques, mais deux — celles donnant la variation
+de $T$ et $\Sigma$ en fonction du temps — sont des EDPs.
 
 \subsubsection{Paramètres du trou noir}
 
-Nous considérons un trou noir de Schwarzschild décrit par sa masse $M$, qui donne également son rayon de Schwarzschild~\eqref{eq:rayon_schwarzschild}.
+Nous considérons un trou noir de Schwarzschild décrit par sa masse $M$,
+laquelle donne également son rayon de Schwarzschild :
 
 \begin{equation}
     \label{eq:rayon_schwarzschild}
-    r_s = \frac{2 G M}{c^2} \approx \SI{3.0}{\kilo\meter} \frac{M}{M_{\odot}}
+    r_s = \frac{\num{2}\, G M}{c^2} \approx \SI{3.0}{\kilo\meter} \frac{M}{M_{\odot}}
 \end{equation}
 
-$G$ est la constante de gravitation, $c$ la vitesse de la lumière et $M_{\odot}$ la masse du soleil.
+Ici, $G = \SI{6.67408(31)d-8}{\cgs}$ est la
+constante de gravitation, $c = \SI{2.99792458e10}{\cgs}$ la
+vitesse de la lumière dans le vide et $M_{\odot} = \SI{1.98855(25)d33}{\cgs}$
+la masse du soleil.
 
-$r_min = 3 r_s$, $r_\mathrm{max} = 100 r_s$.
+\subsubsection{Géométrie du disque}
 
-X, Y et Z composition chimique. On prend $X = \num{0.70}$, $Y = \num{0.28}$ et $Z = \num{0.02}$ (valeurs à la surface du soleil).
+Nous allons supposer que le disque d’accrétion est à symétrie cylindrique,
+aussi nous ne regarderons que les équations faisant intervenir la coordonnée
+radiale $r$. De plus, nous restreindrons notre étude sur une certaine plage de
+valeur de ce paramètre. Pour la valeur minimale, la relativité générale stipule
+qu’en-dessous de $r_\mathrm{min} = \num{3}\, r_s$ le disque est dynamiquement instable et ne
+peut donc exister : ceci sera donc notre limite inférieure. Pour la valeur
+maximale, il y a opposition entre deux problèmes : d’une part, les hypothèses
+physiques que nous ferons par la suite doivent être vérifiées sur toute la
+partie étudiée, d’autre part il faut que les instabilités qui se développeront
+ne puisse pas atteindre la borne supérieure (elles se déplacent vers les $r$
+croissants mais en diminuant d’amplitude) afin que les conditions prises pour
+le bord extérieur par la restent valables. Pour choisir une bonne valeur, il
+faudra en tester plusieurs numériquement, mais pour débuter et fixer un peu les
+idées nous prendrons $r_\mathrm{max} = \num{100}\, r_s$.
 
-On s’intéresse à la description du disque à l’instant $t$, au voisinage d’un point $r$, décrit par sa température $T$, sa densité de surface $\Sigma$ et son taux d’accrétion local $\dot{M}$.
+\subsubsection{Composition chimique ($X$, $Y$ et $Z$)}
 
-On va maintenant lister les équations régissant les différentes grandeurs applicables au disque. La plupart sont algébriques simples, deux sont des EDPs.
+De manière usuelle, la composition chimique est représentée par les fractions
+$X$, $Y$ et $Z$ (avec $X + Y + Z = 1$). $X$ représente la fraction en masse
+d’hydrogène, $Y$ celle d’hélium et $Z$ celle de tous les autres éléments réunis
+(et est appelée \textit{metallicité}). Nous prendrons les valeurs suivantes
+(qui sont celles à la surface du soleil) :
 
-Vitesse angulaire : 
 \begin{equation}
+    \label{eq:compo_chimique}
+    X = \num{0.70}, Y = \num{0.28}, Z = \num{0.02}.
+\end{equation}
+
+\subsubsection{Vitesse angulaire $\Omega$}
+
+La vitesse angulaire correspond à la période de l’orbite képlerienne à la distance $r$ :
+ 
+\begin{equation}
+    \label{eq:vitesse_angulaire}
     \Omega = \left( \frac{G M}{r^3} \right)^½
 \end{equation}
 
-Masse atomique :
+\subsubsection{Masse atomique $\mu$}
+
+Il s’agit de la masse moyenne des particules (noyaux et électrons) constituant
+le gaz, rapportée à la masse atomique unitaire. Pour un gaz complètement ionisé
+il est couramment utilisé :
+
 \begin{equation}
+    \label{eq:masse_atomique}
     \mu = \frac{1}{\left(2X + ¾Y + ½Z\right)} \approx 0.62
 \end{equation}
 
-Pression :
+Nous noterons au passage que cette valeur est constante et ne dépend que des
+paramètres d’entrée $X$ et $Y$.
+
+\subsubsection{Pressions $P$, $P_\mathrm{gaz}$ et $P_\mathrm{rad}$}
+
+La pression se décompose en deux partie : une gazeuse due aux particules, une de radiation due aux photons.
+
 \begin{align}
+    \label{eq:pression}
     P &= P_{\mathrm{gaz}} + P_{\mathrm{rad}} \\
     P_{\mathrm{gaz}} &= \frac{\rho}{\mu m_p} k_B T \\
     P_{\mathrm{rad}} &= \frac{1}{3} a T^4
 \end{align}
 
-$\rho$ est la densité moyenne, $k_B$ la constante de Boltzmann, $m_p$ la masse du proton, $a$ la constante de radiation.
+Ici, $\rho$ est la densité volumique moyenne de matière dans le disque, $k_B$
+la constante de Boltzmann et $m_p$ la masse du proton avec $\frac{k_B}{m_p} =
+\SI{8.31434e7}{\cgs}$, $a = \SI{7.564e-15}{\cgs}$ la constante de radiation.
 
-On définit l’indicateur de pression $\beta$ :
+Nous définissons au passage l’indicateur de pression $\beta$ :
+
 \begin{equation}
+    \label{eq:beta}
     \beta = \frac{P_{\mathrm{gaz}}}{P}
 \end{equation}
 
-La vitesse du son :
+Celui-ci vaut donc 1 si c’est la pression du gaz qui domine, 0 si c’est celle de radiation.
+
+\subsubsection{Vitesse du son $c_s$}
+
+Elle correspond à la vitesse de propagation des perturbations adiabatiques de densité.
+
 \begin{equation}
+    \label{eq:vitesse_son}
     c_s = \left( \frac{\Gamma_1 P}{\rho} \right)^½
 \end{equation}
 
-On prendra $\Gamma_1 = 1$ (expliquer).
+$\Gamma_1$ est le coefficient adiabatique, il dépend normalement de $\beta$.
+Pour simplifier, nous prendront $\Gamma_1 = 1$ (techniquement, $\beta = \num{1}
+\Rightarrow \Gamma_1 = \frac{5}{3}$ et $\beta = \num{0} \Rightarrow \Gamma_1 =
+\frac{4}{3}$).
 
-La demi-hauteur du disque :
+\subsubsection{Demi-hauteur du disque $H$}
+
+L’équilibre hydrostatique donne :
+
 \begin{equation}
+    \label{eq:hauteur}
     H = \frac{c_s}{\Omega}
 \end{equation}
 
-La densité :
+\subsubsection{Densité volumique de matière $\rho$}
+
+Par définition, sa valeur moyenne est directement :
+
 \begin{equation}
+    \label{eq:densite}
     \rho = \frac{\Sigma}{2 H}
 \end{equation}
 
-La viscosité :
+\subsubsection{Viscosité $\nu$}
+
+La viscosité cinématique du gaz, d’origine turbulente, peut s’écrire :
+
 \begin{equation}
+    \label{eq:viscosite}
     \nu = \frac{2}{3} \alpha c_s H
 \end{equation}
 
-Évolution de la densité de surface :
+Ici, $\alpha$ est un paramètre \textit{ad-hoc} introduit par \citet{1973}. De
+par sa nature phénoménologique, sa valeur n’est pas connue, mais cette forme
+permet de rendre plutôt bien compte des phénomènes observés.
+
+\subsubsection{Évolution de la densité de surface $\Sigma$}
+
+Elle est donnée par une équation de type parabolique (« proche » d’une équation
+de diffusion) :
+
 \begin{equation}
+    \label{eq:densite_surface}
     \frac{\partial \Sigma}{\partial t} = \frac{3}{r} \frac{\partial}{\partial r} \left\{ r^½ \frac{\partial}{\partial r} \left(\nu \Sigma r^½ \right) \right\}
 \end{equation}
 
-Vitesse locale d’accrétion :
+\subsubsection{Vitesse locale d’accrétion $v$}
+
+Il s’agit de la composante radiale de la vitesse de la matière, c’est-à-dire
+celle orientée vers le trou noir lorsque sa valeur est négative (\textit{i.e.}
+quand la matière s’accrète).
+
 \begin{equation}
-    v = − \frac{3}{\Sigma r^½} \frac{\partial}{\partial r} \left( \nu \Sigma r^½ \right)
+    \label{eq:vitesse_accretion}
+    v = - \frac{3}{\Sigma r^½} \frac{\partial}{\partial r} \left( \nu \Sigma r^½ \right)
 \end{equation}
 
-Taux d’accrétion :
+\subsubsection{Taux d’accrétion $\dot{M}$}
+
+Il est local (car dépendant de r), il s’agit juste de prendre la quantité de
+matière accrétée à la distance $r$ à chaque instant :
+
 \begin{equation}
-    \dot{M} = − 2 \pi r \Sigma v
+    \label{eq:taux_accretion}
+    \dot{M} = - 2 \pi r \Sigma v
 \end{equation}
 
-Température :
+\subsubsection{Évolution de la température \texorpdfstring{$T$}{\textit{T}}}
+
+L’équation thermique s’écrit :
+
 \begin{equation}
-    C_v \frac{\partial T}{\partial t} = \frac{9}{4} \Omega^2 − \frac{2 F_z}{\Sigma} + C_v \left[ (\Gamma_3 − 1) \frac{T}{\Sigma} \left( \frac{\partial \Sigma}{\partial t} + v \frac{\partial \Sigma}{\partial r}  \right) − v \frac{\partial T}{\partial r} \right]
+    \label{eq:equation_thermique}
+    C_V \frac{\partial T}{\partial t} = Q^+ - Q^- + Q_\mathrm{adv}
+\end{equation}
+
+$C_V$ est la capacité calorifique massique à volume constant du mélange gaz et
+radiation.
+
+Les différents $Q$ correspondent à des termes d’échange de chaleur par unité de
+masse et de temps.
+
+Le terme de chauffage $Q^+$ est dû à la friction :
+
+\begin{equation}
+    \label{eq:chauffage}
+    Q^+ = \frac{9}{4} \nu \Omega^2
+\end{equation}
+
+Le terme de dissipation $Q^-$ est dû au refroidissement par rayonnement :
+
+\begin{align}
+    Q^- &= 2 \frac{F_z}{\Sigma} + 2 \frac{H}{\Sigma r} \frac{\partial}{\partial r} \left(r F_r\right) \\
+    \label{eq:refroidissement}
+        &\approx 2 \frac{F_z}{\Sigma}
+\end{align}
+
+Ici, nous négligerons le flux radial (\textit{i.e.} selon le disque) $F_r$
+devant le flux sortant du disque $F_z$.
+
+Enfin, $Q_\mathrm{adv}$ est la 
+
+\begin{equation}
+    C_V \frac{\partial T}{\partial t} = \frac{9}{4} \nu \Omega^2 - \frac{2 F_z}{\Sigma} + C_V \left[ (\Gamma_3 - 1) \frac{T}{\Sigma} \left( \frac{\partial \Sigma}{\partial t} + v \frac{\partial \Sigma}{\partial r}  \right) - v \frac{\partial T}{\partial r} \right]
 \end{equation}
 
 Où :
 \begin{align}
-    &C_v = \frac{R}{\mu} \frac{12 (\gamma_g − 1)(1 − \beta) + \beta}{(\gamma_g − 1) \beta} \\
-    &C_v (\Gamma_3 − 1) = \frac{R}{\mu} \frac{4 − 3\beta}{\beta}
+    &C_V = \frac{R}{\mu} \frac{12 (\gamma_g - 1)(1 - \beta) + \beta}{(\gamma_g - 1) \beta} \\
+    &C_V (\Gamma_3 - 1) = \frac{R}{\mu} \frac{4 - 3\beta}{\beta}
 \end{align}
 
 $\gamma_g$ est la capacité calorifique des gaz (\num{5/3} pour un gaz parfait monoatomique) et $R = k / m_p$.
@@ -168,12 +300,12 @@ Ce qui donne :
 
 On regarde les conséquences de ces choix pour l’expression de la vitesse radiale :
 \begin{equation}
-    v = − \frac{2 \Omega_\mathrm{max} r_s}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right)
+    v = - \frac{2 \Omega_\mathrm{max} r_s}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right)
 \end{equation}
 
 On pose donc :
 \begin{equation}
-    v_0 = \Omega_\mathrm{max} r_s \Rightarrow v^\star = \frac{v}{v_0} = − \frac{2}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right)
+    v_0 = \Omega_\mathrm{max} r_s \Rightarrow v^\star = \frac{v}{v_0} = - \frac{2}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right)
 \end{equation}
 
 On en profite pour adimensionner $c_s = \Omega H$ :
@@ -198,7 +330,7 @@ Ce qui nous donne bien :
 
 Pour le taux d’accrétion :
 \begin{equation}
-    \dot{M}^\star = \frac{\dot{M}}{\dot{M_0}} = − \frac{2 \pi x^2 r_s v^\star v_0 \Sigma}{\dot{M_0}} = − \frac{2 \pi r_s^2 \Omega_\mathrm{max} v^\star x^2 \Sigma}{\dot{M_0}} 
+    \dot{M}^\star = \frac{\dot{M}}{\dot{M_0}} = - \frac{2 \pi x^2 r_s v^\star v_0 \Sigma}{\dot{M_0}} = - \frac{2 \pi r_s^2 \Omega_\mathrm{max} v^\star x^2 \Sigma}{\dot{M_0}} 
 \end{equation}
 
 Ce qui nous amène à poser :
@@ -280,10 +412,10 @@ Pour écrire :
 La grande équation adimensionnée :
 
 \begin{equation}
-    C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
-    {\Omega^\star}^2 \frac{9 \Omega_\mathrm{max}}{4 T_0} − \frac{2 F_z x}{S^\star \Sigma_0 \Omega_\mathrm{max} T_0} +
-    \frac{R}{\mu} \frac{4−3\beta}{\beta} \frac{T^\star}{S^\star} ×
+    C_V \frac{\partial T^{\star}}{\partial t^{\star}} =
+    {\Omega^\star}^2 \frac{3 \nu^\star v_0^2}{T_0} - \frac{2 F_z x}{S^\star \Sigma_0 \Omega_\mathrm{max} T_0} +
+    \frac{R}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} ×
     \left( \frac{\partial S^\star}{\partial t^\star} + \frac{v^\star}{2} \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) –
-    \frac{C_v v^\star}{2 x} \frac{\partial T^\star}{\partial x}
+    \frac{C_V v^\star}{2 x} \frac{\partial T^\star}{\partial x}
 \end{equation}
 
