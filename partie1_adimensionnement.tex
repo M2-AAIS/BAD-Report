@@ -22,7 +22,6 @@ de $T$ et $\Sigma$ en fonction du temps — sont des EDPs.
 
 Nous considérons un trou noir de Schwarzschild décrit par sa masse $M$,
 laquelle donne également son rayon de Schwarzschild :
-
 \begin{equation}
     \label{eq:rayon_schwarzschild}
     r_s = \frac{\num{2}\, G M}{c^2} \approx \SI{3.0}{\kilo\meter} \frac{M}{M_{\odot}}
@@ -66,7 +65,6 @@ d’hydrogène, $Y$ celle d’hélium et $Z$ celle de tous les autres éléments
 \subsubsection{\texorpdfstring{Vitesse angulaire $\Omega$}{Vitesse angulaire Ω}}
 
 La vitesse angulaire correspond à la période de l’orbite képlerienne à la distance $r$ :
- 
 \begin{equation}
     \label{eq:vitesse_angulaire}
     \Omega = \left( \frac{G M}{r^3} \right)^½
@@ -77,7 +75,6 @@ La vitesse angulaire correspond à la période de l’orbite képlerienne à la 
 Il s’agit de la masse moyenne des particules (noyaux et électrons) constituant
 le gaz, rapportée à la masse atomique unitaire. Pour un gaz complètement ionisé
 il est couramment utilisé :
-
 \begin{equation}
     \label{eq:masse_atomique}
     \mu = \frac{1}{\left(2X + ¾Y + ½Z\right)} \approx 0.62
@@ -89,7 +86,6 @@ paramètres d’entrée $X$ et $Y$.
 \subsubsection{\texorpdfstring{Pressions $P$, $P_\mathrm{gaz}$ et $P_\mathrm{rad}$}{Pressions P, Pgaz et Prad}}
 
 La pression se décompose en deux partie : une gazeuse due aux particules, une de radiation due aux photons.
-
 \begin{align}
     \label{eq:pression}
     P &= P_{\mathrm{gaz}} + P_{\mathrm{rad}} \\
@@ -102,7 +98,6 @@ la constante de Boltzmann et $m_p$ la masse du proton avec $\frac{k_B}{m_p} =
 \SI{8.31434e7}{\cgs}$, $a = \SI{7.564e-15}{\cgs}$ la constante de radiation.
 
 Nous définissons au passage l’indicateur de pression $\beta$ :
-
 \begin{equation}
     \label{eq:beta}
     \beta = \frac{P_{\mathrm{gaz}}}{P}
@@ -113,7 +108,6 @@ Celui-ci vaut donc 1 si c’est la pression du gaz qui domine, 0 si c’est cell
 \subsubsection{\texorpdfstring{Vitesse du son $c_s$}{Vitesse du son cs}}
 
 Elle correspond à la vitesse de propagation des perturbations adiabatiques de densité.
-
 \begin{equation}
     \label{eq:vitesse_son}
     c_s = \left( \frac{\Gamma_1 P}{\rho} \right)^½
@@ -127,7 +121,6 @@ Pour simplifier, nous prendront $\Gamma_1 = 1$ (techniquement, $\beta = \num{1}
 \subsubsection{\texorpdfstring{Demi-hauteur du disque $H$}{Demi-hauteur du disque H}}
 
 L’équilibre hydrostatique donne :
-
 \begin{equation}
     \label{eq:hauteur}
     H = \frac{c_s}{\Omega}
@@ -136,7 +129,6 @@ L’équilibre hydrostatique donne :
 \subsubsection{\texorpdfstring{Densité volumique de matière $\rho$}{Densité volumique de matière ρ}}
 
 Par définition, sa valeur moyenne est directement :
-
 \begin{equation}
     \label{eq:densite}
     \rho = \frac{\Sigma}{2 H}
@@ -145,7 +137,6 @@ Par définition, sa valeur moyenne est directement :
 \subsubsection{\texorpdfstring{Viscosité $\nu$}{Viscosité ν}}
 
 La viscosité cinématique du gaz, d’origine turbulente, peut s’écrire :
-
 \begin{equation}
     \label{eq:viscosite}
     \nu = \frac{2}{3} \alpha c_s H
@@ -159,7 +150,6 @@ permet de rendre plutôt bien compte des phénomènes observés.
 
 Elle est donnée par une équation de type parabolique (« proche » d’une équation
 de diffusion) :
-
 \begin{equation}
     \label{eq:densite_surface}
     \frac{\partial \Sigma}{\partial t} = \frac{3}{r} \frac{\partial}{\partial r} \left\{ r^½ \frac{\partial}{\partial r} \left(\nu \Sigma r^½ \right) \right\}
@@ -170,7 +160,6 @@ de diffusion) :
 Il s’agit de la composante radiale de la vitesse de la matière, c’est-à-dire
 celle orientée vers le trou noir lorsque sa valeur est négative (\textit{i.e.}
 quand la matière s’accrète).
-
 \begin{equation}
     \label{eq:vitesse_accretion}
     v = - \frac{3}{\Sigma r^½} \frac{\partial}{\partial r} \left( \nu \Sigma r^½ \right)
@@ -180,7 +169,6 @@ quand la matière s’accrète).
 
 Il est local (car dépendant de r), il s’agit juste de prendre la quantité de
 matière accrétée à la distance $r$ à chaque instant :
-
 \begin{equation}
     \label{eq:taux_accretion}
     \dot{M} = - 2 \pi r \Sigma v
@@ -189,9 +177,8 @@ matière accrétée à la distance $r$ à chaque instant :
 \subsubsection{\texorpdfstring{Évolution de la température $T$}{Évolution de la température \textit{T}}}
 
 L’équation thermique s’écrit :
-
 \begin{equation}
-    \label{eq:equation_thermique}
+    \label{eq:equation_thermique_th}
     C_V \frac{\partial T}{\partial t} = Q^+ - Q^- + Q_\mathrm{adv}
 \end{equation}
 
@@ -202,14 +189,12 @@ Les différents $Q$ correspondent à des termes d’échange de chaleur par unit
 masse et de temps.
 
 Le terme de chauffage $Q^+$ est dû à la friction :
-
 \begin{equation}
     \label{eq:chauffage}
     Q^+ = \frac{9}{4} \nu \Omega^2
 \end{equation}
 
 Le terme de dissipation $Q^-$ est dû au refroidissement par rayonnement :
-
 \begin{align}
     Q^- &= 2 \frac{F_z}{\Sigma} + 2 \frac{H}{\Sigma r} \frac{\partial}{\partial r} \left(r F_r\right) \\
     \label{eq:refroidissement}
@@ -219,22 +204,37 @@ Le terme de dissipation $Q^-$ est dû au refroidissement par rayonnement :
 Ici, nous négligerons le flux radial (\textit{i.e.} selon le disque) $F_r$
 devant le flux sortant du disque $F_z$.
 
-Enfin, $Q_\mathrm{adv}$ est la 
-
+Enfin, $Q_\mathrm{adv}$ est la chaleur transportée par la matière en mouvement
+(terme d’avdection) : 
 \begin{equation}
-    C_V \frac{\partial T}{\partial t} = \frac{9}{4} \nu \Omega^2 - \frac{2 F_z}{\Sigma} + C_V \left[ (\Gamma_3 - 1) \frac{T}{\Sigma} \left( \frac{\partial \Sigma}{\partial t} + v \frac{\partial \Sigma}{\partial r}  \right) - v \frac{\partial T}{\partial r} \right]
+    \label{eq:advection}
+    Q_\mathrm{adv} = C_V \left[ (\Gamma_3 - 1) \frac{T}{\Sigma} \left( \frac{\partial \Sigma}{\partial t} + v \frac{\partial \Sigma}{\partial r}  \right) - v \frac{\partial T}{\partial r} \right]
 \end{equation}
 
-Où :
+Dans les \cref{eq:equation_thermique,eq:advection} nous avons utilisé $C_V$ et
+$\Gamma_3$, le sens physique du premier a déjà été donné, le second est un
+exposant adiabatique. Leur expression :
 \begin{align}
     &C_V = \frac{R}{\mu} \frac{12 (\gamma_g - 1)(1 - \beta) + \beta}{(\gamma_g - 1) \beta} \\
     &C_V (\Gamma_3 - 1) = \frac{R}{\mu} \frac{4 - 3\beta}{\beta}
 \end{align}
 
-$\gamma_g$ est la capacité calorifique des gaz (\num{5/3} pour un gaz parfait monoatomique) et $R = k / m_p$.
+$\gamma_g$ est le rapport des capacités calorifiques des gaz (\num{5/3} pour un
+gaz parfait monoatomique) et $R = k_B / m_p = \SI{8.31434}{\cgs}$.
 
-Flux radiatif :
+En remplaçant les \cref{eq:chauffage,eq:refroidissement,eq:advection} dans
+l’\cref{eq:equation_thermique_th} nous obtenons :
 \begin{equation}
+    \label{eq:equation_thermique}
+    C_V \frac{\partial T}{\partial t} = \frac{9}{4} \nu \Omega^2 - \frac{2 F_z}{\Sigma} + C_V \left[ (\Gamma_3 - 1) \frac{T}{\Sigma} \left( \frac{\partial \Sigma}{\partial t} + v \frac{\partial \Sigma}{\partial r}  \right) - v \frac{\partial T}{\partial r} \right]
+\end{equation}
+
+\subsubsection{\texorpdfstring{Flux radiatif $F_z$}{Flux radiatif Fz}}
+
+Il reste donc à définir le flux radiatif $F_z$ qui intervient dans les
+\cref{eq:refroidissement,eq:equation_thermique} :
+\begin{equation}
+    \label{eq:flux}
     F_z =
     \begin{cases}
         \frac{2 a c T^4}{3 (\kappa_\mathrm{ff} + \kappa_e)\Sigma}, &\text{si $\tau_\mathrm{eff} \geq 1$} \\
@@ -242,19 +242,28 @@ Flux radiatif :
     \end{cases}
 \end{equation}
 
-Profondeur optique :
+Dont l’expression dépend donc de la profondeur optique $\tau_\mathrm{eff}$ :
 \begin{equation}
+    \label{eq:tau_eff}
     \tau_\mathrm{eff} = ½ (\kappa_e \kappa_\mathrm{ff})^½ \Sigma
 \end{equation}
 
-Où :
-
+Et où nous avons introduit les grandeurs suivantes :
 \begin{align}
+    \label{eq:opacite_thomson}
     \kappa_e &= \num{0.2} × (1+X) \si{\square\centi\meter\per\gram} \approx \SI{0.34}{\square\centi\meter\per\gram} \\
+    \label{eq:opacite_bremsstrahlung}
     \kappa_\mathrm{ff} &= \num{6.13e22} × \rho T^{-\frac{7}{2}} \si{\square\centi\meter\per\gram}\\
+    \label{eq:emissivite}
     \epsilon_\mathrm{ff} &= \num{6.22e20} × \rho^2 T^½ \\
     A &= 1
 \end{align}
+
+$\kappa_e$ est l’opacité correspondant à la diffusion Thomson,
+$\kappa_\mathrm{ff}$ est celle associée au bremsstrahlung (rayonnement de
+freinage), $\epsilon_\mathrm{ff}$ est l’émissivité associée à ce phénomène et
+$A$ et le coefficient d’amplification Compton (la valeur prise ici est choisie
+pour simplifier).
 
 \subsection{Variables et équations adimensionnées}
 
