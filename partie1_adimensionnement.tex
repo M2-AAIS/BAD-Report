@@ -50,7 +50,7 @@ le bord extérieur par la restent valables. Pour choisir une bonne valeur, il
 faudra en tester plusieurs numériquement, mais pour débuter et fixer un peu les
 idées nous prendrons $r_\mathrm{max} = \num{100}\, r_s$.
 
-\subsubsection{Composition chimique ($X$, $Y$ et $Z$)}
+\subsubsection{\texorpdfstring{Composition chimique ($X$, $Y$ et $Z$)}{Composition chimique (X, Y et Z)}}
 
 De manière usuelle, la composition chimique est représentée par les fractions
 $X$, $Y$ et $Z$ (avec $X + Y + Z = 1$). $X$ représente la fraction en masse
@@ -63,7 +63,7 @@ d’hydrogène, $Y$ celle d’hélium et $Z$ celle de tous les autres éléments
     X = \num{0.70}, Y = \num{0.28}, Z = \num{0.02}.
 \end{equation}
 
-\subsubsection{Vitesse angulaire $\Omega$}
+\subsubsection{\texorpdfstring{Vitesse angulaire $\Omega$}{Vitesse angulaire Ω}}
 
 La vitesse angulaire correspond à la période de l’orbite képlerienne à la distance $r$ :
  
@@ -72,7 +72,7 @@ La vitesse angulaire correspond à la période de l’orbite képlerienne à la 
     \Omega = \left( \frac{G M}{r^3} \right)^½
 \end{equation}
 
-\subsubsection{Masse atomique $\mu$}
+\subsubsection{\texorpdfstring{Masse atomique $\mu$}{Masse atomique μ}}
 
 Il s’agit de la masse moyenne des particules (noyaux et électrons) constituant
 le gaz, rapportée à la masse atomique unitaire. Pour un gaz complètement ionisé
@@ -86,7 +86,7 @@ il est couramment utilisé :
 Nous noterons au passage que cette valeur est constante et ne dépend que des
 paramètres d’entrée $X$ et $Y$.
 
-\subsubsection{Pressions $P$, $P_\mathrm{gaz}$ et $P_\mathrm{rad}$}
+\subsubsection{\texorpdfstring{Pressions $P$, $P_\mathrm{gaz}$ et $P_\mathrm{rad}$}{Pressions P, Pgaz et Prad}}
 
 La pression se décompose en deux partie : une gazeuse due aux particules, une de radiation due aux photons.
 
@@ -110,7 +110,7 @@ Nous définissons au passage l’indicateur de pression $\beta$ :
 
 Celui-ci vaut donc 1 si c’est la pression du gaz qui domine, 0 si c’est celle de radiation.
 
-\subsubsection{Vitesse du son $c_s$}
+\subsubsection{\texorpdfstring{Vitesse du son $c_s$}{Vitesse du son cs}}
 
 Elle correspond à la vitesse de propagation des perturbations adiabatiques de densité.
 
@@ -124,7 +124,7 @@ Pour simplifier, nous prendront $\Gamma_1 = 1$ (techniquement, $\beta = \num{1}
 \Rightarrow \Gamma_1 = \frac{5}{3}$ et $\beta = \num{0} \Rightarrow \Gamma_1 =
 \frac{4}{3}$).
 
-\subsubsection{Demi-hauteur du disque $H$}
+\subsubsection{\texorpdfstring{Demi-hauteur du disque $H$}{Demi-hauteur du disque H}}
 
 L’équilibre hydrostatique donne :
 
@@ -133,7 +133,7 @@ L’équilibre hydrostatique donne :
     H = \frac{c_s}{\Omega}
 \end{equation}
 
-\subsubsection{Densité volumique de matière $\rho$}
+\subsubsection{\texorpdfstring{Densité volumique de matière $\rho$}{Densité volumique de matière ρ}}
 
 Par définition, sa valeur moyenne est directement :
 
@@ -142,7 +142,7 @@ Par définition, sa valeur moyenne est directement :
     \rho = \frac{\Sigma}{2 H}
 \end{equation}
 
-\subsubsection{Viscosité $\nu$}
+\subsubsection{\texorpdfstring{Viscosité $\nu$}{Viscosité ν}}
 
 La viscosité cinématique du gaz, d’origine turbulente, peut s’écrire :
 
@@ -155,7 +155,7 @@ Ici, $\alpha$ est un paramètre \textit{ad-hoc} introduit par \citet{1973}. De
 par sa nature phénoménologique, sa valeur n’est pas connue, mais cette forme
 permet de rendre plutôt bien compte des phénomènes observés.
 
-\subsubsection{Évolution de la densité de surface $\Sigma$}
+\subsubsection{\texorpdfstring{Évolution de la densité de surface $\Sigma$}{Évolution de la densité de surface Σ}}
 
 Elle est donnée par une équation de type parabolique (« proche » d’une équation
 de diffusion) :
@@ -165,7 +165,7 @@ de diffusion) :
     \frac{\partial \Sigma}{\partial t} = \frac{3}{r} \frac{\partial}{\partial r} \left\{ r^½ \frac{\partial}{\partial r} \left(\nu \Sigma r^½ \right) \right\}
 \end{equation}
 
-\subsubsection{Vitesse locale d’accrétion $v$}
+\subsubsection{\texorpdfstring{Vitesse locale d’accrétion $v$}{Vitesse locale d’accrétion v}}
 
 Il s’agit de la composante radiale de la vitesse de la matière, c’est-à-dire
 celle orientée vers le trou noir lorsque sa valeur est négative (\textit{i.e.}
@@ -176,7 +176,7 @@ quand la matière s’accrète).
     v = - \frac{3}{\Sigma r^½} \frac{\partial}{\partial r} \left( \nu \Sigma r^½ \right)
 \end{equation}
 
-\subsubsection{Taux d’accrétion $\dot{M}$}
+\subsubsection{\texorpdfstring{Taux d’accrétion $\dot{M}$}{Taux d’accrétion dM/dt}}
 
 Il est local (car dépendant de r), il s’agit juste de prendre la quantité de
 matière accrétée à la distance $r$ à chaque instant :
@@ -186,7 +186,7 @@ matière accrétée à la distance $r$ à chaque instant :
     \dot{M} = - 2 \pi r \Sigma v
 \end{equation}
 
-\subsubsection{Évolution de la température \texorpdfstring{$T$}{\textit{T}}}
+\subsubsection{\texorpdfstring{Évolution de la température $T$}{Évolution de la température \textit{T}}}
 
 L’équation thermique s’écrit :
 
