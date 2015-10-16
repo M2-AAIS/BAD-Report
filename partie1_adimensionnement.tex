@@ -24,7 +24,7 @@ Nous considérons un trou noir de Schwarzschild décrit par sa masse $M$,
 laquelle donne également son rayon de Schwarzschild :
 \begin{equation}
     \label{eq:rayon_schwarzschild}
-    r_s = \frac{\num{2}\, G M}{c^2} \approx \SI{3.0}{\kilo\meter} \frac{M}{M_{\odot}}
+    r_s = \frac{\num{2}\, G M}{c^2} \approx \num{3.0} \frac{M}{M_{\odot}} \si{\kilo\meter}
 \end{equation}
 
 Ici, $G = \SI{6.67408(31)d-8}{\cgs}$ est la
@@ -67,7 +67,7 @@ d’hydrogène, $Y$ celle d’hélium et $Z$ celle de tous les autres éléments
 La vitesse angulaire correspond à la période de l’orbite képlerienne à la distance $r$ :
 \begin{equation}
     \label{eq:vitesse_angulaire}
-    \Omega = \left( \frac{G M}{r^3} \right)^½
+    \Omega = \left( \frac{G M}{r^{\num{3}}} \right)^½
 \end{equation}
 
 \subsubsection{\texorpdfstring{Masse atomique $\mu$}{Masse atomique μ}}
@@ -77,7 +77,7 @@ le gaz, rapportée à la masse atomique unitaire. Pour un gaz complètement ioni
 il est couramment utilisé :
 \begin{equation}
     \label{eq:masse_atomique}
-    \mu = \frac{1}{\left(2X + ¾Y + ½Z\right)} \approx 0.62
+    \mu = \frac{\num{1}}{\num{2} X + ¾ Y + ½ Z} \approx \num{0.62}
 \end{equation}
 
 Nous noterons au passage que cette valeur est constante et ne dépend que des
@@ -90,12 +90,14 @@ La pression se décompose en deux partie : une gazeuse due aux particules, une d
     \label{eq:pression}
     P &= P_{\mathrm{gaz}} + P_{\mathrm{rad}} \\
     P_{\mathrm{gaz}} &= \frac{\rho}{\mu m_p} k_B T \\
-    P_{\mathrm{rad}} &= \frac{1}{3} a T^4
+    P_{\mathrm{rad}} &= \frac{\num{1}}{\num{3}} a T^{\num{4}}
 \end{align}
 
 Ici, $\rho$ est la densité volumique moyenne de matière dans le disque, $k_B$
 la constante de Boltzmann et $m_p$ la masse du proton avec $\frac{k_B}{m_p} =
-\SI{8.31434e7}{\cgs}$, $a = \SI{7.564e-15}{\cgs}$ la constante de radiation.
+\SI{8.3144598(48)d7}{\cgs}$, $a = \frac{\num{8} \pi^{\num{5}} k_B^{\num{4}}}{15 h^{\num{3}} c^{\num{3}}} =
+\SI{7.5657308531642009e-17}{\cgs}$ la constante de radiation ($h$ est la
+constante de Planck).
 
 Nous définissons au passage l’indicateur de pression $\beta$ :
 \begin{equation}
@@ -110,13 +112,14 @@ Celui-ci vaut donc 1 si c’est la pression du gaz qui domine, 0 si c’est cell
 Elle correspond à la vitesse de propagation des perturbations adiabatiques de densité.
 \begin{equation}
     \label{eq:vitesse_son}
-    c_s = \left( \frac{\Gamma_1 P}{\rho} \right)^½
+    c_s = \left( \frac{\Gamma_{\num{1}} P}{\rho} \right)^½
 \end{equation}
 
-$\Gamma_1$ est le coefficient adiabatique, il dépend normalement de $\beta$.
-Pour simplifier, nous prendront $\Gamma_1 = 1$ (techniquement, $\beta = \num{1}
-\Rightarrow \Gamma_1 = \frac{5}{3}$ et $\beta = \num{0} \Rightarrow \Gamma_1 =
-\frac{4}{3}$).
+$\Gamma_{\num{1}}$ est le coefficient adiabatique, il dépend normalement de
+$\beta$. Pour simplifier, nous prendront $\Gamma_{\num{1}} = \num{1}$
+(techniquement, $\beta = \num{1} \Rightarrow \Gamma_{\num{1}} =
+\frac{\num{5}}{\num{3}}$ et $\beta = \num{0} \Rightarrow \Gamma_{\num{1}} =
+\frac{\num{4}}{\num{3}}$).
 
 \subsubsection{\texorpdfstring{Demi-hauteur du disque $H$}{Demi-hauteur du disque H}}
 
@@ -131,7 +134,7 @@ L’équilibre hydrostatique donne :
 Par définition, sa valeur moyenne est directement :
 \begin{equation}
     \label{eq:densite}
-    \rho = \frac{\Sigma}{2 H}
+    \rho = \frac{\Sigma}{\num{2} H}
 \end{equation}
 
 \subsubsection{\texorpdfstring{Viscosité $\nu$}{Viscosité ν}}
@@ -139,7 +142,7 @@ Par définition, sa valeur moyenne est directement :
 La viscosité cinématique du gaz, d’origine turbulente, peut s’écrire :
 \begin{equation}
     \label{eq:viscosite}
-    \nu = \frac{2}{3} \alpha c_s H
+    \nu = \frac{\num{2}}{\num{3}} \alpha c_s H
 \end{equation}
 
 Ici, $\alpha$ est un paramètre \textit{ad-hoc} introduit par \citet{1973}. De
@@ -152,7 +155,7 @@ Elle est donnée par une équation de type parabolique (« proche » d’une éq
 de diffusion) :
 \begin{equation}
     \label{eq:densite_surface}
-    \frac{\partial \Sigma}{\partial t} = \frac{3}{r} \frac{\partial}{\partial r} \left\{ r^½ \frac{\partial}{\partial r} \left(\nu \Sigma r^½ \right) \right\}
+    \frac{\partial \Sigma}{\partial t} = \frac{\num{3}}{r} \frac{\partial}{\partial r} \left\{ r^½ \frac{\partial}{\partial r} \left(\nu \Sigma r^½ \right) \right\}
 \end{equation}
 
 \subsubsection{\texorpdfstring{Vitesse locale d’accrétion $v$}{Vitesse locale d’accrétion v}}
@@ -162,7 +165,7 @@ celle orientée vers le trou noir lorsque sa valeur est négative (\textit{i.e.}
 quand la matière s’accrète).
 \begin{equation}
     \label{eq:vitesse_accretion}
-    v = - \frac{3}{\Sigma r^½} \frac{\partial}{\partial r} \left( \nu \Sigma r^½ \right)
+    v = - \frac{\num{3}}{\Sigma r^½} \frac{\partial}{\partial r} \left( \nu \Sigma r^½ \right)
 \end{equation}
 
 \subsubsection{\texorpdfstring{Taux d’accrétion $\dot{M}$}{Taux d’accrétion dM/dt}}
@@ -171,7 +174,7 @@ Il est local (car dépendant de r), il s’agit juste de prendre la quantité de
 matière accrétée à la distance $r$ à chaque instant :
 \begin{equation}
     \label{eq:taux_accretion}
-    \dot{M} = - 2 \pi r \Sigma v
+    \dot{M} = - \num{2} \pi r \Sigma v
 \end{equation}
 
 \subsubsection{\texorpdfstring{Évolution de la température $T$}{Évolution de la température \textit{T}}}
@@ -191,14 +194,14 @@ masse et de temps.
 Le terme de chauffage $Q^+$ est dû à la friction :
 \begin{equation}
     \label{eq:chauffage}
-    Q^+ = \frac{9}{4} \nu \Omega^2
+    Q^+ = \frac{\num{9}}{\num{4}} \nu \Omega^{\num{2}}
 \end{equation}
 
 Le terme de dissipation $Q^-$ est dû au refroidissement par rayonnement :
 \begin{align}
-    Q^- &= 2 \frac{F_z}{\Sigma} + 2 \frac{H}{\Sigma r} \frac{\partial}{\partial r} \left(r F_r\right) \\
+    Q^- &= \num{2} \frac{F_z}{\Sigma} + \num{2} \frac{H}{\Sigma r} \frac{\partial}{\partial r} \left(r F_r\right) \\
     \label{eq:refroidissement}
-        &\approx 2 \frac{F_z}{\Sigma}
+        &\approx \num{2} \frac{F_z}{\Sigma}
 \end{align}
 
 Ici, nous négligerons le flux radial (\textit{i.e.} selon le disque) $F_r$
@@ -208,25 +211,26 @@ Enfin, $Q_\mathrm{adv}$ est la chaleur transportée par la matière en mouvement
 (terme d’avdection) : 
 \begin{equation}
     \label{eq:advection}
-    Q_\mathrm{adv} = C_V \left[ (\Gamma_3 - 1) \frac{T}{\Sigma} \left( \frac{\partial \Sigma}{\partial t} + v \frac{\partial \Sigma}{\partial r}  \right) - v \frac{\partial T}{\partial r} \right]
+    Q_\mathrm{adv} = C_V \left[ (\Gamma_{\num{3}} - \num{1}) \frac{T}{\Sigma} \left( \frac{\partial \Sigma}{\partial t} + v \frac{\partial \Sigma}{\partial r}  \right) - v \frac{\partial T}{\partial r} \right]
 \end{equation}
 
 Dans les \cref{eq:equation_thermique,eq:advection} nous avons utilisé $C_V$ et
 $\Gamma_3$, le sens physique du premier a déjà été donné, le second est un
 exposant adiabatique. Leur expression :
 \begin{align}
-    &C_V = \frac{R}{\mu} \frac{12 (\gamma_g - 1)(1 - \beta) + \beta}{(\gamma_g - 1) \beta} \\
-    &C_V (\Gamma_3 - 1) = \frac{R}{\mu} \frac{4 - 3\beta}{\beta}
+    &C_V = \frac{\mathcal{R}}{\mu} \frac{\num{12} (\gamma_g - \num{1})(\num{1} - \beta) + \beta}{(\gamma_g - \num{1}) \beta} \\
+    &C_V (\Gamma_{\num{3}} - \num{1}) = \frac{\mathcal{R}}{\mu} \frac{\num{4} - \num{3}\beta}{\beta}
 \end{align}
 
 $\gamma_g$ est le rapport des capacités calorifiques des gaz (\num{5/3} pour un
-gaz parfait monoatomique) et $R = k_B / m_p = \SI{8.31434}{\cgs}$.
+gaz parfait monoatomique) et nous avons introduit pour simplifier la constante
+des gaz parfaits $\mathcal{R} = \frac{k_B}{m_p} = \SI{8.3144598(48)d7}{\cgs}$.
 
 En remplaçant les \cref{eq:chauffage,eq:refroidissement,eq:advection} dans
 l’\cref{eq:equation_thermique_th} nous obtenons :
 \begin{equation}
     \label{eq:equation_thermique}
-    C_V \frac{\partial T}{\partial t} = \frac{9}{4} \nu \Omega^2 - \frac{2 F_z}{\Sigma} + C_V \left[ (\Gamma_3 - 1) \frac{T}{\Sigma} \left( \frac{\partial \Sigma}{\partial t} + v \frac{\partial \Sigma}{\partial r}  \right) - v \frac{\partial T}{\partial r} \right]
+    C_V \frac{\partial T}{\partial t} = \frac{\num{9}}{\num{4}} \nu \Omega^{\num{2}} - \frac{\num{2} F_z}{\Sigma} + C_V \left[ (\Gamma_{\num{3}} - \num{1}) \frac{T}{\Sigma} \left( \frac{\partial \Sigma}{\partial t} + v \frac{\partial \Sigma}{\partial r} \right) - v \frac{\partial T}{\partial r} \right]
 \end{equation}
 
 \subsubsection{\texorpdfstring{Flux radiatif $F_z$}{Flux radiatif Fz}}
@@ -237,8 +241,8 @@ Il reste donc à définir le flux radiatif $F_z$ qui intervient dans les
     \label{eq:flux}
     F_z =
     \begin{cases}
-        \frac{2 a c T^4}{3 (\kappa_\mathrm{ff} + \kappa_e)\Sigma}, &\text{si $\tau_\mathrm{eff} \geq 1$} \\
-        \epsilon_\mathrm{ff} A H, &\text{si $\tau_\mathrm{eff} < 1$}
+        \frac{\num{2} a c T^{\num{4}}}{\num{3} (\kappa_\mathrm{ff} + \kappa_e)\Sigma}, &\text{si $\tau_\mathrm{eff} \geq \num{1}$} \\
+        \epsilon_\mathrm{ff} A H, &\text{si $\tau_\mathrm{eff} < \num{1}$}
     \end{cases}
 \end{equation}
 
@@ -251,12 +255,12 @@ Dont l’expression dépend donc de la profondeur optique $\tau_\mathrm{eff}$ :
 Et où nous avons introduit les grandeurs suivantes :
 \begin{align}
     \label{eq:opacite_thomson}
-    \kappa_e &= \num{0.2} × (1+X) \si{\square\centi\meter\per\gram} \approx \SI{0.34}{\square\centi\meter\per\gram} \\
+    \kappa_e &= \num{0.2} \times (1+X) \si{\square\centi\meter\per\gram} \approx \SI{0.34}{\square\centi\meter\per\gram} \\
     \label{eq:opacite_bremsstrahlung}
-    \kappa_\mathrm{ff} &= \num{6.13e22} × \rho T^{-\frac{7}{2}} \si{\square\centi\meter\per\gram}\\
+    \kappa_\mathrm{ff} &= \num{6.13e22} \times \rho T^{-\frac{\num{7}}{\num{2}}} \si{\square\centi\meter\per\gram}\\
     \label{eq:emissivite}
-    \epsilon_\mathrm{ff} &= \num{6.22e20} × \rho^2 T^½ \\
-    A &= 1
+    \epsilon_\mathrm{ff} &= \num{6.22e20} \times \rho^{\num{2}} T^½ \\
+    A &= \num{1}
 \end{align}
 
 $\kappa_e$ est l’opacité correspondant à la diffusion Thomson,
@@ -267,15 +271,29 @@ pour simplifier).
 
 \subsection{Variables et équations adimensionnées}
 
-Adimensionnement du temps :
+Il est intéressant d’adimensionner toutes les grandeurs en jeu pour plusieurs
+raisons. Notamment, cela permet de simplifier l’écriture des équations ou
+encore d’éviter un certain nombre de problèmes numériques liés à la
+représentation des nombres en informatique.
+
+Dans toute la suite, nous noterons $\chi^\star$ la grandeur adimensionnée
+correspondant à la grandeur physique $\chi$.
+
+\subsubsection{\texorpdfstring{Temps $t$}{Temps t}}
+
+Nous commençons par adimensionner la variable temporelle :
 \begin{equation}
-    t^\star = t × \Omega_\mathrm{max}
+    t^\star = t \times \Omega_\mathrm{max}
 \end{equation}
 
 Où :
 \begin{equation}
     \Omega_\mathrm{max} = \left( \frac{G M}{r^3_\mathrm{min}} \right)^½
 \end{equation}
+
+C’est la période de la dernière orbite stable pour la matière.
+
+\subsubsection{\texorpdfstring{Position $r$}{Position r}}
 
 Adimensionnement de $r$ :
 \begin{equation}
@@ -344,7 +362,7 @@ Pour le taux d’accrétion :
 
 Ce qui nous amène à poser :
 \begin{equation}
-    \Sigma^\star = \frac{\Sigma}{\Sigma_0} = \Sigma × \frac{2 \pi r_s^2 \Omega_\mathrm{max}}{\dot{M_0}}
+    \Sigma^\star = \frac{\Sigma}{\Sigma_0} = \Sigma \times \frac{2 \pi r_s^2 \Omega_\mathrm{max}}{\dot{M_0}}
 \end{equation}
 
 On en profite pour adimensionner naturellement $S$ :
@@ -364,7 +382,7 @@ Pour la température, on pose :
 
 Où :
 \begin{equation}
-    T_0 = \left(\frac{1}{\sqrt{27}} × \frac{L_{tot}}{4 \pi r_s^2 \sigma} \right)^{\frac{1}{4}}
+    T_0 = \left(\frac{1}{\sqrt{27}} \times \frac{L_{tot}}{4 \pi r_s^2 \sigma} \right)^{\frac{1}{4}}
 \end{equation}
 
 Et :
@@ -384,7 +402,7 @@ Pour $F_z$ :
 Où :
 \begin{align}
     \kappa_\mathrm{ff} &= \num{6.13e22} \rho_0 \rho^\star \left(T^\star T_0\right)^{-\frac{7}{2}} \si{\square\centi\meter\per\gram} \\
-    \tau_\mathrm{eff} &= \frac{1}{2} \left[ \num{0.2} × (1 + X) × \num{6.13e22} \left(\rho_0 \rho^\star\right) \left(T^\star T_0\right)^{-\frac{7}{2}} \right]^½ \Sigma_0 \Sigma^\star \\
+    \tau_\mathrm{eff} &= \frac{1}{2} \left[ \num{0.2} \times (1 + X) \times \num{6.13e22} \left(\rho_0 \rho^\star\right) \left(T^\star T_0\right)^{-\frac{7}{2}} \right]^½ \Sigma_0 \Sigma^\star \\
     \epsilon_\mathrm{eff} &= \num{6.22e20} (\rho_0 \rho^\star)^2 (T_0 T^\star)^½ \text{cgs}
 \end{align}
 
@@ -394,7 +412,6 @@ Et :
 \end{equation}
 
 Enfin :
-
 \begin{equation}
     {P_\mathrm{gaz}}_0 = \frac{\rho_0}{\mu m_p} k_B T_0 \Rightarrow P_\mathrm{gaz}^\star = \frac{P_\mathrm{gaz}}{{P_\mathrm{gaz}}_0} = \rho^\star T^\star
 \end{equation}
@@ -423,8 +440,9 @@ La grande équation adimensionnée :
 \begin{equation}
     C_V \frac{\partial T^{\star}}{\partial t^{\star}} =
     {\Omega^\star}^2 \frac{3 \nu^\star v_0^2}{T_0} - \frac{2 F_z x}{S^\star \Sigma_0 \Omega_\mathrm{max} T_0} +
-    \frac{R}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} ×
+    \frac{R}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
     \left( \frac{\partial S^\star}{\partial t^\star} + \frac{v^\star}{2} \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) –
     \frac{C_V v^\star}{2 x} \frac{\partial T^\star}{\partial x}
 \end{equation}
 
+%TODO : tableau variables, adimensionnement, valeur_0
