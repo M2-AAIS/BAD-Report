@@ -69,6 +69,9 @@ distance $r$ :
     \Omega = \left( \frac{G M}{r^3} \right)^½
 \end{equation}
 
+Notons que c’est une constante du temps, nous pourrons donc la calculer une
+seule fois en chaque position.
+
 \subsubsection{\texorpdfstring{Masse atomique $\mu$}{Masse atomique μ}}
 
 Il s’agit de la masse moyenne des particules (noyaux et électrons) constituant
@@ -79,7 +82,7 @@ il est couramment utilisé :
     \mu = \frac{1}{2 X + ¾ Y + ½ Z} \approx 0.62
 \end{equation}
 
-Nous noterons au passage que cette valeur est constante et ne dépend que des
+Notons au passage que cette valeur est constante et ne dépend que des
 paramètres d’entrée $X$ et $Y$ donnés à l’\cref{eq:compo_chimique}.
 
 \subsubsection{\texorpdfstring{Pressions $P$, $P_\mathrm{gaz}$ et $P_\mathrm{rad}$}{Pressions P, Pgaz et Prad}}
@@ -89,7 +92,9 @@ de radiation due aux photons.
 \begin{align}
     \label{eq:pression}
     P &= P_{\mathrm{gaz}} + P_{\mathrm{rad}} \\
+    \label{eq:pression_gaz}
     P_{\mathrm{gaz}} &= \frac{\rho}{\mu m_p} k_B T \\
+    \label{eq:pression_radiation}
     P_{\mathrm{rad}} &= \frac{1}{3} a T^4
 \end{align}
 
@@ -101,7 +106,7 @@ constante de Planck).
 
 Nous définissons au passage l’indicateur de pression $\beta$ :
 \begin{equation}
-    \label{eq:beta}
+    \label{eq:indicateur_beta}
     \beta = \frac{P_{\mathrm{gaz}}}{P}
 \end{equation}
 
@@ -371,10 +376,11 @@ Nous posons donc logiquement :
 
 Et par conséquent :
 \begin{equation}
+    \label{eq:demi_hauteur_adim}
     H^\star = \frac{H}{r_s}
 \end{equation}
 
-\subsubsection{Taux d’accrétion}
+\subsubsection{Taux d’accrétion, densité de surface}
 
 En partant de l’\cref{eq:taux_accretion} :
 \begin{equation}
@@ -383,6 +389,7 @@ En partant de l’\cref{eq:taux_accretion} :
 
 Ce qui nous amène à poser :
 \begin{equation}
+    \label{eq:densite_surface_adim}
     \Sigma^\star = \frac{\Sigma}{\Sigma_0} = \Sigma \times \frac{2 \pi r_s^2 \Omega_\mathrm{max}}{\dot{M_0}}
 \end{equation}
 
@@ -396,9 +403,27 @@ Et donc :
     \dot{M}^\star = v^\star S^\star x
 \end{equation}
 
+\subsubsection{Densité volumique}
+
+Il faut obtenir :
+\begin{equation}
+    \rho^\star = \frac{\Sigma^\star}{2 H^\star}
+\end{equation}
+
+Étant donné les \cref{eq:demi_hauteur_adim,eq:densite_surface_adim} cela nous
+impose :
+\begin{equation}
+    \rho^\star = \frac{\rho}{\rho_0} = \frac{\rho r_s}{\Sigma_0}
+\end{equation}
+
 \subsubsection{Température}
 
-Les équations faisant intervenir un terme en $T^4$
+Les équations faisant intervenir un terme en $T^4$, le choix de cet
+adimensionnement est particulièrement critique. Il est suggéré un argument
+énergétique pour estimer un ordre de grandeur de la température. Celui-ci et
+les calculs correspondant sont présentés à l’\cref{app:adimensionnement}. 
+
+Il vient :
 \begin{equation}
     T^{\star} = \frac{T}{T_0}
 \end{equation}
@@ -413,7 +438,10 @@ Et :
     L_{tot} = \frac{1}{12} \dot{M_0} c^2
 \end{equation}
 
-Pour $F_z$ :
+\subsubsection{Flux radiatif}
+
+Ici, pas vraiment d’adimensionnement, nous remplaçons juste les différentes
+grandeurs par leurs expressions adimensionnées :
 \begin{equation}
     F_z =
     \begin{cases}
@@ -429,26 +457,30 @@ Où :
     \epsilon_\mathrm{eff} &= \num{6.22e20} (\rho_0 \rho^\star)^2 (T_0 T^\star)^½ \text{cgs}
 \end{align}
 
-Et :
-\begin{equation}
-    \rho^\star = \frac{\rho}{\rho_0} = \frac{\rho r_s}{\Sigma_0}
-\end{equation}
+\subsubsection{Pressions}
 
-Enfin :
-\begin{equation}
-    {P_\mathrm{gaz}}_0 = \frac{\rho_0}{\mu m_p} k_B T_0 \Rightarrow P_\mathrm{gaz}^\star = \frac{P_\mathrm{gaz}}{{P_\mathrm{gaz}}_0} = \rho^\star T^\star
-\end{equation}
+Pour les deux termes de pression, nous faisons en sorte d’avoir les expressions
+les plus simples possibles.
 
-\begin{equation}
-    {P_\mathrm{rad}}_0 = \frac{1}{3} a T_0^4 \Rightarrow P_\mathrm{rad}^\star = \frac{P_\mathrm{rad}}{{P_\mathrm{rad}}_0} = {T^\star}^4
-\end{equation}
+Pour le gaz, réduisons l’\cref{eq:pression_gaz} à l’essentiel :
+\begin{align}
+    P_\mathrm{gaz}^\star &= \rho^\star T^\star \\ 
+    \hookrightarrow P_\mathrm{gaz}^\star &= \frac{P_\mathrm{gaz}}{{P_\mathrm{gaz}}_0} = \frac{\mu m_p}{\rho_0 k_B T_0} P_\mathrm{gaz}
+\end{align}
 
-Ce qui donne pour $\beta$ :
+Idem pour l’\cref{eq:pression_radiation} décrivant la radiation :
+\begin{align}
+    P_\mathrm{rad}^\star &= {T^\star}^4 \\
+    \hookrightarrow P_\mathrm{rad}^\star &= \frac{P_\mathrm{rad}}{{P_\mathrm{rad}}_0} = \frac{3}{a T_0^4} P_\mathrm{rad}
+\end{align}
+
+Cela donne pour $\beta$ (la transformation depuis
+l’\cref{eq:indicateur_beta} est donnée à l’\cref{app:adimensionnement}) :
 \begin{equation}
     \beta = \frac{1}{1 + \frac{P_\mathrm{rad}^\star {P_\mathrm{rad}}_0}{P_\mathrm{gaz}^\star {P_\mathrm{gaz}}_0}} = \frac{1}{1 + \frac{{T^\star}^3}{\rho^\star} \frac{\mu m_p a T_0^3}{3 \rho_0 k_B}}
 \end{equation}
 
-On posera donc :
+Nous poserons donc :
 \begin{equation}
     B = \frac{\mu m_p a T_0^3}{3 \rho_0 k_B}
 \end{equation}
@@ -458,14 +490,19 @@ Pour écrire :
     \beta = \frac{1}{1 + B \frac{{T^\star}^3}{\rho^\star}}
 \end{equation}
 
-La grande équation adimensionnée :
+\subsubsection{Évolution de la température}
 
+Pour finir, nous réinjectons tous ces adimensionnement dans
+l’\cref{eq:equation_thermique} :
 \begin{equation}
     C_V \frac{\partial T^{\star}}{\partial t^{\star}} =
-    {\Omega^\star}^2 \frac{3 \nu^\star v_0^2}{T_0} - \frac{2 F_z x}{S^\star \Sigma_0 \Omega_\mathrm{max} T_0} +
-    \frac{R}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
-    \left( \frac{\partial S^\star}{\partial t^\star} + \frac{v^\star}{2} \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) –
+    {\Omega^\star}^2 \frac{3 \nu^\star v_0^2}{T_0} -
+    \frac{2 F_z x}{S^\star \Sigma_0 \Omega_\mathrm{max} T_0} +
+    \frac{\mathcal{R}}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
+    \left( \frac{\partial S^\star}{\partial t^\star} + \frac{v^\star}{2} \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) -
     \frac{C_V v^\star}{2 x} \frac{\partial T^\star}{\partial x}
 \end{equation}
+
+\subsection{Tableau récapitulatif des adimensionnements}
 
 %TODO : tableau variables, adimensionnement, valeur_0

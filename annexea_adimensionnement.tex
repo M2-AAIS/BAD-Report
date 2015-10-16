@@ -1,78 +1,14 @@
 \section{Calculs sur l’adimensionnement}
+\label{app:adimensionnement}
+
+Différentielles :
 
 \begin{align}
-    \left\{
-        \begin{aligned}
-            \partial T &= \partial T^{\star} × T_0 \\
-            \partial t &= \frac{\partial t^{\star}}{\Omega_{max}}
-        \end{aligned}
-    \right.
+    \partial t &= \frac{\partial t^{\star}}{\Omega_{max}} \\
+    \partial r &= 2 r_s dx \\
+    \partial \Sigma &= \frac{dS}{x} - \frac{1}{x^2} S dx \\
+    \partial T &= \partial T^{\star} × T_0
 \end{align}
 
-\begin{equation}
-    T_0 \Omega_\mathrm{max} C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
-    3 \Omega^2 \nu^\star \Omega_\mathrm{max} r_s^2 − \frac{2 F_z x}{S} +
-    \frac{R}{\mu} \left(\frac{4−3\beta}{\beta}\right) \frac{T^\star T_0 x}{S}
-    \left( \frac{\partial S}{\partial t^\star} \frac{\Omega_\mathrm{max}}{x} + v \frac{\partial}{\partial x} \left(\frac{S}{x}\right) \frac{1}{2 r^½ r_s^½}  \right) –
-    C_v v \frac{\partial T^\star}{\partial x} \frac{T_0}{2 r^½ r_s^½}
-\end{equation}
-
-\begin{equation}
-    T_0 C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
-    3 \Omega^2 \nu^\star r_s^2 − \frac{2 F_z x}{S \Omega_\mathrm{max}} +
-    \frac{R}{\mu} \left(\frac{4−3\beta}{\beta}\right) \frac{T^\star T_0 x}{S}
-    \left( \frac{\partial S}{\partial t^\star} \frac{1}{x} + \frac{v}{\Omega_\mathrm{max}} \frac{\partial}{\partial x} \left(\frac{S}{x}\right) \frac{1}{2 r^½ r_s^½}  \right) –
-    \frac{C_v v}{\Omega_\mathrm{max}} \frac{\partial T^\star}{\partial x} \frac{T_0}{2 r^½ r_s^½}
-\end{equation}
-
-\begin{equation}
-    T_0 C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
-    3 \Omega^2 \nu^\star r_s^2 − \frac{2 F_z x}{S \Omega_\mathrm{max}} +
-    \frac{R}{\mu} \left(\frac{4−3\beta}{\beta}\right) \frac{T^\star T_0 x}{S}
-    \left( \frac{\partial S}{\partial t^\star} \frac{1}{x} − \frac{r_s}{S x} \frac{\partial}{\partial x} \left(\nu^\star S\right) \frac{\partial}{\partial x} \left(\frac{S}{x}\right) \frac{1}{r^½ r_s^½}  \right) –
-    \frac{C_v r_s}{S x} \frac{\partial}{\partial x} \left(\nu^\star S\right) \frac{\partial T^\star}{\partial x} \frac{T_0}{r^½ r_s^½}
-\end{equation}
-
-\begin{equation}
-    T_0 C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
-    3 \Omega^2 \nu^\star r_s^2 − \frac{2 F_z x}{S \Omega_\mathrm{max}} +
-    \frac{R}{\mu} \left(\frac{4−3\beta}{\beta}\right) \frac{T^\star T_0 x}{S}
-    \left( \frac{\partial S}{\partial t^\star} \frac{1}{x} − \frac{1}{S x^2} \frac{\partial}{\partial x} \left(\nu^\star S\right) \frac{\partial}{\partial x} \left(\frac{S}{x}\right) \right) –
-    \frac{C_v T_0}{S x^2} \frac{\partial}{\partial x} \left(\nu^\star S\right) \frac{\partial T^\star}{\partial x}
-\end{equation}
-
-On regarde le premier terme :
-\begin{equation}
-    3 \Omega^2 \nu^\star r_s^2 = 3 \frac{\Omega^2}{\Omega_\mathrm{max}^2} \frac{G M \nu^\star}{27 r_s} = {\Omega^\star}^2 \frac{G M \nu^\star}{3 r_\mathrm{min}}
-\end{equation}
-
-Soit :
-\begin{equation}
-    T_0 C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
-    {\Omega^\star}^2 \frac{G M \nu^\star}{3 r_\mathrm{min}} − \frac{2 F_z x}{S \Omega_\mathrm{max}} +
-    \frac{R}{\mu} \left(\frac{4−3\beta}{\beta}\right) \frac{T^\star T_0 x}{S}
-    \left( \frac{\partial S}{\partial t^\star} \frac{1}{x} − \frac{1}{S x^2} \frac{\partial}{\partial x} \left(\nu^\star S\right) \frac{\partial}{\partial x} \left(\frac{S}{x}\right) \right) –
-    \frac{C_v T_0}{S x^2} \frac{\partial}{\partial x} \left(\nu^\star S\right) \frac{\partial T^\star}{\partial x}
-\end{equation}
-
-\begin{equation}
-    T_0 C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
-    {\Omega^\star}^2 \frac{G M \nu^\star}{3 r_\mathrm{min}} − \frac{2 F_z x}{S^\star \Omega_\mathrm{max}} +
-    \frac{R}{\mu} \left(\frac{4−3\beta}{\beta}\right) \frac{T^\star T_0 x}{S^\star}
-    \left( \frac{\partial S^\star}{\partial t^\star} \frac{1}{x} − \frac{1}{S^\star x^2} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right) \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) –
-    \frac{C_v T_0}{S^\star x^2} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right) \frac{\partial T^\star}{\partial x}
-\end{equation}
-
-Par rapport aux photos, je simplifie un $x$ en plus dans le terme central (si ça vous va sous cette forme, je propose de le simplifier plus tôt) :
-
-\begin{equation}
-    T_0 C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
-    {\Omega^\star}^2 \frac{G M \nu^\star}{3 r_\mathrm{min}} − \frac{2 F_z x}{S^\star \Omega_\mathrm{max}} +
-    \frac{R}{\mu} \left(\frac{4−3\beta}{\beta}\right) \frac{T^\star T_0}{S^\star}
-    \left( \frac{\partial S^\star}{\partial t^\star} − \frac{1}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right) \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) –
-    \frac{C_v T_0}{S^\star x^2} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right) \frac{\partial T^\star}{\partial x}
-\end{equation}
-
-On pourrait aussi envisager de remplacer $\frac{\partial S^\star}{\partial t^\star}$ pour avoir une dérivée que selon $x$ à droite (qui se simplifie peut-être en plus).
-
+$x$ et $t^\star$ sont des variables indépendantes (puisque $r$ et $t$ le sont).
 
