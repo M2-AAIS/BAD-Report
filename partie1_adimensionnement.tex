@@ -66,7 +66,7 @@ La vitesse angulaire correspond à la période de l’orbite képlerienne à la
 distance $r$ :
 \begin{equation}
     \label{eq:vitesse_angulaire}
-    \Omega = \left( \frac{G M}{r^3} \right)^½
+    \Omega = \left( \frac{G M}{r^3} \right)^\frac{1}{2}
 \end{equation}
 
 Notons que c’est une constante du temps, nous pourrons donc la calculer une
@@ -79,7 +79,7 @@ le gaz, rapportée à la masse atomique unitaire. Pour un gaz complètement ioni
 il est couramment utilisé :
 \begin{equation}
     \label{eq:masse_atomique}
-    \mu = \frac{1}{2 X + ¾ Y + ½ Z} \approx 0.62
+    \mu = \frac{1}{2 X + \frac{3}{4} Y + \frac{1}{2} Z} \approx 0.62
 \end{equation}
 
 Notons au passage que cette valeur est constante et ne dépend que des
@@ -119,7 +119,7 @@ Elle correspond à la vitesse de propagation des perturbations adiabatiques de
 densité.
 \begin{equation}
     \label{eq:vitesse_son}
-    c_s = \left( \frac{\Gamma_1 P}{\rho} \right)^½
+    c_s = \left( \frac{\Gamma_1 P}{\rho} \right)^\frac{1}{2}
 \end{equation}
 
 $\Gamma_1$ est le coefficient adiabatique, il dépend normalement de $\beta$.
@@ -161,7 +161,7 @@ Elle est donnée par une équation de type parabolique (« proche » d’une éq
 de diffusion) :
 \begin{equation}
     \label{eq:densite_surface}
-    \frac{\partial \Sigma}{\partial t} = \frac{3}{r} \frac{\partial}{\partial r} \left\{ r^½ \frac{\partial}{\partial r} \left(\nu \Sigma r^½ \right) \right\}
+    \frac{\partial \Sigma}{\partial t} = \frac{3}{r} \frac{\partial}{\partial r} \left\{ r^\frac{1}{2} \frac{\partial}{\partial r} \left(\nu \Sigma r^\frac{1}{2} \right) \right\}
 \end{equation}
 
 \subsubsection{\texorpdfstring{Vitesse locale d’accrétion $v$}{Vitesse locale d’accrétion v}}
@@ -171,7 +171,7 @@ celle orientée vers le trou noir lorsque sa valeur est négative (\textit{i.e.}
 quand la matière s’accrète).
 \begin{equation}
     \label{eq:vitesse_accretion}
-    v = - \frac{3}{\Sigma r^½} \frac{\partial}{\partial r} \left( \nu \Sigma r^½ \right)
+    v = - \frac{3}{\Sigma r^\frac{1}{2}} \frac{\partial}{\partial r} \left( \nu \Sigma r^\frac{1}{2} \right)
 \end{equation}
 
 \subsubsection{\texorpdfstring{Taux d’accrétion $\dot{M}$}{Taux d’accrétion dM/dt}}
@@ -255,7 +255,7 @@ Il reste donc à définir le flux radiatif $F_z$ qui intervient dans les
 Dont l’expression dépend donc de la profondeur optique $\tau_\mathrm{eff}$ :
 \begin{equation}
     \label{eq:tau_eff}
-    \tau_\mathrm{eff} = ½ (\kappa_e \kappa_\mathrm{ff})^½ \Sigma
+    \tau_\mathrm{eff} = \frac{1}{2} (\kappa_e \kappa_\mathrm{ff})^\frac{1}{2} \Sigma
 \end{equation}
 
 Et où nous avons introduit les grandeurs suivantes :
@@ -265,7 +265,7 @@ Et où nous avons introduit les grandeurs suivantes :
     \label{eq:opacite_bremsstrahlung}
     \kappa_\mathrm{ff} &= \num{6.13e22} \times \rho T^{-\frac{7}{2}} \si{\square\centi\meter\per\gram}\\
     \label{eq:emissivite}
-    \epsilon_\mathrm{ff} &= \num{6.22e20} \times \rho^2 T^½ \\
+    \epsilon_\mathrm{ff} &= \num{6.22e20} \times \rho^2 T^\frac{1}{2} \\
     A &= 1
 \end{align}
 
@@ -297,7 +297,7 @@ Nous commençons par adimensionner la variable temporelle :
 
 Où :
 \begin{equation}
-    \Omega_\mathrm{max} = \left( \frac{G M}{r^3_\mathrm{min}} \right)^½
+    \Omega_\mathrm{max} = \left( \frac{G M}{r^3_\mathrm{min}} \right)^\frac{1}{2}
 \end{equation}
 
 C’est la vitesse angulaire (ou \textit{moyen mouvement}) de la dernière orbite
@@ -307,7 +307,7 @@ stable pour la matière.
 
 L’autre variable indépendante est la position $r$ :
 \begin{equation}
-    x = \left( \frac{r}{r_s} \right)^½
+    x = \left( \frac{r}{r_s} \right)^\frac{1}{2}
 \end{equation}
 
 Ce choix à de l’intérêt pour la simplification de l’\cref{eq:densite_surface}.
@@ -453,8 +453,8 @@ grandeurs par leurs expressions adimensionnées :
 Où :
 \begin{align}
     \kappa_\mathrm{ff} &= \num{6.13e22} \rho_0 \rho^\star \left(T^\star T_0\right)^{-\frac{7}{2}} \si{\square\centi\meter\per\gram} \\
-    \tau_\mathrm{eff} &= \frac{1}{2} \left[ 0.2 \times (1 + X) \times \num{6.13e22} \left(\rho_0 \rho^\star\right) \left(T^\star T_0\right)^{-\frac{7}{2}} \right]^½ \Sigma_0 \Sigma^\star \\
-    \epsilon_\mathrm{eff} &= \num{6.22e20} (\rho_0 \rho^\star)^2 (T_0 T^\star)^½ \text{cgs}
+    \tau_\mathrm{eff} &= \frac{1}{2} \left[ 0.2 \times (1 + X) \times \num{6.13e22} \left(\rho_0 \rho^\star\right) \left(T^\star T_0\right)^{-\frac{7}{2}} \right]^\frac{1}{2} \Sigma_0 \Sigma^\star \\
+    \epsilon_\mathrm{eff} &= \num{6.22e20} (\rho_0 \rho^\star)^2 (T_0 T^\star)^\frac{1}{2} \text{cgs}
 \end{align}
 
 \subsubsection{Pressions}
