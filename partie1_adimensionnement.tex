@@ -106,7 +106,7 @@ constante de Planck).
 
 Nous définissons au passage l’indicateur de pression $\beta$ :
 \begin{equation}
-    \label{eq:indicateur_beta}
+    \label{eq:indicateur_pression}
     \beta = \frac{P_{\mathrm{gaz}}}{P}
 \end{equation}
 
@@ -131,7 +131,7 @@ Pour simplifier, nous prendront $\Gamma_1 = 1$ (techniquement, $\beta = 1
 
 L’équilibre hydrostatique donne :
 \begin{equation}
-    \label{eq:hauteur}
+    \label{eq:demi_hauteur}
     H = \frac{c_s}{\Omega}
 \end{equation}
 
@@ -139,7 +139,7 @@ L’équilibre hydrostatique donne :
 
 Par définition, sa valeur moyenne est directement :
 \begin{equation}
-    \label{eq:densite}
+    \label{eq:densite_volumique}
     \rho = \frac{\Sigma}{2 H}
 \end{equation}
 
@@ -307,10 +307,11 @@ stable pour la matière.
 
 L’autre variable indépendante est la position $r$ :
 \begin{equation}
+    \label{eq:position_adim}
     x = \left( \frac{r}{r_s} \right)^\frac{1}{2}
 \end{equation}
 
-Ce choix à de l’intérêt pour la simplification de l’\cref{eq:densite_surface}.
+Ce choix a de l’intérêt pour la simplification de l’\cref{eq:densite_surface}.
 
 \subsubsection{Évolution de la densité de surface, viscosité}
 
@@ -324,15 +325,22 @@ Ce qui nous donne en réintroduisant dans l’\cref{eq:densite_surface} :
     \frac{\partial S}{\partial t^\star} = \frac{3}{4} \frac{1}{\Omega_\mathrm{max} r_s^2 x^2} \frac{\partial^2}{\partial x^2} \left(\nu S\right)
 \end{equation}
 
-En introduisant $S^\star$, la grandeur adimensionnée correspondant à $S$ (que
-nous définirons plus tard puisque cela ne change rien ici) :
+Nous introduisons maintenant $S^\star$, la grandeur adimensionnée correspondant
+à $S$ :
+\begin{equation}
+    S^\star = \frac{S}{S_0}
+\end{equation}
+
+Où $S_0$ est une grandeur homogène à $S$ (et que nous définirons plus tard
+puisque cela ne change rien ici). En remplaçant dans l’équation précédente :
 \begin{equation}
     \frac{\partial S^\star}{\partial t^\star} = \frac{3}{4} \frac{1}{\Omega_\mathrm{max} r_s^2 x^2} \frac{\partial^2}{\partial x^2} \left(\nu S^\star\right)
 \end{equation}
 
 Nous posons donc :
 \begin{equation}
-    \nu^\star = \frac{3}{4} \frac{\nu}{\Omega_\mathrm{max} r_s^2} = \frac{\nu}{\nu_0}
+    \label{eq:viscosite_adim}
+    \nu^\star = \frac{\nu}{\nu_0} = \frac{3}{4} \frac{\nu}{\Omega_\mathrm{max} r_s^2} \Rightarrow \nu_0 = \frac{4}{3} r_s^2 \Omega_\mathrm{max}
 \end{equation}
 
 Et nous obtenons :
@@ -350,8 +358,8 @@ d’accrétion) définie par l’\cref{eq:vitesse_accretion} :
 
 Ce qui nous amène à poser :
 \begin{align}
-    v_0 &= \Omega_\mathrm{max} r_s \\
-    \hookrightarrow v^\star &= \frac{v}{v_0} = - \frac{2}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right)
+    v^\star &= \frac{v}{v_0} = \frac{v}{\Omega_\mathrm{max} r_s} \Rightarrow v_0 = \Omega_\mathrm{max} r_s \\
+    \hookrightarrow v^\star &= - \frac{2}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right)
 \end{align}
 
 Nous utilisons cela pour adimensionner $c_s$ :
@@ -384,7 +392,7 @@ Et par conséquent :
 
 En partant de l’\cref{eq:taux_accretion} :
 \begin{equation}
-    \dot{M}^\star = \frac{\dot{M}}{\dot{M_0}} = - \frac{2 \pi x^2 r_s v^\star v_0 \Sigma}{\dot{M_0}} = - \frac{2 \pi r_s^2 \Omega_\mathrm{max} v^\star x^2 \Sigma}{\dot{M_0}} 
+    \dot{M}^\star = \frac{\dot{M}}{\dot{M_0}} = - \frac{2 \pi x^2 r_s v^\star v_0 \Sigma}{\dot{M_0}} = - \frac{2 \pi r_s^2 \Omega_\mathrm{max} v^\star \Sigma x^2}{\dot{M_0}} 
 \end{equation}
 
 Ce qui nous amène à poser :
@@ -395,17 +403,17 @@ Ce qui nous amène à poser :
 
 Cela nous permet au passage d’adimensionner naturellement $S$ :
 \begin{equation}
-    S^\star = \frac{S}{\Sigma_0} = \Sigma^\star x
+    S^\star = \frac{S}{S_0} = \frac{S}{\Sigma_0} = \Sigma^\star x \Rightarrow S_0 = \Sigma_0
 \end{equation}
 
 Et donc :
 \begin{equation}
-    \dot{M}^\star = - v^\star S^\star x
+    \dot{M}^\star = - x S^\star v^\star
 \end{equation}
 
 \subsubsection{Densité volumique}
 
-Il faut obtenir :
+Nous souhaiterions obtenir pour l’\cref{eq:densite_volumique} :
 \begin{equation}
     \rho^\star = \frac{\Sigma^\star}{2 H^\star}
 \end{equation}
@@ -413,7 +421,7 @@ Il faut obtenir :
 Étant donné les \cref{eq:demi_hauteur_adim,eq:densite_surface_adim} cela nous
 impose :
 \begin{equation}
-    \rho^\star = \frac{\rho}{\rho_0} = \frac{\rho r_s}{\Sigma_0}
+    \rho^\star = \frac{\rho}{\rho_0} = \frac{\rho r_s}{\Sigma_0} \Rightarrow \rho_0 = \frac{\Sigma_0}{r_s}
 \end{equation}
 
 \subsubsection{Température}
@@ -438,25 +446,6 @@ Et :
     L_{tot} = \frac{1}{12} \dot{M_0} c^2
 \end{equation}
 
-\subsubsection{Flux radiatif}
-
-Ici, pas vraiment d’adimensionnement, nous remplaçons juste les différentes
-grandeurs par leurs expressions adimensionnées :
-\begin{equation}
-    F_z =
-    \begin{cases}
-        \frac{2 a c \left(T_0 T^\star\right)^4}{3 (\kappa_\mathrm{ff} + \kappa_e)\Sigma^\star \Sigma_0}, &\text{si $\tau_\mathrm{eff} \geq 1$} \\
-        \epsilon_\mathrm{ff} r_s H^\star, &\text{si $\tau_\mathrm{eff} < 1$}
-    \end{cases}
-\end{equation}
-
-Où :
-\begin{align}
-    \kappa_\mathrm{ff} &= \num{6.13e22} \rho_0 \rho^\star \left(T^\star T_0\right)^{-\frac{7}{2}} \si{\square\centi\meter\per\gram} \\
-    \tau_\mathrm{eff} &= \frac{1}{2} \left[ 0.2 \times (1 + X) \times \num{6.13e22} \left(\rho_0 \rho^\star\right) \left(T^\star T_0\right)^{-\frac{7}{2}} \right]^\frac{1}{2} \Sigma_0 \Sigma^\star \\
-    \epsilon_\mathrm{eff} &= \num{6.22e20} (\rho_0 \rho^\star)^2 (T_0 T^\star)^\frac{1}{2} \text{cgs}
-\end{align}
-
 \subsubsection{Pressions}
 
 Pour les deux termes de pression, nous faisons en sorte d’avoir les expressions
@@ -474,8 +463,9 @@ Idem pour l’\cref{eq:pression_radiation} décrivant la radiation :
     \hookrightarrow P_\mathrm{rad}^\star &= \frac{P_\mathrm{rad}}{P_\mathrm{rad}^0} = \frac{3}{a T_0^4} P_\mathrm{rad}
 \end{align}
 
-Cela donne pour $\beta$ (la transformation depuis
-l’\cref{eq:indicateur_beta} est donnée à l’\cref{app:adimensionnement}) :
+Cela donne pour $\beta$ (par rapport à l’\cref{eq:indicateur_pression}, nous
+avons simplement simplifié par $P_\mathrm{gaz}$) :
+
 \begin{equation}
     \beta = \frac{1}{1 + \frac{P_\mathrm{rad}^\star P_\mathrm{rad}^0}{P_\mathrm{gaz}^\star P_\mathrm{gaz}^0}} = \frac{1}{1 + \frac{{T^\star}^3}{\rho^\star} \frac{\mu m_p a T_0^3}{3 \rho_0 k_B}}
 \end{equation}
@@ -489,6 +479,26 @@ Pour écrire :
 \begin{equation}
     \beta = \frac{1}{1 + B \frac{{T^\star}^3}{\rho^\star}}
 \end{equation}
+
+\subsubsection{Flux radiatif}
+
+Ici, pas vraiment d’adimensionnement, nous remplaçons juste les différentes
+grandeurs par leurs expressions adimensionnées :
+\begin{equation}
+    F_z =
+    \begin{cases}
+        \frac{2 a c \left(T_0 T^\star\right)^4}{3 (\kappa_\mathrm{ff} + \kappa_e)\Sigma^\star \Sigma_0}, &\text{si $\tau_\mathrm{eff} \geq 1$} \\
+        \epsilon_\mathrm{ff} r_s H^\star, &\text{si $\tau_\mathrm{eff} < 1$}
+    \end{cases}
+\end{equation}
+
+Où :
+\begin{align}
+    \kappa_\mathrm{ff} &= \num{6.13e22} \rho_0 \rho^\star \left(T^\star T_0\right)^{-\frac{7}{2}} \si{\square\centi\meter\per\gram} \\
+    \kappa_e &= 0.2 \times (1 + X) \si{\square\centi\meter\per\gram} \approx \SI{0.34}{\square\centi\meter\per\gram} \\
+    \tau_\mathrm{eff} &= \frac{1}{2} \left[ 0.2 \times (1 + X) \times \num{6.13e22} \left(\rho_0 \rho^\star\right) \left(T^\star T_0\right)^{-\frac{7}{2}} \right]^\frac{1}{2} \Sigma_0 \Sigma^\star \\
+    \epsilon_\mathrm{eff} &= \num{6.22e20} (\rho_0 \rho^\star)^2 (T_0 T^\star)^\frac{1}{2} \text{cgs}
+\end{align}
 
 \subsubsection{Évolution de la température}
 
@@ -505,7 +515,8 @@ l’\cref{eq:equation_thermique} :
 
 \subsection{Récapitulatif des adimensionnements}
 
-Dans cette sous-partie, nous faisons un récapitulatif des variables et de leurs adimensionnements, ainsi que des équations adimensionnées.
+Dans cette sous-partie, nous faisons un récapitulatif des variables et de leurs
+adimensionnements, ainsi que des équations adimensionnées.
 
 \subsubsection{Tableau récapitulatif des variables}
 
@@ -515,7 +526,7 @@ Dans cette sous-partie, nous faisons un récapitulatif des variables et de leurs
         Variable & Variable adimensionnée & Adimensionnement \\
         \hline
         $\Omega$ & $\Omega^\star = \Omega/\Omega_0$ & $\Omega_0 = \Omega_\mathrm{max} = \left( \frac{G M}{r^3_\mathrm{min}} \right)^\frac{1}{2}$ \\
-        $t$ & $t^\star = t/t_0$ & $t_0 = \Omega_\mathrm{max}^{-1}$ \\
+        $t$ & $t^\star = t/t_0$ & $t_0 = \Omega_0^{-1}$ \\
         $r$ & $x = \sqrt{r/r_s}$ & N/A \\
         $\Sigma$ & $\Sigma^\star = \Sigma/\Sigma_0$ & $\Sigma_0 = \frac{\dot{M_0}}{2 \pi r_s^2 \Omega_\mathrm{max}}$ \\
         $S = \Sigma x$ & $S^\star = \Sigma^\star x$ & N/A \\
@@ -546,11 +557,9 @@ Celles-ci (ainsi que $x$) ne seront calculées qu’une seule fois dans la simul
 Les autres non :
 
 \begin{align}
-    \mu &= \frac{1}{2 X + \frac{3}{4} Y + \frac{1}{2} Z} \approx 0.62 \\
     \frac{\partial S^\star}{\partial t^\star} &= \frac{1}{x^2} \frac{\partial^2}{\partial x^2} \left(\nu^\star S^\star\right) \\
     v^\star &= - \frac{2}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right) \\
     \dot{M^\star} &= - x S^\star v^\star \\
-    \Omega^\star &= \frac{3\sqrt{3}}{x^3} \\
     C_v \frac{\partial T^{\star}}{\partial t^{\star}} &=
     {\Omega^\star}^2 \frac{3 \nu^\star v_0^2}{T_0} -
     \frac{2 F_z x}{S^\star \Sigma_0 \Omega_\mathrm{max} T_0} +
