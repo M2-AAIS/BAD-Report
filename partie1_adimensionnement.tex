@@ -188,10 +188,10 @@ matière accrétée à la distance $r$ à chaque instant :
 L’équation thermique s’écrit :
 \begin{equation}
     \label{eq:equation_thermique_th}
-    C_V \frac{\partial T}{\partial t} = Q^+ - Q^- + Q_\mathrm{adv}
+    C_v \frac{\partial T}{\partial t} = Q^+ - Q^- + Q_\mathrm{adv}
 \end{equation}
 
-$C_V$ est la capacité calorifique massique à volume constant du mélange gaz et
+$C_v$ est la capacité calorifique massique à volume constant du mélange gaz et
 radiation.
 
 Les différents $Q$ correspondent à des termes d’échange de chaleur par unité de
@@ -217,15 +217,15 @@ Enfin, $Q_\mathrm{adv}$ est la chaleur transportée par la matière en mouvement
 (terme d’avdection) : 
 \begin{equation}
     \label{eq:advection}
-    Q_\mathrm{adv} = C_V \left[ (\Gamma_{3} - 1) \frac{T}{\Sigma} \left( \frac{\partial \Sigma}{\partial t} + v \frac{\partial \Sigma}{\partial r}  \right) - v \frac{\partial T}{\partial r} \right]
+    Q_\mathrm{adv} = C_v \left[ (\Gamma_{3} - 1) \frac{T}{\Sigma} \left( \frac{\partial \Sigma}{\partial t} + v \frac{\partial \Sigma}{\partial r}  \right) - v \frac{\partial T}{\partial r} \right]
 \end{equation}
 
-Dans les \cref{eq:equation_thermique,eq:advection} nous avons utilisé $C_V$ et
+Dans les \cref{eq:equation_thermique,eq:advection} nous avons utilisé $C_v$ et
 $\Gamma_3$, le sens physique du premier a déjà été donné, le second est un
 exposant adiabatique. Leur expression :
 \begin{align}
-    &C_V = \frac{\mathcal{R}}{\mu} \frac{12 (\gamma_g - 1)(1 - \beta) + \beta}{(\gamma_g - 1) \beta} \\
-    &C_V (\Gamma_{3} - 1) = \frac{\mathcal{R}}{\mu} \frac{4 - 3\beta}{\beta}
+    &C_v = \frac{\mathcal{R}}{\mu} \frac{12 (\gamma_g - 1)(1 - \beta) + \beta}{(\gamma_g - 1) \beta} \\
+    &C_v (\Gamma_{3} - 1) = \frac{\mathcal{R}}{\mu} \frac{4 - 3\beta}{\beta}
 \end{align}
 
 $\gamma_g$ est le rapport des capacités calorifiques des gaz (5/3 pour un gaz
@@ -236,7 +236,7 @@ En remplaçant les \cref{eq:chauffage,eq:refroidissement,eq:advection} dans
 l’\cref{eq:equation_thermique_th} nous obtenons :
 \begin{equation}
     \label{eq:equation_thermique}
-    C_V \frac{\partial T}{\partial t} = \frac{9}{4} \nu \Omega^2 - \frac{2 F_z}{\Sigma} + C_V \left[ (\Gamma_{3} - 1) \frac{T}{\Sigma} \left( \frac{\partial \Sigma}{\partial t} + v \frac{\partial \Sigma}{\partial r} \right) - v \frac{\partial T}{\partial r} \right]
+    C_v \frac{\partial T}{\partial t} = \frac{9}{4} \nu \Omega^2 - \frac{2 F_z}{\Sigma} + C_v \left[ (\Gamma_{3} - 1) \frac{T}{\Sigma} \left( \frac{\partial \Sigma}{\partial t} + v \frac{\partial \Sigma}{\partial r} \right) - v \frac{\partial T}{\partial r} \right]
 \end{equation}
 
 \subsubsection{\texorpdfstring{Flux radiatif $F_z$}{Flux radiatif Fz}}
@@ -400,7 +400,7 @@ Cela nous permet au passage d’adimensionner naturellement $S$ :
 
 Et donc :
 \begin{equation}
-    \dot{M}^\star = v^\star S^\star x
+    \dot{M}^\star = - v^\star S^\star x
 \end{equation}
 
 \subsubsection{Densité volumique}
@@ -430,7 +430,7 @@ Il vient :
 
 Où :
 \begin{equation}
-    T_0 = \left(\frac{1}{\sqrt{27}} \times \frac{L_{tot}}{4 \pi r_s^2 \sigma} \right)^{\frac{1}{4}}
+    T_0 = \left(\frac{1}{\sqrt{27}} \times \frac{L_{tot}}{4 \pi r_s^2 \sigma} \right)^\frac{1}{4}
 \end{equation}
 
 Et :
@@ -465,24 +465,24 @@ les plus simples possibles.
 Pour le gaz, réduisons l’\cref{eq:pression_gaz} à l’essentiel :
 \begin{align}
     P_\mathrm{gaz}^\star &= \rho^\star T^\star \\ 
-    \hookrightarrow P_\mathrm{gaz}^\star &= \frac{P_\mathrm{gaz}}{{P_\mathrm{gaz}}_0} = \frac{\mu m_p}{\rho_0 k_B T_0} P_\mathrm{gaz}
+    \hookrightarrow P_\mathrm{gaz}^\star &= \frac{P_\mathrm{gaz}}{P_\mathrm{gaz}^0} = \frac{\mu m_p}{\rho_0 k_B T_0} P_\mathrm{gaz}
 \end{align}
 
 Idem pour l’\cref{eq:pression_radiation} décrivant la radiation :
 \begin{align}
     P_\mathrm{rad}^\star &= {T^\star}^4 \\
-    \hookrightarrow P_\mathrm{rad}^\star &= \frac{P_\mathrm{rad}}{{P_\mathrm{rad}}_0} = \frac{3}{a T_0^4} P_\mathrm{rad}
+    \hookrightarrow P_\mathrm{rad}^\star &= \frac{P_\mathrm{rad}}{P_\mathrm{rad}^0} = \frac{3}{a T_0^4} P_\mathrm{rad}
 \end{align}
 
 Cela donne pour $\beta$ (la transformation depuis
 l’\cref{eq:indicateur_beta} est donnée à l’\cref{app:adimensionnement}) :
 \begin{equation}
-    \beta = \frac{1}{1 + \frac{P_\mathrm{rad}^\star {P_\mathrm{rad}}_0}{P_\mathrm{gaz}^\star {P_\mathrm{gaz}}_0}} = \frac{1}{1 + \frac{{T^\star}^3}{\rho^\star} \frac{\mu m_p a T_0^3}{3 \rho_0 k_B}}
+    \beta = \frac{1}{1 + \frac{P_\mathrm{rad}^\star P_\mathrm{rad}^0}{P_\mathrm{gaz}^\star P_\mathrm{gaz}^0}} = \frac{1}{1 + \frac{{T^\star}^3}{\rho^\star} \frac{\mu m_p a T_0^3}{3 \rho_0 k_B}}
 \end{equation}
 
 Nous poserons donc :
 \begin{equation}
-    B = \frac{\mu m_p a T_0^3}{3 \rho_0 k_B}
+    B = \frac{P_\mathrm{rad}^0}{P_\mathrm{gaz}^0} = \frac{\mu m_p a T_0^3}{3 \rho_0 k_B}
 \end{equation}
 
 Pour écrire :
@@ -495,14 +495,81 @@ Pour écrire :
 Pour finir, nous réinjectons tous ces adimensionnement dans
 l’\cref{eq:equation_thermique} :
 \begin{equation}
-    C_V \frac{\partial T^{\star}}{\partial t^{\star}} =
+    C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
     {\Omega^\star}^2 \frac{3 \nu^\star v_0^2}{T_0} -
     \frac{2 F_z x}{S^\star \Sigma_0 \Omega_\mathrm{max} T_0} +
     \frac{\mathcal{R}}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
     \left( \frac{\partial S^\star}{\partial t^\star} + \frac{v^\star}{2} \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) -
-    \frac{C_V v^\star}{2 x} \frac{\partial T^\star}{\partial x}
+    \frac{C_v v^\star}{2 x} \frac{\partial T^\star}{\partial x}
 \end{equation}
 
-\subsection{Tableau récapitulatif des adimensionnements}
+\subsection{Récapitulatif des adimensionnements}
 
-%TODO : tableau variables, adimensionnement, valeur_0
+Dans cette sous-partie, nous faisons un récapitulatif des variables et de leurs adimensionnements, ainsi que des équations adimensionnées.
+
+\subsubsection{Tableau récapitulatif des variables}
+
+\begin{center}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Variable & Variable adimensionnée & Adimensionnement \\
+        \hline
+        $\Omega$ & $\Omega^\star = \Omega/\Omega_0$ & $\Omega_0 = \Omega_\mathrm{max} = \left( \frac{G M}{r^3_\mathrm{min}} \right)^\frac{1}{2}$ \\
+        $t$ & $t^\star = t/t_0$ & $t_0 = \Omega_\mathrm{max}^{-1}$ \\
+        $r$ & $x = \sqrt{r/r_s}$ & N/A \\
+        $\Sigma$ & $\Sigma^\star = \Sigma/\Sigma_0$ & $\Sigma_0 = \frac{\dot{M_0}}{2 \pi r_s^2 \Omega_\mathrm{max}}$ \\
+        $S = \Sigma x$ & $S^\star = \Sigma^\star x$ & N/A \\
+        $\nu$ & $\nu^\star = \nu/\nu_0$ & $\nu_0 = \frac{4 \Omega_\mathrm{max} r_s^2}{3}$ \\
+        $v$ & $v^\star = v/v_0$ & $v_0 = \Omega_\mathrm{max} r_s$ \\
+        $c_s$ & $c_s^\star = c_s/v_0$ & Idem \\
+        $H$ & $H^\star = H/H_0$ & $H_0 = r_s$ \\
+        $\dot{M}$ & $\dot{M^\star} = \dot{M}/\dot{M_0}$ & N/A \\
+        $\rho$ & $\rho^\star = \rho/\rho_0$ & $\rho_0 = \frac{\Sigma_0}{r_s}$ \\
+        $T$ & $T^\star = T/T_0$ & $T_0 = \left(\frac{1}{\sqrt{27}} \times \frac{\dot{M_0} c^2}{48 \pi r_s^2 \sigma} \right)^\frac{1}{4}$ \\
+        $P_\mathrm{gaz}$ & $P_\mathrm{gaz}^\star = P_\mathrm{gaz}/P_\mathrm{gaz}^0$ & $P_\mathrm{gaz}^0 = \frac{\rho_0 k_B T_0}{\mu m_p}$ \\
+        $P_\mathrm{rad}$ & $P_\mathrm{rad}^\star = P_\mathrm{rad}/P_\mathrm{rad}^0$ & $P_\mathrm{rad}^0 = \frac{1}{3} a T_0^4$ \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsubsection{Équations associées}
+
+$x$ et $t$ sont les deux variables indépendantes. Pour les autres, certaines sont des constantes du temps :
+
+\begin{align}
+    \Omega^\star &= \frac{x}{\sqrt{3}}^{-3} \\ 
+    \mu &\approx 0.62
+\end{align}
+
+Celles-ci (ainsi que $x$) ne seront calculées qu’une seule fois dans la simulation.
+
+Les autres non :
+
+\begin{align}
+    \mu &= \frac{1}{2 X + \frac{3}{4} Y + \frac{1}{2} Z} \approx 0.62 \\
+    \frac{\partial S^\star}{\partial t^\star} &= \frac{1}{x^2} \frac{\partial^2}{\partial x^2} \left(\nu^\star S^\star\right) \\
+    v^\star &= - \frac{2}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right) \\
+    \dot{M^\star} &= - x S^\star v^\star \\
+    \Omega^\star &= \frac{3\sqrt{3}}{x^3} \\
+    C_v \frac{\partial T^{\star}}{\partial t^{\star}} &=
+    {\Omega^\star}^2 \frac{3 \nu^\star v_0^2}{T_0} -
+    \frac{2 F_z x}{S^\star \Sigma_0 \Omega_\mathrm{max} T_0} +
+    \frac{\mathcal{R}}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
+    \left( \frac{\partial S^\star}{\partial t^\star} + \frac{v^\star}{2} \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) -
+    \frac{C_v v^\star}{2 x} \frac{\partial T^\star}{\partial x} \\
+    \nu^\star &= \frac{1}{2} \alpha c_s^\star H^\star \\
+    c_s^\star &= \Omega^\star H^\star \\
+    \rho^\star &= \frac{\Sigma^\star}{2 H^\star} \\
+    P_\mathrm{gaz}^\star &= \rho^\star T^\star \\
+    P_\mathrm{rad}^\star &= {T^\star}^4 \\
+    \beta &= \frac{1}{1 + B \frac{{T^\star}^3}{\rho^\star}} ; B = \frac{P_\mathrm{rad}^0}{P_\mathrm{gaz}^0} \\
+    F_z &=
+    \begin{cases}
+        \frac{2 a c \left(T_0 T^\star\right)^4}{3 (\kappa_\mathrm{ff} + \kappa_e)\Sigma^\star \Sigma_0}, &\text{si $\tau_\mathrm{eff} \geq 1$} \\
+        \epsilon_\mathrm{ff} r_s H^\star, &\text{si $\tau_\mathrm{eff} < 1$}
+    \end{cases} \\
+    \kappa_\mathrm{ff} &= \num{6.13e22} \rho_0 \rho^\star \left(T^\star T_0\right)^{-\frac{7}{2}} \si{\square\centi\meter\per\gram} \\
+    \kappa_e &= 0.2 \times (1 + X) \si{\square\centi\meter\per\gram} \approx \SI{0.34}{\square\centi\meter\per\gram} \\
+    \tau_\mathrm{eff} &= \frac{1}{2} \left[ 0.2 \times (1 + X) \times \num{6.13e22} \left(\rho_0 \rho^\star\right) \left(T^\star T_0\right)^{-\frac{7}{2}} \right]^\frac{1}{2} \Sigma_0 \Sigma^\star \\
+    \epsilon_\mathrm{eff} &= \num{6.22e20} (\rho_0 \rho^\star)^2 (T_0 T^\star)^\frac{1}{2} \text{cgs}
+\end{align}
