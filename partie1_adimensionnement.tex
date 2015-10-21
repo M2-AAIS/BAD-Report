@@ -558,18 +558,6 @@ Ce qui nous donne :
     \frac{C_v^\star v^\star}{x} \frac{\partial T^\star}{\partial x}
 \end{equation}
 
-Pour le calcul, avoir une dérivée temporelle dans le membre de droite pose
-quelques problèmes, pour s’en affranchir nous utilisons
-l’\cref{eq:rel_densite_surface_adim} :
-\begin{equation}
-    C_v^\star \frac{\partial T^{\star}}{\partial t^{\star}} =
-    3 v_0^2 \nu^\star {\Omega^\star}^2 - \frac{F_z^\star x}{S^\star} +
-    \frac{\mathcal{R} T_0}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
-    \left( \frac{1}{x^2} \frac{\partial^2}{\partial x^2} \left(\nu^\star S^\star\right) +
-    v^\star \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) -
-    \frac{C_v^\star v^\star}{x} \frac{\partial T^\star}{\partial x}
-\end{equation}
-
 \subsubsection{Pressions}
 
 Pour les deux termes de pression, nous faisons en sorte d’avoir les expressions
@@ -656,8 +644,7 @@ Les autres non :
     C_v^\star \frac{\partial T^{\star}}{\partial t^{\star}} &=
     3 v_0^2 \nu^\star {\Omega^\star}^2 - \frac{F_z^\star x}{S^\star} +
     \frac{\mathcal{R} T_0}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
-    \left( \frac{1}{x^2} \frac{\partial^2}{\partial x^2} \left(\nu^\star S^\star\right) +
-    v^\star \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) -
+    \left( \frac{\partial S^\star}{\partial t^\star} + v^\star \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) -
     \frac{C_v^\star v^\star}{x} \frac{\partial T^\star}{\partial x} \\
     \nu^\star &= \alpha c_s^\star H^\star \\
     c_s^\star &= \Omega^\star H^\star \\
