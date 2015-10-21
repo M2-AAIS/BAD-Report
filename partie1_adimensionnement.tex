@@ -341,6 +341,7 @@ Nous posons donc :
 
 Et nous obtenons :
 \begin{equation}
+    \label{eq:rel_densite_surface_adim}
     \frac{\partial S^\star}{\partial t^\star} = \frac{1}{x^2} \frac{\partial^2}{\partial x^2} \left(\nu^\star S^\star\right)
 \end{equation}
 
@@ -501,12 +502,11 @@ Stefan–Boltzmann) et :
 
 Nous réinjectons tous ces adimensionnements dans l’\cref{eq:equation_thermique} :
 \begin{equation}
-    C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
-    \frac{3 v_0^2}{T_0} \nu^\star {\Omega^\star}^2 -
-    \frac{2 t_0 F_z x}{S^\star \Sigma_0 T_0} +
-    \frac{\mathcal{R}}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
+    C_v T_0 \frac{\partial T^{\star}}{\partial t^{\star}} =
+    3 v_0^2 \nu^\star {\Omega^\star}^2 - \frac{2 t_0 F_z x}{S^\star \Sigma_0} +
+    \frac{\mathcal{R} T_0}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
     \left( \frac{\partial S^\star}{\partial t^\star} + v^\star \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) -
-    \frac{C_v v^\star}{x} \frac{\partial T^\star}{\partial x}
+    \frac{C_v T_0 v^\star}{x} \frac{\partial T^\star}{\partial x}
 \end{equation}
 
 Naturellement, nous avons envie d’introduire $F_z^\star$ pour simplifier cette
@@ -519,11 +519,11 @@ Cela ne donne pas à $F_0$ la même dimension que $F$ (ce qui serait difficile �
 obtenir et pas forcément souhaitable), mais permet de simplifier grandement les
 choses. En remplaçant ça nous avons donc :
 \begin{equation}
-    C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
-    \frac{3 v_0^2}{T_0} \nu^\star {\Omega^\star}^2 - \frac{F_z^\star x}{T_0 S^\star} +
-    \frac{\mathcal{R}}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
+    C_v T_0 \frac{\partial T^{\star}}{\partial t^{\star}} =
+    3 v_0^2 \nu^\star {\Omega^\star}^2 - \frac{F_z^\star x}{S^\star} +
+    \frac{\mathcal{R} T_0}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
     \left( \frac{\partial S^\star}{\partial t^\star} + v^\star \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) -
-    \frac{C_v v^\star}{x} \frac{\partial T^\star}{\partial x}
+    \frac{C_v T_0 v^\star}{x} \frac{\partial T^\star}{\partial x}
 \end{equation}
 
 Il ne reste plus qu’à simplifier l’expression de $F_z^\star$ par rapport à
@@ -543,6 +543,32 @@ Où :
     \kappa_e &= 0.2 \times (1 + X) \si{\square\centi\meter\per\gram} \approx \SI{0.34}{\square\centi\meter\per\gram} \\
     \tau_\mathrm{eff} &= \frac{1}{2} \rho_0^\frac{1}{2} T_0^{-\frac{7}{4}} \Sigma_0 \left[ 0.2 \times (1 + X) \times \num{6.13e22} \rho^\star {T^\star}^{-\frac{7}{2}} \right]^\frac{1}{2} \Sigma^\star
 \end{align}
+
+Enfin nous introduisons $C_v^\star$ :
+\begin{equation}
+    C_v^\star = \frac{C_v}{C_v^0} = C_v T_0 \Rightarrow C_v^0 = T_0^{-1}
+\end{equation} 
+
+Ce qui nous donne :
+\begin{equation}
+    C_v^\star \frac{\partial T^{\star}}{\partial t^{\star}} =
+    3 v_0^2 \nu^\star {\Omega^\star}^2 - \frac{F_z^\star x}{S^\star} +
+    \frac{\mathcal{R} T_0}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
+    \left( \frac{\partial S^\star}{\partial t^\star} + v^\star \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) -
+    \frac{C_v^\star v^\star}{x} \frac{\partial T^\star}{\partial x}
+\end{equation}
+
+Pour le calcul, avoir une dérivée temporelle dans le membre de droite pose
+quelques problèmes, pour s’en affranchir nous utilisons
+l’\cref{eq:rel_densite_surface_adim} :
+\begin{equation}
+    C_v^\star \frac{\partial T^{\star}}{\partial t^{\star}} =
+    3 v_0^2 \nu^\star {\Omega^\star}^2 - \frac{F_z^\star x}{S^\star} +
+    \frac{\mathcal{R} T_0}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
+    \left( \frac{1}{x^2} \frac{\partial^2}{\partial x^2} \left(\nu^\star S^\star\right) +
+    v^\star \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) -
+    \frac{C_v^\star v^\star}{x} \frac{\partial T^\star}{\partial x}
+\end{equation}
 
 \subsubsection{Pressions}
 
@@ -605,6 +631,7 @@ adimensionnements, ainsi que des équations adimensionnées.
         $P_\mathrm{gaz}$ & $P_\mathrm{gaz}^\star = P_\mathrm{gaz}/P_\mathrm{gaz}^0$ & $P_\mathrm{gaz}^0 = \frac{\rho_0 k_B T_0}{\mu m_p}$ \\
         $P_\mathrm{rad}$ & $P_\mathrm{rad}^\star = P_\mathrm{rad}/P_\mathrm{rad}^0$ & $P_\mathrm{rad}^0 = \frac{1}{3} a T_0^4$ \\
         $F_z$ & $F_z^\star = \frac{F_z}{F_z^0}$ & $F_z^0 = \frac{\Sigma_0}{2 t_0}$ \\
+        $C_v$ & $C_v^\star = \frac{C_v}{C_v^0}$ & $C_v^0 = T_0^{-1}$ \\
         \hline
     \end{tabular}
 \end{center}
@@ -626,11 +653,12 @@ Les autres non :
     \frac{\partial S^\star}{\partial t^\star} &= \frac{1}{x^2} \frac{\partial^2}{\partial x^2} \left(\nu^\star S^\star\right) \\
     v^\star &= - \frac{1}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right) \\
     \dot{M^\star} &= - x S^\star v^\star \\
-    C_v \frac{\partial T^{\star}}{\partial t^{\star}} &=
-    \frac{3 v_0^2}{T_0} \nu^\star {\Omega^\star}^2 - \frac{F_z^\star x}{T_0 S^\star} +
-    \frac{\mathcal{R}}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
-    \left( \frac{\partial S^\star}{\partial t^\star} + v^\star \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) -
-    \frac{C_v v^\star}{x} \frac{\partial T^\star}{\partial x} \\
+    C_v^\star \frac{\partial T^{\star}}{\partial t^{\star}} &=
+    3 v_0^2 \nu^\star {\Omega^\star}^2 - \frac{F_z^\star x}{S^\star} +
+    \frac{\mathcal{R} T_0}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
+    \left( \frac{1}{x^2} \frac{\partial^2}{\partial x^2} \left(\nu^\star S^\star\right) +
+    v^\star \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) -
+    \frac{C_v^\star v^\star}{x} \frac{\partial T^\star}{\partial x} \\
     \nu^\star &= \alpha c_s^\star H^\star \\
     c_s^\star &= \Omega^\star H^\star \\
     \rho^\star &= \frac{\Sigma^\star}{H^\star} \\
