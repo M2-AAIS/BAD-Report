@@ -38,7 +38,7 @@ aussi nous ne regarderons que les équations faisant intervenir la coordonnée
 radiale $r$. De plus, nous restreindrons notre étude sur une certaine plage de
 valeur de ce paramètre. Pour la valeur minimale, la relativité générale stipule
 qu’en-dessous de $r_\mathrm{min} = 3 \times r_s$ le disque est dynamiquement
-instable et ne peut donc exister : ceci sera donc notre limite inférieure. Pour
+instable et ne peut donc exister : ceci sera donc notre limite inférieure. Pour
 la valeur maximale, il y a opposition entre deux problèmes : d’une part, les
 hypothèses physiques que nous ferons par la suite doivent être vérifiées sur
 toute la partie étudiée, d’autre part il faut que les instabilités qui se
@@ -265,7 +265,7 @@ Et où nous avons introduit les grandeurs suivantes :
     \label{eq:opacite_bremsstrahlung}
     \kappa_\mathrm{ff} &= \num{6.13e22} \times \rho T^{-\frac{7}{2}} \si{\square\centi\meter\per\gram}\\
     \label{eq:emissivite}
-    \epsilon_\mathrm{ff} &= \num{6.22e20} \times \rho^2 T^\frac{1}{2} \\
+    \epsilon_\mathrm{ff} &= \num{6.22e20} \times \rho^2 T^\frac{1}{2} \si{\cgs} \\
     A &= 1
 \end{align}
 
@@ -292,16 +292,12 @@ l’\cref{app:adimensionnement}.
 
 Nous commençons par adimensionner la variable temporelle :
 \begin{equation}
-    t^\star = t \times \Omega_\mathrm{max}
+    t^\star = \frac{t}{t_0}
 \end{equation}
 
-Où :
-\begin{equation}
-    \Omega_\mathrm{max} = \left( \frac{G M}{r^3_\mathrm{min}} \right)^\frac{1}{2}
-\end{equation}
-
-C’est la vitesse angulaire (ou \textit{moyen mouvement}) de la dernière orbite
-stable pour la matière.
+Où $t_0$ est une grandeur homogène à un temps qui sera définie ultérieurement.
+Nous introduisons ici cette notation pour pouvoir réécrire les différentielles
+qui vont intervenir dans les différentes équations.
 
 \subsubsection{\texorpdfstring{Position $r$}{Position r}}
 
@@ -322,7 +318,7 @@ En effet, nous introduisons $S$ :
 
 Ce qui nous donne en réintroduisant dans l’\cref{eq:densite_surface} :
 \begin{equation}
-    \frac{\partial S}{\partial t^\star} = \frac{3}{4} \frac{1}{\Omega_\mathrm{max} r_s^2 x^2} \frac{\partial^2}{\partial x^2} \left(\nu S\right)
+    \frac{\partial S}{\partial t^\star} = \frac{3}{4} \frac{t_0}{r_s^2 x^2} \frac{\partial^2}{\partial x^2} \left(\nu S\right)
 \end{equation}
 
 Nous introduisons maintenant $S^\star$, la grandeur adimensionnée correspondant
@@ -331,16 +327,16 @@ Nous introduisons maintenant $S^\star$, la grandeur adimensionnée correspondant
     S^\star = \frac{S}{S_0}
 \end{equation}
 
-Où $S_0$ est une grandeur homogène à $S$ (et que nous définirons plus tard
-puisque cela ne change rien ici). En remplaçant dans l’équation précédente :
+$S_0$ est une grandeur homogène à $S$ (que nous définirons plus tard puisque
+cela ne change rien ici). En remplaçant dans l’équation précédente :
 \begin{equation}
-    \frac{\partial S^\star}{\partial t^\star} = \frac{3}{4} \frac{1}{\Omega_\mathrm{max} r_s^2 x^2} \frac{\partial^2}{\partial x^2} \left(\nu S^\star\right)
+    \frac{\partial S^\star}{\partial t^\star} = \frac{3}{4} \frac{t_0}{r_s^2 x^2} \frac{\partial^2}{\partial x^2} \left(\nu S^\star\right)
 \end{equation}
 
 Nous posons donc :
 \begin{equation}
     \label{eq:viscosite_adim}
-    \nu^\star = \frac{\nu}{\nu_0} = \frac{3}{4} \frac{\nu}{\Omega_\mathrm{max} r_s^2} \Rightarrow \nu_0 = \frac{4}{3} r_s^2 \Omega_\mathrm{max}
+    \nu^\star = \frac{3}{4} \frac{t_0 \nu}{r_s^2} = \frac{\nu}{\nu_0} \Rightarrow \nu_0 = \frac{4}{3} \frac{r_s^2}{t_0}
 \end{equation}
 
 Et nous obtenons :
@@ -348,57 +344,111 @@ Et nous obtenons :
     \frac{\partial S^\star}{\partial t^\star} = \frac{1}{x^2} \frac{\partial^2}{\partial x^2} \left(\nu^\star S^\star\right)
 \end{equation}
 
-\subsubsection{Vitesses, demi-hauteur}
+\subsubsection{Vitesse radiale}
 
 Ces choix ont des conséquences pour l’expression de la vitesse radiale (ou
 d’accrétion) définie par l’\cref{eq:vitesse_accretion} :
 \begin{equation}
-    v = - \frac{2 \Omega_\mathrm{max} r_s}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right)
+    v = - \frac{2 r_s}{t_0 S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right)
 \end{equation}
 
 Ce qui nous amène à poser :
-\begin{align}
-    v^\star &= \frac{v}{v_0} = \frac{v}{\Omega_\mathrm{max} r_s} \Rightarrow v_0 = \Omega_\mathrm{max} r_s \\
-    \hookrightarrow v^\star &= - \frac{2}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right)
-\end{align}
-
-Nous utilisons cela pour adimensionner $c_s$ :
 \begin{equation}
-    c_s^\star = \frac{c_s}{v_0}
+    v^\star = \frac{v}{v_0} = \frac{v t_0}{2 r_s} \Rightarrow v_0 = 2 \frac{r_s}{t_0}
 \end{equation}
 
-Par ailleurs, l’\cref{eq:vitesse_son} donne :
+Nous obtenons donc :
 \begin{equation}
-    c_s^\star = \frac{\Omega H}{\Omega_\mathrm{max} r_s}
+    v^\star = - \frac{1}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right)
 \end{equation}
 
-Naturellement nous voudrions que :
+\subsubsection{Vitesse angulaire}
+
+$\Omega$ étant une constante du temps et ne dépendant que de la position $r$,
+il est souhaitable d’en obtenir un adimensionnement correspondant
+$\Omega^\star$ aussi simple que possible en fonction de $x$. En combinant les
+\cref{eq:vitesse_angulaire,eq:position_adim} nous obtenons :
 \begin{equation}
-    c_s^\star = \Omega^\star H^\star
+    \Omega = \frac{1}{x^3} \left( \frac{G M}{r_s^3} \right)^\frac{1}{2} \rightarrow \Omega^\star = \frac{1}{x^3}
 \end{equation}
 
-Nous posons donc logiquement :
+Ce qui nous amène naturellement à poser :
 \begin{equation}
-    \Omega^\star = \frac{\Omega}{\Omega_\mathrm{max}} = \frac{3\sqrt{3}}{x^3}
+    \label{eq:vitesse_angulaire_adim}
+    \Omega^\star = \frac{\Omega}{\Omega_0} = \Omega \left( \frac{r_s^3}{G M} \right)^\frac{1}{2} \Rightarrow \Omega_0 = \left( \frac{G M}{r_s^3} \right)^\frac{1}{2}
 \end{equation}
 
-Et par conséquent :
+\subsubsection{Vitesse du son}
+
+Naturellement, nous introduisons $c_s^\star$ :
+\begin{equation}
+   c_s^\star = \frac{c_s}{c_s^0}
+\end{equation}
+
+Toujours dans l’idée de simplifier au maximum les relations entre les
+différentes grandeurs adimensionnées, nous souhaiterions que
+l’\cref{eq:viscosite} se réécrive ainsi :
+\begin{equation}
+    \nu^\star = \alpha c_s^\star H^\star
+\end{equation}
+
+Nous gardons le coefficient $\alpha$, car il définit cette loi et n’est pas à
+proprement parler un coefficient numérique (mais de toutes façons, nous le
+prendrons – au moins dans un premier temps — comme égal à 1 dans les
+simulations). Nous n’avons pas encore défini $H^\star$, mais nous pouvons le
+substituer par des grandeurs définies en imposant que, de même,
+l’\cref{eq:demi_hauteur} se réécrive ainsi :
+\begin{equation}
+    \label{eq:rel_demi_hauteur_adim}
+    H^\star = \frac{c_s^\star}{\Omega^\star}
+\end{equation}
+
+En combinant ces deux conditions avec les \cref{eq:demi_hauteur,eq:viscosite} et les adimensionnement
+établis aux \cref{eq:viscosite_adim,eq:vitesse_angulaire_adim} nous obtenons :
+\begin{equation}
+    c_s^0 = \sqrt{2 \frac{r_s^2}{t_0} \Omega_0}
+\end{equation}
+
+À partir d’ici, il faut faire un choix sur l’adimensionnement de $t$ et $c_s$.
+En effet, ce sont les seules grandeurs pas encore définies dans cette équation.
+Il y a pragmatiquement deux possibilités : soit définir $t_0$ comme l’inverse
+d’$\Omega_0$, soit poser $v_0 = t_0$. Ici, nous choisirons cette seconde
+possibilité :
+\begin{equation}
+    \label{eq:vitesse_son_adim}
+    c_s^\star = \frac{c_s}{c_s^0} = \frac{c_s}{v_0} \Rightarrow c_s^0 = v_0 = 2 \frac{r_s}{t_0}
+\end{equation}
+
+Ce qui pour $t_0$ nous donne :
+\begin{equation}
+    t_0 = \frac{2}{\Omega_0} = 2 \left( \frac{r_s^3}{G M} \right)^\frac{1}{2}
+\end{equation}    
+
+\subsubsection{Demi-hauteur}
+
+Commençons par définir $H^\star$ :
+\begin{equation}
+    H^\star = \frac{H}{H_0}
+\end{equation}
+
+En réinjectant cela et l’\cref{eq:vitesse_son_adim} dans
+l’\cref{eq:rel_demi_hauteur_adim} nous obtenons :
 \begin{equation}
     \label{eq:demi_hauteur_adim}
-    H^\star = \frac{H}{r_s}
+    H_0 = \frac{c_s^0}{\Omega_0} = r_s
 \end{equation}
 
 \subsubsection{Taux d’accrétion, densité de surface}
 
 En partant de l’\cref{eq:taux_accretion} :
 \begin{equation}
-    \dot{M}^\star = \frac{\dot{M}}{\dot{M_0}} = - \frac{2 \pi x^2 r_s v^\star v_0 \Sigma}{\dot{M_0}} = - \frac{2 \pi r_s^2 \Omega_\mathrm{max} v^\star \Sigma x^2}{\dot{M_0}} 
+    \dot{M}^\star = \frac{\dot{M}}{\dot{M_0}} = - \frac{2 \pi x^2 r_s \Sigma v^\star v_0}{\dot{M_0}} = - \frac{4 \pi r_s^2 x^2 \Sigma v^\star}{\dot{t_0 M_0}}
 \end{equation}
 
 Ce qui nous amène à poser :
 \begin{equation}
     \label{eq:densite_surface_adim}
-    \Sigma^\star = \frac{\Sigma}{\Sigma_0} = \Sigma \times \frac{2 \pi r_s^2 \Omega_\mathrm{max}}{\dot{M_0}}
+    \Sigma^\star = \frac{\Sigma}{\Sigma_0} = \Sigma \times \frac{4 \pi r_s^2}{t_0 \dot{M_0}} = \Sigma \times \frac{3 \pi \nu_0}{\dot{M_0}} \Rightarrow \Sigma_0 = \frac{\dot{M_0}}{3 \pi \nu_0}
 \end{equation}
 
 Cela nous permet au passage d’adimensionner naturellement $S$ :
@@ -406,7 +456,7 @@ Cela nous permet au passage d’adimensionner naturellement $S$ :
     S^\star = \frac{S}{S_0} = \frac{S}{\Sigma_0} = \Sigma^\star x \Rightarrow S_0 = \Sigma_0
 \end{equation}
 
-Et donc :
+Et donc (qui était en fait le résultat voulu) :
 \begin{equation}
     \dot{M}^\star = - x S^\star v^\star
 \end{equation}
@@ -415,13 +465,13 @@ Et donc :
 
 Nous souhaiterions obtenir pour l’\cref{eq:densite_volumique} :
 \begin{equation}
-    \rho^\star = \frac{\Sigma^\star}{2 H^\star}
+    \rho^\star = \frac{\Sigma^\star}{H^\star}
 \end{equation}
 
 Étant donné les \cref{eq:demi_hauteur_adim,eq:densite_surface_adim} cela nous
 impose :
 \begin{equation}
-    \rho^\star = \frac{\rho}{\rho_0} = \frac{\rho r_s}{\Sigma_0} \Rightarrow \rho_0 = \frac{\Sigma_0}{r_s}
+    \rho^\star = \frac{\rho}{\rho_0} = \frac{2 r_s \rho}{\Sigma_0} \Rightarrow \rho_0 = \frac{\Sigma_0}{2 r_s}
 \end{equation}
 
 \subsubsection{Température}
@@ -441,10 +491,58 @@ Où :
     T_0 = \left(\frac{1}{\sqrt{27}} \times \frac{L_{tot}}{4 \pi r_s^2 \sigma} \right)^\frac{1}{4}
 \end{equation}
 
-Et :
+Nous avons introduit $\sigma = \frac{a c}{4}$ (il s’agit de la constante de
+Stefan–Boltzmann) et :
 \begin{equation}
     L_{tot} = \frac{1}{12} \dot{M_0} c^2
 \end{equation}
+
+\subsubsection{Évolution de la température, flux radiatif}
+
+Nous réinjectons tous ces adimensionnements dans l’\cref{eq:equation_thermique} :
+\begin{equation}
+    C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
+    \frac{3 v_0^2}{T_0} \nu^\star {\Omega^\star}^2 -
+    \frac{2 t_0 F_z x}{S^\star \Sigma_0 T_0} +
+    \frac{\mathcal{R}}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
+    \left( \frac{\partial S^\star}{\partial t^\star} + v^\star \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) -
+    \frac{C_v v^\star}{x} \frac{\partial T^\star}{\partial x}
+\end{equation}
+
+Naturellement, nous avons envie d’introduire $F_z^\star$ pour simplifier cette
+écriture. Nous poserons :
+\begin{equation}
+    F_z^\star = \frac{F_z}{F_z^0} = \frac{2 t_0 F_z}{\Sigma_0} \Rightarrow F_z^0 = \frac{\Sigma_0}{2 t_0}
+\end{equation}
+
+Cela ne donne pas à $F_0$ la même dimension que $F$ (ce qui serait difficile à
+obtenir et pas forcément souhaitable), mais permet de simplifier grandement les
+choses. En remplaçant ça nous avons donc :
+\begin{equation}
+    C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
+    \frac{3 v_0^2}{T_0} \nu^\star {\Omega^\star}^2 - \frac{F_z^\star x}{T_0 S^\star} +
+    \frac{\mathcal{R}}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
+    \left( \frac{\partial S^\star}{\partial t^\star} + v^\star \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) -
+    \frac{C_v v^\star}{x} \frac{\partial T^\star}{\partial x}
+\end{equation}
+
+Il ne reste plus qu’à simplifier l’expression de $F_z^\star$ par rapport à
+celle de $F_z$ :
+\begin{equation}
+    F_z^\star =
+    \begin{cases}
+        \frac{4 c^2 {T^\star}^4}{27 \sqrt{3} (\kappa_\mathrm{ff} + \kappa_e)\Sigma^\star \Sigma_0}, &\text{si $\tau_\mathrm{eff} \geq 1$} \\
+        \num{6.22e20} t_0 \rho_0 T_0^\frac{1}{2} H^\star {\rho^\star}^2 {T^\star}^\frac{1}{2} \si{\cgs}, &\text{si $\tau_\mathrm{eff} < 1$}
+    \end{cases}
+\end{equation}
+
+Où :
+
+\begin{align}
+    \kappa_\mathrm{ff} &= \num{6.13e22} \rho_0 T_0^{-\frac{7}{2}} \rho^\star {T^\star}^{-\frac{7}{2}} \si{\square\centi\meter\per\gram} \\
+    \kappa_e &= 0.2 \times (1 + X) \si{\square\centi\meter\per\gram} \approx \SI{0.34}{\square\centi\meter\per\gram} \\
+    \tau_\mathrm{eff} &= \frac{1}{2} \rho_0^\frac{1}{2} T_0^{-\frac{7}{4}} \Sigma_0 \left[ 0.2 \times (1 + X) \times \num{6.13e22} \rho^\star {T^\star}^{-\frac{7}{2}} \right]^\frac{1}{2} \Sigma^\star
+\end{align}
 
 \subsubsection{Pressions}
 
@@ -480,39 +578,6 @@ Pour écrire :
     \beta = \frac{1}{1 + B \frac{{T^\star}^3}{\rho^\star}}
 \end{equation}
 
-\subsubsection{Flux radiatif}
-
-Ici, pas vraiment d’adimensionnement, nous remplaçons juste les différentes
-grandeurs par leurs expressions adimensionnées :
-\begin{equation}
-    F_z =
-    \begin{cases}
-        \frac{2 a c \left(T_0 T^\star\right)^4}{3 (\kappa_\mathrm{ff} + \kappa_e)\Sigma^\star \Sigma_0}, &\text{si $\tau_\mathrm{eff} \geq 1$} \\
-        \epsilon_\mathrm{ff} r_s H^\star, &\text{si $\tau_\mathrm{eff} < 1$}
-    \end{cases}
-\end{equation}
-
-Où :
-\begin{align}
-    \kappa_\mathrm{ff} &= \num{6.13e22} \rho_0 \rho^\star \left(T^\star T_0\right)^{-\frac{7}{2}} \si{\square\centi\meter\per\gram} \\
-    \kappa_e &= 0.2 \times (1 + X) \si{\square\centi\meter\per\gram} \approx \SI{0.34}{\square\centi\meter\per\gram} \\
-    \tau_\mathrm{eff} &= \frac{1}{2} \left[ 0.2 \times (1 + X) \times \num{6.13e22} \left(\rho_0 \rho^\star\right) \left(T^\star T_0\right)^{-\frac{7}{2}} \right]^\frac{1}{2} \Sigma_0 \Sigma^\star \\
-    \epsilon_\mathrm{eff} &= \num{6.22e20} (\rho_0 \rho^\star)^2 (T_0 T^\star)^\frac{1}{2} \text{cgs}
-\end{align}
-
-\subsubsection{Évolution de la température}
-
-Pour finir, nous réinjectons tous ces adimensionnement dans
-l’\cref{eq:equation_thermique} :
-\begin{equation}
-    C_v \frac{\partial T^{\star}}{\partial t^{\star}} =
-    {\Omega^\star}^2 \frac{3 \nu^\star v_0^2}{T_0} -
-    \frac{2 F_z x}{S^\star \Sigma_0 \Omega_\mathrm{max} T_0} +
-    \frac{\mathcal{R}}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
-    \left( \frac{\partial S^\star}{\partial t^\star} + \frac{v^\star}{2} \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) -
-    \frac{C_v v^\star}{2 x} \frac{\partial T^\star}{\partial x}
-\end{equation}
-
 \subsection{Récapitulatif des adimensionnements}
 
 Dans cette sous-partie, nous faisons un récapitulatif des variables et de leurs
@@ -525,20 +590,21 @@ adimensionnements, ainsi que des équations adimensionnées.
         \hline
         Variable & Variable adimensionnée & Adimensionnement \\
         \hline
-        $\Omega$ & $\Omega^\star = \Omega/\Omega_0$ & $\Omega_0 = \Omega_\mathrm{max} = \left( \frac{G M}{r^3_\mathrm{min}} \right)^\frac{1}{2}$ \\
-        $t$ & $t^\star = t/t_0$ & $t_0 = \Omega_0^{-1}$ \\
+        $\Omega$ & $\Omega^\star = \Omega/\Omega_0$ & $\Omega_0 = \left( \frac{G M}{r^3_s} \right)^\frac{1}{2}$ \\
+        $t$ & $t^\star = t/t_0$ & $t_0 = 2 \Omega_0^{-1}$ \\
         $r$ & $x = \sqrt{r/r_s}$ & N/A \\
-        $\Sigma$ & $\Sigma^\star = \Sigma/\Sigma_0$ & $\Sigma_0 = \frac{\dot{M_0}}{2 \pi r_s^2 \Omega_\mathrm{max}}$ \\
-        $S = \Sigma x$ & $S^\star = \Sigma^\star x$ & N/A \\
-        $\nu$ & $\nu^\star = \nu/\nu_0$ & $\nu_0 = \frac{4 \Omega_\mathrm{max} r_s^2}{3}$ \\
-        $v$ & $v^\star = v/v_0$ & $v_0 = \Omega_\mathrm{max} r_s$ \\
-        $c_s$ & $c_s^\star = c_s/v_0$ & Idem \\
+        $\nu$ & $\nu^\star = \nu/\nu_0$ & $\nu_0 = \frac{4 r_s^2}{3 t_0} = \frac{2 r_s^2 \Omega_0}{3}$ \\
+        $v$ & $v^\star = v/v_0$ & $v_0 = 2 \frac{r_s}{t_0} = r_s \Omega_0$ \\
+        $c_s$ & $c_s^\star = c_s/c_s^0$ & $c_s^0 = v_0$ \\
+        $\Sigma$ & $\Sigma^\star = \Sigma/\Sigma_0$ & $\Sigma_0 = \frac{\dot{M_0}}{3 \pi \nu_0}$ \\
+        $S = \Sigma x$ & $S^\star = S/S_0 = \Sigma^\star x$ & $S_0 = \Sigma_0$ \\
         $H$ & $H^\star = H/H_0$ & $H_0 = r_s$ \\
         $\dot{M}$ & $\dot{M^\star} = \dot{M}/\dot{M_0}$ & N/A \\
-        $\rho$ & $\rho^\star = \rho/\rho_0$ & $\rho_0 = \frac{\Sigma_0}{r_s}$ \\
+        $\rho$ & $\rho^\star = \rho/\rho_0$ & $\rho_0 = \frac{\Sigma_0}{2 r_s}$ \\
         $T$ & $T^\star = T/T_0$ & $T_0 = \left(\frac{1}{\sqrt{27}} \times \frac{\dot{M_0} c^2}{48 \pi r_s^2 \sigma} \right)^\frac{1}{4}$ \\
         $P_\mathrm{gaz}$ & $P_\mathrm{gaz}^\star = P_\mathrm{gaz}/P_\mathrm{gaz}^0$ & $P_\mathrm{gaz}^0 = \frac{\rho_0 k_B T_0}{\mu m_p}$ \\
         $P_\mathrm{rad}$ & $P_\mathrm{rad}^\star = P_\mathrm{rad}/P_\mathrm{rad}^0$ & $P_\mathrm{rad}^0 = \frac{1}{3} a T_0^4$ \\
+        $F_z$ & $F_z^\star = \frac{F_z}{F_z^0}$ & $F_z^0 = \frac{\Sigma_0}{2 t_0}$ \\
         \hline
     \end{tabular}
 \end{center}
@@ -548,7 +614,7 @@ adimensionnements, ainsi que des équations adimensionnées.
 $x$ et $t$ sont les deux variables indépendantes. Pour les autres, certaines sont des constantes du temps :
 
 \begin{align}
-    \Omega^\star &= \frac{x}{\sqrt{3}}^{-3} \\ 
+    \Omega^\star &= x^{-3} \\ 
     \mu &\approx 0.62
 \end{align}
 
@@ -558,27 +624,25 @@ Les autres non :
 
 \begin{align}
     \frac{\partial S^\star}{\partial t^\star} &= \frac{1}{x^2} \frac{\partial^2}{\partial x^2} \left(\nu^\star S^\star\right) \\
-    v^\star &= - \frac{2}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right) \\
+    v^\star &= - \frac{1}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right) \\
     \dot{M^\star} &= - x S^\star v^\star \\
     C_v \frac{\partial T^{\star}}{\partial t^{\star}} &=
-    {\Omega^\star}^2 \frac{3 \nu^\star v_0^2}{T_0} -
-    \frac{2 F_z x}{S^\star \Sigma_0 \Omega_\mathrm{max} T_0} +
+    \frac{3 v_0^2}{T_0} \nu^\star {\Omega^\star}^2 - \frac{F_z^\star x}{T_0 S^\star} +
     \frac{\mathcal{R}}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
-    \left( \frac{\partial S^\star}{\partial t^\star} + \frac{v^\star}{2} \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) -
-    \frac{C_v v^\star}{2 x} \frac{\partial T^\star}{\partial x} \\
-    \nu^\star &= \frac{1}{2} \alpha c_s^\star H^\star \\
+    \left( \frac{\partial S^\star}{\partial t^\star} + v^\star \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) -
+    \frac{C_v v^\star}{x} \frac{\partial T^\star}{\partial x} \\
+    \nu^\star &= \alpha c_s^\star H^\star \\
     c_s^\star &= \Omega^\star H^\star \\
-    \rho^\star &= \frac{\Sigma^\star}{2 H^\star} \\
+    \rho^\star &= \frac{\Sigma^\star}{H^\star} \\
     P_\mathrm{gaz}^\star &= \rho^\star T^\star \\
     P_\mathrm{rad}^\star &= {T^\star}^4 \\
     \beta &= \frac{1}{1 + B \frac{{T^\star}^3}{\rho^\star}} ; B = \frac{P_\mathrm{rad}^0}{P_\mathrm{gaz}^0} \\
-    F_z &=
+    F_z^\star &=
     \begin{cases}
-        \frac{2 a c \left(T_0 T^\star\right)^4}{3 (\kappa_\mathrm{ff} + \kappa_e)\Sigma^\star \Sigma_0}, &\text{si $\tau_\mathrm{eff} \geq 1$} \\
-        \epsilon_\mathrm{ff} r_s H^\star, &\text{si $\tau_\mathrm{eff} < 1$}
+        \frac{4 c^2 {T^\star}^4}{27 \sqrt{3} (\kappa_\mathrm{ff} + \kappa_e)\Sigma^\star \Sigma_0}, &\text{si $\tau_\mathrm{eff} \geq 1$} \\
+        \num{6.22e20} t_0 \rho_0 T_0^\frac{1}{2} H^\star {\rho^\star}^2 {T^\star}^\frac{1}{2} \si{\cgs}, &\text{si $\tau_\mathrm{eff} < 1$}
     \end{cases} \\
-    \kappa_\mathrm{ff} &= \num{6.13e22} \rho_0 \rho^\star \left(T^\star T_0\right)^{-\frac{7}{2}} \si{\square\centi\meter\per\gram} \\
+    \kappa_\mathrm{ff} &= \num{6.13e22} \rho_0 T_0^{-\frac{7}{2}} \rho^\star {T^\star}^{-\frac{7}{2}} \si{\square\centi\meter\per\gram} \\
     \kappa_e &= 0.2 \times (1 + X) \si{\square\centi\meter\per\gram} \approx \SI{0.34}{\square\centi\meter\per\gram} \\
-    \tau_\mathrm{eff} &= \frac{1}{2} \left[ 0.2 \times (1 + X) \times \num{6.13e22} \left(\rho_0 \rho^\star\right) \left(T^\star T_0\right)^{-\frac{7}{2}} \right]^\frac{1}{2} \Sigma_0 \Sigma^\star \\
-    \epsilon_\mathrm{eff} &= \num{6.22e20} (\rho_0 \rho^\star)^2 (T_0 T^\star)^\frac{1}{2} \text{cgs}
+    \tau_\mathrm{eff} &= \frac{1}{2} \rho_0^\frac{1}{2} T_0^{-\frac{7}{4}} \Sigma_0 \left[ 0.2 \times (1 + X) \times \num{6.13e22} \rho^\star {T^\star}^{-\frac{7}{2}} \right]^\frac{1}{2} \Sigma^\star
 \end{align}
