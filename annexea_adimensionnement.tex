@@ -1,14 +1,68 @@
 \section{Calculs sur l’adimensionnement}
 \label{app:adimensionnement}
 
-Différentielles :
+\subsection{Différentielles}
 
+Les différentielles découlent directement des adimensionnements :
 \begin{align}
-    \partial t &= \frac{\partial t^{\star}}{\Omega_{max}} \\
-    \partial r &= 2 r_s dx \\
-    \partial \Sigma &= \frac{dS}{x} - \frac{1}{x^2} S dx \\
-    \partial T &= \partial T^{\star} × T_0
+    \label{eq:dt_star}
+    \partial t &= t_0 \partial t^{\star} \\
+    \label{eq:dr_star}
+    \partial r &= 2 r_s x \partial x \\
+    \label{eq:dT_star}
+    \partial T &= T_0 \partial T^{\star}
 \end{align}
 
-$x$ et $t^\star$ sont des variables indépendantes (puisque $r$ et $t$ le sont).
+\subsection{Évolution de la densité de surface}
+
+Nous partons de l’\cref{eq:densite_surface} :
+\begin{equation}
+    \frac{\partial \Sigma}{\partial t} = \frac{3}{r} \frac{\partial}{\partial r} \left( r^\frac{1}{2} \frac{\partial}{\partial r} \left( \nu \Sigma r^\frac{1}{2} \right) \right)
+\end{equation}
+
+Et nous remplaçons $\Sigma$ dans le membre de gauche à l’aide de
+l’\cref{eq:definition_S} et $t$ en vertu de l’\cref{eq:dt_star} :
+\begin{align}
+    \frac{\partial \Sigma}{\partial t} &= \frac{1}{t_0} \frac{\partial}{\partial t^\star} \left( \frac{S}{x} \right) = \frac{1}{x t_0} \frac{\partial S}{\partial t^\star} \\
+    \hookrightarrow \frac{\partial S}{\partial t^\star} &= \frac{3 x t_0}{r} \frac{\partial}{\partial r} \left( r^\frac{1}{2} \frac{\partial}{\partial r} \left( \nu \Sigma r^\frac{1}{2} \right) \right)
+\end{align}
+
+Cela est dû au fait que $x$ et $t^\star$ sont des variables indépendantes
+(puisque $r$ et $t$ le sont).
+
+Puis dans le membre de droite :
+\begin{align}
+    \Sigma &= \frac{S}{x} = S \left( \frac{r_s}{r} \right)^\frac{1}{2} \Rightarrow \Sigma r^\frac{1}{2} = S r_s^\frac{1}{2} \\
+    \hookrightarrow \frac{\partial S}{\partial t^\star} &= \frac{3 x t_0}{r} \frac{\partial}{\partial r} \left( (r_s r)^\frac{1}{2} \frac{\partial}{\partial r} \left( \nu S \right) \right) \\
+\end{align}
+
+Nous remplaçons la première dérivée selon $r$ suivant \eqref{eq:dr_star} :
+\begin{align}
+    \frac{\partial}{\partial r} = \frac{1}{2 r_s x} \frac{\partial}{\partial x}
+    &\Rightarrow (r_s r)^\frac{1}{2} \frac{\partial}{\partial r} = \frac{1}{2} \left( \frac{r_s r}{r_s^2} \frac{r_s}{r} \right)^\frac{1}{2} \frac{\partial}{\partial x}
+                                                                = \frac{1}{2} \frac{\partial}{\partial x} \\
+    &\hookrightarrow \frac{\partial S}{\partial t^\star} = \frac{3 x t_0}{2 r} \frac{\partial}{\partial r} \left( \frac{\partial}{\partial x} \left( \nu S \right) \right)
+\end{align}
+
+Puis la seconde :
+\begin{align}
+    \frac{3 x}{2 r} \frac{\partial}{\partial r} &= \frac{3}{4 r r_s} \frac{\partial}{\partial x} \\
+    \hookrightarrow \frac{\partial S}{\partial t^\star} &= \frac{3 t_0}{4 r r_s} \frac{\partial^2 (\nu S)}{\partial x^2}
+\end{align}
+
+Enfin, en remplaçant $r$ d’après \eqref{eq:position_adim} :
+\begin{equation}
+    \frac{\partial S}{\partial t^\star} = \frac{3}{4} \frac{t_0}{r_s^2 x^2} \frac{\partial^2}{\partial x^2} \left(\nu S\right)
+\end{equation}
+
+Ce qui est bien l’\cref{eq:rel_densite_surface}.
+
+\subsection{Vitesse radiale}
+
+\subsection{Vitesse du son}
+
+\subsection{Demi-hauteur}
+
+\subsection{Évolution de la température}
+
 
