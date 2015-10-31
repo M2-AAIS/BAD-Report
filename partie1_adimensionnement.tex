@@ -660,18 +660,18 @@ Les autres non :
 
 \begin{subequations}
     \begin{align}
-        \frac{\partial S^\star}{\partial t^\star} &= \frac{1}{x^2} \frac{\partial^2}{\partial x^2} \left(\nu^\star S^\star\right) \\
-        v^\star &= - \frac{1}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right) \\
+        \frac{\partial S^\star}{\partial t^\star} &= \frac{1}{x^2} \frac{\partial^2}{\partial x^2} \left(\nu^\star S^\star\right) \label{eq:difS}\\
+        v^\star &= - \frac{1}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right)\label{eq:difv} \\
         \nu^\star &= \alpha c_s^\star H^\star \\
         c_s^\star &= \Omega^\star H^\star \\
         \Sigma^\star &= \frac{S^\star}{x} \\
-        \dot{M^\star} &= - x S^\star v^\star \\
+        \dot{M^\star} &= - x S^\star v^\star \label{eq:Mdotstar}\\
         \rho^\star &= \frac{\Sigma^\star}{H^\star} \\
         C_v^\star \frac{\partial T^{\star}}{\partial t^{\star}} &=
         3 v_0^2 \nu^\star {\Omega^\star}^2 - \frac{F_z^\star x}{S^\star} +
         \frac{\mathcal{R} T_0}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
         \left( \frac{\partial S^\star}{\partial t^\star} + v^\star \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) -
-        \frac{C_v^\star v^\star}{x} \frac{\partial T^\star}{\partial x} \\
+        \frac{C_v^\star v^\star}{x} \frac{\partial T^\star}{\partial x}\label{eq:difT} \\
         F_z^\star &=
         \begin{cases}
             \frac{4 c^2 {T^\star}^4}{27 \sqrt{3} (\kappa_\mathrm{ff} + \kappa_e)\Sigma^\star \Sigma_0}, &\text{si $\tau_\mathrm{eff} \geq 1$} \\
