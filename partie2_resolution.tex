@@ -1,0 +1,49 @@
+\section{Résolution numérique}
+
+\subsection{Principe de la résolution}
+
+\subsection{Courbe en S}
+
+\subsection{Considérations sur les dérivées}
+
+\begin{equation}
+    \frac{\partial u}{\partial t} + v \frac{\partial u}{\partial r} = 0
+\end{equation}
+
+\begin{align}
+    \frac{\partial u_j}{\partial r} &\approx \frac{u_{j+1} - u_j}{\Delta{r}}
+    \frac{\partial u_j}{\partial r} &\approx \frac{u_j - u_{j-1}}{\Delta{r}}
+    \frac{\partial u_j}{\partial r} &\approx \frac{u_{j+1} - u_{j-1}}{\Delta{r}}
+\end{align}
+
+\begin{equation}
+    \frac{\partial \tilde{u}}{\partial t} = - v \frac{\exp(ik\Delta{r}) - \exp(-ik\Delta{r})}{2 \Delta{r}} \tilde{u}
+\end{equation}
+
+\begin{align}
+    \exp(ik\Delta{r}) &= 1 + ik\Delta{r} + \frac{i^2 k^2 \Delta{r}^2}{2}
+    \exp(-ik\Delta{r}) &= 1 - ik\Delta{r} + \frac{i^2 k^2 \Delta{r}^2}{2}
+\end{align}
+
+\begin{equation}
+    \frac{\partial \tilde{u}}{\partial t} = - v \frac{2ik\Delta{r}}{2\Delta{r}} \tilde{u} = - i k v \tilde{u}
+\end{equation}
+
+\begin{equation}
+    \tilde{u} = \tilde{u(0)} \exp(-i k v t)
+\end{equation}
+
+En fait, nous avons tout simplement :
+
+\begin{equation}
+    \frac{\exp(ik\Delta{r}) - \exp(-ik\Delta{r})}{2 \Delta{r}} = \frac{2 i \sin(k\Delta{r})}{2 \Delta{r}} = i k \sinc(k\Delta{r})
+\end{equation}
+
+Soit :
+\begin{equation}
+    \frac{\partial \tilde{u}}{\partial t} = - i k v \sinc(k\Delta{r}) \tilde{u}
+\end{equation}
+
+\begin{equation}
+    \tilde{u} = \tilde{u(0)} \exp(-i k v \sinc(k \Delta{r}) t)
+\end{equation}
