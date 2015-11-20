@@ -2,26 +2,26 @@
 
 \subsection{Méthode d'intégration}
 
-Pour intégrer les équation de S et T (\eqref{eq:difS} et \eqref{eq:difT}), on choisi de réaliser une dérivée amont. Dans le cas présent, il s'agit d'une dérivé dans le sens croissant des indice du tableau. Ainsi pour calculer la dérivé partielle de $S^{\star}$ en x a la case $i$ on calculera :
+Pour intégrer les équation de $S$ et $T$ (\eqref{eq:difS} et \eqref{eq:difT}), on choisit de réaliser une dérivée amont. Dans le cas présent, il s'agit d'une dérivée dans le sens croissant des indices du tableau. Ainsi pour calculer la dérivé partielle de $S^{\star}$ en $x$ à la case $i$ on calculera :
 
 \begin{equation}
   \left. \frac{\partial S^{\star}}{\partial x} \right|_i = \frac{S^{\star}(i+1)-S^{\star}(i)}{\delta x} 
 \end{equation}
 
-Et pour calculer la dérivée seconde de $S^{\star}$ par en x a la case $i$ :
+Et pour calculer la dérivée seconde de $S^{\star}$ en $x$ à la case $i$ :
 
 \begin{equation}
   \left. \frac{\partial^2 S^{\star}}{\partial x^2}\right|_i=\frac{S^{\star}(i+1)-2\ S^{\star}(i) +S^{\star}(i-1)}{\delta x^2} 
 \end{equation}
 
-Cependant, on constate qu'avec cette méthode il nous faut connaitre la valeur de la case $i+1$, case inexistante dans le cas $i=i_{max}$.
+Cependant, on constate qu'avec cette méthode il nous faut connaître la valeur de la case $i+1$, case inexistante dans le cas $i=i_{max}$.
 
 \subsection{Condition au bords de $\nu^{\star}S^{\star}$}
 
-\subsubsection{dérivée partielle première}
+\subsubsection{Dérivée partielle première}
 
-Dans l'équation différentielle sur $v^{\star}$ \eqref{eq:difv} on doit connaitre $\frac{\partial \nu^{\star} S^{\star}}{\partial x}$ en $i=i_{max}$.
-On fais l'hypothèse que en $r_{max}$ le taux d'accrétion est $\dot{M}_0$ dés lors par \eqref{eq:Mdotstar} on a $(\dot{M}^{\star}_0=)1 = -(x S^{\star}v^{\star})$ et par \eqref{eq:difv} il vient :
+Dans l'équation différentielle sur $v^{\star}$ \eqref{eq:difv} on doit connaître $\frac{\partial \nu^{\star} S^{\star}}{\partial x}$ en $i=i_{max}$.
+On fait l'hypothèse qu'en $r_{max}$ le taux d'accrétion est $\dot{M}_0$. Dés lors par \eqref{eq:Mdotstar} on a $(\dot{M}^{\star}_0=)1 = -(x S^{\star}v^{\star})$ et par \eqref{eq:difv} il vient :
 
 \begin{equation}
   \left. \frac{\partial (\nu^{\star} S^{\star})}{\partial x}\right|_{i=i_{max}}=1
@@ -29,13 +29,13 @@ On fais l'hypothèse que en $r_{max}$ le taux d'accrétion est $\dot{M}_0$ dés 
 
 
 \subsubsection{dérivée partielle seconde}
-Afin de calculé $\frac{\partial^2(\nu^{\star} S^{\star})} {\partial x^2}$ en $i=i_{max}$ il nous faut connaitre les valeur hypothétique de $(\nu^{\star} S^{\star})(i=i_{max}+1)$ que l'on va obtenir a partir des valeurs des dérivée première. On a donc :
+Afin de calculer $\frac{\partial^2(\nu^{\star} S^{\star})} {\partial x^2}$ en $i=i_{max}$ il nous faut connaître les valeurs hypothétiques de $(\nu^{\star} S^{\star})(i=i_{max}+1)$ que l'on va obtenir à partir des valeurs des dérivées premières. On a donc :
 
 \begin{eqnarray}
   \left. \frac{\partial (\nu^{\star}S^{\star})}{\partial x} \right|_{i_{max}} = 1 = \frac{(\nu^{\star} S^{\star})(i_{max}+1)-(\nu^{\star}S^{\star})(i_{max})}{\delta x} 
 \end{eqnarray}
 
-Dés lors on a : 
+Dès lors on a : 
 \begin{equation}
 ( \nu^{\star} S^{\star})(i_{max}+1) = \delta x + (\nu^{\star}S^{\star})(i_{max}) 
 \end{equation}
@@ -46,17 +46,17 @@ Il vient donc :
  \left. \frac{\partial^2 (\nu^{\star} S^{\star})}{\partial x^2}\right|_{i=i_{max}} &=& \frac{\delta x - (\nu^{\star} S^{\star})(i_{max}) + (\nu^{\star} S^{\star})(i_{max}-1)}{\delta x^2}
 \end{eqnarray}
 
-\subsection{conditions aux bords de $S^{\star}$}
-On cherche les condition au bords de $\frac{\partial S^{\star}}{\partial t^{\star}}$, pour cela on utilise l'équation \eqref{eq:difS}. Dès lors on a directement :
+\subsection{Conditions aux bords de $S^{\star}$}
+On cherche les conditions aux bords de $\frac{\partial S^{\star}}{\partial t^{\star}}$, pour cela on utilise l'équation \eqref{eq:difS}. Dès lors on a directement :
 
 \begin{eqnarray}
   \left. \frac{\partial S^{\star}}{\partial t^{\star}} \right|_{i=i_{max}}&= \frac{1}{(x(i_{max}))^2} \left. \frac{\partial^2 (\nu^{\star} S^{\star})}{\partial x^2}\right|_{i=i_{max}} &= \frac{1}{(x(i_{max}))^2} \frac{\delta x - (\nu^{\star} S^{\star})(i_{max}) + (\nu^{\star} S^{\star})(i_{max}-1)}{\delta x^2}
 \end{eqnarray}
 
 
-\subsection{condition aux bords de $S^{\star}/x$}
+\subsection{Condition aux bords de $S^{\star}/x$}
 
-Dans l'équation \eqref{eq:difT} il est nécessaire de connaitre les valeur $\frac{\partial}{\partial x}\left(\frac{S^{\star}}{x}\right)$ en chacun des point du disque, donc en $i=i_{max}$. 
+Dans l'équation \eqref{eq:difT} il est nécessaire de connaître les valeurs $\frac{\partial}{\partial x}\left(\frac{S^{\star}}{x}\right)$ en chacun des points du disque, donc en $i=i_{max}$. 
 
 %FIXME
 On a : (je ne sais plus l'argument !!!)
