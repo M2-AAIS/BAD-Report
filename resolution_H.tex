@@ -1,0 +1,25 @@
+\section{Equation}
+Pour la résolution de H : utilistation du trinôme du second degré.
+\begin{eqnarray}
+  a^{\prime} H^{* 2}+b^{\prime}H^{*}+c^{\prime}=0
+  \end{eqnarray}
+
+  $\begin{cases}  
+    a^{\prime} &= \Omega^{*2} \Omega_{0}^{2} S^{*} S_{0}\\
+      b^{\prime} &= - \frac{2 a}{3 r_{s}} T^{*4} T_{0}^{4} x \\
+        c^{\prime}&=-\frac{RT_{0}}{\mu r_{s}^{2}} T^{*} S^{*} S_{0}
+        \end{cases}$\\
+
+        $\Delta^{\prime} = b^{\prime 2} - 4a^{\prime}c^{\prime}$\\
+
+        Cela s'écrit en Fortran : $x_1 = -0.5d0 * (b^{\prime} + sign(sqrt(\Delta^{\prime}),b^{\prime}))/a^{\prime}$\\
+
+        Odre de resolution : \\
+
+
+        \noindent $(S^{*},T^{*}) \rightarrow (a, b, c, P_{rad}^{*}) \rightarrow H^{*}
+        \rightarrow (c_{s}^{*}, \rho^{*}) \\
+        c_{s}^{*} \rightarrow \nu^{*} \rightarrow (v^{*}, \dot{M}^{*}) \\
+        \rho \rightarrow (P_{gaz}^{*}, \kappa_{ff}, \epsilon) , \\
+        P_{gaz}^{*} \rightarrow \beta \\
+        \kappa_{ff} \rightarrow \tau_{eff} \rightarrow F_{z} $
