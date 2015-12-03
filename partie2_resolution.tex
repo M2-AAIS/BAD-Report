@@ -117,6 +117,37 @@ Qui s'écrit aussi :
 \begin{equation}
   AS^{t+1} = S^t + X 
 \end{equation}
+
+\subsection{Intégration de $T$}
+\label{subsec:integration_T}
+
+Si on est dans le cas optiquement mince (ou bien négligeons terme advection ??), $T$ est régit par l'équation :
+\begin{equation}
+  C_v^\star \frac{\partial T^\star}{\partial t^\star} = 3v_0^2\nu^\star \Omega^\star^2 - \frac{F_z^\star x}{S^\star}
+\end{equation}
+
+\subsubsection{Linéarisation}
+On va écrire l'équation linéarisée pour $T$. Une fois encore, nous allons ommettre les ${}^\star$ pour alléger les notations.
+
+On note $f(T, S) = \frac{\partial T}{\partial t}(T, S)$ et $f_1(T, S) = \frac{\partial f}{\partial T}$
+\begin{equation}
+  \label{eq:T_devpmt_lin_2e_ordre} 
+  \frac{T(t+\Delta t) - T(t)}{\Delta t} = f(T(t), S(t)) + \Delta Tf_1 + \Delta S\frac{\partial f}{\partial S}
+\end{equation}
+Comme $\tau_\textrm{therm} \ll \tau_\textrm{dyn}$, on va pouvoir négliger $\frac{\Delta S}{\tau_\textrm{therm}}$ devant $\frac{\Delta T}{\tau_\textrm{therm}}$. L'équation \eqref{eq:T_devpmt_lin_2e_ordre} s'écrit alors :
+\begin{equation}
+  \frac{T(t+\Delta t) - T(t)}{\Delta t} = f(T, S) + \Delta T f_1 = f(T, S) + \Delta t \underbrace{\frac{\Delta T}{\Delta t}}_{f} f_1
+\end{equation}
+Finalement, on obtient avec les écritures discrètes:
+\begin{equation}
+  T^{t+1}_n = T^{t}_n + \Delta t f^t_n \left(1 + \Delta t f_1^t_n\right)
+\end{equation}
+
+\subsubsection{Approximation de $f_1$}
+Pour approximer $f_1^t$, on utilisera :
+\begin{equation}
+  f_1^t_n = \frac{f(T_n^t+\Delta T_n^t) - f(T_n^t)}{\Delta T_n^t}, \quad \Delta T_n^t = \alpha T_n^t,\ \alpha \ll 1
+\end{equation}
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "rapport"
