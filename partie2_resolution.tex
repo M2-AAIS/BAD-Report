@@ -59,12 +59,12 @@ On souhaite intégrer $S^\star$, la densité surfacique adimensionnée. L'équat
 Pour alléger les notations, nous allons ommettre les étoiles dans les développements prochains. L'équation s'écrit alors en passant aux variables discrètes, au temps $t$ et à la case $0<n<n_\textrm{max}$
 \begin{equation}
   \label{eq:S_discret_n}
-  \frac{S^{t+1}_n - S^t_n}{\Delta t} & = \frac{1}{x_n^2}\frac{\nu^t_{n+1}S^{t+1}_{n+1} - 2 \nu^t_nS^{t+1}_n + \nu^t_{n-1}S^{t+1}_{n-1}}{\Delta x^2}
+  \frac{S^{t+1}_n - S^t_n}{\Delta t} = \frac{1}{x_n^2}\frac{\nu^t_{n+1}S^{t+1}_{n+1} - 2 \nu^t_nS^{t+1}_n + \nu^t_{n-1}S^{t+1}_{n-1}}{\Delta x^2}
 \end{equation}
 Pour la case $n = 1$, la quantité $\nu^t_{0}S^{t+1}_{0}$ est supposée nulle et donc: 
 \begin{equation}
   \label{eq:S_discret_1}
-  \frac{S^{t+1}_1 - S^t_1}{\Delta t} & = \frac{1}{x_1^2}\frac{\nu^t_{2}S^{t+1}_{2} - 2 \nu^t_1S^{t+1}_1}{\Delta x^2}
+  \frac{S^{t+1}_1 - S^t_1}{\Delta t} = \frac{1}{x_1^2}\frac{\nu^t_{2}S^{t+1}_{2} - 2 \nu^t_1S^{t+1}_1}{\Delta x^2}
 \end{equation}
 Pour la case $n = n_\textrm{max} = N$, on a d'après \eqref{eq:nuS_n_is_null}:
 \begin{equation}
