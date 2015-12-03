@@ -47,3 +47,77 @@ Soit :
 \begin{equation}
     \tilde{u} = \tilde{u(0)} \exp(-i k v \sinc(k \Delta{r}) t)
 \end{equation}
+
+\section{Schéma implicite}
+\subsection{Intégration de $S$}
+\label{subsec:S_integration}
+\subsubsection{Linéarisation des équations}
+On souhaite intégrer $S^\star$, la densité surfacique adimensionnée. L'équation d'évolution est :
+\begin{equation}
+  \frac{\partial S^\star}{\partial t^\star} = \frac{1}{x^2}\frac{\partial^2}{\partial x^2}\left(\nu^\star S^\star\right)
+\end{equation}
+Pour alléger les notations, nous allons ommettre les étoiles dans les développements prochains. L'équation s'écrit alors en passant aux variables discrètes, au temps $t$ et à la case $0<n<n_\textrm{max}$
+\begin{equation}
+  \label{eq:S_discret_n}
+  \frac{S^{t+1}_n - S^t_n}{\Delta t} & = \frac{1}{x_n^2}\frac{\nu^t_{n+1}S^{t+1}_{n+1} - 2 \nu^t_nS^{t+1}_n + \nu^t_{n-1}S^{t+1}_{n-1}}{\Delta x^2}
+\end{equation}
+Pour la case $n = 1$, la quantité $\nu^t_{0}S^{t+1}_{0}$ est supposée nulle et donc: 
+\begin{equation}
+  \label{eq:S_discret_1}
+  \frac{S^{t+1}_1 - S^t_1}{\Delta t} & = \frac{1}{x_1^2}\frac{\nu^t_{2}S^{t+1}_{2} - 2 \nu^t_1S^{t+1}_1}{\Delta x^2}
+\end{equation}
+Pour la case $n = n_\textrm{max} = N$, on a d'après \eqref{eq:nuS_n_is_null}:
+\begin{equation}
+  \frac{\nu^{t}_{N+1}S^{t+1}_{N+1} - \nu^{t}_NS^{t+1}_N}{\Delta x} = 1
+\end{equation}
+et donc l'équation \eqref{eq:S_discret_n} s'écrit en $N$:
+\begin{equation}
+  \label{eq:S_discret_N}
+  \frac{S^{t+1}_N - S^t_N}{\Delta t} = \frac{1}{x_N^2}\frac{\Delta x - \nu^{t}_NS^{t+1}_N + \nu^{t}_{N-1}S^{t+1}_{N-1}}{\Delta x^2}
+\end{equation}
+
+\subsubsection{Écriture matricielle}
+On réécrit \eqref{eq:S_discret_n}, \eqref{eq:S_discret_1} et \eqref{eq:S_discret_N} pour exprimer $S^t$ en fonction de $S^{t+1}$:
+\begin{align}
+  S^{t}_1 & = S_1^{t+1}\left(1 + 2\frac{\Delta t}{\Delta x^2}\frac{\nu_1^t}{x_1^2}\right)
+  + S_{2}^{t+1}\left(-\frac{\Delta t}{\Delta x^2}\frac{\nu_{2}^t}{x_1^2}\right)\\
+  S^{t}_n & = S_{n-1}^{t+1}\left(-\frac{\Delta t}{\Delta x^2}\frac{\nu_{n-1}^t}{x_n^2}\right)
+  + S_n^{t+1}\left(1 + 2\frac{\Delta t}{\Delta x^2}\frac{\nu_n^t}{x_n^2}\right)
+  + S_{n+1}^{t+1}\left(-\frac{\Delta t}{\Delta x^2}\frac{\nu_{n+1}^t}{x_n^2}\right)\\
+  S^{t}_N + \frac{\Delta t}{\Delta x x_N^2}& = S^{t+1}_{N-1} \left(-\frac{\Delta t}{\Delta x^2}\frac{\nu_{N-1}^t}{x_N^2}\right) + S_N^{t+1} \left(1 + \frac{\Delta t}{\Delta x^2}\frac{\nu^t_N}{x_N^2}\right)
+\end{align}
+
+Pour simplifier, on notera $A_k = 1 + 2 \frac{\Delta t}{\Delta x^2}\frac{\nu_k^t}{x_k^2}$ et $\Delta = \frac{\Delta t}{\Delta x^2}$
+Ce système d'équation s'écrit aussi sous forme matricielle :
+\begin{equation}
+  \left(S^t\middle) + 
+  \middle(\begin{matrix}
+    0 \\
+    \\
+    \\
+    \vdots \\
+    \\
+    \\
+    \\
+    0 \\
+    \frac{\Delta t}{\Delta x}\frac{1}{x_N^2}
+  \end{matrix}\middle)
+  =
+  \begin{pmatrix}
+A_1                            & -\Delta\frac{\nu_{2}^t}{x_1^2} &  & & & & 0\\
+-\Delta \frac{\nu_{1}^t}{x_2^2} & A_2                           & -\Delta\frac{\nu_{3}^t}{x_2^2} & & & &\\
+    &        & \ddots                          &  & & & &\\
+    &        & -\Delta \frac{\nu_{k-1}^t}{x_k^2} & A_k    & -\Delta \frac{\nu_{k+1}^t}{x_k^2} & &\\
+    &        &                                 & & \ddots                          & & \\
+    & & & & -\Delta \frac{\nu_{N-2}^t}{x_{N-1}^2} & A_{N-1} & -\Delta \frac{\nu_{N}^t}{x_{N-1}^2}\\
+    0 & & & & & -\Delta \frac{\nu_{N-1}^t}{x_N^2} & 1 + \Delta \frac{\nu_N^t}{x_N^2}
+  \end{pmatrix} \middle(S^{t+1}\right)
+\end{equation}
+Qui s'écrit aussi :
+\begin{equation}
+  AS^{t+1} = S^t + X 
+\end{equation}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "rapport"
+%%% End:
