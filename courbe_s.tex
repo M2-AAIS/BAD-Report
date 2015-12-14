@@ -1,0 +1,67 @@
+\section{Détermination des courbes en S}
+
+[INTRO BLABLA]
+\\   
+
+\subsection{Etablissement de la fonction}
+
+Au premier abord, pour obtenir une seule courbe en S, le rayon r a été fixé. Ainsi la vitesse angulaire \Omega a été préalablement déterminée. Par la suite nous avons répété la démarche suivante pour 256 differentes valeurs du rayon.
+\\
+Pour définir la température T en fonction de \Sigma, nous avons d' abord essayé de simplifier l' égalité $Q^+$ = $Q^-$ , qui traduit l' équilibre thermique local, en remplaçant tous les termes par T,\Sigma et \Omega. Celà donne deux expressions (selon l'opacité du milieu) de fonctions implicites où ces variables sont couplées.
+La résolution n' étant pas plus simple qu' avant le changement et afin d' éviter toute erreur induite lors du remplacement des différentes variables impliquées, nous avons préferé de calculer indépendemment chaque variable dans un ordre bien choisi. 
+\\
+En première partie, nous avons calculé la demi-hauteur H en utilisant la résolution d' une équation quadratique ne dépendant que de (T,\Sigma,\Omega) (Voir \cref{Equation}).
+\\
+Ensuite, la densité volumique \rho, la vitesse du son $c_s$ et la viscosité \nu. ( ref)
+\\
+De plus $\kappa_{ff}$, $\kappa_{e}$ et $\epsilon_{ff}$ pour pouvoir calculer le flux radiatif $F_z$ et déduire la différence des deux termes de chaleurs (en ne prenant pas en compte le terme d' advection) :
+\\
+\begin{equation} 
+  \label{eq:qplus-qmoins}
+   $Q^+$ - $Q^-$ = 0. 
+\end{equation}
+\\
+Nous avons aussi déterminé la profondeur optique effective $\tau_{eff}$. Selon sa valeur, nous pouvons nous placer dans un cas dit optiquement épais ($\tau_{eff}$ > 1) ou bien dans le cas optiquement mince  ($\tau_{eff}$ < 1).
+Cependant nous ne l' avons pas utilisé comme critère pour le choix de l' expression du flux pour éviter de tomber sur des solutions stables artificielles qui seraient le fruit d' interpolations aux alentours de $\tau_{efff}$ = 1 où a lieu le basculement entre les deux approximations utilisées. 
+\\
+Nous avons donc calculé \cref{eq:qplus-qmoins} dans deux cas où on a imposé l' expression du flux radiatif. Ainsi, nous avons un algorithme où l' on peut fixer les valeurs de T et \Omega pour obtenir une fonction ne dépendant que de \Sigma.
+
+
+\subsection{Intervalle de température}
+
+\subsection{Résolution}
+\subsubsection{Méthode de la dichotomie}
+
+Pour déterminer la densité de surface associée à une valeur de température précise, nous avons procédé par dichotomie.
+Cette méthode consiste à trouver les coordonnées où s' annulle une fonction continue en partant d' un intervalle de départ (voir \ref{}) et en le divisant successivement pour cerner l' intervalle le plus petit possible où se trouve la solution.  
+\\
+Soit f(T,\Sigma) = $Q^+$ - $Q^-$ = 0,  une fonction continue et strictement monotone dans un intervalle [$\Sigma_{min}$ ; $\Sigma_{max}$] pour un T donné. Si f(T,[$\Sigma_{min}$ ) et  f(T,[$\Sigma_{max}$ ) sont de signes opposés, alors d' après le théorème de la bijection il existe une solution unique comprise dans cette intervalle. 
+\\
+Nous avons appliqué cette bissection en divisant à chaque fois l' intervalle en deux jusqu' à obtenir une solution avec une précision de $10^-6$ et en limitant le nombre d' itérations pour des raisons pratiques. Nous avons alors obtenu deux graphes, représentant T en fonction de \Sigma pour un milieu optiquement épais (tracé courbé) et pour un milieu optiquement mince (relation linéaire).
+\\
+[deux graphes log T-logS]
+
+\subsubsection{Autres méthodes}
+
+\subsection{Points critiques}
+Afin de déterminer la propagation de l' instabilité thermique, il faut trouver le point critique où le système devient instable. Au niveau de la courbe en S, ceci a lieu sur la branche inférieure au niveau de la courbure : au-delà de ce point la densité surfacique diminue tandis que la température continue à s' élever.
+\\
+Pour trouver les coordonnées de ce point critique, nous avons comparé les valeurs de \Sigma (calculé pour un milieu optiquement épais) pour chaque point en augmentant T. Lorsque la variation de la courbe change, c' est-à-dire quand \Sigma cesse d' augmenter et commence à diminuer, nous avons repéré les coordonnées du dernier point pour lequel la densité surfacique croît.
+\\
+[?discussion sur les autres manières envisagées ?]        
+\\
+Dans le code, nous avons nommé "deuxième point critique", le point où a lieu le basculement d'épaisseur optique. Sur les graphes, ce point se situe à l' intersection des deux branches et signale le changement de régime où on a utilisé une approximation de diffusion à une autre approximation où l'on doit prendre en compte les pertes par rayonnement de freinage (le refroidissement par bremsstrahlung).
+\\
+ Pour le repérer, nous avons eu la même approche que pour pour le point d' instabilité trouvé préalablement. Cette fois-ci, nous avons comparé le \Sigma déterminé pour un milieu optiquement épais à celui optiquement mince. Quand le premier devient plus petit que le second, celà signifie que la densité surfacique arrête de décroître et qu' elle commence à augmenter linéairement en fonction de la température. 
+\\
+[?si on mentionne la façon avec les dérivées : ce point là est un point anguleux!]
+\\
+[courbe en S avec les points légendés + ?evolution en fonction de r ?]
+
+\subsection{Construction de la courbe}
+
+\subsection{Evolution du $\tau_eff$}
+[To be continued...]
+
+\\
+[DISCUSSION BLABLA]
