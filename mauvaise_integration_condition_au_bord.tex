@@ -1,44 +1,44 @@
-\section{integration de $S^{\star}$ et $T^{\star}$ (mauvaise facons) et condition au bord}
+\section{Intégration de $S^{\star}$ et $T^{\star}$ (mauvaise façon) et conditions aux bords}
 
 \subsection{Méthode d'intégration}
 
-Pour intégrer les équation de S et T (\eqref{eq:difS} et \eqref{eq:difT}), étant donné que ce ne sont pas des équation de transport, nous avons le choix du sens d'intégration. Afin de gagner en précision, pour la dérivée en un point on fera la moyenne des dérivé a droite et a gauche. Ainsi pour calculer la dérivé partielle de $S^{\star}$ en x a la case $i$ on calculera :
+Pour intégrer les équations de S et T (\eqref{eq:difS} et \eqref{eq:difT}), étant donné que ce ne sont pas des équations de transport, nous avons le choix du sens d'intégration. Afin de gagner en précision, pour la dérivée en un point on fera la moyenne des dérivées à droite et à gauche. Ainsi pour calculer la dérivée partielle de $S^{\star}$ en x à la case $i$ on calculera :
 
 \begin{equation}
   \left. \frac{\partial S^{\star}}{\partial x} \right|_i = \frac{S^{\star}(i+1)-S^{\star}(i-1)}{2\delta x} \label{eq:dif_ordre1}
 \end{equation}
 
-Et pour calculer la dérivée seconde de $S^{\star}$ par en x a la case $i$ :
+Et pour calculer la dérivée seconde de $S^{\star}$ par en x à la case $i$ :
 
 \begin{equation}
   \left. \frac{\partial^2 S^{\star}}{\partial x^2}\right|_i=\frac{S^{\star}(i+1)-2\ S^{\star}(i) +S^{\star}(i-1)}{\delta x^2} \label{eq:dif_ordre2}
 \end{equation}
 
-Cependant, on constate qu'avec cette méthode il est nécessaire de connaitre la valeur des cases voisines, or la première ($i=1$) et la dernière ($i=i_{max}$) n'ont pas de voisin de part et d'autre, il nous faut donc déterminer des condition au bord.
+Cependant, on constate qu'avec cette méthode il est nécessaire de connaître la valeur des cases voisines, or la première ($i=1$) et la dernière ($i=i_{max}$) n'ont pas de voisins de part et d'autre, il nous faut donc déterminer des conditions aux bords.
 
 
-\subsection{Condition au bords de $\nu^{\star}S^{\star}$}
+\subsection{Conditions aux bords de $\nu^{\star}S^{\star}$}
 
-\subsubsection{dérivée partielle première}
+\subsubsection{Dérivée partielle première}
 
-Dans l'équation différentielle sur $v^{\star}$ \eqref{eq:difv} on doit connaitre $\frac{\partial \nu^{\star} S^{\star}}{\partial x}$ en $i=1$ et $i=i_{max}$.
+Dans l'équation différentielle sur $v^{\star}$ \eqref{eq:difv} on doit connaître $\frac{\partial \nu^{\star} S^{\star}}{\partial x}$ en $i=1$ et $i=i_{max}$.
 
 \paragraph{$i=1$}
-Dans ce projet on fais l'hypothèse que juste après $r_{min}$ toute la matière est accréter par le trou noir donc $S^{\star}(i=1-1)=0$ dés lors par l'équation \eqref{eq:difv} on a
+Dans ce projet on fait l'hypothèse que juste après $r_{min}$ toute la matière est accrétée par le trou noir donc $S^{\star}(i=1-1)=0$ dés lors par l'équation \eqref{eq:difv} on a
 
 \begin{equation}
   \left. \frac{\partial (\nu^{\star} S^{\star})}{\partial x}\right|_{i=1}=\frac{(\nu^\star S^{\star})(1+1)}{2 \delta x}\label{eq:dif_nuS_i1}
 \end{equation}
 
 \paragraph{$i=i_{max}$}
-On fais l'hypothèse que en $r_{max}$ le taux d'accrétion est $\dot{M}_0$ dés lors par \eqref{eq:Mdotstar} on a $(\dot{M}^{\star}_0=)1 = -(x S^{\star}v^{\star})$ et par \eqref{eq:difv} il vient :
+On fait l'hypothèse qu' en $r_{max}$ le taux d'accrétion est $\dot{M}_0$ dès lors par \eqref{eq:Mdotstar} on a $(\dot{M}^{\star}_0=)1 = -(x S^{\star}v^{\star})$ et par \eqref{eq:difv} il vient :
 
 \begin{equation}
   \left. \frac{\partial (\nu^{\star} S^{\star})}{\partial x}\right|_{i=i_{max}}=1\label{eq:dif_nuS_imax}
 \end{equation}
 
-\subsubsection{dérivée partielle seconde}
-Afin de calculé $\frac{\partial^2(\nu^{\star} S^{\star})} {\partial x^2}$ en $i=1$ et $i=i_{max}$ il nous faut connaitre les valeur hypothétique de $(\nu^{\star} S^{\star})(i=1-1)$ et $(\nu^{\star} S^{\star})(i=i_{max}+1)$ que l'on va obtenir a partir des valeurs des dérivée première.
+\subsubsection{Dérivée partielle seconde}
+Afin de calculer $\frac{\partial^2(\nu^{\star} S^{\star})} {\partial x^2}$ en $i=1$ et $i=i_{max}$ il nous faut connaître les valeurs hypothétiques de $(\nu^{\star} S^{\star})(i=1-1)$ et $(\nu^{\star} S^{\star})(i=i_{max}+1)$ que l'on va obtenir à partir des valeurs des dérivées premières.
 
 \paragraph{i=1}
 On a d'après \eqref{eq:dif_ordre1} et \eqref{eq:dif_nuS_i1} :
@@ -70,17 +70,17 @@ Il vient donc
   \left. \frac{\partial^2 (\nu^{\star} S^{\star})}{\partial x^2}\right|_{i=i_{max}} &=& 2\ \frac{\delta x + (\nu^{\star} S^{\star})(i_{max}-1)- (\nu^{\star} S^{\star})(i_{max})}{\delta x^2}
 \end{eqnarray}
 
-\subsection{conditions aux bords de $S^{\star}$}
-On cherche les condition au bords de $\frac{\partial S^{\star}}{\partial t^{\star}}$, pour cela on utilise l'équation \eqref{eq:difS}. Dès lors on a directement :
+\subsection{Conditions aux bords de $S^{\star}$}
+On cherche les conditions aux bords de $\frac{\partial S^{\star}}{\partial t^{\star}}$, pour celà on utilise l'équation \eqref{eq:difS}. Dès lors on a directement :
 
 \begin{eqnarray}
   \left. \frac{\partial S^{\star}}{\partial t^{\star}} \right|_{i=1} &= \frac{1}{(x(1))^2} \left. \frac{\partial^2 (\nu^{\star} S^{\star})}{\partial x^2}\right|_{i=1} &= \frac{1}{(x(1))^2} \frac{2\ (\nu^{\star} S^{\star})(2)}{\delta x ^2}\\
   \left. \frac{\partial S^{\star}}{\partial t^{\star}} \right|_{i=i_{max}}&= \frac{1}{(x(i_{max}))^2} \left. \frac{\partial^2 (\nu^{\star} S^{\star})}{\partial x^2}\right|_{i=i_{max}} &= \frac{2}{(x(i_{max}))^2} \frac{\delta x + (\nu^{\star} S^{\star})(i_{max}-1)- (\nu^{\star} S^{\star})(i_{max})}{\delta x^2}
 \end{eqnarray}
 
-\subsection{condition aux bords de $S^{\star}/x$}
+\subsection{Conditions aux bords de $S^{\star}/x$}
 
-Dans l'équation \eqref{eq:difT} il est nécessaire de connaitre les valeur $\frac{\partial}{\partial x}\left(\frac{S^{\star}}{x}\right)$ en chacun des point du disque, donc a chacune des extrémités. 
+Dans l'équation \eqref{eq:difT} il est nécessaire de connaître les valeurs $\frac{\partial}{\partial x}\left(\frac{S^{\star}}{x}\right)$ en chacun des points du disque, donc à chacune des extrémités. 
 
 %FIXME
 On a : (je ne sais plus l'argument !!!)

@@ -44,7 +44,7 @@ hypothèses physiques que nous ferons par la suite doivent être vérifiées sur
 toute la partie étudiée, d’autre part il faut que les instabilités qui se
 développeront ne puisse pas atteindre la borne supérieure (elles se déplacent
 vers les $r$ croissants mais en diminuant d’amplitude) afin que les conditions
-prises pour le bord extérieur par la restent valables. Pour choisir une bonne
+prises pour le bord extérieur restent valables. Pour choisir une bonne
 valeur, il faudra en tester plusieurs numériquement, mais pour débuter et fixer
 un peu les idées nous prendrons $r_\mathrm{max} = 100 \times r_s$.
 
@@ -54,7 +54,7 @@ De manière usuelle, la composition chimique est représentée par les fractions
 $X$, $Y$ et $Z$ (avec $X + Y + Z = 1$). $X$ représente la fraction en masse
 d’hydrogène, $Y$ celle d’hélium et $Z$ celle de tous les autres éléments réunis
 (et est appelée \textit{metallicité}). Nous prendrons les valeurs suivantes
-(qui sont celles à la surface du soleil) :
+(qui sont celles à la surface du Soleil) :
 \begin{equation}
     \label{eq:compo_chimique}
     X = 0.70, Y = 0.28, Z = 0.02
@@ -87,7 +87,7 @@ paramètres d’entrée $X$ et $Y$ donnés à l’\cref{eq:compo_chimique}.
 
 \subsubsection{\texorpdfstring{Pressions $P$, $P_\mathrm{gaz}$ et $P_\mathrm{rad}$}{Pressions P, Pgaz et Prad}}
 
-La pression se décompose en deux partie : une gazeuse due aux particules, une
+La pression se décompose en deux parties : une gazeuse due aux particules, une
 de radiation due aux photons.
 \begin{align}
     \label{eq:pression}
@@ -123,7 +123,7 @@ densité.
 \end{equation}
 
 $\Gamma_1$ est le coefficient adiabatique, il dépend normalement de $\beta$.
-Pour simplifier, nous prendront $\Gamma_1 = 1$ (techniquement, $\beta = 1
+Pour simplifier, nous prendrons $\Gamma_1 = 1$ (techniquement, $\beta = 1
 \Rightarrow \Gamma_1 = \frac{5}{3}$ et $\beta = 0 \Rightarrow \Gamma_1
 = \frac{4}{3}$).
 
@@ -214,7 +214,7 @@ Ici, nous négligerons le flux radial (\textit{i.e.} selon le disque) $F_r$
 devant le flux sortant du disque $F_z$.
 
 Enfin, $Q_\mathrm{adv}$ est la chaleur transportée par la matière en mouvement
-(terme d’avdection) : 
+(terme d’advection) : 
 \begin{equation}
     \label{eq:advection}
     Q_\mathrm{adv} = C_v \left[ (\Gamma_{3} - 1) \frac{T}{\Sigma} \left( \frac{\partial \Sigma}{\partial t} + v \frac{\partial \Sigma}{\partial r}  \right) - v \frac{\partial T}{\partial r} \right]
@@ -280,7 +280,7 @@ pour simplifier).
 \subsection{Variables et équations adimensionnées}
 
 Il est intéressant d’adimensionner toutes les grandeurs en jeu pour plusieurs
-raisons. Notamment, cela permet de simplifier l’écriture des équations ou
+raisons. Notamment, celà permet de simplifier l’écriture des équations ou
 encore d’éviter un certain nombre de problèmes numériques liés à la
 représentation des nombres en informatique.
 
@@ -332,7 +332,7 @@ Nous introduisons maintenant $S^\star$, la grandeur adimensionnée correspondant
 \end{equation}
 
 $S_0$ est une grandeur homogène à $S$ (que nous définirons plus tard puisque
-cela ne change rien ici). En remplaçant dans l’équation précédente :
+celà ne change rien ici). En remplaçant dans l’équation précédente :
 \begin{equation}
     \frac{\partial S^\star}{\partial t^\star} = \frac{3}{4} \frac{t_0}{r_s^2 x^2} \frac{\partial^2}{\partial x^2} \left(\nu S^\star\right)
 \end{equation}
@@ -381,6 +381,7 @@ Ce qui nous amène naturellement à poser :
 \begin{equation}
     \label{eq:vitesse_angulaire_adim}
     \Omega^\star = \frac{\Omega}{\Omega_0} = \Omega \left( \frac{r_s^3}{G M} \right)^\frac{1}{2} \Rightarrow \Omega_0 = \left( \frac{G M}{r_s^3} \right)^\frac{1}{2}
+
 \end{equation}
 
 \subsubsection{Vitesse du son}
@@ -436,7 +437,7 @@ Commençons par définir $H^\star$ :
     H^\star = \frac{H}{H_0}
 \end{equation}
 
-En réinjectant cela et l’\cref{eq:vitesse_son_adim} dans
+En réinjectant celà et l’\cref{eq:vitesse_son_adim} dans
 l’\cref{eq:rel_demi_hauteur_adim} nous obtenons :
 \begin{equation}
     \label{eq:demi_hauteur_adim}
@@ -456,7 +457,7 @@ Ce qui nous amène à poser :
     \Sigma^\star = \frac{\Sigma}{\Sigma_0} = \Sigma \times \frac{4 \pi r_s^2}{t_0 \dot{M_0}} = \Sigma \times \frac{3 \pi \nu_0}{\dot{M_0}} \Rightarrow \Sigma_0 = \frac{\dot{M_0}}{3 \pi \nu_0}
 \end{equation}
 
-Cela nous permet au passage d’adimensionner naturellement $S$ :
+Celà nous permet au passage d’adimensionner naturellement $S$ :
 \begin{equation}
     S^\star = \frac{S}{S_0} = \frac{S}{\Sigma_0} = \Sigma^\star x \Rightarrow S_0 = \Sigma_0
 \end{equation}
@@ -473,7 +474,7 @@ Nous souhaiterions obtenir pour l’\cref{eq:densite_volumique} :
     \rho^\star = \frac{\Sigma^\star}{H^\star}
 \end{equation}
 
-Étant donné les \cref{eq:demi_hauteur_adim,eq:densite_surface_adim} cela nous
+Étant donné les \cref{eq:demi_hauteur_adim,eq:densite_surface_adim} celà nous
 impose :
 \begin{equation}
     \rho^\star = \frac{\rho}{\rho_0} = \frac{2 H_0 \rho}{\Sigma_0} \Rightarrow \rho_0 = \frac{\Sigma_0}{2 H_0} = \frac{\Sigma_0}{2 r_s}
@@ -525,7 +526,7 @@ Naturellement, nous avons envie d’introduire $F_z^\star$ pour simplifier cette
     F_z^\star = \frac{F_z}{F_z^0} = \frac{2 t_0 F_z}{\Sigma_0} \Rightarrow F_z^0 = \frac{\Sigma_0}{2 t_0} = \frac{\rho_0 H_0}{t_0}
 \end{equation}
 
-Cela ne donne pas à $F_0$ la même dimension que $F$ (ce qui serait difficile à
+Celà ne donne pas à $F_0$ la même dimension que $F$ (ce qui serait difficile à
 obtenir et pas forcément souhaitable), mais permet de simplifier grandement les
 choses. En remplaçant ça nous avons donc :
 \begin{equation}
@@ -600,7 +601,7 @@ Soit :
     P_\mathrm{rad}^\star = \frac{P_\mathrm{rad}}{P_\mathrm{rad}^0} = \frac{3}{a T_0^4} P_\mathrm{rad} \Rightarrow P_\mathrm{rad}^0 = \frac{1}{3} a T_0^4
 \end{equation}
 
-Cela donne pour $\beta$ (par rapport à l’\cref{eq:indicateur_pression}, nous
+Celà donne pour $\beta$ (par rapport à l’\cref{eq:indicateur_pression}, nous
 avons simplement simplifié par $P_\mathrm{gaz}$) :
 
 \begin{equation}
