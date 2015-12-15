@@ -1,53 +1,73 @@
 \section{Résolution numérique}
 
+Dans cette partie, nous allons expliquer comment le problème se résout
+numériquement et aborder quelques considérations en rapport avec cette
+résolution.
+
 \subsection{Principe de la résolution}
 
-%\subsection{Courbe en S}
-%
+La résolution peut être découpée en plusieurs partie, plus ou moins
+indépendantes.
 
-\subsection{Considérations sur les dérivées}
+Une première considération numérique est la discrétisation spatiale du problème
+: le disque sera représenté par un ensemble de position discrète selon l’axe
+radial. Ces positions s’étendent de $x_min = \sqrt(r_min/r_s)$ à $x_max =
+\sqrt(r_max/r_s)$, et sont séparées par un $dx$ constant, ce qui aura pour
+effet une fois revenu dans le monde dimensionné d’avoir un $dr$ parabolique,
+avec donc plus de points vers le bord intérieur du disque et moins vers le bord
+extérieur, ce qui est physiquement une bonne chose a priori.
 
-\begin{equation}
-    \frac{\partial u}{\partial t} + v \frac{\partial u}{\partial r} = 0
-\end{equation}
+\subsubsection{Courbe en S}
 
-\begin{align}
-    \frac{\partial u_j}{\partial r} &\approx \frac{u_{j+1} - u_j}{\Delta{r}}
-    \frac{\partial u_j}{\partial r} &\approx \frac{u_j - u_{j-1}}{\Delta{r}}
-    \frac{\partial u_j}{\partial r} &\approx \frac{u_{j+1} - u_{j-1}}{\Delta{r}}
-\end{align}
+L’idée ici est de trouver les zones de stationnarité du système, c’est-à-dire
+celles pour lesquelles la température évolue peu. Cela revient à résoudre
+l’équation $Q^+ = Q^-$. En pratique, cette courbe a une forme « en S », avec
+une partie arrondie correspondant au cas optiquement épais et une partie droite
+correspondant au cas optiquement mince. Il y a deux points critiques : un au
+point extrême de la partie arrondie, appelé premier point critique, et un au
+point de jonction des deux parties, appelé second point critique.
 
-\begin{equation}
-    \frac{\partial \tilde{u}}{\partial t} = - v \frac{\exp(ik\Delta{r}) - \exp(-ik\Delta{r})}{2 \Delta{r}} \tilde{u}
-\end{equation}
+Il faudra donc déterminer la courbe de stationnarité en chaque point du disque,
+puis sortir les coordonnées des points critiques pour chacun d’entre eux ainsi
+que déterminer une position initiale pour le système sur ces courbes.
 
-\begin{align}
-    \exp(ik\Delta{r}) &= 1 + ik\Delta{r} + \frac{i^2 k^2 \Delta{r}^2}{2}
-    \exp(-ik\Delta{r}) &= 1 - ik\Delta{r} + \frac{i^2 k^2 \Delta{r}^2}{2}
-\end{align}
+Cette partie a été réalisée essentiellement par Maximilien et Michelle.
 
-\begin{equation}
-    \frac{\partial \tilde{u}}{\partial t} = - v \frac{2ik\Delta{r}}{2\Delta{r}} \tilde{u} = - i k v \tilde{u}
-\end{equation}
+\subsubsection{Intégration numérique de S et T}
 
-\begin{equation}
-    \tilde{u} = \tilde{u(0)} \exp(-i k v t)
-\end{equation}
+C’est ici que se trouve le cœur du problème. Partant d’un état initial, il faut
+intégrer itérativement S et T pour suivre l’évolution du disque.
 
-En fait, nous avons tout simplement :
+Dans un premier temps, cette évolution se fait le long de la courbe par
+intégrations successives de S et T à l’aide d’un schéma explicite, le terme de
+convection dans l’équation sur la température pouvant être négligé. Puis, une
+fois un point doublement stationnaire atteint (S n’évolue plus non plus), une
+perturbation est ajoutée pour déstabiliser le système, qui va alors dépasser le
+premier point critique. À partir de ce moment-là, il faut passer à un schéma
+implicite, le terme de convection ne pouvant plus être négligé.
 
-\begin{equation}
-    \frac{\exp(ik\Delta{r}) - \exp(-ik\Delta{r})}{2 \Delta{r}} = \frac{2 i \sin(k\Delta{r})}{2 \Delta{r}} = i k \sinc(k\Delta{r})
-\end{equation}
+\subsubsection{Considérations sur les dérivées numériques spatiales}
 
-Soit :
-\begin{equation}
-    \frac{\partial \tilde{u}}{\partial t} = - i k v \sinc(k\Delta{r}) \tilde{u}
-\end{equation}
+Dans un certain nombre d’équations interviennent plusieurs dérivées spatiales,
+du premier ou second ordre. Il existe plusieurs manières de les calculer
+numériquement, ayant des conséquences variées. Nous nous intéresserons à
+celles-ci dans cette partie afin d’expliquer les choix effectués.
 
-\begin{equation}
-    \tilde{u} = \tilde{u(0)} \exp(-i k v \sinc(k \Delta{r}) t)
-\end{equation}
+\subsubsection{Conditions aux bords}
+
+Toujours à propos des dérivées spatiales intervenant, l’existence de bords «
+numériques » au problème implique d’imposer des conditions aux bords pour ces
+dernières. Ces conditions dépendent des dérivées numériques utilisées, dans
+cette partie seront présentées uniquement celles intervenant pour les dérivées
+effectivement utilisées, les autres seront présentées en ANNEXE CL.
+%TODO: Annexe CL
+
+\subsubsection{Calcul des autres variables}
+
+\subsection{Courbe en S}
+%\include{courbe_s}
+
+\subsection{Intégration numérique de S et T}
 
 \section{Schéma implicite}
 \subsection{Intégration de $S$}
@@ -156,7 +176,51 @@ Pour approximer $f_1^t$, on utilisera :
 \begin{equation}
   {f_1^t}_n = \frac{f(T_n^t+\Delta T_n^t) - f(T_n^t)}{\Delta T_n^t}, \quad \Delta T_n^t = \alpha T_n^t,\ \alpha \ll 1
 \end{equation}
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "rapport"
-%%% End:
+
+\subsection{Considérations sur les dérivées numériques}
+
+\begin{equation}
+    \frac{\partial u}{\partial t} + v \frac{\partial u}{\partial r} = 0
+\end{equation}
+
+\begin{align}
+    \frac{\partial u_j}{\partial r} &\approx \frac{u_{j+1} - u_j}{\Delta{r}} \\
+    \frac{\partial u_j}{\partial r} &\approx \frac{u_j - u_{j-1}}{\Delta{r}} \\
+    \frac{\partial u_j}{\partial r} &\approx \frac{u_{j+1} - u_{j-1}}{2 \Delta{r}}
+\end{align}
+
+\begin{equation}
+    \frac{\partial \tilde{u}}{\partial t} = - v \frac{\exp(ik\Delta{r}) - \exp(-ik\Delta{r})}{2 \Delta{r}} \tilde{u}
+\end{equation}
+
+\begin{align}
+    \exp(ik\Delta{r}) &= 1 + ik\Delta{r} + \frac{i^2 k^2 \Delta{r}^2}{2}
+    \exp(-ik\Delta{r}) &= 1 - ik\Delta{r} + \frac{i^2 k^2 \Delta{r}^2}{2}
+\end{align}
+
+\begin{equation}
+    \frac{\partial \tilde{u}}{\partial t} = - v \frac{2ik\Delta{r}}{2\Delta{r}} \tilde{u} = - i k v \tilde{u}
+\end{equation}
+
+\begin{equation}
+    \tilde{u} = \tilde{u(0)} \exp(-i k v t)
+\end{equation}
+
+En fait, nous avons tout simplement :
+
+\begin{equation}
+    \frac{\exp(ik\Delta{r}) - \exp(-ik\Delta{r})}{2 \Delta{r}} = \frac{2 i \sin(k\Delta{r})}{2 \Delta{r}} = i k \sinc(k\Delta{r})
+\end{equation}
+
+Soit :
+\begin{equation}
+    \frac{\partial \tilde{u}}{\partial t} = - i k v \sinc(k\Delta{r}) \tilde{u}
+\end{equation}
+
+\begin{equation}
+    \tilde{u} = \tilde{u(0)} \exp(-i k v \sinc(k \Delta{r}) t)
+\end{equation}
+
+\subsection{Conditions aux bords}
+
+\subsection{Calcul des autres variables}
