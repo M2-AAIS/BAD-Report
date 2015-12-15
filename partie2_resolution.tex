@@ -57,6 +57,38 @@ Une méthode implicite pour $S$ est alors préconisée. En effet, celle-ci assur
 
 L'autre régime est instable. Les évolutions de $S$ et de $T$ se font sur des temps similaires. Dans ce régime, il n'est plus légitime de traiter séparement ces deux variables et il faut donc résoudre conjointement l'une et l'autre. Le schéma implicite n'y est pas utilisé, car il n'assure que la convergence vers une solution physique, mais pas via des états successifs physiquement acceptables. Comme la valeur de $S$ influe sur celle de $T$, cela impliquerait que l'intégration de $T$ n'est pas non plus exacte. Dans le cas du comportement chaotique de l'instabilité, il est nécessaire de limiter au maximum les erreurs numériques car celles-ci peuvent mener à un résultat final différent du résultat physiquement attendu. Le choix d'un schéma explicite est alors fait pour $T$ et $S$, les deux évoluant alors sur le plus petit temps charactéristique du système : le pas de temps thermique. Le schéma explicite est donné dans la partie \ref{ssec:integration_S_exp} pour $S$ et dans la partie \ref{ssec:integration_T} pour $T$.
 
+\subsubsection{Détermination du pas de temps\label{sec::pas_de_temps}}
+Nous allons expliciter dans cette section les choix que nous avons fait pour déterminer les différents pas de thermique $\tau_T$ et visqueux $\tau_\nu$ nécessaires aux intégrations en schéma implicite et explicite. \\
+
+
+Sur la première branche (intégration en schéma implicite), ils sont déterminés au cours de la simulation avant chaque nouvelle intégration en $S$, à partir des formules suivantes : 
+
+\begin{equation}
+	\Delta \tau_\nu^{imp} = \frac{\tau_\nu}{k_{\nu}} = \frac{1}{k_{\nu}} \times \frac{r}{v}
+\end{equation}
+
+\begin{equation}
+	\Delta \tau_{T}^{imp} = \frac{\tau_{T}}{k_{T}}= \frac{1}{k_{T}} \times \frac{C_{V} T}{Q^{+} - Q^{-}}
+\end{equation} \\
+
+où $k_{\nu}$ et $k_{T}$ sont des constantes que l'on à prise respectivement égales à 100 et 1000. \\
+
+
+Il est nécessaire dans cette simulation de faire intervenir un pas de temps adaptatif. En effet, l'approche du point critique que l'on peut voir en figure \ref{Fig::Stable} est délicate. Le pas de temps visqueux est donc multiplier
+à chaque nouvelle intégration sur $S$ par un facteur dépendant de la distance au point critique par rapport à la variable $S$. 
+
+
+\begin{equation}
+	\Delta^{'} \tau_{\nu}^{imp} = \alpha \Delta \tau_{\nu}^{imp}
+\end{equation} \\
+
+où $\alpha = 1 - \left( 0.99 \times \e^{- \lvert \frac{S_{crit} - S}{D_{crit}} \rvert} \right)$, avec $D_{crit}$ défini arbitrairement : $D_{}crit = 200$ \\
+
+Le passage en shéma d'intégration explicite est soumis à deux conditions : $T \ge T_{crit}$ ou $\Sigma \ge \Sigma_{crit}$. On bascule dès lors qu'un des rayons à rempli ces conditions. $T$ et $\Sigma$ sont alors intégrés sur le même pas de temps :
+
+\begin{equation}
+\Delta \tau_{T}^{exp} = 0.01 \times \Delta \tau_{T}^{imp}
+\end{equation}
 
 \subsubsection{Considérations sur les dérivées numériques spatiales}
 
