@@ -5,20 +5,16 @@ numériquement et aborder quelques considérations en rapport avec cette
 résolution.
 
 \subsection{Principe de la résolution}
-L'évolution du disque d'accrétion est dominé par les deux équations sur $S$ \eqref{eq:difS} et sur $T$ \eqref{eq:difT}. Il existe deux domaines de l'espace des phases $S-T$. Le premier est un domaine où le temps visqueux $\tau_\nu$ \FIXME{référence à une courbe, une section?}
-est très grand devant le temps thermique $\tau_T$. Dans ce domaine, on pourra intégrer $S$ et $T$ sur deux échelles de temps différentes et effectuer une démarche de ``step and relax'', où on intègre d'abord $S$ sur un grand temps (visqueux) avant de laisser se relaxer $T$ sur des petits temps (thermiques). Il faut à cet endroit faire attention à ce que le temps de relaxation de $T$ soit toujours plus petit que le temps visqueux. Cela revient à vérifier que le nombre d'itérations nécessaires à la stabilisation de $T$ est plus petit que $\nicefrac{\tau_\nu}{\tau_T}$. Une méthode implicite pour $S$ est alors préconisée. En effet, celle-ci assure de converger vers la solution et est stable quelque soit le pas de temps (dans la limite des approximations données précédemment).. Les détails de la méthode sont donnés dans la partie \ref{ssec:integration_S_imp}. Pour intégrer la température, il n'est pas possible d'écrire un schéma implicite. Il faudra donc utiliser un schéma explicite. En revanche, il sera possible de procéder à des simplifications pour donner une convergence plus rapide de $T$. Les détails de ces approximations sont donnés dans la partie \ref{ssec:integration_T}
-Le deuxième domaine est celui dans lequel les évolutions de $S$ et de $T$ se font sur des temps similaires. Dans ce régime, il n'est plus légitime de traiter séparement ces deux variables et il faut donc résoudre conjointement l'une et l'autre. Le schéma implicite n'y est pas utilisé, car il n'assure que la convergence vers une solution physique, mais pas via des états successifs physiquement acceptables. Comme la valeur de $S$ influe sur celle de $T$, cela impliquerait que l'intégration de $T$ n'est pas non plus exacte. Dans le cas du comportement chaotique de l'instabilité, il est nécessaire de limiter au maximum les erreurs numériques car celles-ci peuvent mener à un résultat final différent du résultat physiquement attendu. Le choix d'un schéma explicite est alors fait pour $T$ et $S$, les deux évoluant alors sur le plus petit temps charactéristique du système : le pas de temps thermique. Le schéma explicite est donné dans la partie \ref{ssec:integration_S_exp} pour $S$ et dans la partie \ref{ssec:integration_T} pour $T$.
-
 La résolution peut être découpée en plusieurs partie, plus ou moins
 indépendantes.
 
 Une première considération numérique est la discrétisation spatiale du problème
 : le disque sera représenté par un ensemble de position discrète selon l’axe
-radial. Ces positions s’étendent de $x_min = \sqrt(r_min/r_s)$ à $x_max =
-\sqrt(r_max/r_s)$, et sont séparées par un $dx$ constant, ce qui aura pour
+radial. Ces positions s’étendent de $x_{min} = \sqrt{r_{min}/r_s}$ à $x_{max} =
+\sqrt{r_{max}/r_s}$, et sont séparées par un $dx$ constant, ce qui aura pour
 effet une fois revenu dans le monde dimensionné d’avoir un $dr$ parabolique,
 avec donc plus de points vers le bord intérieur du disque et moins vers le bord
-extérieur, ce qui est physiquement une bonne chose a priori.
+extérieur. Comme l'instabilité commence par se développer au niveau du bord intérieur, il est favorable d'y avoir un bon échantillonnage.
 
 \subsubsection{Courbe en S}
 
@@ -47,7 +43,13 @@ convection dans l’équation sur la température pouvant être négligé. Puis,
 fois un point doublement stationnaire atteint (S n’évolue plus non plus), une
 perturbation est ajoutée pour déstabiliser le système, qui va alors dépasser le
 premier point critique. À partir de ce moment-là, il faut passer à un schéma
-implicite, le terme de convection ne pouvant plus être négligé.
+implicite, le terme de convection ne pouvant plus être négligé. \FIXME{ce paragraphe n'est pas vrai, je travaille dessus Corentin}
+
+
+L'évolution du disque d'accrétion est dominé par les deux équations sur $S$ \eqref{eq:difS} et sur $T$ \eqref{eq:difT}. Il existe deux domaines de l'espace des phases $S-T$. Le premier est un domaine où le temps visqueux $\tau_\nu$ \FIXME{référence à une courbe, une section?}
+est très grand devant le temps thermique $\tau_T$. Dans ce domaine, on pourra intégrer $S$ et $T$ sur deux échelles de temps différentes et effectuer une démarche de ``step and relax'', où on intègre d'abord $S$ sur un grand temps (visqueux) avant de laisser se relaxer $T$ sur des petits temps (thermiques). Il faut à cet endroit faire attention à ce que le temps de relaxation de $T$ soit toujours plus petit que le temps visqueux. Cela revient à vérifier que le nombre d'itérations nécessaires à la stabilisation de $T$ est plus petit que $\nicefrac{\tau_\nu}{\tau_T}$. Une méthode implicite pour $S$ est alors préconisée. En effet, celle-ci assure de converger vers la solution et est stable quelque soit le pas de temps (dans la limite des approximations données précédemment).. Les détails de la méthode sont donnés dans la partie \ref{ssec:integration_S_imp}. Pour intégrer la température, il n'est pas possible d'écrire un schéma implicite. Il faudra donc utiliser un schéma explicite. En revanche, il sera possible de procéder à des simplifications pour donner une convergence plus rapide de $T$. Les détails de ces approximations sont donnés dans la partie \ref{ssec:integration_T}
+Le deuxième domaine est celui dans lequel les évolutions de $S$ et de $T$ se font sur des temps similaires. Dans ce régime, il n'est plus légitime de traiter séparement ces deux variables et il faut donc résoudre conjointement l'une et l'autre. Le schéma implicite n'y est pas utilisé, car il n'assure que la convergence vers une solution physique, mais pas via des états successifs physiquement acceptables. Comme la valeur de $S$ influe sur celle de $T$, cela impliquerait que l'intégration de $T$ n'est pas non plus exacte. Dans le cas du comportement chaotique de l'instabilité, il est nécessaire de limiter au maximum les erreurs numériques car celles-ci peuvent mener à un résultat final différent du résultat physiquement attendu. Le choix d'un schéma explicite est alors fait pour $T$ et $S$, les deux évoluant alors sur le plus petit temps charactéristique du système : le pas de temps thermique. Le schéma explicite est donné dans la partie \ref{ssec:integration_S_exp} pour $S$ et dans la partie \ref{ssec:integration_T} pour $T$.
+
 
 \subsubsection{Considérations sur les dérivées numériques spatiales}
 
@@ -70,14 +72,7 @@ effectivement utilisées, les autres seront présentées en ANNEXE CL.
 \subsection{Courbe en S}
 %\include{courbe_s}
 
-\subsection{Intégration numérique de S et T}
-
-\section{Schéma implicite}
-\subsection{Intégration de $S$}
-\label{subsec:S_integration}
-\subsubsection{Linéarisation des équations}
-
-\subsection{Intégration implicite de $S$}
+\subsection{Intégration numérique de S et T}\subsection{Intégration implicite de $S$}
 \label{ssec:integration_S_imp}
 L'intégration implicite revient à calculer $S^t$ en fonction de $S^{t+1}$, ce qui donne un système linéaire qu'il est ensuite possible d'inverser. Il est important de noter que cette méthode est plus coûteuse à chaque pas de temps qu'une méthode explicite, car elle nécessite l'inversion d'une matrice. Il faut donc vérifier que le gain de temps de calcul lié à une intégration sur un plus grand pas de temps est plus important que le surcoût lié à l'inversion du système.\FIXME{le faire …}\FIXME{dans la simulation, il faut noter qu'il y a un moment où l'approximation de séparation des échelles de temps n'est *plus* vraie}
 
