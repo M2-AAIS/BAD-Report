@@ -5,6 +5,9 @@ numériquement et aborder quelques considérations en rapport avec cette
 résolution.
 
 \subsection{Principe de la résolution}
+L'évolution du disque d'accrétion est dominé par les deux équations sur $S$ \eqref{eq:difS} et sur $T$ \eqref{eq:difT}. Il existe deux domaines de l'espace des phases $S-T$. Le premier est un domaine où le temps visqueux $\tau_\nu$ \FIXME{référence à une courbe, une section?}
+est très grand devant le temps thermique $\tau_T$. Dans ce domaine, on pourra intégrer $S$ et $T$ sur deux échelles de temps différentes et effectuer une démarche de ``step and relax'', où on intègre d'abord $S$ sur un grand temps (visqueux) avant de laisser se relaxer $T$ sur des petits temps (thermiques). Il faut à cet endroit faire attention à ce que le temps de relaxation de $T$ soit toujours plus petit que le temps visqueux. Cela revient à vérifier que le nombre d'itérations nécessaires à la stabilisation de $T$ est plus petit que $\nicefrac{\tau_\nu}{\tau_T}$. Une méthode implicite pour $S$ est alors préconisée. En effet, celle-ci assure de converger vers la solution et est stable quelque soit le pas de temps (dans la limite des approximations données précédemment).. Les détails de la méthode sont donnés dans la partie \ref{ssec:integration_S_imp}. Pour intégrer la température, il n'est pas possible d'écrire un schéma implicite. Il faudra donc utiliser un schéma explicite. En revanche, il sera possible de procéder à des simplifications pour donner une convergence plus rapide de $T$. Les détails de ces approximations sont donnés dans la partie \ref{ssec:integration_T}
+Le deuxième domaine est celui dans lequel les évolutions de $S$ et de $T$ se font sur des temps similaires. Dans ce régime, il n'est plus légitime de traiter séparement ces deux variables et il faut donc résoudre conjointement l'une et l'autre. Le schéma implicite n'y est pas utilisé, car il n'assure que la convergence vers une solution physique, mais pas via des états successifs physiquement acceptables. Comme la valeur de $S$ influe sur celle de $T$, cela impliquerait que l'intégration de $T$ n'est pas non plus exacte. Dans le cas du comportement chaotique de l'instabilité, il est nécessaire de limiter au maximum les erreurs numériques car celles-ci peuvent mener à un résultat final différent du résultat physiquement attendu. Le choix d'un schéma explicite est alors fait pour $T$ et $S$, les deux évoluant alors sur le plus petit temps charactéristique du système : le pas de temps thermique. Le schéma explicite est donné dans la partie \ref{ssec:integration_S_exp} pour $S$ et dans la partie \ref{ssec:integration_T} pour $T$.
 
 La résolution peut être découpée en plusieurs partie, plus ou moins
 indépendantes.
@@ -73,31 +76,39 @@ effectivement utilisées, les autres seront présentées en ANNEXE CL.
 \subsection{Intégration de $S$}
 \label{subsec:S_integration}
 \subsubsection{Linéarisation des équations}
+
+\subsection{Intégration implicite de $S$}
+\label{ssec:integration_S_imp}
+L'intégration implicite revient à calculer $S^t$ en fonction de $S^{t+1}$, ce qui donne un système linéaire qu'il est ensuite possible d'inverser. Il est important de noter que cette méthode est plus coûteuse à chaque pas de temps qu'une méthode explicite, car elle nécessite l'inversion d'une matrice. Il faut donc vérifier que le gain de temps de calcul lié à une intégration sur un plus grand pas de temps est plus important que le surcoût lié à l'inversion du système.\FIXME{le faire …}\FIXME{dans la simulation, il faut noter qu'il y a un moment où l'approximation de séparation des échelles de temps n'est *plus* vraie}
+
+\paragraph{Linéarisation des équations}
+
 On souhaite intégrer $S^\star$, la densité surfacique adimensionnée. L'équation d'évolution est :
 \begin{equation}
   \frac{\partial S^\star}{\partial t^\star} = \frac{1}{x^2}\frac{\partial^2}{\partial x^2}\left(\nu^\star S^\star\right)
 \end{equation}
-Pour alléger les notations, nous allons ommettre les étoiles dans les développements prochains. L'équation s'écrit alors en passant aux variables discrètes, au temps $t$ et à la case $1<n<n_\textrm{max}$
+Pour alléger les notations, nous allons ommettre les étoiles dans les développements prochains. L'équation s'écrit alors en passant aux variables discrètes, au temps $t$ et à la case $1<n\leq n_\textrm{max}$
 \begin{equation}
   \label{eq:S_discret_n}
   \frac{S^{t+1}_n - S^t_n}{\Delta t} = \frac{1}{x_n^2}\frac{\nu^t_{n+1}S^{t+1}_{n+1} - 2 \nu^t_nS^{t+1}_n + \nu^t_{n-1}S^{t+1}_{n-1}}{\Delta x^2}
 \end{equation}
-Pour la case $n = 1$, la quantité $\nu^t_{0}S^{t+1}_{0}$ est supposée nulle et donc: 
+À l'intérieur du disque, la densité de matière est supposée nulle ($\nu^t_{0}S^{t+1}_{0} = 0$). Physiquement, il est en effet attendu qu'aucune orbite keplerienne circulaire ne soit stable en dessous de l'ISCO (\emph{\emph{I}nnermost \emph{S}table \emph{C}ircular \emph{O}rbit}), située en $r = 3M$. En approximation, on suppose donc que la densité de matière y est nulle. \FIXME{lien vers la partie qui en parle}
 \begin{equation}
   \label{eq:S_discret_1}
   \frac{S^{t+1}_1 - S^t_1}{\Delta t} = \frac{1}{x_1^2}\frac{\nu^t_{2}S^{t+1}_{2} - 2 \nu^t_1S^{t+1}_1}{\Delta x^2}
 \end{equation}
 Pour la case $n = n_\textrm{max} = N$, on a d'après \eqref{eq:nuS_n_is_null}:
 \begin{equation}
-  \frac{\nu^{t}_{N+1}S^{t+1}_{N+1} - \nu^{t}_NS^{t+1}_N}{\Delta x} = 1
+  \frac{\nu^{t}_{N+1}S^{t+1}_{N+1} - \nu^{t}_NS^{t+1}_N}{\Delta x} = \dot{M}^\star_N
 \end{equation}
-et donc l'équation \eqref{eq:S_discret_n} s'écrit en $N$:
+Il faut noter que $\dot{M}^\star_N$ vaut initialement $1$. Pour simuler l'arrivée de matière par l'extérieur du disque, cette quantité est incrémentée au fur et à mesure de la simulation. Le détail de la procédure est donné en partie \FIXME{Faire la partie}.
+Donc l'équation \eqref{eq:S_discret_n} s'écrit en $N$:
 \begin{equation}
   \label{eq:S_discret_N}
   \frac{S^{t+1}_N - S^t_N}{\Delta t} = \frac{1}{x_N^2}\frac{\Delta x - \nu^{t}_NS^{t+1}_N + \nu^{t}_{N-1}S^{t+1}_{N-1}}{\Delta x^2}
 \end{equation}
 
-\subsubsection{Écriture matricielle}
+\paragraph{Écriture matricielle}
 On réécrit \eqref{eq:S_discret_n}, \eqref{eq:S_discret_1} et \eqref{eq:S_discret_N} pour exprimer $S^t$ en fonction de $S^{t+1}$:
 \begin{equation}
   \left\lbrace\begin{array}{r l c l c l }
@@ -145,36 +156,74 @@ Qui s'écrit aussi :
   AS^{t+1} = S^t + X 
 \end{equation}
 $A$ est une matrice tri-diagonale qu'il est facile de résoudre en utilisant Lapack (\href{http://www.netlib.org/lapack/explore-html/d4/d62/group__double_g_tsolve.html#ga2bf93f2ddefa5e671866eb2191dc19d4}{routine DGTSV}).
+\FIXME{ ajouter cela comme une référence}
 
-\subsection{Intégration de $T$}
-\label{subsec:integration_T}
-
-Si on est dans le cas optiquement mince (ou bien négligeons terme advection ??), $T$ est régit par l'équation :
+\subsection{Intégration explicite de $S$}
+\label{ssec:integration_S_exp}
+Au contraire de l'intégration implicite, l'intégration explicite permet une résolution directe d'une équation aux dérivées partielles. Il suffit de connaître les variables à un temps $t$ pour en déduire la nouvelle valeur au temps $t+1$ :
 \begin{equation}
-  C_v^\star \frac{\partial T^\star}{\partial t^\star} = 3v_0^2\nu^\star \Omega^\star{}^2 - \frac{F_z^\star x}{S^\star}
+  u^{t+1} = u^t + \Delta t f(t)
+\end{equation}
+\FIXME{ noter le domaine de validité de cette intégration}
+\subsection{Intégration explicite de $T$}
+\label{ssec:integration_T}
+Il est possible d'améliorer le schéma d'intégration explicite pour la température en donnant une meilleure estimation de $f(t)$.
+\begin{equation}
+  \frac{\partial T}{\partial t} = \frac{Q^+ - Q^- + Q_{adv}}{C_V} = f(T, S)
+\end{equation}
+On peut écrire un développement limité de $f(T) = f_0 + \frac{\partial f}{\partial T}\Delta T + \frac{\partial f}{\partial S}\Delta S$
+Comme on a un temps thermique très petit devant le temps visqueux $\tau_\nu \gg \tau_T$ \FIXME{ est-ce vraiment vrai ?}
+, les variations de $f$ par rapport à $S$ sont très faibles devant celles par rapport à $T$. On obtient alors $f(T) = f_0 + f'_T \Delta T$. En linéarisant, on obtient finalement:
+\begin{equation}
+  T^{t+1} = T^t + \frac{f_0}{f'_T}\left[e^{f'_T\Delta t} - 1 \right] 
+\end{equation}
+On peut facilement obtenir numériquement une approximation de $f'_T$ en calculant la quantité $\frac{f(T+\delta T) - f(T)}{\delta T}$, avec $\delta T = \lambda T,\ \lambda \ll 1$. 
+\FIXME{ ajouter plot qui montre qu'on a bien df/dS << df/dT}
+\FIXME{ajouter plot qui montre que la courbe est suffisamment lisse, c'est-à-dire que f'T peut bien être approximé numériquement}
+
+\subsection{Considérations sur les dérivées}
+\FIXME{peut être bouger cette partie pour la cohérence ?}
+
+\begin{equation}
+    \frac{\partial u}{\partial t} + v \frac{\partial u}{\partial r} = 0
 \end{equation}
 
-\subsubsection{Linéarisation}
-On va écrire l'équation linéarisée pour $T$. Une fois encore, nous allons ommettre les ${}^\star$ pour alléger les notations.
+\begin{align}
+    \frac{\partial u_j}{\partial r} &\approx \frac{u_{j+1} - u_j}{\Delta{r}}
+    \frac{\partial u_j}{\partial r} &\approx \frac{u_j - u_{j-1}}{\Delta{r}}
+    \frac{\partial u_j}{\partial r} &\approx \frac{u_{j+1} - u_{j-1}}{\Delta{r}}
+\end{align}
 
-On note $f(T, S) = \frac{\partial T}{\partial t}(T, S)$ et $f_1(T, S) = \frac{\partial f}{\partial T}$
 \begin{equation}
-  \label{eq:T_devpmt_lin_2e_ordre} 
-  \frac{T(t+\Delta t) - T(t)}{\Delta t} = f(T(t), S(t)) + \Delta Tf_1 + \Delta S\frac{\partial f}{\partial S}
-\end{equation}
-Comme $\tau_\textrm{therm} \ll \tau_\textrm{dyn}$, on va pouvoir négliger $\frac{\Delta S}{\tau_\textrm{therm}}$ devant $\frac{\Delta T}{\tau_\textrm{therm}}$. L'équation \eqref{eq:T_devpmt_lin_2e_ordre} s'écrit alors :
-\begin{equation}
-  \frac{T(t+\Delta t) - T(t)}{\Delta t} = f(T, S) + \Delta T f_1 = f(T, S) + \Delta t \underbrace{\frac{\Delta T}{\Delta t}}_{f} f_1
-\end{equation}
-Finalement, on obtient avec les écritures discrètes:
-\begin{equation}
-  T^{t+1}_n = T^{t}_n + \Delta t f^t_n \left(1 + \Delta t {f_1^t}_n\right)
+    \frac{\partial \tilde{u}}{\partial t} = - v \frac{\exp(ik\Delta{r}) - \exp(-ik\Delta{r})}{2 \Delta{r}} \tilde{u}
 \end{equation}
 
-\subsubsection{Approximation de $f_1$}
-Pour approximer $f_1^t$, on utilisera :
+\begin{align}
+    \exp(ik\Delta{r}) &= 1 + ik\Delta{r} + \frac{i^2 k^2 \Delta{r}^2}{2}
+    \exp(-ik\Delta{r}) &= 1 - ik\Delta{r} + \frac{i^2 k^2 \Delta{r}^2}{2}
+\end{align}
+
 \begin{equation}
-  {f_1^t}_n = \frac{f(T_n^t+\Delta T_n^t) - f(T_n^t)}{\Delta T_n^t}, \quad \Delta T_n^t = \alpha T_n^t,\ \alpha \ll 1
+    \frac{\partial \tilde{u}}{\partial t} = - v \frac{2ik\Delta{r}}{2\Delta{r}} \tilde{u} = - i k v \tilde{u}
+\end{equation}
+
+\begin{equation}
+    \tilde{u} = \tilde{u(0)} \exp(-i k v t)
+\end{equation}
+
+En fait, nous avons tout simplement :
+
+\begin{equation}
+    \frac{\exp(ik\Delta{r}) - \exp(-ik\Delta{r})}{2 \Delta{r}} = \frac{2 i \sin(k\Delta{r})}{2 \Delta{r}} = i k \sinc(k\Delta{r})
+\end{equation}
+
+Soit :
+\begin{equation}
+    \frac{\partial \tilde{u}}{\partial t} = - i k v \sinc(k\Delta{r}) \tilde{u}
+\end{equation}
+
+\begin{equation}
+    \tilde{u} = \tilde{u(0)} \exp(-i k v \sinc(k \Delta{r}) t)
 \end{equation}
 
 \subsection{Considérations sur les dérivées numériques}
@@ -224,3 +273,8 @@ Soit :
 \subsection{Conditions aux bords}
 
 \subsection{Calcul des autres variables}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "rapport"
+%%% End:
