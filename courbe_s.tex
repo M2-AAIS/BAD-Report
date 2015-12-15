@@ -51,7 +51,7 @@ Soit f(T,$\Sigma$) = $Q^+$ - $Q^-$ = 0,  une fonction continue et strictement mo
 \\
 Nous avons appliqué cette bissection en divisant à chaque fois l' intervalle en deux jusqu' à obtenir une solution avec une précision de $10^-6$ et en limitant le nombre d' itérations pour des raisons pratiques. Nous avons alors obtenu deux graphes, représentant T en fonction de $\Sigma$ pour un milieu optiquement épais (tracé courbé) et pour un milieu optiquement mince (relation linéaire).
 \\
-[deux graphes log T-logS]
+%%%%%[deux graphes log T-logS]
 
 \subsubsection{Méthode de Brent}
 La méthode de Brent est une méthode de recherche de "zéros" d'une fonction combinant les méthodes de la dichotomie, de la sécante et l'interpolation quadratique inverse pour en utiliser tous leurs avantages.
@@ -68,7 +68,7 @@ Sinon, nous utilisons la méthode de la sécante vue précédemment. Si la méth
 \subsubsection{Méthodes alternatives à la dichotomie}
 La méthode de la dichotomie est une méthode simple et robuste pour trouver les "zéros" d'une fonction mais elle demande un grand nombre de d'itérations. En effet cette méthode converge linéairement.
 \\
-[A VERIFIER]
+%%%%[A VERIFIER]
 Le nombre d'itérations par une méthode de dichotomie est donnée par la formule suivante
 \begin{equation}
 n = log(\frac{borne_{sup} - borne_{inf}}{\epsilon}) \frac{1}{log(2)} - 1
@@ -101,11 +101,11 @@ a compléter...
 
 \begin{figure}[htb!]
 	\centering
-	\includegraphics[height=0.7\textwidth]{images/secante.png}
+	\includegraphics[height=0.7\textwidth]{S_curve_secant.eps}
 	\caption{méthode de la sécante}
 	\label{Fig::bench}
 \end{figure}
-\FloatBarrier
+%\FloatBarrier
 
 
 \subsubsection{Autres méthodes}
@@ -122,11 +122,11 @@ Afin de déterminer la propagation de l' instabilité thermique, il faut trouver
 
 \begin{figure}[htb!]
 	\centering
-	\includegraphics[height=0.7\textwidth]{images/stable.pdf}
+	\includegraphics[height=0.7\textwidth]{stable.pdf}
 	\caption{Zones stables et instables de la courbe en S}
 	\label{Fig::bench}
 \end{figure}
-\FloatBarrier
+%\FloatBarrier
 
 Pour trouver les coordonnées de ce point critique, nous avons comparé les valeurs de $\Sigma$ (calculé pour un milieu optiquement épais) pour chaque point en augmentant T. Lorsque la variation de la courbe change, c' est-à-dire quand $\Sigma$ cesse d' augmenter et commence à diminuer, nous avons repéré les coordonnées du dernier point pour lequel la densité surfacique croît.  
 \\
@@ -134,7 +134,7 @@ Dans le code, nous avons nommé "deuxième point critique", le point où a lieu 
 \\
 Pour le repérer, nous avons eu la même approche que pour pour le point d' instabilité trouvé préalablement. Cette fois-ci, nous avons comparé le $\Sigma$ déterminé pour un milieu optiquement épais à celui optiquement mince. Quand le premier devient plus petit que le second, celà signifie que la densité surfacique arrête de décroître et qu' elle commence à augmenter linéairement en fonction de la température. 
 \\
-[courbe en S avec les points légendés + ?evolution en fonction de r ?]
+%%%%%%%%[courbe en S avec les points légendés + ?evolution en fonction de r ?]
 
 \subsection{Construction de la courbe}
 
@@ -142,20 +142,20 @@ En combinant les points trouvés dans le cas optiquement épais jusqu'au deuxiè
 
 \begin{figure}[htb!]
 	\centering
-	\includegraphics[height=0.5\textwidth]{images/deux_parties.pdf}
+	\includegraphics[height=0.5\textwidth]{deux_parties.pdf}
 	\caption{Construction de la courbe en S}
 	\label{Fig::bench}
 \end{figure}
-\FloatBarrier
+%\FloatBarrier
 
 Nous avons donc pour chaque rayon une courbe en S représenté sur le graphe ci-dessous.
 \begin{figure}[htb!]
 	\centering
-	\includegraphics[height=0.7\textwidth]{images/evolutioncourbes.pdf}
+	\includegraphics[height=0.7\textwidth]{evolutioncourbes.pdf}
 	\caption{Evolution de la courbe en S en fonction de la distance au centre}
 	\label{Fig::bench}
 \end{figure}
-\FloatBarrier
+%\FloatBarrier
 
 
 \subsection{Evolution du $\tau_eff$}
