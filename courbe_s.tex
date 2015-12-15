@@ -51,7 +51,22 @@ Soit f(T,$\Sigma$) = $Q^+$ - $Q^-$ = 0,  une fonction continue et strictement mo
 \\
 Nous avons appliqué cette bissection en divisant à chaque fois l' intervalle en deux jusqu' à obtenir une solution avec une précision de $10^-6$ et en limitant le nombre d' itérations pour des raisons pratiques. Nous avons alors obtenu deux graphes, représentant T en fonction de $\Sigma$ pour un milieu optiquement épais (tracé courbé) et pour un milieu optiquement mince (relation linéaire).
 \\
-%%%%%[deux graphes log T-logS]
+
+\begin{figure}
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.4\linewidth]{S_curve_thick.eps}
+  \captionof{figure}{\textit{Cas optiquement épais}}
+  \label{fig:test1}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.4\linewidth]{image1}
+  \captionof{figure}{S_curve_thin.eps}
+  \label{fig:test2}
+\end{minipage}
+\end{figure}
 
 \subsubsection{Méthode de Brent}
 La méthode de Brent est une méthode de recherche de "zéros" d'une fonction combinant les méthodes de la dichotomie, de la sécante et l'interpolation quadratique inverse pour en utiliser tous leurs avantages.
@@ -146,7 +161,7 @@ En combinant les points trouvés dans le cas optiquement épais jusqu'au deuxiè
 	\caption{Construction de la courbe en S}
 	\label{Fig::bench}
 \end{figure}
-%\FloatBarrier
+
 
 Nous avons donc pour chaque rayon une courbe en S représenté sur le graphe ci-dessous.
 \begin{figure}[htb!]
@@ -155,10 +170,21 @@ Nous avons donc pour chaque rayon une courbe en S représenté sur le graphe ci-
 	\caption{Evolution de la courbe en S en fonction de la distance au centre}
 	\label{Fig::bench}
 \end{figure}
-%\FloatBarrier
+
 
 
 \subsection{Evolution du $\tau_eff$}
+
+D' après nos calculs nous trouvons un $\tau_eff$ aux alentours de 0,06 lors de la transition d'un milieu dit optiquement épais à un milieu optiquement mince. Cette valeur ne correspond pas à la valeur théorique où $\tau_eff$ = 1. 
+Celà est étrange; très étrange.
+
+\begin{figure}[htb!]
+	\centering
+	\includegraphics[height=0.7\textwidth]{S_curves_tau.eps}
+	\caption{\textit{Evolution de la profondeur optique de la courbe en S pour diffèrents rayons.}  }
+	\label{Fig::bench}
+\end{figure}
+
 \subsection{Idées avortées}
 \begin{enumerate}
 
