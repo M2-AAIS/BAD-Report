@@ -1,6 +1,6 @@
 \section{Résolution des équations}
 
-\subsection{Résolution de la hauteur $H$}
+\subsection{Résolution de la hauteur $H$ \label{sec::res_H}}
 Nous avons vu précédemment que toutes les quantités physiques nécessaires à la simulation sont obtenues à partir de formules simples et immédiates, à l'exception de la vitesse locale d'accrétion $v$ ainsi que la hauteur $H$ du disque.  $H$ fait en effet intervenir la résolution d'un trinôme du second degré dont nous avons détaillé le calcul ci dessous. \\
 
 Partons de la pression P : 
@@ -22,7 +22,8 @@ Partons de la pression P :
 
 \begin{equation}
 	\frac{1}{2} \Omega^{2} \Sigma H = \frac{R T}{\mu} \frac{\Sigma}{2 H} + \frac{1}{3} a T^{4}
-\end{equation}
+	\label{eq:trinôme}
+\end{equation}  	   
 
 H est donc solution d'un trinôme du second degré $ a H^{2} + b H + c = 0$. \\
 Compte tenu de l'adimensionnement considéré dans cette simulation, nous l'exprimons sous la forme suivante :  
