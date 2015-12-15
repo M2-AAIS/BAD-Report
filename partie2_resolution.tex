@@ -104,11 +104,6 @@ Une méthode implicite pour $S$ est alors préconisée. En effet, celle-ci assur
 
 L'autre régime est instable. Les évolutions de $S$ et de $T$ se font sur des temps similaires. Dans ce régime, il n'est plus légitime de traiter séparement ces deux variables et il faut donc résoudre conjointement l'une et l'autre. Le schéma implicite n'y est pas utilisé, car il n'assure que la convergence vers une solution physique, mais pas via des états successifs physiquement acceptables. Comme la valeur de $S$ influe sur celle de $T$, cela impliquerait que l'intégration de $T$ n'est pas non plus exacte. Dans le cas du comportement chaotique de l'instabilité, il est nécessaire de limiter au maximum les erreurs numériques car celles-ci peuvent mener à un résultat final différent du résultat physiquement attendu. Le choix d'un schéma explicite est alors fait pour $T$ et $S$, les deux évoluant alors sur le plus petit temps charactéristique du système : le pas de temps thermique. Le schéma explicite est donné dans la partie \ref{ssec:integration_S_exp} pour $S$ et dans la partie \ref{ssec:integration_T} pour $T$.
 
-\begin{figure}
-  \includegraphics{figures/S-T.pdf}
-  \caption{Courbe suivie par les points en $x_1$ (en bleu) et en $x_{20}$ (en rouge) dans le diagramme $\Sigma-T$. Les applats de couleurs correspondent aux zones où le terme de chauffage est négatif au rayon considéré. Les deux points commencent initialement à faibles température et densité surfacique, remontent la courbe en S (qui délimite la zone où le chauffage est négatif). Une fois le point critique dépassé, ils effectuent des cycles autour du point critique jusqu'à ce que le système soit à nouveau en mesure d'être à l'équilibre. \FIXME{ajouter annotations sur la figure}}
-\end{figure}
-
 \subsubsection{Détermination du pas de temps\label{sec::pas_de_temps}}
 Nous allons expliciter dans cette section les choix que nous avons fait pour déterminer les différents pas de thermique $\tau_T$ et visqueux $\tau_\nu$ nécessaires aux intégrations en schéma implicite et explicite. \\
 
@@ -159,6 +154,7 @@ effectivement utilisées, les autres seront présentées en ANNEXE CL.
 %TODO: Annexe CL
 
 \subsubsection{Calcul des autres variables}
+
 
 %\subsection{Courbe en S}
 %\include{courbe_s}
@@ -259,16 +255,15 @@ Il est possible d'améliorer le schéma d'intégration explicite pour la tempér
 \begin{equation}
   \frac{\partial T}{\partial t} = \frac{Q^+ - Q^- + Q_{adv}}{C_V} = f(T, S)
 \end{equation}
-On peut écrire un développement limité de $f(T) = f_0 + \frac{\partial f}{\partial T^\star}\Delta T^\star + \frac{\partial f}{\partial S^\star}\Delta S^\star$. Comme on a un temps thermique très petit devant le temps visqueux $\tau_\nu \gg \tau_T$. Le terme en $\frac{\partial f}{\partial S^\star}\Delta S^\star$ est négligeable devant $\frac{\partial f}{\partial T^\star}\Delta T^\star$ dans le régime en évolution stable, comme le montre la figure \ref{fig:df_dT_and_df_dS}. On obtient alors $f(T) = f_0 + f'_T \Delta T$. En linéarisant, on obtient finalement:
+On peut écrire un développement limité de $f(T) = f_0 + \frac{\partial f}{\partial T}\Delta T + \frac{\partial f}{\partial S}\Delta S$
+Comme on a un temps thermique très petit devant le temps visqueux $\tau_\nu \gg \tau_T$ \FIXME{ est-ce vraiment vrai ?}
+, les variations de $f$ par rapport à $S$ sont très faibles devant celles par rapport à $T$. On obtient alors $f(T) = f_0 + f'_T \Delta T$. En linéarisant, on obtient finalement:
 \begin{equation}
   T^{t+1} = T^t + \frac{f_0}{f'_T}\left[e^{f'_T\Delta t} - 1 \right] 
 \end{equation}
-On peut facilement obtenir numériquement une approximation de $f'_T$ en calculant la quantité $\frac{f(T+\delta T) - f(T)}{\delta T}$, avec $\delta T = \lambda T,\ \lambda \ll 1$.
-\begin{figure}
-  \includegraphics[]{figures/df_dS_and_df_dT.pdf}
-  \caption{\label{fig:df_dT_and_df_dS} Évolution du rapport $\Delta T^\star \frac{\mathrm{d} f}{\mathrm{d} T^\star}$ sur $\Delta S^\star\frac{\mathrm{d} f}{\mathrm{d}S^\star}$ au cours du temps. Le rapport est en faveur du terme thermique dans le régime stable (en bleu), alors qu'il peut être en faveur dans le régime instable (en vert).}
-\end{figure}
-
+On peut facilement obtenir numériquement une approximation de $f'_T$ en calculant la quantité $\frac{f(T+\delta T) - f(T)}{\delta T}$, avec $\delta T = \lambda T,\ \lambda \ll 1$. 
+\FIXME{ ajouter plot qui montre qu'on a bien df/dS << df/dT}
+\FIXME{ajouter plot qui montre que la courbe est suffisamment lisse, c'est-à-dire que f'T peut bien être approximé numériquement}
 
 \subsection{Considérations sur les dérivées}
 \FIXME{peut être bouger cette partie pour la cohérence ?}
@@ -362,6 +357,82 @@ Soit :
 \subsection{Conditions aux bords}
 
 \subsection{Calcul des autres variables}
+
+Pour chaque temps t donné, nous devons résoudre le système physique en chaque point du disque. Cela correspond à résoudre un système de 16 équations et 16 inconnus. Nous avons vu précédemment que toutes ces quantités physiques nécessaires à  la simulation sont obtenues à  partir de formules simples et immédiates, à  l'exception de la vitesse locale d'accrétion $v$ ainsi que la demi-hauteur $H$ du disque.
+\subsubsection{Résolution de la demi-hauteur $H$}
+  $H$ fait en effet intervenir la résolution d'un trinôme du second degré dont nous avons détaillé le calcul ci dessous. \\
+
+Partons de la pression P : 
+
+\begin{equation}
+	P = P_{gaz} + P_{rad}
+\end{equation}
+
+
+\begin{equation}
+	c_{s}^{2} \rho = \frac{R \rho T}{\mu} + \frac{1}{3} a T^{4}
+\end{equation}
+
+
+\begin{equation}
+	\Omega^{2} H^{2} \rho = \frac{R T}{\mu} \rho + \frac{1}{3} a T^{4}
+\end{equation}
+
+
+\begin{equation}
+	\frac{1}{2} \Omega^{2} \Sigma H = \frac{R T}{\mu} \frac{\Sigma}{2 H} + \frac{1}{3} a T^{4}
+\end{equation}
+
+H est donc solution d'un trinôme du second degré $ a H^{2} + b H + c = 0$. \\
+Compte tenu de l'adimensionnement considéré dans cette simulation, nous l'exprimons sous la forme suivante :  
+
+\begin{eqnarray}
+  a^{\prime} H^{* 2}+b^{\prime}H^{*}+c^{\prime}=0
+  \end{eqnarray}
+
+$\begin{cases}  
+      a^{\prime} &= \Omega^{*2} \Omega_{0}^{2} S^{*} S_{0}\\
+      b^{\prime} &= - \frac{2 a}{3 r_{s}} T^{*4} T_{0}^{4} x \\
+      c^{\prime}&=-\frac{RT_{0}}{\mu r_{s}^{2}} T^{*} S^{*} S_{0}
+     \end{cases}$ \\
+
+
+\begin{equation}
+	\Delta^{\prime} = b^{\prime 2} - 4a^{\prime}c^{\prime}
+\end{equation} 
+
+Il vient donc : 
+
+\begin{equation}
+	H^{*} = \frac{-b -sign(b) \sqrt{\Delta}}{2a}
+\end{equation}
+
+
+\subsubsection{Résolution de la vitesse locale d'accrétion $v$}
+\begin{equation}
+    v^\star = - \frac{1}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right)
+\end{equation} 
+
+Nous avons privilégié pour cette équation le calcul d'une moyenne des dérivées amonts et avales. La question de savoir lesquelles des dérivées (amonts ou avales) conduisent à  des solutions stables n'est pas nécessaire ici puisque en effet il ne s'agit pas d'une équation d'advection mais seulement d'une dérivée spatiale. Ci-dessous l'équation de la dérivée selon cette approximation : 
+
+\begin{equation}
+v^\star_{i} = - \frac{1}{S_{i}^\star x_{i}} \frac{( (\nu^{*}S^{*})_{i+1} - (\nu^{*}S^{*})_{i-1} )}{2 \Delta x_{i}}
+\end{equation} 
+
+Par contre ce choix de dérivée impose que nous mettions des conditions à  chaque bords du disque. La condition au bord intérieur est  $(\nu^{*}S^{*})_{0} = 0$, tandis que celle au bord extérieur est $v^\star_{max}   = - \dot{M^{*}}_{max} / (S^{*}x^{*})_{max}$.
+
+
+\subsubsection{Ordre de résolution des équations}
+
+Nous avons donc maintenant toutes les équations  nécessaires à  la résolution du système. L'ordre de résolution des équations est le suivant :  \\
+
+ $\rightarrow$ Une foi le calcul de $H^{*}$ effectué, nous pouvons calculer les valeurs de la vitesse du son $cs^{*}$, de la viscosité $\nu^{*}$ ainsi que de la densité $\rho^{*}$ grâce aux formules décrites précédemment.   
+
+ $\rightarrow$ Le calcul de $v$ nous permet quand à lui de trouver $\dot{M}$. Nous calculons également les valeurs de $\epsilon$,  $\kappa_{ff}$ et $\tau$, qui servent ensuite dans le calcul de $Fz$.
+ 
+ $\rightarrow$ Enfin nous résolvons les équations des pressions $P_{gaz}$ et $P_{rad}$, de $\beta$,  de la capacité $Cv$ ainsi que des termes du transfert thermique $Q^{+}$, $Q^{-}$ et $Q_{adv}$.
+
+
 
 %%% Local Variables:
 %%% mode: latex
