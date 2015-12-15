@@ -81,12 +81,17 @@ multi-part-units = single}
 
 % Bibliographie
 \usepackage{natbib}
+
+% Pour de belles frations
+\usepackage{nicefrac}
  
 % Corrections de l’espacement autour des \left et \right
 \let\originalleft\left
 \let\originalright\right
 \renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
 \renewcommand{\right}{\aftergroup\egroup\originalright}
+
+\newcommand\FIXME[1]{{\color{red}FIXME #1}}
 
 \title{\textsc{Méthodes Numériques – Projet BlackHole Accretion Disk}}
 \author{\textsc{M2 AAIS}}
