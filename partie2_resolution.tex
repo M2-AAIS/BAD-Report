@@ -51,8 +51,7 @@ Lorsque le flux de matière entrant est trop élevé, il n'existe plus de régim
 
 L'évolution du disque d'accrétion est dominé par les deux équations sur $S$ \eqref{eq:difS} et sur $T$ \eqref{eq:difT}.
 
-Les régimes stationnaires et en évolution stable seront traités avec un schéma explicite pour la température et un schéma implicite pour la densité de surface. On a alors un temps visqueux $\tau_\nu$ \FIXME{référence à une courbe, une section?}
-très grand devant le temps thermique $\tau_T$. On peut donc intégrer $S$ et $T$ sur deux échelles de temps différentes et effectuer une démarche de ``step and relax'', où on intègre d'abord $S$ sur un grand temps (visqueux) avant de laisser se relaxer $T$ sur des petits temps (thermiques). Il faut à cet endroit faire attention à ce que le temps de relaxation de $T$ soit toujours plus petit que le temps visqueux. Cela revient à vérifier que le nombre d'itérations nécessaires à la stabilisation de $T$ est plus petit que $\nicefrac{\tau_\nu}{\tau_T}$. Si cette condition est violée, la simulation numérique ne traduit plus de réalité physique. 
+Les régimes stationnaires et en évolution stable seront traités avec un schéma explicite pour la température et un schéma implicite pour la densité de surface. On a alors un temps visqueux $\tau_\nu$ \FIXME{référence à une courbe, une section?} très grand devant le temps thermique $\tau_T$. On peut donc intégrer $S$ et $T$ sur deux échelles de temps différentes et effectuer une démarche de ``step and relax'', où on intègre d'abord $S$ sur un grand temps (visqueux) avant de laisser se relaxer $T$ sur des petits temps (thermiques). Il faut à cet endroit faire attention à ce que le temps de relaxation de $T$ soit toujours plus petit que le temps visqueux. Cela revient à vérifier que le nombre d'itérations nécessaires à la stabilisation de $T$ est plus petit que $\nicefrac{\tau_\nu}{\tau_T}$. Si cette condition est violée, la simulation numérique ne traduit plus de réalité physique. 
 
 Une méthode implicite pour $S$ est alors préconisée. En effet, celle-ci assure de converger vers la solution et est stable quelque soit le pas de temps (dans la limite des approximations données précédemment). Les détails de la méthode sont donnés dans la partie \ref{ssec:integration_S_imp}. Pour intégrer la température, il n'est pas possible d'écrire un schéma implicite. Il faudra donc utiliser un schéma explicite. En revanche, il sera possible de procéder à des simplifications pour donner une convergence plus rapide de $T$. Les détails de ces approximations sont donnés dans la partie \ref{ssec:integration_T}.
 
@@ -95,7 +94,7 @@ Pour alléger les notations, nous allons ommettre les étoiles dans les dévelop
   \label{eq:S_discret_n}
   \frac{S^{t+1}_n - S^t_n}{\Delta t} = \frac{1}{x_n^2}\frac{\nu^t_{n+1}S^{t+1}_{n+1} - 2 \nu^t_nS^{t+1}_n + \nu^t_{n-1}S^{t+1}_{n-1}}{\Delta x^2}
 \end{equation}
-À l'intérieur du disque, la densité de matière est supposée nulle ($\nu^t_{0}S^{t+1}_{0} = 0$). Physiquement, il est en effet attendu qu'aucune orbite keplerienne circulaire ne soit stable en dessous de l'ISCO (\emph{\emph{I}nnermost \emph{S}table \emph{C}ircular \emph{O}rbit}), située en $r = 3M$. En approximation, on suppose donc que la densité de matière y est nulle. \FIXME{lien vers la partie qui en parle}
+À l'intérieur du disque, la densité de matière est supposée nulle ($\nu^t_{0}S^{t+1}_{0} = 0$). Physiquement, il est en effet attendu qu'aucune orbite keplerienne circulaire ne soit stable en dessous de l'ISCO (\emph{\emph{I}nnermost \emph{S}table \emph{C}ircular \emph{O}rbit}), située en $r = 3M$. En approximation, on suppose donc que la densité de matière y est nulle.
 \begin{equation}
   \label{eq:S_discret_1}
   \frac{S^{t+1}_1 - S^t_1}{\Delta t} = \frac{1}{x_1^2}\frac{\nu^t_{2}S^{t+1}_{2} - 2 \nu^t_1S^{t+1}_1}{\Delta x^2}
@@ -104,7 +103,7 @@ Pour la case $n = n_\textrm{max} = N$, on a d'après \eqref{eq:nuS_n_is_null}:
 \begin{equation}
   \frac{\nu^{t}_{N+1}S^{t+1}_{N+1} - \nu^{t}_NS^{t+1}_N}{\Delta x} = \dot{M}^\star_N
 \end{equation}
-Il faut noter que $\dot{M}^\star_N$ vaut initialement $1$. Pour simuler l'arrivée de matière par l'extérieur du disque, cette quantité est incrémentée au fur et à mesure de la simulation. Le détail de la procédure est donné en partie \FIXME{Faire la partie}.
+Il faut noter que $\dot{M}^\star_N$ vaut initialement $1$. Pour simuler l'arrivée de matière par l'extérieur du disque, cette quantité est incrémentée au fur et à mesure de la simulation.
 Donc l'équation \eqref{eq:S_discret_n} s'écrit en $N$:
 \begin{equation}
   \label{eq:S_discret_N}
@@ -159,15 +158,17 @@ Qui s'écrit aussi :
   AS^{t+1} = S^t + X 
 \end{equation}
 $A$ est une matrice tri-diagonale qu'il est facile de résoudre en utilisant Lapack (\href{http://www.netlib.org/lapack/explore-html/d4/d62/group__double_g_tsolve.html#ga2bf93f2ddefa5e671866eb2191dc19d4}{routine DGTSV}).
-\FIXME{ ajouter cela comme une référence}
+\FIXME{ajouter cela comme une référence}
 
 \subsection{Intégration explicite de $S$}
+
 \label{ssec:integration_S_exp}
 Au contraire de l'intégration implicite, l'intégration explicite permet une résolution directe d'une équation aux dérivées partielles. Il suffit de connaître les variables à un temps $t$ pour en déduire la nouvelle valeur au temps $t+1$ :
 \begin{equation}
-  u^{t+1} = u^t + \Delta t f(t)
+  S^{t+1} = S^t + \Delta t f(t)
 \end{equation}
-\FIXME{ noter le domaine de validité de cette intégration}
+La solution au temps suivant est directement donnée.
+
 \subsection{Intégration explicite de $T$}
 \label{ssec:integration_T}
 Il est possible d'améliorer le schéma d'intégration explicite pour la température en donnant une meilleure estimation de $f(t)$.
