@@ -1,6 +1,6 @@
-\section{intégration de $S^{\star}$ et $T^{\star}$}
+\section{dérivation partielle  de $S^{\star}$ et $T^{\star}$}
 
-\subsection{Méthode d'intégration}
+\subsection{Méthode de dérivation}
 
 Pour intégrer les équation de $S$ et $T$ (\eqref{eq:difS} et \eqref{eq:difT}), on choisit de réaliser une dérivée amont. Dans le cas présent, il s'agit d'une dérivée dans le sens croissant des indices du tableau. Ainsi pour calculer la dérivé partielle de $S^{\star}$ en $x$ à la case $i$ on calculera :
 
@@ -59,8 +59,17 @@ On cherche les conditions aux bords de $\frac{\partial S^{\star}}{\partial t^{\s
 
 Dans l'équation \eqref{eq:difT} il est nécessaire de connaître les valeurs $\frac{\partial}{\partial x}\left(\frac{S^{\star}}{x}\right)$ en chacun des points du disque, donc en $i=i_{max}$. 
 
-%FIXME
-On a : (je ne sais plus l'argument !!!)
+On a fais comme hypothèse que la partie du disque la plus éloigné du trou noire ($i_{max}$) reste toujours stable. Par conséquent, $Q_{adv}$ est toujours négligeable devant $Q^+$ et $Q^-$. On a donc 
+
+\begin{equation}
+Q_{adv}=\frac{\mathcal{R} T_0}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
+        \left( \frac{\partial S^\star}{\partial t^\star} + v^\star \frac{\partial}{\partial x} \left(\frac{S^\star}{x}\right) \right) -
+        \frac{C_v^\star v^\star}{x} \frac{\partial T^\star}{\partial x}=0
+\end{equation}
+
+Or d'après nos hypothèse la température ne varie pas en $i_{max}$ donc $\frac{\partial T^\star}{\partial x} =0$ dés lors on a :
+
+
 \begin{equation}
   \frac{\partial S^{\star}}{\partial t^{\star}} + v^{\star} \frac{\partial}{\partial x} \left(\frac{S^{\star}}{x}\right)=0
 \end{equation}
