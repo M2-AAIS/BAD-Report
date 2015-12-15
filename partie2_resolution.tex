@@ -104,6 +104,11 @@ Une méthode implicite pour $S$ est alors préconisée. En effet, celle-ci assur
 
 L'autre régime est instable. Les évolutions de $S$ et de $T$ se font sur des temps similaires. Dans ce régime, il n'est plus légitime de traiter séparement ces deux variables et il faut donc résoudre conjointement l'une et l'autre. Le schéma implicite n'y est pas utilisé, car il n'assure que la convergence vers une solution physique, mais pas via des états successifs physiquement acceptables. Comme la valeur de $S$ influe sur celle de $T$, cela impliquerait que l'intégration de $T$ n'est pas non plus exacte. Dans le cas du comportement chaotique de l'instabilité, il est nécessaire de limiter au maximum les erreurs numériques car celles-ci peuvent mener à un résultat final différent du résultat physiquement attendu. Le choix d'un schéma explicite est alors fait pour $T$ et $S$, les deux évoluant alors sur le plus petit temps charactéristique du système : le pas de temps thermique. Le schéma explicite est donné dans la partie \ref{ssec:integration_S_exp} pour $S$ et dans la partie \ref{ssec:integration_T} pour $T$.
 
+\begin{figure}
+  \includegraphics{figures/S-T.pdf}
+  \caption{Courbe suivie par les points en $x_1$ (en bleu) et en $x_{20}$ (en rouge) dans le diagramme $\Sigma-T$. Les applats de couleurs correspondent aux zones où le terme de chauffage est négatif au rayon considéré. Les deux points commencent initialement à faibles température et densité surfacique, remontent la courbe en S (qui délimite la zone où le chauffage est négatif). Une fois le point critique dépassé, ils effectuent des cycles autour du point critique jusqu'à ce que le système soit à nouveau en mesure d'être à l'équilibre. \FIXME{ajouter annotations sur la figure}}
+\end{figure}
+
 \subsubsection{Détermination du pas de temps\label{sec::pas_de_temps}}
 Nous allons expliciter dans cette section les choix que nous avons fait pour déterminer les différents pas de thermique $\tau_T$ et visqueux $\tau_\nu$ nécessaires aux intégrations en schéma implicite et explicite. \\
 
@@ -254,15 +259,16 @@ Il est possible d'améliorer le schéma d'intégration explicite pour la tempér
 \begin{equation}
   \frac{\partial T}{\partial t} = \frac{Q^+ - Q^- + Q_{adv}}{C_V} = f(T, S)
 \end{equation}
-On peut écrire un développement limité de $f(T) = f_0 + \frac{\partial f}{\partial T}\Delta T + \frac{\partial f}{\partial S}\Delta S$
-Comme on a un temps thermique très petit devant le temps visqueux $\tau_\nu \gg \tau_T$ \FIXME{ est-ce vraiment vrai ?}
-, les variations de $f$ par rapport à $S$ sont très faibles devant celles par rapport à $T$. On obtient alors $f(T) = f_0 + f'_T \Delta T$. En linéarisant, on obtient finalement:
+On peut écrire un développement limité de $f(T) = f_0 + \frac{\partial f}{\partial T^\star}\Delta T^\star + \frac{\partial f}{\partial S^\star}\Delta S^\star$. Comme on a un temps thermique très petit devant le temps visqueux $\tau_\nu \gg \tau_T$. Le terme en $\frac{\partial f}{\partial S^\star}\Delta S^\star$ est négligeable devant $\frac{\partial f}{\partial T^\star}\Delta T^\star$ dans le régime en évolution stable, comme le montre la figure \ref{fig:df_dT_and_df_dS}. On obtient alors $f(T) = f_0 + f'_T \Delta T$. En linéarisant, on obtient finalement:
 \begin{equation}
   T^{t+1} = T^t + \frac{f_0}{f'_T}\left[e^{f'_T\Delta t} - 1 \right] 
 \end{equation}
-On peut facilement obtenir numériquement une approximation de $f'_T$ en calculant la quantité $\frac{f(T+\delta T) - f(T)}{\delta T}$, avec $\delta T = \lambda T,\ \lambda \ll 1$. 
-\FIXME{ ajouter plot qui montre qu'on a bien df/dS << df/dT}
-\FIXME{ajouter plot qui montre que la courbe est suffisamment lisse, c'est-à-dire que f'T peut bien être approximé numériquement}
+On peut facilement obtenir numériquement une approximation de $f'_T$ en calculant la quantité $\frac{f(T+\delta T) - f(T)}{\delta T}$, avec $\delta T = \lambda T,\ \lambda \ll 1$.
+\begin{figure}
+  \includegraphics[]{figures/df_dS_and_df_dT.pdf}
+  \caption{\label{fig:df_dT_and_df_dS} Évolution du rapport $\Delta T^\star \frac{\mathrm{d} f}{\mathrm{d} T^\star}$ sur $\Delta S^\star\frac{\mathrm{d} f}{\mathrm{d}S^\star}$ au cours du temps. Le rapport est en faveur du terme thermique dans le régime stable (en bleu), alors qu'il peut être en faveur dans le régime instable (en vert).}
+\end{figure}
+
 
 \subsection{Considérations sur les dérivées}
 \FIXME{peut être bouger cette partie pour la cohérence ?}
