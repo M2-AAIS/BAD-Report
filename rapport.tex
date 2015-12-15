@@ -93,6 +93,9 @@ multi-part-units = single}
 %\date{18 décembre 2015}
 \date{\today} 
 
+%option pour utiliser exponentielle
+\DeclareMathOperator{\e}{e}
+
 % Début du document proprement dit
 \begin{document}
 
@@ -120,9 +123,11 @@ multi-part-units = single}
 
 \include{initial_condition}
 
-\include{partie2_resolution}
+\include{pas_de_temps}
 
 \include{resolution_H}
+
+\include{partie2_resolution}
 
 \include{integration}
 
