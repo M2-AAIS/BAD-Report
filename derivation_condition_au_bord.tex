@@ -2,7 +2,7 @@
 
 \subsection{Méthode de dérivation}
 
-Pour intégrer les équation de $S$ et $T$ (\eqref{eq:difS} et \eqref{eq:difT}), on choisit de réaliser une dérivée amont. Dans le cas présent, il s'agit d'une dérivée dans le sens croissant des indices du tableau. Ainsi pour calculer la dérivé partielle de $S^{\star}$ en $x$ à la case $i$ on calculera :
+Pour intégrer les équation de $S$ et $T$ (\eqref{eq:difS} et \eqref{eq:difT}), on a commencé par faire une dérivé moyenne de la dérivée amont et de la dérivée avale. Cette méthode s'est avérer infructueuse, cela s'explique par le faite $S^{\star}$ est un flux de matières dépendant. On a donc choisit de réaliser une dérivée amont. Dans le cas présent, il s'agit d'une dérivée dans le sens croissant des indices du tableau. Ainsi pour calculer la dérivé partielle de $S^{\star}$ en $x$ à la case $i$ on calculera :
 
 \begin{equation}
   \left. \frac{\partial S^{\star}}{\partial x} \right|_i = \frac{S^{\star}(i+1)-S^{\star}(i)}{\delta x} 
