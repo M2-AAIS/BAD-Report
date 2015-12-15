@@ -41,6 +41,53 @@ Le disque à un moment $t$ peut être dans l'une des trois situations suivantes.
 \paragraph{Régime en évolution stable} ce régime correspond au disque évoluant sur un temps visqueux pour la densité surfacique et un temps thermique pour la température. Dans ce régime, on pourra négliger le terme advectif du chauffage. Ce régime se situe dans la partie inférieure de la courbe en S et est caractérisé par un quasi-équilibre thermique. On aura donc $Q^+ = Q^-$. Dans un diagramme $\Sigma-T$, ce régime correspond au suivi de la partie inférieure droite de la courbe en S.
 \paragraph{Régime en évolution instable} ce régime est celui de l'instabilité. Il est caractérisé par une évolution de la densité surfacique et de la température sur un même temps thermique. Dans ce régime, au moins une partie du disque se situe à une température ou une densité de surface plus élevée que les valeurs critiques. L'équilibre thermique n'y est alors pas atteint. C'est là que se situe le cœur du problème. Le disque évacue de l'énergie par rayonnement et perds beaucoup de matière par chute dans le trou noir. Chaque point proche du point critique va effectuer des cycles autour du point critique. Ces points voient d'abord leur densité augmentée jusqu'à dépasser la densité critique. Au dela, la température croît rapidement jusqu'à ce que l'advection ne soit plus négligeable et limite la température tout en diminuant la densité localement. Le point se dirige alors vers la gauche, au dessus du point critique jusqu'à retraverser la courbe en S, où le refroidissement est plus important que le chauffage. Le point retombe alors dans la partie inférieure de la courbe en S. Tant qu'il existe des points instables, ils vont se stabiliser en déstabilisant leurs voisins.
 
+\subsubsection{Les conditions initiales}
+Les relations nous permettant d'apporter des conditions satisfaisantes au système sont données par les formules de Frank, King et Raine avec $P = P_{gaz}$ et $\kappa_{ff} \gg \kappa_{e}$ \cite{F_K_R-1985}. Ces conditions en $\Sigma$ et $T$ sont suffisamment petites pour ne pas influencer le système lors de son évolution. $\dot{M}$ est pris très petit devant  le taux $\dot{M_{0}}$ imposé au système : 
+\begin{equation}
+	\dot{M} = 1.10^{-1 }\dot{M_{0}}
+\end{equation} 
+
+\begin{equation}
+	T = 1.4 \times 10^{4} \alpha^{- \frac{1}{5}} \left[ \frac{\dot{M}}{10^{16} \mbox{g} \mbox{s}^{-1}} \right]^{\frac{3}{10}} \left[ \frac{M}{M_{sol}}\right]^{\frac{1}{4}} \left[ \frac{r}{10^{10} cm}\right]^{- \frac{3}{4}} f^{\frac{3}{10}} \mbox{K} 
+\end{equation}
+
+\begin{align}
+	\Sigma = 5.2 \alpha^{- \frac{4}{5}} \left[ \frac{\dot{M}}{10^{16} \mbox{g} \mbox{s}^{-1}} \right]^{\frac{7}{10}} \left[ \frac{M}{M_{sol}}\right]^{\frac{1}{4}} \left[ \frac{r}{10^{10} cm}\right]^{- \frac{3}{4}} f^{\frac{7}{10}} \mbox{K}  \\ 
+	\text{avec } f = \left[ 1 - \left( \frac{r}{3 r_{s}}\right)^{- \frac{1}{2}}\right]
+\end{align}
+
+ \begin{figure}[ht]
+   \begin{minipage}[c]{.46\linewidth}
+      \includegraphics[scale=0.6]{ic_T.eps}
+      \caption{Evolution de T en fonction de r à t = 0}\label{fig:CI_T}
+   \end{minipage} \hfill
+   \begin{minipage}[c]{.46\linewidth}
+      \includegraphics[scale=0.6]{ic_Sig.eps}
+      \caption{Evolution de $\Sigma$ en fonction de r à t = 0}\label{fig:CI_Sig}
+   \end{minipage}
+\end{figure} 
+
+
+Nous pouvons voir sur les figures \ref{fig:CI_T} et \ref{fig:CI_Sig} les calculs de $T$ et $\Sigma$ en fonction de $r$ à l'instant t = 0 de la simulation. \\
+
+
+Cela nous permet donc, à partir de l'utilisation du trinôme du second degré explicité équation \eqref{eq:trinôme} de calculer la hauteur du disque à l'instant $t = 0$ du système. \\
+
+Dans le cas limite où s'expriment ces formules nous pouvons également calculer le rapport $H/r$ à partir de la formule suivante : 
+
+\begin{equation}
+	\frac{H}{r} = 1.7 \times 10^{-2}\alpha^{- \frac{1}{10}} \left[ \frac{\dot{M}}{10^{16} \mbox{g} \mbox{s}^{-1}} \right]^{\frac{3}{20}} \left[ \frac{M}{M_{sol}}\right]^{- \frac{3}{8}} \left[ \frac{r}{10^{10} cm}\right]^{- \frac{1}{8}} f^{\frac{3}{5}}
+\end{equation}
+ 
+Cela nous permet de comparer cette approximation de $H$ à la résolution par trinôme pour ces approximations de $T$ et $\Sigma$ à t = 0. \\
+
+\begin{center}
+	\includegraphics[scale=0.8]{ic_h.eps}
+\end{center} 
+
+La forme de notre disque d'accrétion découlant de ces conditions initiales est réaliste compte tenu de la masse du trou noir et de son taux d'accrétion.
+
+
 \subsubsection{Évolution du disque}
 
 La simulation commence dans le régime en évolution stable et avec des paramètres tels qu'un régime stationnaire existe. Le disque va alors rapidement se stabiliser sur la courbe en S avant de converger lentement vers l'état stationnaire. Une fois l'état stationnaire atteint, le flux de matière est augmenté. On recommence alors à suivre la courbe en S jusqu'à atteindre un nouveau régime stationnaire.
