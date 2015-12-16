@@ -212,8 +212,8 @@ où $k_{\nu}$ et $k_{T}$ sont des constantes que l'on à prise respectivement é
 Il est nécessaire dans cette simulation de faire intervenir un pas de temps
 adaptatif. En effet, l'approche du point critique que l'on peut voir en figure
 \ref{Fig::bench} est délicate. Le pas de temps visqueux est donc multiplier à
-chaque nouvelle intégration sur $S^\star$ par un facteur dépendant de la
-distance au point critique par rapport à la variable $S^\star$. 
+chaque nouvelle intégration sur $S^\star$ par un facteur $\alpha$ dépendant de la
+distance au point critique par rapport à la variable $S^\star$. L'évolution du facteur $\alpha$ en fonction de la densité de surface $\Sigma$ est représenté figure \ref{fig::alpha_fct_sig} 
 
 
 \begin{equation}
@@ -226,6 +226,7 @@ où $\alpha = 1 - \left( 0.99 \times \e^{- \left| \frac{S_\textrm{crit} - S}{D_\
 \begin{figure}
   \includegraphics{figures/alpha_fonction_de_sigma.pdf}
   \caption{Evolution du facteur de ralentissement $\alpha$ en fonction de la densité de surface $\Sigma$ - Le point de rupture représente la valeur de $\Sigma$ au point critique}
+  \label{fig::alpha_fct_sig}
 \end{figure}
 
 Le passage en shéma d'intégration explicite est soumis à deux conditions : $T
