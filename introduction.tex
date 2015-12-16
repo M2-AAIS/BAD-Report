@@ -1,14 +1,12 @@
 \section*{Introduction}
 \addcontentsline{toc}{section}{Introduction}
 
-Les trous noirs de Schwarzschild font partie des objets les plus "simples". En effet, il ne faut qu'un seul paramètre pour les décrire : leurs masses. En revanche, les disque d'accrétion qui les entourent sont plus complexes. En ce qui nous concerne, 6 paramètres sont utilisés pour les décrire. Ces paramètres sont reliés par plusieurs équations sans solutions analytiques. On peut néanmoins s'attendre à plusieurs régimes de stabilité/instabilité du disque. La stabilité du disque est régie par deux paramètres, la température  $T$ et la densité de surface $\Sigma$. Les couples $(\Sigma, T)$ pour un disque à l'équilibre dessinent un "S" dans un diagramme $(\Sigma, T)$. Cette courbe en S n'a pas non plus de solution analytique. 
+Les trous noirs de Schwarzschild font partie des objets les plus ``simples'' à décrire. En effet, il sont entièrement déterminés par un seul paramètre : leur masse. S'ils sont aisément décrits, la physique qu'ils engendrent peut s'avérer extrêmement compliquée. Les disques d'accrétions en sont un bon exemple ; leur description nécessite un jeu de variable bien plus important. Dans le modèle donné dans ce rapport, 6 paramètres sont utilisés. Ces paramètres sont reliés par plusieurs équations dont la solution n'est pas analytique ; leur évolution nécessite donc un traitement numérique. La matière accrétée subit conjointement des forces de pression radiative et cinétique, l'attraction du trou noir, des turbulences, de la diffusion, de l'accrétion et du transfert radiatif. Nous allons étudier le cas d'un disque en rotation autour d'un trou noir de masse $10M_\odot$ qui reçoit un flux de matière qui modélise un partenaire cédant de la matière. Dans ce cadre là, nous montrerons qu'une instabilité est susceptible de se former pour un taux d'accrétion suffisammenent important. La perte d'énergie gravitationnelle liée à la chute de matière dans le trou noir se traduit par un rayonnement. Nous montrerons qu'il existe un régime où la luminosité a des soubresauts et n'est plus constante au cours du temps. Nous étudierons aussi l'évolution du disque d'accrétion dans un diagramme température-densité surfacique.
 
-Le problème du disque d'accrétion autour d'un trou noir de Schwarzschild ne peut pas donc pas être résolu par une unique étude théorique. C'est pourquoi, nous avons eu recours à la simulation numérique. Notre simulateur fonctionne principalement en trois temps.
-
-Pour commencer, il nous faut calculer les courbes en S en  tout points du disque d'accrétion, c'est à dire calculer ses positions d'équilibre. Ensuite, on fait évoluer ce disque en intégrant des équations différentielles partielles (EDP). L'intégration achevée, une mise à jours de toutes les autres variables du problème sont nécessaires afin de poursuivre l'évolution. 
+Le disque sera supposé à symétrie cylindrique et de faible épaisseur, c'est-à-dire qu'il sera supposé unidimensionnel et modélisé en 1D. L'espace sera discrétisé et les quantités physique approximées sur chacune des cases de la simulation. Tous les calculs seront faits dans l'espace réel des paramètres.
 
 %\paragraph{L’équipe :}
-Nous étions une équipe de 7 personnes, sous la co-direction de Bruno \textit{Pagani} et Corentin \textit{Cadiou}. Nous nous sommes séparés en 3 équipes selon la répartition du travail proposé par Franck Le Petit :
+Nous étions une équipe de 7 personnes, sous la co-direction de Bruno \textit{Pagani} et Corentin \textit{Cadiou}. Nous nous sommes séparés en 3 équipes selon la répartition du travail proposée par Franck Le Petit :
 \begin{itemize}
     \item Équipe « Courbe en S » : Maximilien \textit{Franco} et Michelle \textit{Tsirou} :
     \\Ce groupe avait pour tâche de générer les courbes en S en chacune des positions du disque. Ceci nous permettait par la suite de savoir dans quel régime le disque se trouvait.
@@ -18,3 +16,9 @@ Nous étions une équipe de 7 personnes, sous la co-direction de Bruno \textit{P
     \\Ce groupe avait pour but le calcul de toutes les variables entre deux évolutions successives ainsi que de mettre en place le passage des variables dimensionnées aux variables adimensionnées et inversement.
 \end{itemize}
 En pratique, une fois les principaux organes du simulateur établis, la totalité de l'équipe a participé à la mise en place des derniers détails sur l'ensemble du projet. 
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "rapport"
+%%% End:
