@@ -268,75 +268,93 @@ Comme on a un temps thermique très petit devant le temps visqueux $\tau_\nu \gg
 \begin{equation}
   T^{t+1} = T^t + \frac{f_0}{f'_T}\left[e^{f'_T\Delta t} - 1 \right] 
 \end{equation}
-On peut facilement obtenir numériquement une approximation de $f'_T$ en calculant la quantité $\frac{f(T+\delta T) - f(T)}{\delta T}$, avec $\delta T = \lambda T,\ \lambda \ll 1$. 
+On peut facilement obtenir numériquement une approximation de $f'_T$ en calculant la quantité $\frac{f(T+\delta T) - f(T)}{\delta T}$, avec $\delta T = \lambda T,\ \lambda \ll 1$.
+
 \FIXME{ ajouter plot qui montre qu'on a bien df/dS << df/dT}
 \FIXME{ajouter plot qui montre que la courbe est suffisamment lisse, c'est-à-dire que f'T peut bien être approximé numériquement}
 
-\subsection{Considérations sur les dérivées}
+\subsection{Considérations sur les dérivées numériques spatiales}
+
 \FIXME{peut être bouger cette partie pour la cohérence ?}
 
+Il existe un grand nombre de façon de dériver numériquement une variable $u$ en
+fonction de l’espace discrétisé selon $r$ (pas spatial $\Delta{r}$). La plus
+classique d’entre elles est celle des différences finies au premier ordre, qui
+admet trois expressions standards~\eqref{eq:differences_finies}, qui exprime
+$u_j = u(r,t)$ en fonctions des valeurs aux positions spatiales adjacentes
+$u_{j+1} = u(r+\Delta{r},t)$ et $u_{j-1} = u(r-\Delta{r},t)$.
+
+\begin{subequations}
+    \label{eq:differences_finies}
+    \begin{align}
+        \label{eq:diff_droite}
+        \frac{\partial u_j}{\partial r} &\approx \frac{u_{j+1} - u_j    }{  \Delta{r}}\\
+        \label{eq:diff_gauche}
+        \frac{\partial u_j}{\partial r} &\approx \frac{u_j     - u_{j-1}}{  \Delta{r}}\\
+        \label{eq:diff_centre}
+        \frac{\partial u_j}{\partial r} &\approx \frac{u_{j+1} - u_{j-1}}{2 \Delta{r}}
+    \end{align}
+\end{subequations}
+
+Elles sont appelées respectivement \textit{différence à
+droite}~\eqref{eq:diff_droite}, \textit{différence à
+gauche}~\eqref{eq:diff_gauche} et \textit{différence
+centrée}~\eqref{eq:diff_centre}. En pratique, la plus fidèle est celle des
+différences centrées, mais elle n’est pas toujours utilisable.
+
+En effet, considérons l’équation d’advection~\eqref{eq:advection_th} sous une
+forme assez générale, où $v$ représente la vitesse d’advection (et donc son
+signe le sens du gradient). 
+
 \begin{equation}
+    \label{eq:advection_th}
     \frac{\partial u}{\partial t} + v \frac{\partial u}{\partial r} = 0
 \end{equation}
 
-\begin{align}
-    \frac{\partial u_j}{\partial r} &\approx \frac{u_{j+1} - u_j}{\Delta{r}}
-    \frac{\partial u_j}{\partial r} &\approx \frac{u_j - u_{j-1}}{\Delta{r}}
-    \frac{\partial u_j}{\partial r} &\approx \frac{u_{j+1} - u_{j-1}}{\Delta{r}}
-\end{align}
+L’\cref{eq:advection_th} étant linéaire, on peut étudier la stabilité des
+solutions numériques selon la méthode de Von Neumann. On considère $u(r,t)$ une
+solution du problème et on ajoute une perturbation $\delta{u}$ à celle-ci. On
+va alors regarder l’évolution de cette perturbation au cours du temps. La
+linéarité nous permet de plus de considérer uniquement un terme de la
+transformée de Fourier de $\delta{u}$, qu’on écrit alors $\delta{u} =
+\tilde{u}(t) \e^{ikr}$. En réinjectant dans \eqref{eq:advection_th} et en
+remplaçant $\frac{\partial u}{\partial r}$ par les expressions données
+\cref{eq:differences_finies}, on obtient respectivement :
 
-\begin{equation}
-    \frac{\partial \tilde{u}}{\partial t} = - v \frac{\exp(ik\Delta{r}) - \exp(-ik\Delta{r})}{2 \Delta{r}} \tilde{u}
-\end{equation}
+\begin{subequations}
+    \begin{align}
+        \frac{\partial \tilde{u}}{\partial t} \e^{ik\Delta{r}} &= - v \frac{\e^{ik(r+\Delta{r})} - \e^{ik r           }}{  \Delta{r}} \tilde{u}\\
+        \frac{\partial \tilde{u}}{\partial t} \e^{ik\Delta{r}} &= - v \frac{\e^{ik r           } - \e^{ik(r-\Delta{r})}}{  \Delta{r}} \tilde{u}\\
+        \frac{\partial \tilde{u}}{\partial t} \e^{ik\Delta{r}} &= - v \frac{\e^{ik(r+\Delta{r})} - \e^{ik(r-\Delta{r})}}{2 \Delta{r}} \tilde{u}
+    \end{align}
+\end{subequations}
 
-\begin{align}
-    \exp(ik\Delta{r}) &= 1 + ik\Delta{r} + \frac{i^2 k^2 \Delta{r}^2}{2}
-    \exp(-ik\Delta{r}) &= 1 - ik\Delta{r} + \frac{i^2 k^2 \Delta{r}^2}{2}
-\end{align}
+En simplifiant ces équations par $\e^{ik\Delta{r}}$, cela devient :
 
-\begin{equation}
-    \frac{\partial \tilde{u}}{\partial t} = - v \frac{2ik\Delta{r}}{2\Delta{r}} \tilde{u} = - i k v \tilde{u}
-\end{equation}
+\begin{subequations}
+    \begin{align}
+        \frac{\partial \tilde{u}}{\partial t} &= - v \frac{\e^{ik\Delta{r}} - 1                }{  \Delta{r}} \tilde{u}\\
+        \frac{\partial \tilde{u}}{\partial t} &= - v \frac{1                - \e^{-ik\Delta{r}}}{  \Delta{r}} \tilde{u}\\
+        \frac{\partial \tilde{u}}{\partial t} &= - v \frac{\e^{ik\Delta{r}} - \e^{-ik\Delta{r}}}{2 \Delta{r}} \tilde{u}
+    \end{align}
+\end{subequations}
 
-\begin{equation}
-    \tilde{u} = \tilde{u(0)} \exp(-i k v t)
-\end{equation}
-
-En fait, nous avons tout simplement :
-
-\begin{equation}
-    \frac{\exp(ik\Delta{r}) - \exp(-ik\Delta{r})}{2 \Delta{r}} = \frac{2 i \sin(k\Delta{r})}{2 \Delta{r}} = i k \sinc(k\Delta{r})
-\end{equation}
-
-Soit :
-\begin{equation}
-    \frac{\partial \tilde{u}}{\partial t} = - i k v \sinc(k\Delta{r}) \tilde{u}
-\end{equation}
-
-\begin{equation}
-    \tilde{u} = \tilde{u(0)} \exp(-i k v \sinc(k \Delta{r}) t)
-\end{equation}
-
-\subsection{Considérations sur les dérivées numériques}
-
-\begin{equation}
-    \frac{\partial u}{\partial t} + v \frac{\partial u}{\partial r} = 0
-\end{equation}
+On fait alors un développement limité en $ik\Delta{r}$ :
 
 \begin{align}
-    \frac{\partial u_j}{\partial r} &\approx \frac{u_{j+1} - u_j}{\Delta{r}} \\
-    \frac{\partial u_j}{\partial r} &\approx \frac{u_j - u_{j-1}}{\Delta{r}} \\
-    \frac{\partial u_j}{\partial r} &\approx \frac{u_{j+1} - u_{j-1}}{2 \Delta{r}}
+    \e^{ ik\Delta{r}} &= 1 + ik\Delta{r} + \frac{i^2 k^2 \Delta{r}^2}{2}\\
+    \e^{-ik\Delta{r}} &= 1 - ik\Delta{r} + \frac{i^2 k^2 \Delta{r}^2}{2}
 \end{align}
 
-\begin{equation}
-    \frac{\partial \tilde{u}}{\partial t} = - v \frac{\exp(ik\Delta{r}) - \exp(-ik\Delta{r})}{2 \Delta{r}} \tilde{u}
-\end{equation}
+Et on réinjecte :
 
-\begin{align}
-    \exp(ik\Delta{r}) &= 1 + ik\Delta{r} + \frac{i^2 k^2 \Delta{r}^2}{2}
-    \exp(-ik\Delta{r}) &= 1 - ik\Delta{r} + \frac{i^2 k^2 \Delta{r}^2}{2}
-\end{align}
+\begin{subequations}
+    \begin{align}
+        \frac{\partial \tilde{u}}{\partial t} &= \left(- vik + v\frac{k^2}{2}\right) \tilde{u}\\
+        \frac{\partial \tilde{u}}{\partial t} &= \left(- vik - v\frac{k^2}{2}\right) \tilde{u}\\
+        \frac{\partial \tilde{u}}{\partial t} &= \left(- vik + 0             \right) \tilde{u}
+    \end{align}
+\end{subequations}
 
 \begin{equation}
     \frac{\partial \tilde{u}}{\partial t} = - v \frac{2ik\Delta{r}}{2\Delta{r}} \tilde{u} = - i k v \tilde{u}
