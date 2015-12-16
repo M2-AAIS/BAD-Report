@@ -84,14 +84,13 @@ En revanche, cette méthode présente plusieurs inconvénients, tout d'abord, la
 
 \subsubsection{Méthode de la sécante}
 
-Un des gros inconvénient de la méthode de Newton est d'avoir à calculer la dérivée de la fonction. La méthode de la sécante permet de contourner cet obstacle ne nécessite pas que la fonction soit de classe $C^1$
-
+Un des gros inconvénient de la méthode de Newton est d'avoir à calculer la dérivée de la fonction. La méthode de la sécante permet de contourner cet obstacle et ne nécessite pas que la fonction soit de classe $C^1$
 
 \begin{equation}
 x_{n+1} = x_n - \frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})}
 \end{equation}
 
-Cette méthode converge plus rapidement que la méthode de la dichotomie mais moins rapidement que la méthode de Newton (son ordre de convergence est compris entre 0 et 1 \footnote{Pour être plus précis l'ordre de convergence de cette méthode est égale à $\frac{1 + \sqrt{5}}{2}$} qui est le nombre d'or.). Elle permet également de s'affranchir également de la contrainte de l'intervalle de la fonction de la dichotomie. En revanche, cette méthode peut ne pas être robuste si la valeur initial est trop éloignée de la solution ou s'il existe des racines multiples.
+Cette méthode converge plus rapidement que la méthode de la dichotomie mais moins rapidement que la méthode de Newton (son ordre de convergence est compris entre 0 et 1 \footnote{Pour être plus précis l'ordre de convergence de cette méthode est égale à $\frac{1 + \sqrt{5}}{2}$} qui est le nombre d'or.). Elle permet également de s'affranchir également de la contrainte de l'intervalle de la fonction de la dichotomie. En revanche, cette méthode peut ne pas être robuste si la valeur initiale est trop éloignée de la solution ou s'il existe des racines multiples.
 
 \begin{figure}[htb!]
 	\centering
@@ -195,3 +194,5 @@ La résolution n' étant pas plus simple qu' avant le changement et afin d' évi
 Comme nous n'avions pas à notre disposition une expression explicite d' allure T = f($\Sigma$), la dérivation des solutions issues d' une série d'équations ne semblait pas l'approche la plus efficace pour trouver le point critique d' instabilité. De plus, en dérivant nous aurions eu un problème au niveau du deuxième point critique qui est un point anguleux.
 \end{enumerate}
 
+\subsection{Discussion}
+Il n'est pas exclu qu'il existe plusieurs racines à l'équation $Q^+ = Q^-$, ce qui voudrait dire que la courbe en S n'est pas unique et plus particulièrement qu'il pourrait exister plusieurs branches dans le cas optiquement mince.
