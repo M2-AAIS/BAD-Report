@@ -197,15 +197,25 @@ En combinant les points trouvés dans le cas optiquement épais jusqu'au deuxiè
 D'après nos calculs nous trouvons un $\tau_\textrm{eff}$ aux alentours de $0.06$ lors de la transition d'un milieu dit optiquement épais à un milieu optiquement mince. Cette valeur ne correspond pas à la valeur théorique où $\tau_\textrm{eff} = 1$.
 Celà pose un problème au niveau de la partie d'intégration car notre branche linéaire est translatée par rapport à celle définie par la théorie. 
 Cette différence de valeurs peut être expliquée par une erreur au niveau de l’adimensionnement ou bien dans les équations que nous avons utilisées ainsi que peut-être par une faute cachée dans nos paramètres ou nos constantes. 
+En fonction du rayon $r$, les coordonnées dans l'espace $\left\lbrace T, \Sigma\right\rbrace$ points ayant une valeur critique de $\tau_\textrm{eff}$ semblent évoluer de manière à ce que la température diminue et la densité surfacique augmente..\ref{Fig::fctR}. Ceci explique le changement de forme de la courbe en S selon la position où l'on se place.\ref{Fig::3}
+%%%manque d'inspiration
 
-En fonction du rayon $r$, les coordonnées dans l'espace $\left\lbrace T, \Sigma\right\rbrace$ points ayant une valeur critique de $\tau_\textrm{eff}$ semblent évoluer de manière à ce que la température diminue et la densité surfacique augmente.
-%%%manque d'inspiration  
+\begin{figure}[htb!]
+\centering
+\begin{tabular}{cc} 
+\includegraphics[height=0.3\textwidth]{critical_2_T.eps} &
+\includegraphics[height=0.3\textwidth]{critical_2_sigma.eps} \\
+\end{tabular}
+  \caption{Température T du point critique en fonction du rayon r (gauche). Densité surfacique $\Sigma$ selon le rayon r(droite)}
+\label{Fig::fctR}
+\end{figure}
+  
 
 \begin{figure}[htb!]
 	\centering
 	\includegraphics[height=0.7\textwidth]{S_curves_tau.eps}
 	\caption{\textit{Evolution de la profondeur optique de la courbe en S pour différents rayons.}  }
-	\label{Fig::bench}
+	\label{Fig::3}
 \end{figure}
 
 \subsection{Pistes d'améliorations}
@@ -224,7 +234,7 @@ Comme nous n'avions pas à notre disposition une expression explicite d'allure $
 \end{itemize}
 
 \subsection{Discussion}
-Il n'est pas exclu qu'il existe plusieurs racines à l'équation $Q^+ = Q^-$, ce qui voudrait dire que la courbe en S n'est pas unique et plus particulièrement qu'il pourrait exister plusieurs branches dans le cas optiquement mince.
+Il n'est pas exclu qu'il existe plusieurs racines à l'équation $Q^+ = Q^-$, ce qui voudrait dire que la courbe en S n'est pas unique et plus particulièrement qu'il pourrait exister plusieurs branches dans le cas optiquement mince. 
 
 
 %%% Local Variables:
