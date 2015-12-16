@@ -187,7 +187,7 @@ matière accrétée à la distance $r$ à chaque instant :
 
 L’équation thermique s’écrit :
 \begin{equation}
-    \label{eq:equation_thermique_th}
+    \label{eq:equation_thermique}
     C_v \frac{\partial T}{\partial t} = Q^+ - Q^- + Q_\mathrm{adv}
 \end{equation}
 
@@ -214,7 +214,7 @@ Ici, nous négligerons le flux radial (\textit{i.e.} selon le disque) $F_r$
 devant le flux sortant du disque $F_z$.
 
 Enfin, $Q_\mathrm{adv}$ est la chaleur transportée par la matière en mouvement
-(terme d’advection) : 
+(terme d’advection) :
 \begin{equation}
     \label{eq:advection}
     Q_\mathrm{adv} = C_v \left[ (\Gamma_{3} - 1) \frac{T}{\Sigma} \left( \frac{\partial \Sigma}{\partial t} + v \frac{\partial \Sigma}{\partial r}  \right) - v \frac{\partial T}{\partial r} \right]
@@ -224,6 +224,7 @@ Dans les \cref{eq:equation_thermique,eq:advection} nous avons utilisé $C_v$ et
 $\Gamma_3$, le sens physique du premier a déjà été donné, le second est un
 exposant adiabatique. Leur expression :
 \begin{align}
+    \label{eq:capacite_calorifique}
     &C_v = \frac{\mathcal{R}}{\mu} \frac{12 (\gamma_g - 1)(1 - \beta) + \beta}{(\gamma_g - 1) \beta} \\
     &C_v (\Gamma_{3} - 1) = \frac{\mathcal{R}}{\mu} \frac{4 - 3\beta}{\beta}
 \end{align}
@@ -233,9 +234,9 @@ parfait monoatomique) et nous avons introduit pour simplifier la constante des
 gaz parfaits $\mathcal{R} = \frac{k_B}{m_p} = \SI{8.3144598(48)d7}{\cgs}$.
 
 En remplaçant les \cref{eq:chauffage,eq:refroidissement,eq:advection} dans
-l’\cref{eq:equation_thermique_th} nous obtenons :
+l’\cref{eq:equation_thermique} nous obtenons :
 \begin{equation}
-    \label{eq:equation_thermique}
+    \label{eq:temperature}
     C_v \frac{\partial T}{\partial t} = \frac{9}{4} \nu \Omega^2 - \frac{2 F_z}{\Sigma} + C_v \left[ (\Gamma_{3} - 1) \frac{T}{\Sigma} \left( \frac{\partial \Sigma}{\partial t} + v \frac{\partial \Sigma}{\partial r} \right) - v \frac{\partial T}{\partial r} \right]
 \end{equation}
 
@@ -244,7 +245,7 @@ l’\cref{eq:equation_thermique_th} nous obtenons :
 Il reste donc à définir le flux radiatif $F_z$ qui intervient dans les
 \cref{eq:refroidissement,eq:equation_thermique} :
 \begin{equation}
-    \label{eq:flux}
+    \label{eq:flux_radiatif}
     F_z =
     \begin{cases}
         \frac{2 a c T^4}{3 (\kappa_\mathrm{ff} + \kappa_e)\Sigma}, &\text{si $\tau_\mathrm{eff} \geq 1$} \\
@@ -284,16 +285,22 @@ raisons. Notamment, celà permet de simplifier l’écriture des équations ou
 encore d’éviter un certain nombre de problèmes numériques liés à la
 représentation des nombres en informatique.
 
+Le fil directeur suivi ici est d’obtenir des adimensionnements naturels et
+ayant un sens physique, mais avec la contrainte première d’obtenir des
+équations du système ne faisant pas intervenir de coefficients numériques dans
+la mesure du possible.
+
 Dans toute la suite, nous noterons $\chi^\star$ la grandeur adimensionnée
 correspondant à la grandeur physique $\chi$.
 
 Les calculs, peu abordés ici, sont détaillés dans
 l’\cref{app:adimensionnement}.
 
-\subsubsection{\texorpdfstring{Temps $t$}{Temps t}}
+\subsubsection{\texorpdfstring{Temps $t^\star$}{Temps t⋆}}
 
 Nous commençons par adimensionner la variable temporelle :
 \begin{equation}
+    \label{eq:temps_adim}
     t^\star = \frac{t}{t_0}
 \end{equation}
 
@@ -301,25 +308,33 @@ Où $t_0$ est une grandeur homogène à un temps qui sera définie ultérieureme
 Nous introduisons ici cette notation pour pouvoir réécrire les différentielles
 qui vont intervenir dans les différentes équations.
 
-\subsubsection{\texorpdfstring{Position $r$}{Position r}}
+\subsubsection{\texorpdfstring{Position $x$}{Position x}}
 
-L’autre variable indépendante est la position $r$ :
+L’autre variable indépendante est la position $r$. Nous l’adimensionnons
+naturellement en fonction du rayon de Schwarzschild $r_s$. En revanche, les
+termes en $r^\frac{1}{2}$ apparaissant dans certaines équations comme
+l’\cref{eq:vitesse_accretion} donnent envie de définir la variable
+adimensionnée correspondant à $r$ ainsi :
 \begin{equation}
     \label{eq:position_adim}
-    x = \left( \frac{r}{r_s} \right)^\frac{1}{2}
+    x = \left(\frac{r}{r_s}\right)^\frac{1}{2}
 \end{equation}
 
-Ce choix a de l’intérêt pour la simplification de l’\cref{eq:densite_surface}.
+Nous ne la noterons pas $r^\star$ pour justement marquer cette spécificité. Ce
+choix a de l’intérêt pour la simplification de l’\cref{eq:densite_surface}
+également.
 
-\subsubsection{Évolution de la densité de surface, viscosité}
+\subsubsection{\texorpdfstring{Évolution de la densité de surface $S^\star$, viscosité $\nu^\star$}{Évolution de la densité de surface S⋆, viscosité ν⋆}}
 
-En effet, nous introduisons $S$ :
+En effet, nous définissons $S$ (qu’on appellera par la suite densité de
+surface — presque sans abus de language) :
 \begin{equation}
     \label{eq:definition_S}
     S = \Sigma x
 \end{equation}
 
-Ce qui nous donne en réintroduisant dans l’\cref{eq:densite_surface} :
+Ce qui nous donne en réintroduisant dans l’\cref{eq:densite_surface} (détails
+des calculs dans l’\cref{app:densite_surface}) :
 \begin{equation}
     \label{eq:rel_densite_surface}
     \frac{\partial S}{\partial t^\star} = \frac{3}{4} \frac{t_0}{r_s^2 x^2} \frac{\partial^2}{\partial x^2} \left(\nu S\right)
@@ -328,11 +343,12 @@ Ce qui nous donne en réintroduisant dans l’\cref{eq:densite_surface} :
 Nous introduisons maintenant $S^\star$, la grandeur adimensionnée correspondant
 à $S$ :
 \begin{equation}
+    \label{eq:S_adim}
     S^\star = \frac{S}{S_0}
 \end{equation}
 
 $S_0$ est une grandeur homogène à $S$ (que nous définirons plus tard puisque
-celà ne change rien ici). En remplaçant dans l’équation précédente :
+cela ne change rien ici). En remplaçant dans l’équation précédente :
 \begin{equation}
     \frac{\partial S^\star}{\partial t^\star} = \frac{3}{4} \frac{t_0}{r_s^2 x^2} \frac{\partial^2}{\partial x^2} \left(\nu S^\star\right)
 \end{equation}
@@ -349,46 +365,56 @@ Et nous obtenons :
     \frac{\partial S^\star}{\partial t^\star} = \frac{1}{x^2} \frac{\partial^2}{\partial x^2} \left(\nu^\star S^\star\right)
 \end{equation}
 
-\subsubsection{Vitesse radiale}
+\subsubsection{\texorpdfstring{Vitesse locale d’accrétion $v^\star$}{Vitesse locale d’accrétion v⋆}}
 
-Ces choix ont des conséquences pour l’expression de la vitesse radiale (ou
-d’accrétion) définie par l’\cref{eq:vitesse_accretion} :
+Ces choix ont des conséquences pour l’expression de la vitesse d’accrétion
+(aussi dite radiale) définie par l’\cref{eq:vitesse_accretion} (détails des
+calculs dans l’\cref{app:vitesse_accretion}) :
 \begin{equation}
-    \label{eq:rel_vitesse_radiale}
+    \label{eq:rel_vitesse_accretion}
     v = - \frac{2 r_s}{t_0 S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right)
 \end{equation}
 
 Ce qui nous amène à poser :
 \begin{equation}
+    \label{eq:vitesse_accretion_adim}
     v^\star = \frac{v}{v_0} = \frac{v t_0}{2 r_s} \Rightarrow v_0 = 2 \frac{r_s}{t_0}
 \end{equation}
 
 Nous obtenons donc :
 \begin{equation}
+    \label{eq:rel_vitesse_accretion_adim}
     v^\star = - \frac{1}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right)
 \end{equation}
 
-\subsubsection{Vitesse angulaire}
+\subsubsection{\texorpdfstring{Vitesse angulaire $\Omega^\star$}{Vitesse angulaire Ω⋆}}
 
 $\Omega$ étant une constante du temps et ne dépendant que de la position $r$,
 il est souhaitable d’en obtenir un adimensionnement correspondant
 $\Omega^\star$ aussi simple que possible en fonction de $x$. En combinant les
 \cref{eq:vitesse_angulaire,eq:position_adim} nous obtenons :
 \begin{equation}
-    \Omega = \frac{1}{x^3} \left( \frac{G M}{r_s^3} \right)^\frac{1}{2} \rightarrow \Omega^\star = \frac{1}{x^3}
+    \label{eq:rel_omega}
+    \Omega = \frac{1}{x^3} \left( \frac{G M}{r_s^3} \right)^\frac{1}{2}
+\end{equation}
+
+Nous voudrions donc avoir :
+\begin{equation}
+    \label{eq:rel_omega_adim}
+    \Omega^\star = \frac{1}{x^3}
 \end{equation}
 
 Ce qui nous amène naturellement à poser :
 \begin{equation}
     \label{eq:vitesse_angulaire_adim}
     \Omega^{\star} = \frac{\Omega}{\Omega_0} = \Omega \left( \frac{r_s^3}{G M} \right)^\frac{1}{2} \Rightarrow \Omega_0 = \left( \frac{G M}{r_s^3} \right)^{\frac{1}{2}}
-%
 \end{equation}
 
-\subsubsection{Vitesse du son}
+\subsubsection{\texorpdfstring{Vitesse du son $c_s^\star$}{Vitesse du son cs⋆}}
 
 Naturellement, nous introduisons $c_s^\star$ :
 \begin{equation}
+   \label{eq:vitesse_son_adim}
    c_s^\star = \frac{c_s}{c_s^0}
 \end{equation}
 
@@ -414,43 +440,46 @@ l’\cref{eq:demi_hauteur} se réécrive ainsi :
 En combinant ces deux conditions avec les \cref{eq:demi_hauteur,eq:viscosite} et les adimensionnements
 établis aux \cref{eq:viscosite_adim,eq:vitesse_angulaire_adim} nous obtenons :
 \begin{equation}
-    \label{eq:rel_cs_0}
+    \label{eq:rel_vitesse_son_zero}
     c_s^0 = \sqrt{2 \frac{r_s^2}{t_0} \Omega_0}
 \end{equation}
 
 À partir d’ici, il faut faire un choix sur l’adimensionnement de $t$ et $c_s$.
-En effet, ce sont les seules grandeurs pas encore définies dans cette équation.
-Il y a pragmatiquement deux possibilités : soit définir $t_0$ comme l’inverse
-d’$\Omega_0$, soit poser ${c_s}_0 = v_0$. Ici, nous choisirons cette seconde
-possibilité :
+En effet, ce sont les seules grandeurs encore non-définies dans cette équation.
+Il y a pragmatiquement deux possibilités pour obtenir des expressions simples :
+soit définir $t_0$ comme l’inverse d’$\Omega_0$, soit poser ${c_s}_0 = v_0$.
+Ici, nous choisirons cette seconde possibilité :
 \begin{equation}
-    \label{eq:vitesse_son_adim}
-    c_s^\star = \frac{c_s}{c_s^0} = \frac{c_s}{v_0} \Rightarrow c_s^0 = v_0 = 2 \frac{r_s}{t_0}
+    \label{eq:vitesse_son_zero}
+    c_s^0 = v_0 = 2 \frac{r_s}{t_0}
 \end{equation}
 
 Ce qui pour $t_0$ nous donne :
 \begin{equation}
+    \label{eq:temps_zero}
     t_0 = \frac{2}{\Omega_0} = 2 \left( \frac{r_s^3}{G M} \right)^\frac{1}{2}
-\end{equation}    
+\end{equation}
 
-\subsubsection{Demi-hauteur}
+\subsubsection{\texorpdfstring{Demi-hauteur $H^\star$}{Demi-hauteur H⋆}}
 
 Commençons par définir $H^\star$ :
 \begin{equation}
+    \label{eq:demi_hauteur_adim}
     H^\star = \frac{H}{H_0}
 \end{equation}
 
-En réinjectant celà et l’\cref{eq:vitesse_son_adim} dans
+En réinjectant cela et l’\cref{eq:vitesse_son_adim} dans
 l’\cref{eq:rel_demi_hauteur_adim} nous obtenons :
 \begin{equation}
-    \label{eq:demi_hauteur_adim}
+    \label{eq:demi_hauteur_zero}
     H_0 = \frac{c_s^0}{\Omega_0} = r_s
 \end{equation}
 
-\subsubsection{Taux d’accrétion, densité de surface}
+\subsubsection{\texorpdfstring{Taux d’accrétion $\dot{M}^\star$, densité de surface $\Sigma^\star$}{Taux d’accrétion (dM/dt)⋆, densité de surface Σ⋆}}
 
 En partant de l’\cref{eq:taux_accretion} :
 \begin{equation}
+    \label{eq:rel_taux_accretion}
     \dot{M}^\star = \frac{\dot{M}}{\dot{M_0}} = - \frac{2 \pi x^2 r_s \Sigma v^\star v_0}{\dot{M_0}} = - \frac{4 \pi r_s^2 x^2 \Sigma v^\star}{\dot{t_0 M_0}}
 \end{equation}
 
@@ -462,47 +491,47 @@ Ce qui nous amène à poser :
 
 Celà nous permet au passage d’adimensionner naturellement $S$ :
 \begin{equation}
-    S^\star = \frac{S}{S_0} = \frac{S}{\Sigma_0} = \Sigma^\star x \Rightarrow S_0 = \Sigma_0
+    \label{eq:S_zero}
+    S^\star = \frac{S}{S_0} = \frac{\Sigma x}{\Sigma_0} = \Sigma^\star x \Rightarrow S_0 = \Sigma_0
 \end{equation}
 
 Et donc (qui était en fait le résultat voulu) :
 \begin{equation}
+    \label{eq:rel_taux_accretion_adim}
     \dot{M}^\star = - x S^\star v^\star
 \end{equation}
 
-\subsubsection{Densité volumique}
+\subsubsection{\texorpdfstring{Densité volumique $\rho^\star$}{Densité volumique ρ⋆}}
 
 Nous souhaiterions obtenir pour l’\cref{eq:densite_volumique} :
 \begin{equation}
+    \label{eq:rel_densite_volumique_adim}
     \rho^\star = \frac{\Sigma^\star}{H^\star}
 \end{equation}
 
-Étant donné les \cref{eq:demi_hauteur_adim,eq:densite_surface_adim} celà nous
+Étant donné les \cref{eq:demi_hauteur_adim,eq:densite_surface_adim} cela nous
 impose :
 \begin{equation}
+    \label{eq:densite_volumique_adim}
     \rho^\star = \frac{\rho}{\rho_0} = \frac{2 H_0 \rho}{\Sigma_0} \Rightarrow \rho_0 = \frac{\Sigma_0}{2 H_0} = \frac{\Sigma_0}{2 r_s}
 \end{equation}
 
-Naturellement, pour l’implémentation nous remplacerons $\Sigma^\star$ par
-$S^\star/x$ ce qui donne :
-\begin{equation}
-    \rho^\star = \frac{S^\star}{x H^\star}
-\end{equation}
-
-\subsubsection{Température}
+\subsubsection{\texorpdfstring{Température $T^\star$, évolution et flux radiatif $F_z^\star$}{Température T⋆, évolution et flux radiatif Fz⋆}}
 
 Les équations faisant intervenir un terme en $T^4$, le choix de cet
 adimensionnement est particulièrement critique. Il est suggéré un argument
-énergétique pour estimer un ordre de grandeur de la température. Celui-ci et
-les calculs correspondant sont présentés à l’\cref{app:adimensionnement}. 
+énergétique pour estimer un ordre de grandeur de la température.
+%Celui-ci et les calculs correspondant sont présentés à l’\cref{app:temperature}.
 
-Il vient :
+Comme d’habitude :
 \begin{equation}
+    \label{eq:temperature_adim}
     T^{\star} = \frac{T}{T_0}
 \end{equation}
 
 Où :
 \begin{equation}
+    \label{eq:temperature_zero}
     T_0 = \left(\frac{1}{\sqrt{27}} \times \frac{L_{tot}}{4 \pi r_s^2 \sigma} \right)^\frac{1}{4}
 \end{equation}
 
@@ -512,10 +541,10 @@ Stefan–Boltzmann) et :
     L_{tot} = \frac{1}{12} \dot{M_0} c^2
 \end{equation}
 
-\subsubsection{Évolution de la température, flux radiatif}
-
-Nous réinjectons tous ces adimensionnements dans l’\cref{eq:equation_thermique} :
+Nous réinjectons tous ces adimensionnements dans l’\cref{eq:temperature} :
+%(les calculs sont dans l’\cref{app:temperature}):
 \begin{equation}
+    \label{eq:rel_temperature}
     C_v T_0 \frac{\partial T^{\star}}{\partial t^{\star}} =
     3 v_0^2 \nu^\star {\Omega^\star}^2 - \frac{2 t_0 F_z x}{S^\star \Sigma_0} +
     \frac{\mathcal{R} T_0}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
@@ -526,12 +555,13 @@ Nous réinjectons tous ces adimensionnements dans l’\cref{eq:equation_thermiqu
 Naturellement, nous avons envie d’introduire $F_z^\star$ pour simplifier cette
 écriture. Nous poserons :
 \begin{equation}
+    \label{eq:flux_radiatif_adim}
     F_z^\star = \frac{F_z}{F_z^0} = \frac{2 t_0 F_z}{\Sigma_0} \Rightarrow F_z^0 = \frac{\Sigma_0}{2 t_0} = \frac{\rho_0 H_0}{t_0}
 \end{equation}
 
 Cela ne donne pas à $F_0$ la même dimension que $F$ (ce qui serait difficile à
 obtenir et pas forcément souhaitable), mais permet de simplifier grandement les
-choses. En remplaçant ça nous avons donc :
+choses. En remplaçant ceci dans l’\cref{eq:rel_temperature} nous avons donc :
 \begin{equation}
     C_v T_0 \frac{\partial T^{\star}}{\partial t^{\star}} =
     3 v_0^2 \nu^\star {\Omega^\star}^2 - \frac{F_z^\star x}{S^\star} +
@@ -541,7 +571,7 @@ choses. En remplaçant ça nous avons donc :
 \end{equation}
 
 Il ne reste plus qu’à simplifier l’expression de $F_z^\star$ par rapport à
-celle de $F_z$ :
+celle de $F_z$~\eqref{eq:flux_radiatif} :
 \begin{equation}
     F_z^\star =
     \begin{cases}
@@ -562,11 +592,13 @@ Où :
 
 Enfin nous introduisons $C_v^\star$ :
 \begin{equation}
+    \label{eq:capacite_calorifique_adim}
     C_v^\star = \frac{C_v}{C_v^0} = C_v T_0 \Rightarrow C_v^0 = T_0^{-1}
-\end{equation} 
+\end{equation}
 
-Ce qui nous donne :
+Ce qui nous donne finalement :
 \begin{equation}
+    \label{eq:rel_temperature_adim}
     C_v^\star \frac{\partial T^{\star}}{\partial t^{\star}} =
     3 v_0^2 \nu^\star {\Omega^\star}^2 - \frac{F_z^\star x}{S^\star} +
     \frac{\mathcal{R} T_0}{\mu} \frac{4-3\beta}{\beta} \frac{T^\star}{S^\star} \times
@@ -574,33 +606,38 @@ Ce qui nous donne :
     \frac{C_v^\star v^\star}{x} \frac{\partial T^\star}{\partial x}
 \end{equation}
 
-Et :
+Et en combinant les \cref{eq:capacite_calorifique,eq:capacite_calorifique_adim} :
 \begin{equation}
+    \label{eq:rel_capacite_calorifique_adim}
     C_v^\star = \frac{\mathcal{R} T_0}{\mu} \frac{12 (\gamma_g - 1)(1 - \beta) + \beta}{(\gamma_g - 1) \beta}
 \end{equation}
 
-\subsubsection{Pressions}
+\subsubsection{\texorpdfstring{Pressions $P_\mathrm{gaz}^\star$ et $P_\mathrm{rad}^\star$, indicateur $\beta$}{Pressions Pgaz⋆ et Prad⋆, β}}
 
 Pour les deux termes de pression, nous faisons en sorte d’avoir les expressions
 les plus simples possibles.
 
 Pour le gaz, réduisons l’\cref{eq:pression_gaz} à l’essentiel :
 \begin{equation}
+    \label{eq:rel_pression_gaz_adim}
     P_\mathrm{gaz}^\star = \rho^\star T^\star
 \end{equation}
 
 Ce qui implique :
 \begin{equation}
+    \label{eq:pression_gaz_adim}
     P_\mathrm{gaz}^\star = \frac{P_\mathrm{gaz}}{P_\mathrm{gaz}^0} = \frac{\mu m_p}{\rho_0 k_B T_0} P_\mathrm{gaz} \Rightarrow P_\mathrm{gaz}^0 = \frac{\rho_0 k_B T_0}{\mu m_p} = \rho_0 \frac{\mathcal{R} T_0}{\mu}
 \end{equation}
 
 Idem pour l’\cref{eq:pression_radiation} décrivant la radiation :
 \begin{equation}
+    \label{eq:rel_pression_radiation_adim}
     P_\mathrm{rad}^\star = {T^\star}^4
 \end{equation}
 
 Soit :
 \begin{equation}
+    \label{eq:pression_radiation_adim}
     P_\mathrm{rad}^\star = \frac{P_\mathrm{rad}}{P_\mathrm{rad}^0} = \frac{3}{a T_0^4} P_\mathrm{rad} \Rightarrow P_\mathrm{rad}^0 = \frac{1}{3} a T_0^4
 \end{equation}
 
@@ -608,16 +645,19 @@ Cela donne pour $\beta$ (par rapport à l’\cref{eq:indicateur_pression}, nous
 avons simplement simplifié par $P_\mathrm{gaz}$) :
 
 \begin{equation}
+    \label{eq:rel_indicateur_pression}
     \beta = \frac{1}{1 + \frac{P_\mathrm{rad}^\star P_\mathrm{rad}^0}{P_\mathrm{gaz}^\star P_\mathrm{gaz}^0}} = \frac{1}{1 + \frac{{T^\star}^3}{\rho^\star} \frac{\mu m_p a T_0^3}{3 \rho_0 k_B}}
 \end{equation}
 
 Nous poserons donc :
 \begin{equation}
+    \label{eq:indicateur_pression_zero}
     \beta_0 = \frac{P_\mathrm{rad}^0}{P_\mathrm{gaz}^0} = \frac{\mu m_p a T_0^3}{3 \rho_0 k_B}
 \end{equation}
 
 Pour écrire :
 \begin{equation}
+    \label{eq:rel_indicateur_pression_adim}
     \beta = \frac{1}{1 + \beta_0 \frac{{T^\star}^3}{\rho^\star}} = \frac{1}{1 + \beta_0 \frac{P_\mathrm{rad}^\star}{P_\mathrm{gaz}^\star}} = \frac{P_\mathrm{gaz}^\star}{P_\mathrm{gaz}^\star + \beta_0 P_\mathrm{rad}^\star}
 \end{equation}
 
@@ -639,7 +679,7 @@ adimensionnements, ainsi que des équations adimensionnées.
         $\nu$ & $\nu^\star = \nu/\nu_0$ & $\nu_0 = \frac{4 r_s^2}{3 t_0} = \frac{2 r_s^2 \Omega_0}{3}$ \\
         $v$ & $v^\star = v/v_0$ & $v_0 = 2 \frac{r_s}{t_0} = r_s \Omega_0$ \\
         $c_s$ & $c_s^\star = c_s/c_s^0$ & $c_s^0 = v_0$ \\
-        $\Sigma$ & $\Sigma^\star = \Sigma/\Sigma_0$ & $\Sigma_0 = \frac{\dot{M_0}}{3 \pi \nu_0}$ \\
+        $\Sigma$ & $\Sigma^\star = \Sigma/\Sigma_0$ & $\Sigma_0 = \frac{\dot{M_0}}{3 \pi \nu_0} = \frac{\dot{M_0}}{2 \pi r_s^2 \Omega_0}$ \\
         $S = \Sigma x$ & $S^\star = S/S_0 = \Sigma^\star x$ & $S_0 = \Sigma_0$ \\
         $H$ & $H^\star = H/H_0$ & $H_0 = r_s$ \\
         $\dot{M}$ & $\dot{M^\star} = \dot{M}/\dot{M_0}$ & N/A \\
@@ -647,7 +687,7 @@ adimensionnements, ainsi que des équations adimensionnées.
         $T$ & $T^\star = T/T_0$ & $T_0 = \left(\frac{1}{\sqrt{27}} \times \frac{\dot{M_0} c^2}{48 \pi r_s^2 \sigma} \right)^\frac{1}{4}$ \\
         $F_z$ & $F_z^\star = F_z/F_z^0$ & $F_z^0 = \frac{\Sigma_0}{2 t_0} = \frac{\rho_0 H_0}{t_0} = \frac{\Sigma_0 \Omega_0}{4}$ \\
         $C_v$ & $C_v^\star = C_v/C_v^0$ & $C_v^0 = T_0^{-1}$ \\
-        $P_\mathrm{gaz}$ & $P_\mathrm{gaz}^\star = P_\mathrm{gaz}/P_\mathrm{gaz}^0$ & $P_\mathrm{gaz}^0 = \frac{\rho_0 k_B T_0}{\mu m_p}$ \\
+        $P_\mathrm{gaz}$ & $P_\mathrm{gaz}^\star = P_\mathrm{gaz}/P_\mathrm{gaz}^0$ & $P_\mathrm{gaz}^0 = \frac{\rho_0 k_B T_0}{\mu m_p} = \rho_0 \frac{\mathcal{R} T_0}{\mu}$ \\
         $P_\mathrm{rad}$ & $P_\mathrm{rad}^\star = P_\mathrm{rad}/P_\mathrm{rad}^0$ & $P_\mathrm{rad}^0 = \frac{1}{3} a T_0^4$ \\
         \hline
     \end{tabular}
@@ -655,8 +695,8 @@ adimensionnements, ainsi que des équations adimensionnées.
 
 \subsubsection{Équations associées \label{sec::eq_adim}}
 
-$x$ et $t$ sont les deux variables indépendantes. Pour les autres, certaines sont des constantes du temps :
-
+$x$ et $t$ sont les deux variables indépendantes. Pour les autres, certaines
+sont des constantes du temps :
 \begin{subequations}
     \begin{align}
         \mu &\approx 0.62 \\
@@ -664,10 +704,9 @@ $x$ et $t$ sont les deux variables indépendantes. Pour les autres, certaines so
     \end{align}
 \end{subequations}
 
-Celles-ci (ainsi que $x$) ne seront calculées qu’une seule fois dans la simulation.
+Celles-ci (ainsi que $x$) ne seront calculées qu’une seule fois au début de la simulation.
 
 Les autres non :
-
 \begin{subequations}
     \begin{align}
         \frac{\partial S^\star}{\partial t^\star} &= \frac{1}{x^2} \frac{\partial^2}{\partial x^2} \left(\nu^\star S^\star\right) \label{eq:difS}\\
@@ -697,3 +736,6 @@ Les autres non :
         \beta &= \frac{1}{1 + \beta_0 \frac{{T^\star}^3}{\rho^\star}} = \frac{P_\mathrm{gaz}^\star}{P_\mathrm{gaz}^\star + \beta_0 P_\mathrm{rad}^\star} ; \beta_0 = \frac{P_\mathrm{rad}^0}{P_\mathrm{gaz}^0}
     \end{align}
 \end{subequations}
+
+En pratique dans le code nous utiliserons $\Sigma$ là où c’est judicieux pour
+éviter de calculer plusieurs fois $\nicefrac{S}{x}$.
