@@ -1,5 +1,8 @@
 \section{Résultats et interprétations}
 
+Nous avons fait tourner cette simulation pour une durée totale physique de 26141802 secondes, soit l'équivalent de 302.6 jours. 
+Les solutions pour chaque $r$ de la branche supérieure déterminé par dichotomie ne sont pas les branches atteintes dans la simulations. Nous pouvons voir sur la figure (\ref{fig:tau.png}) en rouge la branche déterminer par dichotomie correspondant à $\tau_{ff} = 0.06 $ et en blanc celle correspondant à la valeur théorique $\tau_{ff} = 1$. Les possibles raisons de cet écarts sont dévelopés partie (\ref{sec::pistes}). La simulation est bien en accord avec le passage d'un disque optiquement épais à un disque optiquement mince.  
+
 \begin{figure}
   \begin{center}
     \includegraphics[]{c1.eps}
@@ -14,4 +17,14 @@
   \end{center}
   \caption{$T=f(\Sigma)$, $\Delta t = 26141802 s$ (durée de la simulation) pour $r_{20}$. Le gradiant de couleur représente les valeurs de $\tau_{ff}$}
   \label{fig:c20.eps}
+\end{figure}
+
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[scale=0.36]{tau.png}
+  \end{center}
+  \caption{..}
+  \label{fig:tau.png}
 \end{figure} 
+
