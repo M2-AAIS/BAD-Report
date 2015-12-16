@@ -35,7 +35,7 @@ cette résolution sont donnés dans la partie \ref{sec:courbe_s}.
 
 Le disque à un moment $t$ peut être dans l'une des trois situations suivantes.
 
-\paragraph{Régime stationnaire} ce régime correspond au disque dans une situation telle que tout le flux de matière entrant traverse le disque pour finir par tomber dans le trou noir. Il est caractérisé par une température et une densité surfacique constantes au cours du temps. Le taux d'accrétion est alors constant et égal au taux d'accrétion à son bord extérieur. Numériquement, il se traduit par une évolution relative de $T$ et $S$ très faible entre deux pas de temps. Lorsque ce régime est atteint, on augmentera le flux de matière entrant au bord externe et ce jusqu'à ce qu'il n'y ait plus de régime stationnaire.
+\paragraph{Régime stationnaire} ce régime correspond au disque dans une situation telle que tout le flux de matière entrant traverse le disque pour finir par tomber dans le trou noir. Il est caractérisé par une température et une densité surfacique constantes au cours du temps. Le taux d'accrétion est alors constant et égal au taux d'accrétion à son bord extérieur. Numériquement, il se traduit par une évolution relative de $T$ et $S^\star$ très faible entre deux pas de temps. Lorsque ce régime est atteint, on augmentera le flux de matière entrant au bord externe et ce jusqu'à ce qu'il n'y ait plus de régime stationnaire.
 
 \paragraph{Régime en évolution stable} ce régime correspond au disque évoluant sur un temps visqueux pour la densité surfacique et un temps thermique pour la température. Dans ce régime, on pourra négliger le terme advectif du chauffage. Ce régime se situe dans la partie inférieure de la courbe en S et est caractérisé par un quasi-équilibre thermique. On aura donc $Q^+ = Q^-$. Dans un diagramme $\Sigma-T$, ce régime correspond au suivi de la partie inférieure droite de la courbe en S.
 \paragraph{Régime en évolution instable} ce régime est celui de l'instabilité. Il est caractérisé par une évolution de la densité surfacique et de la température sur un même temps thermique. Dans ce régime, au moins une partie du disque se situe à une température ou une densité de surface plus élevée que les valeurs critiques. L'équilibre thermique n'y est alors pas atteint. C'est là que se situe le cœur du problème. Le disque évacue de l'énergie par rayonnement et perd beaucoup de matière par chute dans le trou noir. Chaque point proche du point critique va effectuer des cycles autour du point critique. Ces points voient d'abord leur densité augmentée jusqu'à dépasser la densité critique. Au dela, la température croît rapidement jusqu'à ce que l'advection ne soit plus négligeable et limite la température tout en diminuant la densité localement. Le point se dirige alors vers les densités faibles, au dessus du point critique jusqu'à retraverser la courbe en S, où le refroidissement est plus important que le chauffage. Le point retombe alors dans la partie inférieure de la courbe en S.
@@ -91,25 +91,25 @@ Les deux formes étant toutes deux approximatives, on ne peut que comparer leurs
 
 \subsubsection{Évolution du disque}
 
-La simulation commence dans le régime en évolution stable et avec des paramètres tels qu'un régime stationnaire existe. Le disque va alors rapidement se stabiliser sur la courbe en S avant de converger lentement vers l'état stationnaire. Une fois l'état stationnaire atteint, le flux de matière est augmenté. On recommence alors à suivre la courbe en S jusqu'à atteindre un nouveau régime stationnaire.
+La simulation commence dans le régime en évolution stable et avec des paramètres tels qu'un régime stationnaire existe. Le disque va alors rapidement se stabiliser thermiquement jusqu'à atteindre la courbe en S avant de converger sur un temps visqueux vers l'état stationnaire. Une fois l'état stationnaire atteint, le flux de matière est augmenté. On recommence alors à suivre la courbe en S jusqu'à atteindre un nouveau régime stationnaire.
 
 Lorsque le flux de matière entrant est trop élevé, il n'existe plus de régime stationnaire mais seulement un régime en évolution instable. Les points proches des points critiques commencent alors à effectuer des cycles d'amplitude croissante jusqu'à déclencher l'instabilité. Une fois l'instabilité terminée, la densité et la température sont de nouveau assez faible pour retomber dans un régime d'évolution stable.
 
-\subsubsection{Intégration numérique de S et T}
+\subsubsection{Intégration numérique de $S^\star$ et $T^\star$}
 
-L'évolution du disque d'accrétion est dominé par les deux équations sur $S$ \eqref{eq:difS} et sur $T$ \eqref{eq:difT}.
+L'évolution du disque d'accrétion est dominé par les deux équations sur $S^\star$ \eqref{eq:difS} et sur $T^\star$ \eqref{eq:difT}.
 
-Les régimes stationnaires et en évolution stable seront traités avec un schéma explicite pour la température et un schéma implicite pour la densité de surface. On a alors un temps visqueux $\tau_\nu$ \FIXME{référence à une courbe, une section?} (voir section \ref{sec::pas_de_temps}) très grand devant le temps thermique $\tau_T$. On peut donc intégrer $S$ et $T$ sur deux échelles de temps différentes et effectuer une démarche de ``step and relax'', où on intègre d'abord $S$ sur un grand temps (visqueux) avant de laisser se relaxer $T$ sur des petits temps (thermiques). Il faut à cet endroit faire attention à ce que le temps de relaxation de $T$ soit toujours plus petit que le temps visqueux. Cela revient à vérifier que le nombre d'itérations nécessaires à la stabilisation de $T$ est plus petit que $\nicefrac{\tau_\nu}{\tau_T}$. Si cette condition est violée, la simulation numérique ne traduit plus de réalité physique. 
+Les régimes stationnaires et en évolution stable seront traités avec un schéma explicite pour la température et un schéma implicite pour la densité de surface. On a alors un temps visqueux $\tau_\nu$ \FIXME{référence à une courbe, une section?} (voir section \ref{sec::pas_de_temps}) très grand devant le temps thermique $\tau_T$. On peut donc intégrer $S^\star$ et $T$ sur deux échelles de temps différentes et effectuer une démarche de ``step and relax'', où on intègre d'abord $S^\star$ sur un grand temps (visqueux) avant de laisser se relaxer $T$ sur des petits temps (thermiques). Il faut à cet endroit faire attention à ce que le temps de relaxation de $T$ soit toujours plus petit que le temps visqueux. Cela revient à vérifier que le nombre d'itérations nécessaires à la stabilisation de $T$ est plus petit que $\nicefrac{\tau_\nu}{\tau_T}$. Si cette condition est violée, la simulation numérique ne traduit plus de réalité physique. 
 
-Une méthode implicite pour $S$ est alors préconisée. En effet, celle-ci assure de converger vers la solution et est stable quelque soit le pas de temps (dans la limite des approximations données précédemment). Les détails de la méthode sont donnés dans la partie \ref{ssec:integration_S_imp}. Pour intégrer la température, il n'est pas possible d'écrire un schéma implicite. Il faudra donc utiliser un schéma explicite. En revanche, il sera possible de procéder à des simplifications pour donner une convergence plus rapide de $T$. Les détails de ces approximations sont donnés dans la partie \ref{ssec:integration_T}.
+Une méthode implicite pour $S^\star$ est alors préconisée. En effet, celle-ci assure de converger vers la solution et est stable quelque soit le pas de temps (dans la limite des approximations données précédemment). Les détails de la méthode sont donnés dans la partie \ref{ssec:integration_S_imp}. Pour intégrer la température, il n'est pas possible d'écrire un schéma implicite. Il faudra donc utiliser un schéma explicite. En revanche, il sera possible de procéder à des simplifications pour donner une convergence plus rapide de $T$. Les détails de ces approximations sont donnés dans la partie \ref{ssec:integration_T}.
 
-L'autre régime est instable. Les évolutions de $S$ et de $T$ se font sur des temps similaires. Dans ce régime, il n'est plus légitime de traiter séparement ces deux variables et il faut donc résoudre conjointement l'une et l'autre. Le schéma implicite n'y est pas utilisé, car il n'assure que la convergence vers une solution physique, mais pas via des états successifs physiquement acceptables. Comme la valeur de $S$ influe sur celle de $T$, cela impliquerait que l'intégration de $T$ n'est pas non plus exacte. Dans le cas du comportement chaotique de l'instabilité, il est nécessaire de limiter au maximum les erreurs numériques car celles-ci peuvent mener à un résultat final différent du résultat physiquement attendu. Le choix d'un schéma explicite est alors fait pour $T$ et $S$, les deux évoluant alors sur le plus petit temps charactéristique du système : le pas de temps thermique. Le schéma explicite est donné dans la partie \ref{ssec:integration_S_exp} pour $S$ et dans la partie \ref{ssec:integration_T} pour $T$.
+L'autre régime est instable. Les évolutions de $S^\star$ et de $T$ se font sur des temps similaires. Dans ce régime, il n'est plus légitime de traiter séparement ces deux variables et il faut donc résoudre conjointement l'une et l'autre. Le schéma implicite n'y est pas utilisé, car il n'assure que la convergence vers une solution physique, mais pas via des états successifs physiquement acceptables. Comme la valeur de $S^\star$ influe sur celle de $T$, cela impliquerait que l'intégration de $T$ n'est pas non plus exacte. Dans le cas du comportement chaotique de l'instabilité, il est nécessaire de limiter au maximum les erreurs numériques car celles-ci peuvent mener à un résultat final différent du résultat physiquement attendu. Le choix d'un schéma explicite est alors fait pour $T$ et $S^\star$, les deux évoluant alors sur le plus petit temps charactéristique du système : le pas de temps thermique. Le schéma explicite est donné dans la partie \ref{ssec:integration_S_exp} pour $S^\star$ et dans la partie \ref{ssec:integration_T} pour $T$.
 
 \subsubsection{Détermination du pas de temps\label{sec::pas_de_temps}}
 Nous allons expliciter dans cette section les choix que nous avons fait pour déterminer les différents pas de thermique $\tau_T$ et visqueux $\tau_\nu$ nécessaires aux intégrations en schéma implicite et explicite. \\
 
 
-Sur la première branche (intégration en schéma implicite), ils sont déterminés au cours de la simulation avant chaque nouvelle intégration en $S$, à partir des formules suivantes : 
+Sur la première branche (intégration en schéma implicite), ils sont déterminés au cours de la simulation avant chaque nouvelle intégration en $S^\star$, à partir des formules suivantes : 
 
 \begin{equation}
 	\Delta \tau_\nu^{imp} = \frac{\tau_\nu}{k_{\nu}} = \frac{1}{k_{\nu}} \times \frac{r}{v}
@@ -123,14 +123,20 @@ où $k_{\nu}$ et $k_{T}$ sont des constantes que l'on à prise respectivement é
 
 
 Il est nécessaire dans cette simulation de faire intervenir un pas de temps adaptatif. En effet, l'approche du point critique que l'on peut voir en figure \ref{Fig::bench} est délicate. Le pas de temps visqueux est donc multiplier
-à chaque nouvelle intégration sur $S$ par un facteur dépendant de la distance au point critique par rapport à la variable $S$. 
+à chaque nouvelle intégration sur $S^\star$ par un facteur dépendant de la distance au point critique par rapport à la variable $S^\star$. 
 
 
 \begin{equation}
 	\Delta^{'} \tau_{\nu}^{imp} = \alpha \Delta \tau_{\nu}^{imp}
 \end{equation} \\
 
-où $\alpha = 1 - \left( 0.99 \times \e^{- \lvert \frac{S_\textrm{crit} - S}{D_\textrm{crit}} \rvert} \right)$, avec $D_\textrm{crit}$ défini arbitrairement : $D_\textrm{crit} = 200$ \\
+où $\alpha = 1 - \left( 0.99 \times \e^{- \left| \frac{S_\textrm{crit} - S}{D_\textrm{crit}} \right|} \right)$, avec $D_\textrm{crit}$ défini arbitrairement : $D_\textrm{crit} = 200$.
+
+
+\begin{figure}
+  \includegraphics{figures/alpha_fonction_de_sigma.pdf}
+  \caption{\FIXME{pas de caption}}
+\end{figure}
 
 Le passage en shéma d'intégration explicite est soumis à deux conditions : $T \ge T_\textrm{crit}$ ou $\Sigma \ge \Sigma_\textrm{crit}$. On bascule dès lors qu'un des rayons à rempli ces conditions. $T$ et $\Sigma$ sont alors intégrés sur le même pas de temps :
 
