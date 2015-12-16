@@ -39,7 +39,7 @@ Nous avons donc calculé \ref{eq:qplus-qmoins} dans deux cas où on a imposé l'
 
 \subsection{Intervalle de température}
 La résolution de la courbe en S nécessite de se placer dans un intervalle de température relativement restreint correspondant à la valeur de basculement de $\tau$ entre le cas optiquement épais et le cas optiquement mince.
-Pour avoir un premier ordre de grandeur, nous nous sommes basés sur l'équation donnant la luminosité d'Eddington \ref{eq::} puis celle permettant de définir le taux d'accretion critique \ref{eq::} qui nous a donné la valeur de la température caractéristique $T_0$ de $1,40.10^6$ K. Nous avons ensuite, par paliers successifs, déterminé les intervalles de température permettant de représenter ce basculement d'état. Les deux valeurs que nous avons prises sont : $T_{min}$ = 2,94.$10^5 K$ et $T_{max}$ 6,2.$10^6 K$ 
+Pour avoir un premier ordre de grandeur, nous nous sommes basés sur l'équation donnant la luminosité d'Eddington \ref{eq::} puis celle permettant de définir le taux d'accretion critique \ref{eq::} qui nous a donné la valeur de la température caractéristique $T_0$ de $1,40.10^6$ K. Nous avons ensuite, par paliers successifs, déterminé les intervalles de température permettant de représenter ce basculement d'état. Les deux valeurs que nous avons retenues sont : $T_{min}$ = 2,94.$10^5 K$ et $T_{max}$ 6,2.$10^6 K$ 
 \\
 
 
@@ -63,24 +63,8 @@ Nous avons appliqué cette bissection en divisant à chaque fois l' intervalle e
 \label{Fig::}
 \end{figure}
 
-
-
-
-\subsubsection{Méthode de Brent}
-La méthode de Brent est une méthode de recherche de "zéros" d'une fonction combinant les méthodes de la dichotomie, de la sécante et l'interpolation quadratique inverse pour en utiliser tous leurs avantages. La méthode de l'interpolation quadratique inverse est une méthode de convergence rapide (ordre 2).
-\begin{equation}
-f(b) \ne f(a) \text{ et } f(b) \ne f(c) 
-\end{equation}
-Nous utilisons la méthode de l'interpolation quadratique inverse.
-\begin{equation}
-x = \frac{(y-f(a)(y-f(b))c}{(f(c)-f(a))(f(c)-f(b))} + \frac{(y-f(b)(y-f(c))a}{(f(a)-f(b))(f(a)-f(c))} +  \frac{(y-f(c)(y-f(a))b}{(f(b)-f(c))(f(b)-f(a))}
-\end{equation}
-Sinon, nous utilisons la méthode de la sécante vue précédemment. Si la méthode de la sécante n'est pas efficace \footnote{C'est à dire.....}, nous utilisons la méthode de la dichotomie.
-\\
-\subsubsection{Méthodes alternatives à la dichotomie}
 La méthode de la dichotomie est une méthode simple et robuste pour trouver les "zéros" d'une fonction mais elle demande un grand nombre de d'itérations. En effet cette méthode converge linéairement.
-\\
-%%%%[A VERIFIER]
+
 Le nombre d'itérations par une méthode de dichotomie est donnée par la formule suivante : 
 \begin{equation}
 n = \frac{log(borne_{sup} - borne_{inf}) + log(\epsilon)}{log(2)} 
@@ -99,6 +83,10 @@ Convergence quadratique...
 
 Cependant il faut que f soit de classe $C^1$
 \\
+
+
+
+
 
 \subsubsection{Méthode de la sécante}
 
@@ -120,7 +108,17 @@ Cette méthode converge plus rapidement que la méthode de la dichotomie mais mo
 %\FloatBarrier
 
 
-\subsubsection{Autres méthodes}
+\subsubsection{Méthode de Brent}
+La méthode de Brent est une méthode de recherche de "zéros" d'une fonction combinant les méthodes de la dichotomie, de la sécante et l'interpolation quadratique inverse pour en utiliser tous leurs avantages. La méthode de l'interpolation quadratique inverse est une méthode de convergence rapide (ordre 2).
+\begin{equation}
+f(b) \ne f(a) \text{ et } f(b) \ne f(c) 
+\end{equation}
+Nous utilisons la méthode de l'interpolation quadratique inverse.
+\begin{equation}
+x = \frac{(y-f(a)(y-f(b))c}{(f(c)-f(a))(f(c)-f(b))} + \frac{(y-f(b)(y-f(c))a}{(f(a)-f(b))(f(a)-f(c))} +  \frac{(y-f(c)(y-f(a))b}{(f(b)-f(c))(f(b)-f(a))}
+\end{equation}
+Sinon, nous utilisons la méthode de la sécante vue précédemment. Si la méthode de la sécante n'est pas efficace \footnote{C'est à dire.....}, nous utilisons la méthode de la dichotomie.
+\\
 
 
 \subsection{Comparaison des différentes méthodes}
