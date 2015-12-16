@@ -102,15 +102,14 @@ Cette méthode converge plus rapidement que la méthode de la dichotomie mais mo
 
 
 \subsubsection{Méthode de Brent}
-La méthode de Brent est une méthode de recherche de "zéros" d'une fonction combinant les méthodes de la dichotomie, de la sécante et l'interpolation quadratique inverse pour en utiliser tous leurs avantages. La méthode de l'interpolation quadratique inverse est une méthode de convergence rapide (ordre 2).
+La méthode de Brent est une méthode de recherche de "zéros" d'une fonction combinant les méthodes de la dichotomie, de la sécante et l'interpolation quadratique inverse pour en utiliser tous leurs avantages. La méthode de l'interpolation quadratique inverse est une méthode de convergence rapide (ordre 2). Nous pouvons utiliser cette méthode si le dénominateur ne s'annule pas, c'est à dire :
 \begin{equation}
 f(b) \ne f(a) \text{ et } f(b) \ne f(c) 
 \end{equation}
-Nous utilisons la méthode de l'interpolation quadratique inverse.
 \begin{equation}
 x = \frac{(y-f(a)(y-f(b))c}{(f(c)-f(a))(f(c)-f(b))} + \frac{(y-f(b)(y-f(c))a}{(f(a)-f(b))(f(a)-f(c))} +  \frac{(y-f(c)(y-f(a))b}{(f(b)-f(c))(f(b)-f(a))}
 \end{equation}
-Sinon, nous utilisons la méthode de la sécante vue précédemment. Si la méthode de la sécante n'est pas efficace \footnote{C'est à dire.....}, nous utilisons la méthode de la dichotomie.
+Si cette condition n'est pas réalisée, nous utilisons la méthode de la sécante vue précédemment. Si la méthode de la sécante n'est pas efficace \footnote{C'est à dire.....}, nous utilisons la méthode de la dichotomie.
 \\
 
 
