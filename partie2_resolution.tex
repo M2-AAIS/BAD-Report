@@ -495,27 +495,55 @@ Et on réinjecte :
     \end{align}
 \end{subequations}
 
-\begin{equation}
-    \frac{\partial \tilde{u}}{\partial t} = - v \frac{2ik\Delta{r}}{2\Delta{r}} \tilde{u} = - i k v \tilde{u}
-\end{equation}
+Ce qui donne en intégrant
+
+\begin{subequations}
+    \begin{align}
+        \tilde{u} = \tilde{u(0)} \e^{-i k v t} \e^{ v\frac{k^2}{2}t}\\
+        \tilde{u} = \tilde{u(0)} \e^{-i k v t} \e^{-v\frac{k^2}{2}t}\\
+        \tilde{u} = \tilde{u(0)} \e^{-i k v t}
+    \end{align}
+\end{subequations}
+
+En fait, nous avons tout simplement pour le cas centré :
 
 \begin{equation}
-    \tilde{u} = \tilde{u(0)} \exp(-i k v t)
-\end{equation}
-
-En fait, nous avons tout simplement :
-
-\begin{equation}
-    \frac{\exp(ik\Delta{r}) - \exp(-ik\Delta{r})}{2 \Delta{r}} = \frac{2 i \sin(k\Delta{r})}{2 \Delta{r}} = i k \sinc(k\Delta{r})
+    \frac{\e^{ik\Delta{r}} - \e^{-ik\Delta{r}}}{2 \Delta{r}} = \frac{2 i \sin(k\Delta{r})}{2 \Delta{r}} = i k \sinc(k\Delta{r})
 \end{equation}
 
 Soit :
+
 \begin{equation}
     \frac{\partial \tilde{u}}{\partial t} = - i k v \sinc(k\Delta{r}) \tilde{u}
 \end{equation}
 
+Et donc :
+
 \begin{equation}
-    \tilde{u} = \tilde{u(0)} \exp(-i k v \sinc(k \Delta{r}) t)
+    \tilde{u} = \tilde{u(0)} \e^{-i k v \sinc(k \Delta{r}) t}
+\end{equation}
+
+Finalement :
+
+\begin{subequations}
+    \begin{align}
+        \tilde{u} = \tilde{u(0)} \e^{-i k v t} \e^{ v\frac{k^2}{2}t}\\
+        \tilde{u} = \tilde{u(0)} \e^{-i k v t} \e^{-v\frac{k^2}{2}t}\\
+        \tilde{u} = \tilde{u(0)} \e^{-i k v \sinc(k \Delta{r}) t}
+    \end{align}
+\end{subequations}
+
+Donc dans les deux premiers cas selon le signe de $v$ la perturbation croît ou
+s’atténue exponentiellement (et il faudra alors toujours prendre la dérivée
+\textit{amont}, celle pour laquelle l’exponentielle est négative pour un $v$
+donné, c’est-à-dire en revenant à la définition celle qui résout l’advection
+dans le sens du gradient des valeurs hautes aux valeurs basses), et pour la
+dérivée centrée, elle reste d’amplitude constante.
+
+Pour résumer cela, on écrira la dérivée amont sous la forme générique suivante :
+
+\begin{equation}
+    \frac{\partial u_j}{\partial r} = \frac{\max(v,0) \left[u_{j+1} - u_j \right] + \min(v,0) \left[u_j - u_{j-1}\right]}{\Delta{r}}
 \end{equation}
 
 \subsection{Conditions aux bords}
@@ -603,10 +631,3 @@ Nous avons donc maintenant toutes les équations  nécessaires à  la résolutio
  $\rightarrow$ Le calcul de $v$ nous permet quand à lui de trouver $\dot{M}$. Nous calculons également les valeurs de $\epsilon$,  $\kappa_\textrm{ff}$ et $\tau$, qui servent ensuite dans le calcul de $Fz$.
  
  $\rightarrow$ Enfin nous résolvons les équations des pressions $P_\textrm{gaz}$ et $P_\textrm{rad}$, de $\beta$,  de la capacité $Cv$ ainsi que des termes du transfert thermique $Q^{+}$, $Q^{-}$ et $Q_\textrm{adv}$.
-
-
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "rapport"
-%%% End:
