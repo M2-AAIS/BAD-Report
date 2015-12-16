@@ -10,9 +10,9 @@ indépendantes.
 
 Une première considération numérique est la discrétisation spatiale du problème
 : le disque sera représenté par un ensemble de position discrète selon l’axe
-radial. Ces positions s’étendent de $x_{min} = \sqrt{r_{min}/r_s}$ à $x_{max} =
-\sqrt{r_{max}/r_s}$, et sont séparées par un $dx$ constant, ce qui aura pour
-effet une fois revenu dans le monde dimensionné d’avoir un $dr$ parabolique,
+radial. Ces positions s’étendent de $x_\textrm{min} = \sqrt{r_\textrm{min}/r_s}$ à $x_\textrm{max} =
+\sqrt{r_\textrm{max}/r_s}$, et sont séparées par un $\mathrm{d} x$ constant, ce qui aura pour
+effet une fois revenu dans le monde dimensionné d’avoir un $\mathrm{d} r$ parabolique,
 avec donc plus de points vers le bord intérieur du disque et moins vers le bord
 extérieur. Comme l'instabilité commence par se développer au niveau du bord intérieur, il est favorable d'y avoir un bon échantillonnage.
 
@@ -26,11 +26,10 @@ correspondant au cas optiquement mince. Il y a deux points critiques : un au
 point extrême de la partie arrondie, appelé premier point critique, et un au
 point de jonction des deux parties, appelé second point critique.
 
-Il faudra donc déterminer la courbe de stationnarité en chaque point du disque,
+Il faut donc déterminer la courbe de stationnarité en chaque point du disque,
 puis sortir les coordonnées des points critiques pour chacun d’entre eux ainsi
-que déterminer une position initiale pour le système sur ces courbes.
-
-Cette partie a été réalisée essentiellement par Maximilien et Michelle.
+que déterminer une position initiale pour le système sur ces courbes. Le détail de 
+cette résolution sont donnés dans la partie \ref{sec:courbe_s}.
 
 \subsubsection{Domaines de la simulation}
 
@@ -39,54 +38,56 @@ Le disque à un moment $t$ peut être dans l'une des trois situations suivantes.
 \paragraph{Régime stationnaire} ce régime correspond au disque dans une situation telle que tout le flux de matière entrant traverse le disque pour finir par tomber dans le trou noir. Il est caractérisé par une température et une densité surfacique constantes au cours du temps. Le taux d'accrétion est alors constant et égal au taux d'accrétion à son bord extérieur. Numériquement, il se traduit par une évolution relative de $T$ et $S$ très faible entre deux pas de temps. Lorsque ce régime est atteint, on augmentera le flux de matière entrant au bord externe et ce jusqu'à ce qu'il n'y ait plus de régime stationnaire.
 
 \paragraph{Régime en évolution stable} ce régime correspond au disque évoluant sur un temps visqueux pour la densité surfacique et un temps thermique pour la température. Dans ce régime, on pourra négliger le terme advectif du chauffage. Ce régime se situe dans la partie inférieure de la courbe en S et est caractérisé par un quasi-équilibre thermique. On aura donc $Q^+ = Q^-$. Dans un diagramme $\Sigma-T$, ce régime correspond au suivi de la partie inférieure droite de la courbe en S.
-\paragraph{Régime en évolution instable} ce régime est celui de l'instabilité. Il est caractérisé par une évolution de la densité surfacique et de la température sur un même temps thermique. Dans ce régime, au moins une partie du disque se situe à une température ou une densité de surface plus élevée que les valeurs critiques. L'équilibre thermique n'y est alors pas atteint. C'est là que se situe le cœur du problème. Le disque évacue de l'énergie par rayonnement et perds beaucoup de matière par chute dans le trou noir. Chaque point proche du point critique va effectuer des cycles autour du point critique. Ces points voient d'abord leur densité augmentée jusqu'à dépasser la densité critique. Au dela, la température croît rapidement jusqu'à ce que l'advection ne soit plus négligeable et limite la température tout en diminuant la densité localement. Le point se dirige alors vers la gauche, au dessus du point critique jusqu'à retraverser la courbe en S, où le refroidissement est plus important que le chauffage. Le point retombe alors dans la partie inférieure de la courbe en S. Tant qu'il existe des points instables, ils vont se stabiliser en déstabilisant leurs voisins.
+\paragraph{Régime en évolution instable} ce régime est celui de l'instabilité. Il est caractérisé par une évolution de la densité surfacique et de la température sur un même temps thermique. Dans ce régime, au moins une partie du disque se situe à une température ou une densité de surface plus élevée que les valeurs critiques. L'équilibre thermique n'y est alors pas atteint. C'est là que se situe le cœur du problème. Le disque évacue de l'énergie par rayonnement et perd beaucoup de matière par chute dans le trou noir. Chaque point proche du point critique va effectuer des cycles autour du point critique. Ces points voient d'abord leur densité augmentée jusqu'à dépasser la densité critique. Au dela, la température croît rapidement jusqu'à ce que l'advection ne soit plus négligeable et limite la température tout en diminuant la densité localement. Le point se dirige alors vers les densités faibles, au dessus du point critique jusqu'à retraverser la courbe en S, où le refroidissement est plus important que le chauffage. Le point retombe alors dans la partie inférieure de la courbe en S.
 
 \subsubsection{Les conditions initiales}
-Les relations nous permettant d'apporter des conditions satisfaisantes au système sont données par les formules de Frank, King et Raine avec $P = P_{gaz}$ et $\kappa_{ff} \gg \kappa_{e}$ \cite{F_K_R-1985}. Ces conditions en $\Sigma$ et $T$ sont suffisamment petites pour ne pas influencer le système lors de son évolution. $\dot{M}$ est pris très petit devant  le taux $\dot{M_{0}}$ imposé au système : 
+Les relations nous permettant d'apporter des conditions satisfaisantes au système sont données par les formules de Frank, King et Raine avec $P = P_\textrm{gaz}$ et $\kappa_\textrm{ff} \gg \kappa_\textrm{e}$ \cite{F_K_R-1985}. Ces conditions en $\Sigma$ et $T$ sont suffisamment petites pour ne pas influencer le système lors de son évolution. $\dot{M}$ est pris très petit devant  le taux $\dot{M_{0}}$ imposé au système : 
 \begin{equation}
-	\dot{M} = 1.10^{-1 }\dot{M_{0}}
+	\dot{M} = 1\ 10^{-1 }\dot{M_{0}}
 \end{equation} 
 
 \begin{equation}
-	T = 1.4 \times 10^{4} \alpha^{- \frac{1}{5}} \left[ \frac{\dot{M}}{10^{16} \mbox{g} \mbox{s}^{-1}} \right]^{\frac{3}{10}} \left[ \frac{M}{M_{sol}}\right]^{\frac{1}{4}} \left[ \frac{r}{10^{10} cm}\right]^{- \frac{3}{4}} f^{\frac{3}{10}} \mbox{K} 
+	T = 1.4 \times 10^{4} \alpha^{- \frac{1}{5}} \left[ \frac{\dot{M}}{10^{16} \mathrm{g.s}^{-1}} \right]^{\frac{3}{10}} \left[ \frac{M}{M_\odot}}\right]^{\frac{1}{4}} \left[ \frac{r}{10^{10}\mathrm{cm}}\right]^{- \frac{3}{4}} f^{\frac{3}{10}} \mathrm{K} 
 \end{equation}
 
 \begin{align}
-	\Sigma = 5.2 \alpha^{- \frac{4}{5}} \left[ \frac{\dot{M}}{10^{16} \mbox{g} \mbox{s}^{-1}} \right]^{\frac{7}{10}} \left[ \frac{M}{M_{sol}}\right]^{\frac{1}{4}} \left[ \frac{r}{10^{10} cm}\right]^{- \frac{3}{4}} f^{\frac{7}{10}} \mbox{K}  \\ 
+	\Sigma = 5.2 \alpha^{- \frac{4}{5}} \left[ \frac{\dot{M}}{10^{16} \mathrm{g.s}^{-1}} \right]^{\frac{7}{10}} \left[ \frac{M}{M_\odot}\right]^{\frac{1}{4}} \left[ \frac{r}{10^{10} \mathrm{cm}}\right]^{- \frac{3}{4}} f^{\frac{7}{10}} \mbox{K}  \\ 
 	\text{avec } f = \left[ 1 - \left( \frac{r}{3 r_{s}}\right)^{- \frac{1}{2}}\right]
 \end{align}
 
  \begin{figure}[ht]
    \begin{minipage}[c]{.46\linewidth}
       \includegraphics[scale=0.6]{ic_T.eps}
-      \caption{Evolution de T en fonction de r à t = 0}\label{fig:CI_T}
+      \caption{Tracé de $T(r)$ à $t = 0$}\label{fig:CI_T}
    \end{minipage} \hfill
    \begin{minipage}[c]{.46\linewidth}
       \includegraphics[scale=0.6]{ic_Sig.eps}
-      \caption{Evolution de $\Sigma$ en fonction de r à t = 0}\label{fig:CI_Sig}
+      \caption{Tracé de $\Sigma(r)$ à $t = 0$}\label{fig:CI_Sig}
    \end{minipage}
 \end{figure} 
 
 
-Nous pouvons voir sur les figures \ref{fig:CI_T} et \ref{fig:CI_Sig} les calculs de $T$ et $\Sigma$ en fonction de $r$ à l'instant t = 0 de la simulation. \\
+Nous pouvons voir sur les figures \ref{fig:CI_T} et \ref{fig:CI_Sig} les formes de $T$ et $\Sigma$ en fonction de $r$ à l'instant initial.
 
-
-Cela nous permet donc, à partir de l'utilisation du trinôme du second degré explicité équation \eqref{eq:trinôme} de calculer la hauteur du disque à l'instant $t = 0$ du système. \\
-
-Dans le cas limite où s'expriment ces formules nous pouvons également calculer le rapport $H/r$ à partir de la formule suivante : 
+Cela nous permet donc, à partir de l'utilisation du trinôme du second degré explicité équation \eqref{eq:trinôme} de calculer la hauteur initiale du disque. Dans le cas limite où s'expriment ces formules nous pouvons également calculer le rapport $H/r$ à partir de la formule suivante : 
 
 \begin{equation}
-	\frac{H}{r} = 1.7 \times 10^{-2}\alpha^{- \frac{1}{10}} \left[ \frac{\dot{M}}{10^{16} \mbox{g} \mbox{s}^{-1}} \right]^{\frac{3}{20}} \left[ \frac{M}{M_{sol}}\right]^{- \frac{3}{8}} \left[ \frac{r}{10^{10} cm}\right]^{- \frac{1}{8}} f^{\frac{3}{5}}
+  \label{eq:H_r}
+	\frac{H}{r} = 1.7 \times 10^{-2}\alpha^{- \frac{1}{10}} \left[ \frac{\dot{M}}{10^{16} \mbox{g} \mbox{s}^{-1}} \right]^{\frac{3}{20}} \left[ \frac{M}{M_\odot}\right]^{- \frac{3}{8}} \left[ \frac{r}{10^{10} \mathrm{cm}}\right]^{- \frac{1}{8}} f^{\frac{3}{5}}
 \end{equation}
  
-Cela nous permet de comparer cette approximation de $H$ à la résolution par trinôme pour ces approximations de $T$ et $\Sigma$ à t = 0. \\
+On peut alors comparer cette forme approximative avec la valeur simulée pour montrer que ces 
+conditions initiales sont physiquement acceptables. Le tracé de cette courbe est effectué en figure \ref{fig:H_r}.
 
-\begin{center}
-	\includegraphics[scale=0.8]{ic_h.eps}
-\end{center} 
+\begin{figure}
+  \begin{center}
+    \includegraphics[]{ic_h.eps}
+  \end{center}
+  \caption{$H(r)$ à l'instant initial. La courbe rose est issue de la simulation, la courbe rouge est issue de l'équation \eqref{eq:H_r}}
+  \label{fig:H_r}
+\end{figure} 
 
-La forme de notre disque d'accrétion découlant de ces conditions initiales est réaliste compte tenu de la masse du trou noir et de son taux d'accrétion.
-
+Les deux formes étant toutes deux approximatives, on ne peut que comparer leurs ordre de grandeurs qui sont compatibles. On supposera donc que les conditions initiales sont physiquement raisonnables.
 
 \subsubsection{Évolution du disque}
 
@@ -129,9 +130,9 @@ Il est nécessaire dans cette simulation de faire intervenir un pas de temps ada
 	\Delta^{'} \tau_{\nu}^{imp} = \alpha \Delta \tau_{\nu}^{imp}
 \end{equation} \\
 
-où $\alpha = 1 - \left( 0.99 \times \e^{- \lvert \frac{S_{crit} - S}{D_{crit}} \rvert} \right)$, avec $D_{crit}$ défini arbitrairement : $D_{}crit = 200$ \\
+où $\alpha = 1 - \left( 0.99 \times \e^{- \lvert \frac{S_\textrm{crit} - S}{D_\textrm{crit}} \rvert} \right)$, avec $D_\textrm{crit}$ défini arbitrairement : $D_\textrm{crit} = 200$ \\
 
-Le passage en shéma d'intégration explicite est soumis à deux conditions : $T \ge T_{crit}$ ou $\Sigma \ge \Sigma_{crit}$. On bascule dès lors qu'un des rayons à rempli ces conditions. $T$ et $\Sigma$ sont alors intégrés sur le même pas de temps :
+Le passage en shéma d'intégration explicite est soumis à deux conditions : $T \ge T_\textrm{crit}$ ou $\Sigma \ge \Sigma_\textrm{crit}$. On bascule dès lors qu'un des rayons à rempli ces conditions. $T$ et $\Sigma$ sont alors intégrés sur le même pas de temps :
 
 \begin{equation}
 \Delta \tau_{T}^{exp} = 0.01 \times \Delta \tau_{T}^{imp}
@@ -253,7 +254,7 @@ La solution au temps suivant est directement donnée.
 \label{ssec:integration_T}
 Il est possible d'améliorer le schéma d'intégration explicite pour la température en donnant une meilleure estimation de $f(t)$.
 \begin{equation}
-  \frac{\partial T}{\partial t} = \frac{Q^+ - Q^- + Q_{adv}}{C_V} = f(T, S)
+  \frac{\partial T}{\partial t} = \frac{Q^+ - Q^- + Q_\textrm{adv}}{C_V} = f(T, S)
 \end{equation}
 On peut écrire un développement limité de $f(T) = f_0 + \frac{\partial f}{\partial T}\Delta T + \frac{\partial f}{\partial S}\Delta S$
 Comme on a un temps thermique très petit devant le temps visqueux $\tau_\nu \gg \tau_T$ \FIXME{ est-ce vraiment vrai ?}
@@ -365,7 +366,7 @@ Pour chaque temps t donné, nous devons résoudre le système physique en chaque
 Partons de la pression P : 
 
 \begin{equation}
-	P = P_{gaz} + P_{rad}
+	P = P_\textrm{gaz} + P_\textrm{rad}
 \end{equation}
 
 
@@ -419,7 +420,7 @@ Nous avons privilégié pour cette équation le calcul d'une moyenne des dériv�
 v^\star_{i} = - \frac{1}{S_{i}^\star x_{i}} \frac{( (\nu^{*}S^{*})_{i+1} - (\nu^{*}S^{*})_{i-1} )}{2 \Delta x_{i}}
 \end{equation} 
 
-Par contre ce choix de dérivée impose que nous mettions des conditions à  chaque bords du disque. La condition au bord intérieur est  $(\nu^{*}S^{*})_{0} = 0$, tandis que celle au bord extérieur est $v^\star_{max}   = - \dot{M^{*}}_{max} / (S^{*}x^{*})_{max}$.
+Par contre ce choix de dérivée impose que nous mettions des conditions à  chaque bords du disque. La condition au bord intérieur est  $(\nu^{*}S^{*})_{0} = 0$, tandis que celle au bord extérieur est $v^\star_\textrm{max}   = - \dot{M^{*}}_\textrm{max} / (S^{*}x^{*})_\textrm{max}$.
 
 
 \subsubsection{Ordre de résolution des équations}
@@ -428,9 +429,9 @@ Nous avons donc maintenant toutes les équations  nécessaires à  la résolutio
 
  $\rightarrow$ Une foi le calcul de $H^{*}$ effectué, nous pouvons calculer les valeurs de la vitesse du son $cs^{*}$, de la viscosité $\nu^{*}$ ainsi que de la densité $\rho^{*}$ grâce aux formules décrites précédemment.   
 
- $\rightarrow$ Le calcul de $v$ nous permet quand à lui de trouver $\dot{M}$. Nous calculons également les valeurs de $\epsilon$,  $\kappa_{ff}$ et $\tau$, qui servent ensuite dans le calcul de $Fz$.
+ $\rightarrow$ Le calcul de $v$ nous permet quand à lui de trouver $\dot{M}$. Nous calculons également les valeurs de $\epsilon$,  $\kappa_\textrm{ff}$ et $\tau$, qui servent ensuite dans le calcul de $Fz$.
  
- $\rightarrow$ Enfin nous résolvons les équations des pressions $P_{gaz}$ et $P_{rad}$, de $\beta$,  de la capacité $Cv$ ainsi que des termes du transfert thermique $Q^{+}$, $Q^{-}$ et $Q_{adv}$.
+ $\rightarrow$ Enfin nous résolvons les équations des pressions $P_\textrm{gaz}$ et $P_\textrm{rad}$, de $\beta$,  de la capacité $Cv$ ainsi que des termes du transfert thermique $Q^{+}$, $Q^{-}$ et $Q_\textrm{adv}$.
 
 
 
