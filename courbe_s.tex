@@ -1,4 +1,4 @@
-\section{Détermination des courbes en S}
+\subsection{Détermination des courbes en S}
 \label{sec:courbe_s}
 
 Nous avons voulu modéliser dans cette partie la condition d'équilibre thermique du plan équatorial du disque d'accrétion c'est-à-dire représenter l'état du système lorsque la quantité de chaleur produite ($Q^+$) est égale à la quantité de chaleur dissipée ($Q^-$), lorsque le terme de refroidissement est égal au terme de chauffage.
@@ -17,7 +17,7 @@ Cette équation est stationnaire, elle ne dépend pas du temps mais elle dépend
 
 Nous avons voulu représenter sur un même graphique l'évolution de la température en fonction de densité de surface, c'est à dire représenter la fonction T($\Sigma$).
    
-\subsection{Établissement de la fonction}
+\subsubsection{Établissement de la fonction}
 
 Au premier abord, pour obtenir une seule courbe en S, le rayon r a été fixé. Ainsi la vitesse angulaire $\Omega$ a été préalablement définie. Par la suite nous avons répété la démarche suivante pour 256 différentes valeurs du rayon.
 
@@ -38,7 +38,7 @@ Cependant nous ne l'avons pas utilisé comme critère pour le choix de l'express
 
 Nous avons donc cherché les zéros de l'équation \eqref{eq:qplus-qmoins} dans deux cas où on a imposé l'expression du flux radiatif. Ainsi, nous avons un algorithme où l'on peut fixer les valeurs de T et $\Omega$ pour obtenir une fonction ne dépendant que de $\Sigma$.
 
-\subsection{Intervalle de température}
+\subsubsection{Intervalle de température}
 La résolution de la courbe en S nécessite de se placer dans un intervalle de température relativement restreint correspondant à la valeur de basculement de $\tau$ entre le cas optiquement épais et le cas optiquement mince.
 Pour avoir un premier ordre de grandeur, nous nous sommes basés sur l'équation donnant la luminosité d'Eddington 
 \begin{equation}
@@ -56,7 +56,7 @@ T_0 \approx 2,50.10^7\left(\frac{\dot{M}_0}{\dot{L}_\mathrm{crit}}\right)^{\frac
 Nous obtenons $T_0 =1.40\ 10^6 \mathrm{K}$. Nous avons ensuite, par paliers successifs, déterminé les intervalles de température permettant de représenter ce basculement d'état. Les deux valeurs que nous avons retenues sont : $T_\textrm{min} = 2.9\ 10^5 \mathrm{K}$ et $T_\textrm{max} = 6.2\ 10^6 \mathrm{K}$. 
 
 
-\subsubsection{Méthode de la dichotomie}
+\paragraph{Méthode de la dichotomie}
 
 Pour déterminer la densité de surface associée à une valeur de température précise, nous avons procédé par dichotomie.
 Cette méthode consiste à trouver les coordonnées où s'annule une fonction continue en partant d'un intervalle de départ et en le divisant successivement pour cerner l'intervalle le plus petit possible où se trouve la solution.  
@@ -85,7 +85,8 @@ n = \frac{\log(borne_\mathrm{sup} - borne_\mathrm{inf})}{\log(2)}
 Pour avoir le résultat à $10^{-N}$ près.
 Nous avons donc regardé s'il existait des méthodes qui convergeaient plus rapidement et de manière tout aussi robuste. 
 
-\subsubsection{Méthode de Newton}
+\paragraph{Méthode de Newton}
+
 La méthode de Newton parfois appelée méthode de Newton-Raphson, a été décrite pour la première fois par I. Newton dans le \textit{De analysi per aequationes numero terminorum infinitas} en 1669. Cette méthode à l'avantage de converger beaucoup plus rapidement que pour la méthode de la dichotomie (convergence d'ordre 2)
 
 \begin{equation}
@@ -95,7 +96,7 @@ x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)}
 En revanche, cette méthode présente plusieurs inconvénients, tout d'abord, la fonction doit être obligatoirement de classe $C^1$ et le calcul de la dérivée de manière analytique est complexe.
 
 
-\subsubsection{Méthode de la sécante}
+\paragraph{Méthode de la sécante}
 
 Un des gros inconvénients de la méthode de Newton est d'avoir à calculer la dérivée de la fonction. La méthode de la sécante permet de contourner cet obstacle et ne nécessite pas que la fonction soit de classe $C^1$. Elle utilise pour cela une approximation de la dérivée.
 
@@ -113,8 +114,8 @@ Cette méthode converge plus rapidement que la méthode de la dichotomie mais mo
 \end{figure}
 %\FloatBarrier
 
+\paragraph{Méthode de Brent}
 
-\subsubsection{Méthode de Brent}
 La méthode de Brent est une méthode de recherche de "zéros" d'une fonction combinant les méthodes de la dichotomie, de la sécante et l'interpolation quadratique inverse pour en utiliser tous leurs avantages. La méthode de l'interpolation quadratique inverse est une méthode de convergence rapide (ordre 2). Cette méthode sauvegarde une borne éloignée ($a$), une borne proche ($b$, qui est le point le plus proche de 0) et la valeur précédente de $b$: $c$. La méthode choisit la méthode quadratique inverse lorsque son dénominateur est non nul:
 \begin{equation}
 f(b) \ne f(a) \text{ et } f(b) \ne f(c) 
@@ -136,7 +137,7 @@ Si le dénominateur s'annule, la méthode de la sécante est utilisé et alors :
 Il peut exister des cas où la méthode de la dichotomie reste meilleure (par exemple si $f(a)$, $f(b)$ et $f(c)$ ont des valeur proches et non nulles, la méthode quadratique donne alors une valeur qui ne converge pas rapidement), dans ce cas là la méthode de la dichotomie est utilisée. Cela assure par ailleurs que la méthode converge au moins aussi vite de que la dichotomie.
 
 
-\subsection{Comparaison des différentes méthodes}
+\subsubsection{Comparaison des différentes méthodes}
 
 Nous pouvons vérifier que la méthode de Brent est plus efficace que la méthode de la dichotomie en affichant le nombre d'itérations nécessaire dans chacun des cas pour obtenir la précision souhaité dans le calcul de la courbe en S. Les résultats de cette simulation sont donnés sur la figure \ref{Fig::bench}. 
 \begin{figure}[htb!]
@@ -147,7 +148,7 @@ Nous pouvons vérifier que la méthode de Brent est plus efficace que la méthod
 \end{figure}
 
 
-\subsection{Détermination des points critiques}
+\subsubsection{Détermination des points critiques}
 Afin de déterminer la propagation de l'instabilité thermique, il faut trouver le point critique où le système devient instable. Au niveau de la courbe en S, ceci a lieu sur la branche inférieure au niveau de la courbure : au-delà de ce point la densité surfacique diminue tandis que la température continue à s'élever. Sur la figure \ref{Fig::stable} la zone d'instabilité est représentée en bleue, les zones de stabilité sont en rouge.
 
 \begin{figure}[htb!]
@@ -170,7 +171,7 @@ Dans le code, nous avons nommé ``deuxième point critique'', le point où a lie
 Pour le repérer, nous avons eu la même approche que pour pour le point d'instabilité trouvé préalablement. Cette fois-ci, nous avons comparé le $\Sigma$ déterminé pour un milieu optiquement épais à celui optiquement mince. Quand le premier devient plus petit que le second, cela signifie que la densité surfacique arrête de décroître et qu'elle commence à augmenter linéairement en fonction de la température. 
 
 
-\subsection{Construction de la courbe}
+\subsubsection{Construction de la courbe}
 
 En combinant les points trouvés dans le cas optiquement épais jusqu'au deuxième point critique et les points trouvés dans le cas optiquement mince, nous avons pu assembler les deux parties de la courbe en S (\ref{Fig::construction_S}). Cette procédure donne pour chaque position une courbe en S (\ref{Fig::courbe_S_rayons}).
 
@@ -190,7 +191,7 @@ En combinant les points trouvés dans le cas optiquement épais jusqu'au deuxiè
 
 
 
-\subsection{Evolution du $\tau_\textrm{eff}$}
+\subsubsection{Evolution du $\tau_\textrm{eff}$}
 
 D'après nos calculs nous trouvons un $\tau_\textrm{eff}$ aux alentours de $0.06$ lors de la transition d'un milieu dit optiquement épais à un milieu optiquement mince. Cette valeur ne correspond pas à la valeur théorique où $\tau_\textrm{eff} = 1$.
 Cela pose un problème au niveau de la partie d'intégration car notre branche linéaire est translatée par rapport à celle définie par la théorie. 
@@ -216,7 +217,7 @@ En fonction du rayon $r$, les coordonnées dans l'espace $\left\lbrace T, \Sigma
 	\label{Fig::3}
 \end{figure}
 
-\subsection{Pistes d'améliorations}
+\subsubsection{Pistes d'améliorations}
 \label{sec::pistes}
 \begin{itemize}
 
