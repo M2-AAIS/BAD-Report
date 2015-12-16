@@ -124,7 +124,7 @@ Si cette condition n'est pas réalisée, nous utilisons la méthode de la sécan
 
 
 \subsection{Détermination des points critiques}
-Afin de déterminer la propagation de l' instabilité thermique, il faut trouver le point critique où le système devient instable. Au niveau de la courbe en S, ceci a lieu sur la branche inférieure au niveau de la courbure : au-delà de ce point la densité surfacique diminue tandis que la température continue à s' élever. Sur la figure \ref{Fig::stable} la zone d'instabilité est représentée en bleue.
+Afin de déterminer la propagation de l' instabilité thermique, il faut trouver le point critique où le système devient instable. Au niveau de la courbe en S, ceci a lieu sur la branche inférieure au niveau de la courbure : au-delà de ce point la densité surfacique diminue tandis que la température continue à s' élever. Sur la figure \ref{Fig::stable} la zone d'instabilité est représentée en bleue, les zones de stabilité sont en rouge.
 
 \begin{figure}[htb!]
 	\centering
@@ -133,6 +133,11 @@ Afin de déterminer la propagation de l' instabilité thermique, il faut trouver
 	\label{Fig::stable}
 \end{figure}
 %\FloatBarrier
+
+Nous pouvons voir sur ce schéma que la première zone de la courbe en S (la partie la plus basse) correspond à une position stable. Si l'on observe une petite élévation de température (si l'on se place légèrement au-dessus de la courbe), nous arrivons sur une zone ou le terme de refroidissement est supérieur au terme de chauffage, cette partie du disque va donc se refroidir pour retrouver sa position d'équilibre. De même, si l'on observe une petite diminution de température (si l'on se place légèrement en-dessus de la courbe) le terme de chauffage devient supérieur au terme de refroidissement, cette partie du disque va donc se réchauffer jusqu'à retrouver sa position d'équilibre. Il se passe exactement le même phénomène sur la partie haute de la courbe en S (zone III).
+
+En revanche sur la partie centrale de la courbe (zone II), les petites perturbations se retrouvent amplifiées, nous sommes donc sur une section instable.
+
 
 Pour trouver les coordonnées de ce point critique, nous avons comparé les valeurs de $\Sigma$ (calculé pour un milieu optiquement épais) pour chaque point en augmentant T. Lorsque la variation de la courbe change, c' est-à-dire quand $\Sigma$ cesse d' augmenter et commence à diminuer, nous avons repéré les coordonnées du dernier point pour lequel la densité surfacique croît.  
 \\
