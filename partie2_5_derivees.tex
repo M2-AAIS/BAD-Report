@@ -1,0 +1,133 @@
+\subsection{Considérations sur les dérivées numériques spatiales}
+
+Il existe un grand nombre de façon de dériver numériquement une variable $u$ en
+fonction de l’espace discrétisé selon $r$ (pas spatial $\Delta{r}$). La plus
+classique d’entre elles est celle des différences finies au premier ordre, qui
+admet trois expressions standards~\eqref{eq:differences_finies}, qui exprime
+$u_j = u(r,t)$ en fonctions des valeurs aux positions spatiales adjacentes
+$u_{j+1} = u(r+\Delta{r},t)$ et $u_{j-1} = u(r-\Delta{r},t)$.
+
+\begin{subequations}
+    \label{eq:differences_finies}
+    \begin{align}
+        \label{eq:diff_droite}
+        \frac{\partial u_j}{\partial r} &\approx \frac{u_{j+1} - u_j    }{  \Delta{r}}\\
+        \label{eq:diff_gauche}
+        \frac{\partial u_j}{\partial r} &\approx \frac{u_j     - u_{j-1}}{  \Delta{r}}\\
+        \label{eq:diff_centre}
+        \frac{\partial u_j}{\partial r} &\approx \frac{u_{j+1} - u_{j-1}}{2 \Delta{r}}
+    \end{align}
+\end{subequations}
+
+Elles sont appelées respectivement \textit{différence à
+droite}~\eqref{eq:diff_droite}, \textit{différence à
+gauche}~\eqref{eq:diff_gauche} et \textit{différence
+centrée}~\eqref{eq:diff_centre}. En pratique, la plus fidèle est celle des
+différences centrées, mais elle n’est pas toujours utilisable.
+
+En effet, considérons l’équation d’advection~\eqref{eq:advection_th} sous une
+forme assez générale, où $v$ représente la vitesse d’advection (et donc son
+signe le sens du gradient). 
+
+\begin{equation}
+    \label{eq:advection_th}
+    \frac{\partial u}{\partial t} + v \frac{\partial u}{\partial r} = 0
+\end{equation}
+
+L’\cref{eq:advection_th} étant linéaire, on peut étudier la stabilité des
+solutions numériques selon la méthode de Von Neumann. On considère $u(r,t)$ une
+solution du problème et on ajoute une perturbation $\delta{u}$ à celle-ci. On
+va alors regarder l’évolution de cette perturbation au cours du temps. La
+linéarité nous permet de plus de considérer uniquement un terme de la
+transformée de Fourier de $\delta{u}$, qu’on écrit alors $\delta{u} =
+\tilde{u}(t) \e^{ikr}$. En réinjectant dans \eqref{eq:advection_th} et en
+remplaçant $\frac{\partial u}{\partial r}$ par les expressions données
+\cref{eq:differences_finies}, on obtient respectivement :
+
+\begin{subequations}
+    \begin{align}
+        \frac{\partial \tilde{u}}{\partial t} \e^{ik\Delta{r}} &= - v \frac{\e^{ik(r+\Delta{r})} - \e^{ik r           }}{  \Delta{r}} \tilde{u}\\
+        \frac{\partial \tilde{u}}{\partial t} \e^{ik\Delta{r}} &= - v \frac{\e^{ik r           } - \e^{ik(r-\Delta{r})}}{  \Delta{r}} \tilde{u}\\
+        \frac{\partial \tilde{u}}{\partial t} \e^{ik\Delta{r}} &= - v \frac{\e^{ik(r+\Delta{r})} - \e^{ik(r-\Delta{r})}}{2 \Delta{r}} \tilde{u}
+    \end{align}
+\end{subequations}
+
+En simplifiant ces équations par $\e^{ik\Delta{r}}$, cela devient :
+
+\begin{subequations}
+    \begin{align}
+        \frac{\partial \tilde{u}}{\partial t} &= - v \frac{\e^{ik\Delta{r}} - 1                }{  \Delta{r}} \tilde{u}\\
+        \frac{\partial \tilde{u}}{\partial t} &= - v \frac{1                - \e^{-ik\Delta{r}}}{  \Delta{r}} \tilde{u}\\
+        \frac{\partial \tilde{u}}{\partial t} &= - v \frac{\e^{ik\Delta{r}} - \e^{-ik\Delta{r}}}{2 \Delta{r}} \tilde{u}
+    \end{align}
+\end{subequations}
+
+On fait alors un développement limité en $ik\Delta{r}$ :
+
+\begin{align}
+    \e^{ ik\Delta{r}} &= 1 + ik\Delta{r} + \frac{i^2 k^2 \Delta{r}^2}{2}\\
+    \e^{-ik\Delta{r}} &= 1 - ik\Delta{r} + \frac{i^2 k^2 \Delta{r}^2}{2}
+\end{align}
+
+Et on réinjecte :
+
+\begin{subequations}
+    \begin{align}
+        \frac{\partial \tilde{u}}{\partial t} &= \left(- vik + v\frac{k^2}{2}\right) \tilde{u}\\
+        \frac{\partial \tilde{u}}{\partial t} &= \left(- vik - v\frac{k^2}{2}\right) \tilde{u}\\
+        \frac{\partial \tilde{u}}{\partial t} &= \left(- vik + 0             \right) \tilde{u}
+    \end{align}
+\end{subequations}
+
+Ce qui donne en intégrant
+
+\begin{subequations}
+    \begin{align}
+        \tilde{u} = \tilde{u(0)} \e^{-i k v t} \e^{ v\frac{k^2}{2}t}\\
+        \tilde{u} = \tilde{u(0)} \e^{-i k v t} \e^{-v\frac{k^2}{2}t}\\
+        \tilde{u} = \tilde{u(0)} \e^{-i k v t}
+    \end{align}
+\end{subequations}
+
+En fait, nous avons tout simplement pour le cas centré :
+
+\begin{equation}
+    \frac{\e^{ik\Delta{r}} - \e^{-ik\Delta{r}}}{2 \Delta{r}} = \frac{2 i \sin(k\Delta{r})}{2 \Delta{r}} = i k \sinc(k\Delta{r})
+\end{equation}
+
+Soit :
+
+\begin{equation}
+    \frac{\partial \tilde{u}}{\partial t} = - i k v \sinc(k\Delta{r}) \tilde{u}
+\end{equation}
+
+Et donc :
+
+\begin{equation}
+    \tilde{u} = \tilde{u(0)} \e^{-i k v \sinc(k \Delta{r}) t}
+\end{equation}
+
+Finalement :
+
+\begin{subequations}
+    \begin{align}
+        \tilde{u} = \tilde{u(0)} \e^{-i k v t} \e^{ v\frac{k^2}{2}t}\\
+        \tilde{u} = \tilde{u(0)} \e^{-i k v t} \e^{-v\frac{k^2}{2}t}\\
+        \tilde{u} = \tilde{u(0)} \e^{-i k v \sinc(k \Delta{r}) t}
+    \end{align}
+\end{subequations}
+
+Donc dans les deux premiers cas selon le signe de $v$ la perturbation croît ou
+s’atténue exponentiellement (et il faudra alors toujours prendre la dérivée
+\textit{amont}, celle pour laquelle l’exponentielle est négative pour un $v$
+donné, c’est-à-dire en revenant à la définition celle qui résout l’advection
+dans le sens du gradient des valeurs hautes aux valeurs basses), et pour la
+dérivée centrée, elle reste d’amplitude constante.
+
+Pour résumer cela, on écrira la dérivée amont sous la forme générique suivante :
+
+\begin{equation}
+    \frac{\partial u_j}{\partial r} = \frac{\max(v,0) \left[u_{j+1} - u_j \right] + \min(v,0) \left[u_j - u_{j-1}\right]}{\Delta{r}}
+\end{equation}
+
+

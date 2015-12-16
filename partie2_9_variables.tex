@@ -1,0 +1,84 @@
+\subsection{Calcul des autres variables}
+
+Pour chaque temps t donné, nous devons résoudre le système physique en chaque
+point du disque. Cela correspond à résoudre un système de 16 équations et 16
+inconnus \ref{sec::eq_adim}. Nous avons vu précédemment que toutes ces
+quantités physiques nécessaires à  la simulation sont obtenues à  partir de
+formules simples et immédiates, à  l'exception de la vitesse locale d'accrétion
+$v$ ainsi que la demi-hauteur $H$ du disque.
+
+\subsubsection{Résolution de la demi-hauteur $H$}
+\label{ssec::resolution_H}
+
+  $H$ fait en effet intervenir la résolution d'un trinôme du second degré dont nous avons détaillé le calcul ci dessous. \\
+
+Partons de la pression P : 
+
+\begin{equation}
+	P = P_\textrm{gaz} + P_\textrm{rad}
+\end{equation}
+
+
+\begin{equation}
+	c_{s}^{2} \rho = \frac{R \rho T}{\mu} + \frac{1}{3} a T^{4}
+\end{equation}
+
+
+\begin{equation}
+	\Omega^{2} H^{2} \rho = \frac{R T}{\mu} \rho + \frac{1}{3} a T^{4}
+\end{equation}
+
+
+\begin{equation}
+	\frac{1}{2} \Omega^{2} \Sigma H = \frac{R T}{\mu} \frac{\Sigma}{2 H} + \frac{1}{3} a T^{4}
+\end{equation}
+
+H est donc solution d'un trinôme du second degré $ a H^{2} + b H + c = 0$. \\
+Compte tenu de l'adimensionnement considéré dans cette simulation, nous l'exprimons sous la forme suivante :  
+
+\begin{eqnarray}
+  a^{\prime} H^{* 2}+b^{\prime}H^{*}+c^{\prime}=0
+  \end{eqnarray}
+
+$\begin{cases}  
+      a^{\prime} &= \Omega^{*2} \Omega_{0}^{2} S^{*} S_{0}\\
+      b^{\prime} &= - \frac{2 a}{3 r_{s}} T^{*4} T_{0}^{4} x \\
+      c^{\prime}&=-\frac{RT_{0}}{\mu r_{s}^{2}} T^{*} S^{*} S_{0}
+     \end{cases}$ \\
+
+
+\begin{equation}
+	\Delta^{\prime} = b^{\prime 2} - 4a^{\prime}c^{\prime}
+\end{equation} 
+
+Il vient donc : 
+
+\begin{equation}
+	H^{*} = \frac{-b -sign(b) \sqrt{\Delta}}{2a}
+\end{equation}
+
+
+\subsubsection{Résolution de la vitesse locale d'accrétion $v$}
+\begin{equation}
+    v^\star = - \frac{1}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right)
+\end{equation} 
+
+Nous avons privilégié pour cette équation le calcul d'une moyenne des dérivées amonts et avales. La question de savoir lesquelles des dérivées (amonts ou avales) conduisent à  des solutions stables n'est pas nécessaire ici puisque en effet il ne s'agit pas d'une équation d'advection mais seulement d'une dérivée spatiale. Ci-dessous l'équation de la dérivée selon cette approximation : 
+
+\begin{equation}
+v^\star_{i} = - \frac{1}{S_{i}^\star x_{i}} \frac{( (\nu^{*}S^{*})_{i+1} - (\nu^{*}S^{*})_{i-1} )}{2 \Delta x_{i}}
+\end{equation} 
+
+Par contre ce choix de dérivée impose que nous mettions des conditions à  chaque bords du disque. La condition au bord intérieur est  $(\nu^{*}S^{*})_{0} = 0$, tandis que celle au bord extérieur est $v^\star_\textrm{max}   = - \dot{M^{*}}_\textrm{max} / (S^{*}x^{*})_\textrm{max}$.
+
+
+\subsubsection{Ordre de résolution des équations}
+
+Nous avons donc maintenant toutes les équations  nécessaires à  la résolution du système. L'ordre de résolution des équations est le suivant :  \\
+
+ $\rightarrow$ Une foi le calcul de $H^{*}$ effectué, nous pouvons calculer les valeurs de la vitesse du son $cs^{*}$, de la viscosité $\nu^{*}$ ainsi que de la densité $\rho^{*}$ grâce aux formules décrites précédemment.   
+
+ $\rightarrow$ Le calcul de $v$ nous permet quand à lui de trouver $\dot{M}$. Nous calculons également les valeurs de $\epsilon$,  $\kappa_\textrm{ff}$ et $\tau$, qui servent ensuite dans le calcul de $Fz$.
+ 
+ $\rightarrow$ Enfin nous résolvons les équations des pressions $P_\textrm{gaz}$ et $P_\textrm{rad}$, de $\beta$,  de la capacité $Cv$ ainsi que des termes du transfert thermique $Q^{+}$, $Q^{-}$ et $Q_\textrm{adv}$.
+
