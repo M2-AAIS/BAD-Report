@@ -4,14 +4,16 @@
 \subsection{Différentielles}
 
 Les différentielles découlent directement des adimensionnements :
-\begin{align}
-    \label{eq:dt_star}
-    \partial t &= t_0 \partial t^{\star} \\
-    \label{eq:dr_star}
-    \partial r &= 2 r_s x \partial x \\
-    \label{eq:dT_star}
-    \partial T &= T_0 \partial T^{\star}
-\end{align}
+\begin{subequations}
+    \begin{align}
+        \label{eq:dt_star}
+        \partial t &= t_0 \partial t^{\star} \\
+        \label{eq:dr_star}
+        \partial r &= 2 r_s x \partial x \\
+        \label{eq:dT_star}
+        \partial T &= T_0 \partial T^{\star}
+    \end{align}
+\end{subequations}
 
 \subsection{Évolution de la densité de surface}
 
@@ -59,7 +61,64 @@ Ce qui est bien l’\cref{eq:rel_densite_surface}.
 
 \subsection{Vitesse radiale}
 
+Nous partons de l’\cref{eq:vitesse_accretion} :
+\begin{equation}
+    v = - \frac{3}{\Sigma r^\frac{1}{2}} \frac{\partial}{\partial r} \left(\nu \Sigma r^\frac{1}{2} \right)
+\end{equation}
+
+Comme précédemment :
+\begin{align}
+    \Sigma &= \frac{S}{x} = S \left( \frac{r_s}{r} \right)^\frac{1}{2} \Rightarrow \Sigma r^\frac{1}{2} = S r_s^\frac{1}{2} \\
+    \hookrightarrow v &= - \frac{3}{S r_s^\frac{1}{2}} \frac{\partial}{\partial r} \left(\nu S r_s^\frac{1}{2} \right)
+\end{align}
+
+Les $r_s^\frac{1}{2}$ se simplifient donc, de même que le font les $S_0$ en remplaçant $S = S^\star S_0$ :
+\begin{equation}
+    v = - \frac{3}{S^\star} \frac{\partial}{\partial r} \left(\nu S^\star \right)
+\end{equation}
+
+On utilise maintenant l’\cref{eq:dr_star} :
+\begin{align}
+    \frac{\partial}{\partial r} \left(\nu S^\star \right) &= \frac{1}{2 r_s x} \frac{\partial}{\partial x} \left( \nu S^\star \right) \\
+    \hookrightarrow v &= - \frac{3}{2 r_s S^\star x} \frac{\partial}{\partial x} \left(\nu S^\star \right)
+\end{align}
+
+On remplace $\nu = \nu^\star \nu_0$ grâce à l’\cref{eq:viscosite_adim} :
+\begin{align}
+    \nu &= \frac{4}{3} \frac{r_s^2 \nu^\star}{t_0} \\
+    \hookrightarrow v &= - \frac{2 r_s}{t_0 S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star \right)
+\end{align}
+
+Ce qui est bien l’\cref{eq:rel_vitesse_radiale}.
+
 \subsection{Vitesse du son}
+
+On commence par remplacer l’\cref{eq:rel_demi_hauteur_adim} dans l’\cref{eq:rel_viscosite_adim} :
+\begin{equation}
+    \nu^\star \Omega^\star = \alpha {c_s^\star}^2
+\end{equation}
+
+On fait de même avec l’\cref{eq:demi_hauteur} et l’\cref{eq:viscosite} :
+\begin{equation}
+    3 \nu \Omega = 2 \alpha c_s^2
+\end{equation}
+
+Et on divise cette dernière par la précédente :
+\begin{equation}
+    3 \frac{\nu}{\nu^\star} \frac{\Omega}{\Omega^\star} = 2 \left(\frac{c_s}{c_s^\star}\right)^2
+\end{equation}
+
+On remplace alors les rapports $\chi/\chi^\star$ par $\chi_0$ :
+\begin{equation}
+    3 \nu_0 \Omega_0 = 2 {c_s^0}^2
+\end{equation}
+
+On remplace alors $\nu_0 = \frac{4 r_s^2}{3 t_0}$, divise par \num{2} et prend la racine carrée :
+\begin{equation}
+    c_s^0 = \sqrt{2 \frac{r_s^2}{t_0} \Omega_0}
+\end{equation}
+
+Ce qui est bien l’\cref{eq:rel_cs_0}.
 
 \subsection{Demi-hauteur}
 
