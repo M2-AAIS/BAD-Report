@@ -42,7 +42,7 @@ Nous avons donc calculé \ref{eq:qplus-qmoins} dans deux cas où on a imposé l'
 La résolution de la courbe en S nécessite de se placer dans un intervalle de température relativement restreint correspondant à la valeur de basculement de $\tau$ entre le cas optiquement épais et le cas optiquement mince.
 Pour avoir un premier ordre de grandeur, nous nous sommes basés sur l'équation donnant la luminosité d'Eddington 
 \begin{equation}
-L_{Edd} = \frac{4\piGMm_pc}{\sigma_e}
+L_{Edd} = \frac{4\pi GMm_pc}{\sigma_e}
 \end{equation}
 puis celle permettant de définir le taux d’accrétion critique 
 \begin{equation}
@@ -50,22 +50,21 @@ puis celle permettant de définir le taux d’accrétion critique
 \end{equation}
 ce qui nous donne une valeur de la température caractéristique $T_0$
 \begin{equation}
-T_0 \approx 2,50.10^7(\frac{\dot{M}_0}{\dot{L}_{crit})^{\frac{1}{4}}(\frac{M}{M\sun})^{-\frac{1}{4}} Kelvin
+T_0 \approx 2,50.10^7\left(\frac{\dot{M}_0}{\dot{L}_{crit}}\right)^{\frac{1}{4}}\left(\frac{M}{M_\odot}\right)^{-\frac{1}{4}} \mathrm{K}
 \end{equation}
 
-Nous obtenons $T_0 =1,40.10^6$ K. Nous avons ensuite, par paliers successifs, déterminé les intervalles de température permettant de représenter ce basculement d'état. Les deux valeurs que nous avons retenues sont : $T_{min}$ = 2,94.$10^5 K$ et $T_{max}$ 6,2.$10^6 K$ 
-\\
+Nous obtenons $T_0 =1,40.10^6$ K. Nous avons ensuite, par paliers successifs, déterminé les intervalles de température permettant de représenter ce basculement d'état. Les deux valeurs que nous avons retenues sont : $T_{min}$ = 2,94.$10^5 K$ et $T_{max}$ 6,2.$10^6 K$. 
 
 
 \subsubsection{Méthode de la dichotomie}
 
 Pour déterminer la densité de surface associée à une valeur de température précise, nous avons procédé par dichotomie.
 Cette méthode consiste à trouver les coordonnées où s' annule une fonction continue en partant d' un intervalle de départ et en le divisant successivement pour cerner l' intervalle le plus petit possible où se trouve la solution.  
-\\
+
 Soit f(T,$\Sigma$) = $Q^+$ - $Q^-$ = 0,  une fonction continue et strictement monotone dans un intervalle [$\Sigma_{min}$ ; $\Sigma_{max}$] pour un T donné. Si f(T,$\Sigma_{min}$ ) et  f(T,$\Sigma_{max}$ ) sont de signes opposés, alors d' après le théorème de la bijection il existe une solution unique comprise dans cette intervalle. 
-\\
+
 Nous avons appliqué cette bissection en divisant à chaque fois l' intervalle en deux jusqu' à obtenir une solution avec une précision de $10^-6$ et en limitant le nombre d' itérations pour des raisons pratiques. Nous avons alors obtenu deux graphes, représentant T en fonction de $\Sigma$ pour un milieu optiquement épais (tracé courbé) et pour un milieu optiquement mince (relation linéaire).
-\\
+
 
 \begin{figure}[htb!]
 \centering
@@ -84,10 +83,10 @@ Le nombre d'itérations par une méthode de dichotomie est donnée par la formul
 n = \frac{log(borne_{sup} - borne_{inf}) + N}{log(2)} 
 \end{equation}
 Pour avoir le résultat à $10^{-N}$ près.
-Nous avons donc regardé s' il existait des méthodes qui convergeaient plus rapidement et de manière tout aussi robuste. 
+Nous avons donc regardé s'il existait des méthodes qui convergeaient plus rapidement et de manière tout aussi robuste. 
 
 \subsubsection{Méthode de Newton}
-La méthode de Newton parfois appelée méthode de Newton-Raphson, décrite dans le \textit{De analysi per aequationes numero terminorum infinitas} en 1669. Cette méthode à l'avantage de converger beaucoup plus rapidement que pour la méthode de la dichotomie (convergence d'ordre 2)
+La méthode de Newton parfois appelée méthode de Newton-Raphson, a été décrite pour la première fois par I.Newton dans le \textit{De analysi per aequationes numero terminorum infinitas} en 1669. Cette méthode à l'avantage de converger beaucoup plus rapidement que pour la méthode de la dichotomie (convergence d'ordre 2)
 
 \begin{equation}
 x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)}
@@ -98,13 +97,13 @@ En revanche, cette méthode présente plusieurs inconvénients, tout d'abord, la
 
 \subsubsection{Méthode de la sécante}
 
-Un des gros inconvénient de la méthode de Newton est d'avoir à calculer la dérivée de la fonction. La méthode de la sécante permet de contourner cet obstacle et ne nécessite pas que la fonction soit de classe $C^1$
+Un des gros inconvénients de la méthode de Newton est d'avoir à calculer la dérivée de la fonction. La méthode de la sécante permet de contourner cet obstacle et ne nécessite pas que la fonction soit de classe $C^1$. Elle utilise pour cela une approximation de la dérivée.
 
 \begin{equation}
 x_{n+1} = x_n - \frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})}
 \end{equation}
 
-Cette méthode converge plus rapidement que la méthode de la dichotomie mais moins rapidement que la méthode de Newton (son ordre de convergence est compris entre 0 et 1 \footnote{Pour être plus précis l'ordre de convergence de cette méthode est égale à $\frac{1 + \sqrt{5}}{2}$} qui est le nombre d'or.). Elle permet également de s'affranchir également de la contrainte de l'intervalle de la fonction de la dichotomie. En revanche, cette méthode peut ne pas être robuste si la valeur initiale est trop éloignée de la solution ou s'il existe des racines multiples.
+Cette méthode converge plus rapidement que la méthode de la dichotomie mais moins rapidement que la méthode de Newton (son ordre de convergence est compris entre 0 et 1 \footnote{Pour être plus précis l'ordre de convergence de cette méthode est égale à $\frac{1 + \sqrt{5}}{2}$}qui est le nombre d'or.). Elle permet de s'affranchir également de la contrainte de l'intervalle de la fonction de la dichotomie. En revanche, cette méthode peut ne pas être robuste si la valeur initiale est trop éloignée de la solution ou s'il existe des racines multiples.
 
 \begin{figure}[htb!]
 	\centering
@@ -116,24 +115,34 @@ Cette méthode converge plus rapidement que la méthode de la dichotomie mais mo
 
 
 \subsubsection{Méthode de Brent}
-La méthode de Brent est une méthode de recherche de "zéros" d'une fonction combinant les méthodes de la dichotomie, de la sécante et l'interpolation quadratique inverse pour en utiliser tous leurs avantages. La méthode de l'interpolation quadratique inverse est une méthode de convergence rapide (ordre 2). Nous pouvons utiliser cette méthode si le dénominateur ne s'annule pas, c'est à dire :
+La méthode de Brent est une méthode de recherche de "zéros" d'une fonction combinant les méthodes de la dichotomie, de la sécante et l'interpolation quadratique inverse pour en utiliser tous leurs avantages. La méthode de l'interpolation quadratique inverse est une méthode de convergence rapide (ordre 2). Cette méthode sauvegarde une borne éloignée ($a$), une borne proche ($b$, qui est le point le plus proche de 0) et la valeur précédente de $b$: $c$. La méthode choisit la méthode quadratique inverse lorsque son dénominateur est non nul:
 \begin{equation}
 f(b) \ne f(a) \text{ et } f(b) \ne f(c) 
 \end{equation}
+% \begin{equation}
+%   x = \frac{(y-f(a)(y-f(b))c}{(f(c)-f(a))(f(c)-f(b))} +
+%   \frac{(y-f(b)(y-f(c))a}{(f(a)-f(b))(f(a)-f(c))} +
+%   \frac{(y-f(c)(y-f(a))b}{(f(b)-f(c))(f(b)-f(a))}
+% \end{equation}
 \begin{equation}
-x = \frac{(y-f(a)(y-f(b))c}{(f(c)-f(a))(f(c)-f(b))} + \frac{(y-f(b)(y-f(c))a}{(f(a)-f(b))(f(a)-f(c))} +  \frac{(y-f(c)(y-f(a))b}{(f(b)-f(c))(f(b)-f(a))}
+  s = \frac{af(b)f(c)}{(f(a)-f(b))(f(a)-f(c))} 
+  + \frac{bf(a)f(c)}{(f(b)-f(a))(f(b)-f(c))}
+  + \frac{cf(a)f(b)}{(f(c)-f(a))(f(c)-f(b))}
 \end{equation}
-Si cette condition n'est pas réalisée, nous utilisons la méthode de la sécante vue précédemment. Si la méthode de la sécante n'est pas efficace \footnote{C'est à dire.....}, nous utilisons la méthode de la dichotomie.
-\\
+Si le dénominateur s'annule, la méthode de la sécante est utilisé et alors :
+\begin{equation}
+  s = b - f(b)\frac{b-a}{f(b) - f(a)}
+\end{equation}
+Il peut exister des cas où la méthode de la dichotomie reste meilleure (par exemple si $f(a)$, $f(b)$ et $f(c)$ ont des valeur proches et non nulles, la méthode quadratique donne alors une valeur qui ne converge pas rapidement), dans ce cas là la méthode de la dichotomie est utilisée. Cela assure par ailleurs que la méthode converge au moins aussi vite de que la dichotomie.
 
 
 \subsection{Comparaison des différentes méthodes}
 
-Nous pouvons vérifier que la méthode de Brent est plus efficace que la méthode de la dichotomie en affichant le nombre d'itérations nécessaire dans chacun des cas pour obtenir la précision souhaité dans le calcul de la courbe en S. 
+Nous pouvons vérifier que la méthode de Brent est plus efficace que la méthode de la dichotomie en affichant le nombre d'itérations nécessaire dans chacun des cas pour obtenir la précision souhaité dans le calcul de la courbe en S. Les résultats de cette simulation sont donnés sur la figure \ref{Fig::bench}. 
 \begin{figure}[htb!]
 	\centering
 	\includegraphics[height=0.5\textwidth]{brent_method3.pdf}
-	\caption{Comparaison du nombre d'itérations nécessaire pour converger pour la méthode de la dichotomie et celle de Brent.}
+	\caption{Comparaison du nombre d'itérations nécessaires pour converger pour la méthode de la dichotomie (en vert) et celle de Brent (en mauve) en fonction du rayon. L'unité du rayon est l'index de la case considérée.}
 	\label{Fig::bench}
 \end{figure}
 
@@ -144,7 +153,7 @@ Afin de déterminer la propagation de l' instabilité thermique, il faut trouver
 \begin{figure}[htb!]
 	\centering
 	\includegraphics[height=0.7\textwidth]{stable.pdf}
-	\caption{Zones stables et instables de la courbe en S}
+	\caption{Zones stables et instables de la courbe en S dans un diagramme $\Sigma-T$. Les zones en rouge sont stables, la zone en bleue est instable. \FIXME{les labels des axes ne sont pas bons, ce n'est pas en log}}
 	\label{Fig::stable}
 \end{figure}
 %\FloatBarrier
@@ -156,9 +165,9 @@ En revanche sur la partie centrale de la courbe (zone II), les petites perturbat
 
 Pour trouver les coordonnées de ce point critique, nous avons comparé les valeurs de $\Sigma$ (calculé pour un milieu optiquement épais) pour chaque point en augmentant T. Lorsque la variation de la courbe change, c' est-à-dire quand $\Sigma$ cesse d' augmenter et commence à diminuer, nous avons repéré les coordonnées du dernier point pour lequel la densité surfacique croît.  
 \\
-Dans le code, nous avons nommé "deuxième point critique", le point où a lieu le basculement d'épaisseur optique. Sur les graphes, ce point se situe à l' intersection des deux branches et signale le changement de régime où on a utilisé une approximation de diffusion à une autre approximation où l'on doit prendre en compte les pertes par rayonnement de freinage (le refroidissement par bremsstrahlung).
+Dans le code, nous avons nommé ``deuxième point critique'', le point où a lieu le basculement d'épaisseur optique. Sur les graphes, ce point se situe à l' intersection des deux branches et signale le changement de régime où on a utilisé une approximation de diffusion à une autre approximation où l'on doit prendre en compte les pertes par rayonnement de freinage (le refroidissement par \emph{bremsstrahlung}).
 \\
-Pour le repérer, nous avons eu la même approche que pour pour le point d' instabilité trouvé préalablement. Cette fois-ci, nous avons comparé le $\Sigma$ déterminé pour un milieu optiquement épais à celui optiquement mince. Quand le premier devient plus petit que le second, cela signifie que la densité surfacique arrête de décroître et qu' elle commence à augmenter linéairement en fonction de la température. 
+Pour le repérer, nous avons eu la même approche que pour pour le point d'instabilité trouvé préalablement. Cette fois-ci, nous avons comparé le $\Sigma$ déterminé pour un milieu optiquement épais à celui optiquement mince. Quand le premier devient plus petit que le second, cela signifie que la densité surfacique arrête de décroître et qu' elle commence à augmenter linéairement en fonction de la température. 
 \\
 %%%%%%%%[courbe en S avec les points légendés + ?evolution en fonction de r ?]
 
@@ -216,3 +225,9 @@ Comme nous n'avions pas à notre disposition une expression explicite d' allure 
 
 \subsection{Discussion}
 Il n'est pas exclu qu'il existe plusieurs racines à l'équation $Q^+ = Q^-$, ce qui voudrait dire que la courbe en S n'est pas unique et plus particulièrement qu'il pourrait exister plusieurs branches dans le cas optiquement mince.
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "rapport"
+%%% End:
