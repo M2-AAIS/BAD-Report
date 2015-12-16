@@ -24,12 +24,12 @@ Les solutions pour chaque $r$ de la branche supérieure déterminées par dichot
 
 \subsection{Évolution de la luminosité}
 
-Pour des valeurs de $\dot{M}_0$ suffisamment faible, le disque converge comme prévu vers la solution stationnaire. Ce régime est atteint en un temps d'environ 3000s. C'est un régime qui correspond à un transfert total de matière de l'extérieur du disque jusqu'à tomber dans le trou noir. On s'attend à avoir une luminosité constante qui traduit la conversion partielle de l'énergie potentielle de gravité en énergie thermique, et ainsi en énergie radiative via le terme $L_\mathrm{tot} = \int_{r_\mathrm{min}}^{r_\mathrm{max}} 2\pi r Fz\ \mathrm{d}r$. Le tracé de la luminosité est donné en figure \ref{eq:Lstable} et est en accord avec le comportement physique attendu. Dans un diagramme $\Sigma-T$, cela correspond à un point fixe et stable de la courbe en S.
+Pour des valeurs de $\dot{M}_0$ suffisamment faible, le disque converge comme prévu vers la solution stationnaire. Ce régime est atteint en un temps d'environ 3000s. C'est un régime qui correspond à un transfert total de matière de l'extérieur du disque jusqu'à tomber dans le trou noir. On s'attend à avoir une luminosité constante qui traduit la conversion partielle de l'énergie potentielle de gravité en énergie thermique, et ainsi en énergie radiative via le terme $L_\mathrm{tot} = \int_{r_\mathrm{min}}^{r_\mathrm{max}} 2\pi r Fz\ \mathrm{d}r$. Le tracé de la luminosité est donné en figure \ref{fig:Lstable} et est en accord avec le comportement physique attendu. Dans un diagramme $\Sigma-T$, cela correspond à un point fixe et stable de la courbe en S.
 
 \begin{figure}
   \includegraphics{figures/Ltot_fonction_t_stable.pdf}
   \caption{Évolution de la luminosité totale du disque $L_\mathrm{tot}$ en fonction du temps pour un taux d'accrétion faible $\dot{M}_0 = 10^{-4}\dot{M}_c$. Le disque atteint rapidement son état stationnaire où la luminosité est constante et vaut ici $4.4\ 10^{22}\mathrm{erg.s^{-1}}$}
-  \label{eq:Lstable}
+  \label{fig:Lstable}
 \end{figure}
 
 Lorsqu'on perturbe le disque en augmentant le taux d'accrétion, on doit finir par atteindre un régime instable. C'est ce qu'on observe lorsqu'on augmente $\dot{M}_0$ dès qu'un équilibre est atteint. La simulation montre que la luminosité totale du disque n'est pas constante et possède des sursauts, correspondant à l'instabilité, représenté sur la figure \ref{fig:Ltot_function_t}. Cette figure présente des incurvations de la luminosité qui correspondent à l'augmentation de $\dot{M}_0$ au bord extérieure. L'instabilité se déclenche plus rapidement que l'arrivée au point stable de la figure \ref{fig:Lstable} car le critère de stabilité déclanchant l'augmentation du taux d'accrétion n'attend pas l'équilibre en $L_\mathrm{tot}$.
