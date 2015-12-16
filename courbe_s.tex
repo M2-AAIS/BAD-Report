@@ -1,6 +1,6 @@
 \section{Détermination des courbes en S}
 
-Nous avons voulu modéliser dans cette partie la condition d'équilibre thermique du plan équatorial du disque d'accrétion c'est-à-dire représenter l'état du système lorsque la quantité de chaleur produite ($Q^+$)est égale à la quantité de chaleur dissipée ($Q^-$), lorsque le terme de refroidissement est égal au terme de chauffage.
+Nous avons voulu modéliser dans cette partie la condition d'équilibre thermique du plan équatorial du disque d'accrétion c'est-à-dire représenter l'état du système lorsque la quantité de chaleur produite ($Q^+$) est égale à la quantité de chaleur dissipée ($Q^-$), lorsque le terme de refroidissement est égal au terme de chauffage.
 \begin{equation}
 Q^+ = Q^-
 \end{equation}
@@ -17,7 +17,7 @@ Cette équation est stationnaire, elle ne dépend pas du temps mais elle dépend
 Nous avons voulu représenter sur un même graphique l'évolution de la température en fonction de densité de surface, c'est à dire représenter la fonction T($\Sigma$).
 \\   
 
-\subsection{Etablissement de la fonction}
+\subsection{Établissement de la fonction}
 
 Au premier abord, pour obtenir une seule courbe en S, le rayon r a été fixé. Ainsi la vitesse angulaire $\Omega$ a été préalablement définie. Par la suite nous avons répété la démarche suivante pour 256 différentes valeurs du rayon.
 \\
@@ -32,14 +32,28 @@ De plus $\kappa_{ff}$, $\kappa_{e}$ et $\epsilon_{ff}$ pour pouvoir calculer le 
 Q^+ - Q^- = 0. 
 \end{equation}
 \\
-Nous avons aussi déterminé la profondeur optique effective $\tau_{eff}$. Selon sa valeur, nous pouvons nous placer dans un cas dit optiquement épais ($\tau_{eff} > 1$) ou bien dans le cas optiquement mince  ($\tau_{eff} < 1$).
-Cependant nous ne l' avons pas utilisé comme critère pour le choix de l' expression du flux pour éviter de tomber sur des solutions stables artificielles qui seraient le fruit d' interpolations aux alentours de $\tau_{efff}$ = 1 où a lieu le basculement entre les deux approximations utilisées. 
+Nous avons aussi déterminé la profondeur optique effective $\tau_{eff}$. Selon sa valeur, nous pouvons nous placer dans un cas dit optiquement épais ($\tau_{eff} > 1$) ou bien dans le cas optiquement mince  ($\tau_{eff} < 1$). Cette profondeur optique joue un rôle central dans l'établissement des courbes en S, c'est elle qui détermine l'équation à utiliser pour calculer la valeur du flux radiatif $Fz$.
+
+Cependant nous ne l' avons pas utilisé comme critère pour le choix de l' expression du flux pour éviter de tomber sur des solutions stables artificielles qui seraient le fruit d' interpolations aux alentours de $\tau_{eff}$ = 1 où a lieu le basculement entre les deux approximations utilisées. 
 \\
 Nous avons donc calculé \ref{eq:qplus-qmoins} dans deux cas où on a imposé l' expression du flux radiatif. Ainsi, nous avons un algorithme où l' on peut fixer les valeurs de T et $\Omega$ pour obtenir une fonction ne dépendant que de $\Sigma$.
 
 \subsection{Intervalle de température}
 La résolution de la courbe en S nécessite de se placer dans un intervalle de température relativement restreint correspondant à la valeur de basculement de $\tau$ entre le cas optiquement épais et le cas optiquement mince.
-Pour avoir un premier ordre de grandeur, nous nous sommes basés sur l'équation donnant la luminosité d'Eddington \ref{eq::} puis celle permettant de définir le taux d'accretion critique \ref{eq::} qui nous a donné la valeur de la température caractéristique $T_0$ de $1,40.10^6$ K. Nous avons ensuite, par paliers successifs, déterminé les intervalles de température permettant de représenter ce basculement d'état. Les deux valeurs que nous avons retenues sont : $T_{min}$ = 2,94.$10^5 K$ et $T_{max}$ 6,2.$10^6 K$ 
+Pour avoir un premier ordre de grandeur, nous nous sommes basés sur l'équation donnant la luminosité d'Eddington 
+\begin{equation}
+L_{Edd} = \frac{4\piGMm_pc}{\sigma_e}
+\end{equation}
+puis celle permettant de définir le taux d’accrétion critique 
+\begin{equation}
+\dot{M}_{crit} = \frac{12}{c^2}L_{Edd} 
+\end{equation}
+ce qui nous donne une valeur de la température caractéristique $T_0$
+\begin{equation}
+T_0 \approx 2,50.10^7(\frac{\dot{M}_0}{\dot{L}_{crit})^{\frac{1}{4}}(\frac{M}{M\sun})^{-\frac{1}{4}} Kelvin
+\end{equation}
+
+Nous obtenons $T_0 =1,40.10^6$ K. Nous avons ensuite, par paliers successifs, déterminé les intervalles de température permettant de représenter ce basculement d'état. Les deux valeurs que nous avons retenues sont : $T_{min}$ = 2,94.$10^5 K$ et $T_{max}$ 6,2.$10^6 K$ 
 \\
 
 
@@ -143,13 +157,13 @@ Pour trouver les coordonnées de ce point critique, nous avons comparé les vale
 \\
 Dans le code, nous avons nommé "deuxième point critique", le point où a lieu le basculement d'épaisseur optique. Sur les graphes, ce point se situe à l' intersection des deux branches et signale le changement de régime où on a utilisé une approximation de diffusion à une autre approximation où l'on doit prendre en compte les pertes par rayonnement de freinage (le refroidissement par bremsstrahlung).
 \\
-Pour le repérer, nous avons eu la même approche que pour pour le point d' instabilité trouvé préalablement. Cette fois-ci, nous avons comparé le $\Sigma$ déterminé pour un milieu optiquement épais à celui optiquement mince. Quand le premier devient plus petit que le second, celà signifie que la densité surfacique arrête de décroître et qu' elle commence à augmenter linéairement en fonction de la température. 
+Pour le repérer, nous avons eu la même approche que pour pour le point d' instabilité trouvé préalablement. Cette fois-ci, nous avons comparé le $\Sigma$ déterminé pour un milieu optiquement épais à celui optiquement mince. Quand le premier devient plus petit que le second, cela signifie que la densité surfacique arrête de décroître et qu' elle commence à augmenter linéairement en fonction de la température. 
 \\
 %%%%%%%%[courbe en S avec les points légendés + ?evolution en fonction de r ?]
 
 \subsection{Construction de la courbe}
 
-En combinant les points trouvés dans le cas optiquement épais jusqu'au deuxième point critique et les points trouvés dans le cas optiquement mince, nous avons pu assembler les deux parties de la courbe en S.
+En combinant les points trouvés dans le cas optiquement épais jusqu'au deuxième point critique et les points trouvés dans le cas optiquement mince, nous avons pu assembler les deux parties de la courbe en S. 
 
 \begin{figure}[htb!]
 	\centering
