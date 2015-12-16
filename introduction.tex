@@ -1,16 +1,20 @@
 \section*{Introduction}
 \addcontentsline{toc}{section}{Introduction}
 
-\FIXME{Du bla bla}
+Les trous noirs de Schwarzschild font partie des objets les plus "simples". En effet, il ne faut qu'un seul paramètre pour les décrire : leurs masses. En revanche, les disque d'accrétion qui les entourent sont plus complexes. En ce qui nous concerne, 6 paramètres sont utilisés pour les décrire. Ces paramètres sont reliés par plusieurs équations sans solutions analytiques. On peut néanmoins s'attendre à plusieurs régimes de stabilité/instabilité du disque. La stabilité du disque est régie par deux paramètres, la température  $T$ et la densité de surface $\Sigma$. Les couples $(\Sigma, T)$ pour un disque à l'équilibre dessinent un "S" dans un diagramme $(\Sigma, T)$. Cette courbe en S n'a pas non plus de solution analytique. 
 
-\paragraph{L’équipe :}
-Nous étions une équipe de 7 personnes, sous la co-direction de Bruno
-\textit{Pagani} et Corentin \textit{Cadiou}, et réparties comme suit :
+Le problème du disque d'accrétion autour d'un trou noir de Schwarzschild ne peut pas donc pas être résolu par une unique étude théorique. C'est pourquoi, nous avons eu recours à la simulation numérique. Notre simulateur fonctionne principalement en trois temps.
+
+Pour commencer, il nous faut calculer les courbes en S en  tout points du disque d'accrétion, c'est à dire calculer ses positions d'équilibre. Ensuite, on fait évoluer ce disque en intégrant des équations différentielles partielles (EDP). L'intégration achevée, une mise à jours de toutes les autres variables du problème sont nécessaires afin de poursuivre l'évolution. 
+
+%\paragraph{L’équipe :}
+Nous étions une équipe de 7 personnes, sous la co-direction de Bruno \textit{Pagani} et Corentin \textit{Cadiou}. Nous nous sommes séparés en 3 équipes selon la répartition du travail proposé par Franck Le Petit :
 \begin{itemize}
-    \item Équipe « Courbe en S » : Maximilien \textit{Franco} et Michelle \textit{Tsirou} ;
-    \item Équipe « Variables » : Antoine \textit{Marchal} et Simon \textit{Jeanne} ;
-    \item Équipe « Intégration » : Clément \textit{Hottier}, Corentin \textit{Cadiou} et Bruno \textit{Pagani}.
+    \item Équipe « Courbe en S » : Maximilien \textit{Franco} et Michelle \textit{Tsirou} :
+    \\Ce groupe avait pour tâche de générer les courbes en S en chacune des positions du disque. Ceci nous permettait par la suite de savoir dans quel régime le disque se trouvait.
+    \item Équipe « Intégration » : Clément \textit{Hottier}, Corentin \textit{Cadiou} et Bruno \textit{Pagani} :
+    \\Ce groupe avait pour mission de mettre au point les différents schémas d'intégrations des EDP permettant de faire évoluer le disque en fonction de l'état actuel.
+    \item Équipe « Variables » : Antoine \textit{Marchal} et Simon \textit{Jeanne} :
+    \\Ce groupe avait pour but le calcul de toutes les variables entre deux évolutions successives ainsi que de mettre en place le passage des variables dimensionnées aux variables adimensionnées et inversement.
 \end{itemize}
-
-En pratique, la plupart des membres ont participé à quasiment toutes les
-parties du projet.
+En pratique, une fois les principaux organes du simulateur établis, la totalité de l'équipe a participé à la mise en place des derniers détails sur l'ensemble du projet. 
