@@ -1,4 +1,4 @@
-\subsection{Intégration numérique de S et T}
+\subsection{Intégration numérique de $S$ et $T$}
 
 \subsubsection{Intégration implicite de $S$}
 
@@ -128,7 +128,7 @@ temps $t+1$ :
 \end{equation}
 La solution au temps suivant est directement donnée.
 
-\subsubsection{Intégration explicite de $T$}
+\subsubsection{Intégration de $T$}
 \label{ssec:integration_T}
 
 Il est possible d'améliorer le schéma d'intégration explicite pour la
@@ -138,18 +138,29 @@ température en donnant une meilleure estimation de $f(t)$.
   \frac{\partial T}{\partial t} = \frac{Q^+ - Q^- + Q_\textrm{adv}}{C_V} = f(T, S)
 \end{equation}
 
-On peut écrire un développement limité de $f(T) = f_0 + \frac{\partial
-f}{\partial T}\Delta T + \frac{\partial f}{\partial S}\Delta S$ Comme on a un
-temps thermique très petit devant le temps visqueux $\tau_\nu \gg \tau_T$
-\FIXME{ est-ce vraiment vrai ?} , les variations de $f$ par rapport à $S$ sont
-très faibles devant celles par rapport à $T$. On obtient alors $f(T) = f_0 +
-f'_T \Delta T$. En linéarisant, on obtient finalement: \begin{equation} T^{t+1}
-= T^t + \frac{f_0}{f'_T}\left[e^{f'_T\Delta t} - 1 \right] \end{equation} On
+On peut écrire un développement limité de $f(T) = f_0 + \frac{\partial f}{\partial T}\Delta T + \frac{\partial f}{\partial S}\Delta S$. Comme dans le régime stable, on un temps thermique très petit devant le temps visqueux $\tau_\nu \gg \tau_T$, les variations de $f$ par rapport à $S$ sont seront négligées devant celles par rapport à $T$. Dans les simulations, cette supposition ne sera vraie que dans le régime stable, comme le montre la figure \ref{fig:df_ds_et_df_dt}. On obtient alors $f(T) = f_0 + f'_T \Delta T$. En linéarisant, on obtient finalement:
+\begin{equation} 
+  \label{eq:evol_T}
+  T^{t+1} = T^t + \frac{f_0}{f'_T}\left[e^{f'_T\Delta t} - 1 \right]
+\end{equation}
+On
 peut facilement obtenir numériquement une approximation de $f'_T$ en calculant
 la quantité $\frac{f(T+\delta T) - f(T)}{\delta T}$, avec $\delta T = \lambda
 T,\ \lambda \ll 1$.
 
-\FIXME{ ajouter plot qui montre qu'on a bien df/dS << df/dT}
-\FIXME{ajouter plot qui montre que la courbe est suffisamment lisse, c'est-à-dire que f'T peut bien être approximé numériquement}
+Dans le régime instable, comme le pas de temps diminue fortement, le terme en $\Delta t f'_T$ tend vers 0. L'équation \eqref{eq:evol_T} devient alors :
+\begin{equation}
+  T^{t+1} = T^t + \Delta t f_0
+\end{equation}
+Cela revient à ne pas faire de developpement limité en $S$ et $T$, c'est-à-dire à négliger les termes en $f'_T$ et $f'_S$. Par soucis de simplicité, le code n'utilise donc que la formule \eqref{eq:evol_T}.
 
+\begin{figure}
+  \includegraphics{figures/df_dS_and_df_dT.pdf}
+  \caption{Variation du rapport $\Delta T \frac{\mathrm{d} f}{\mathrm d T}$ sur $\Delta S \frac{\mathrm{d} f}{\mathrm d S}$ au cours de la simulation. En bleu, le régime stable (utilisation d'un schéma implicite pour $S$) et en vert le régime instable (utilisation d'un schéma explicite pour $S$). On constate que dans le régime stable, la variation du terme de chauffage par une perturbation en température est plus grande que la variation par une perturbation en densité surfacique. Le rapport devient très variable lorsque le disque devient instable.}
+  \label{fig:df_ds_et_df_dt}
+\end{figure}
 
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "rapport"
+%%% End:
