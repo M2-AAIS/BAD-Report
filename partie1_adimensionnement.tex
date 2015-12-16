@@ -354,6 +354,7 @@ Et nous obtenons :
 Ces choix ont des conséquences pour l’expression de la vitesse radiale (ou
 d’accrétion) définie par l’\cref{eq:vitesse_accretion} :
 \begin{equation}
+    \label{eq:rel_vitesse_radiale}
     v = - \frac{2 r_s}{t_0 S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right)
 \end{equation}
 
@@ -395,6 +396,7 @@ Toujours dans l’idée de simplifier au maximum les relations entre les
 différentes grandeurs adimensionnées, nous souhaiterions que
 l’\cref{eq:viscosite} se réécrive ainsi :
 \begin{equation}
+    \label{eq:rel_viscosite_adim}
     \nu^\star = \alpha c_s^\star H^\star
 \end{equation}
 
@@ -412,13 +414,14 @@ l’\cref{eq:demi_hauteur} se réécrive ainsi :
 En combinant ces deux conditions avec les \cref{eq:demi_hauteur,eq:viscosite} et les adimensionnements
 établis aux \cref{eq:viscosite_adim,eq:vitesse_angulaire_adim} nous obtenons :
 \begin{equation}
+    \label{eq:rel_cs_0}
     c_s^0 = \sqrt{2 \frac{r_s^2}{t_0} \Omega_0}
 \end{equation}
 
 À partir d’ici, il faut faire un choix sur l’adimensionnement de $t$ et $c_s$.
 En effet, ce sont les seules grandeurs pas encore définies dans cette équation.
 Il y a pragmatiquement deux possibilités : soit définir $t_0$ comme l’inverse
-d’$\Omega_0$, soit poser $v_0 = t_0$. Ici, nous choisirons cette seconde
+d’$\Omega_0$, soit poser ${c_s}_0 = v_0$. Ici, nous choisirons cette seconde
 possibilité :
 \begin{equation}
     \label{eq:vitesse_son_adim}
