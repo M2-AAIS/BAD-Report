@@ -23,7 +23,7 @@ Au premier abord, pour obtenir une seule courbe en S, le rayon r a été fixé. 
 \\
 En première partie, nous avons calculé la demi-hauteur H en utilisant la résolution d' une équation quadratique ne dépendant que de (T,$\Sigma,\Omega$) (Voir \ref{Equation}).
 \\
-Ensuite, la densité volumique $\rho$, la vitesse du son $c_s$ et la viscosité $\nu$. ( ref)
+Ensuite, la densité volumique $\rho$, la vitesse du son $c_s$ et la viscosité $\nu$. 
 \\
 De plus $\kappa_{ff}$, $\kappa_{e}$ et $\epsilon_{ff}$ pour pouvoir calculer le flux radiatif $F_z$ et déduire la différence des deux termes de chaleurs (en ne prenant pas en compte le terme d' advection) :
 \\
@@ -32,7 +32,7 @@ De plus $\kappa_{ff}$, $\kappa_{e}$ et $\epsilon_{ff}$ pour pouvoir calculer le 
 Q^+ - Q^- = 0. 
 \end{equation}
 \\
-Nous avons aussi déterminé la profondeur optique effective $\tau_{eff}$. Selon sa valeur, nous pouvons nous placer dans un cas dit optiquement épais ($\tau_{eff}$ > 1) ou bien dans le cas optiquement mince  ($\tau_{eff}$ < 1).
+Nous avons aussi déterminé la profondeur optique effective $\tau_{eff}$. Selon sa valeur, nous pouvons nous placer dans un cas dit optiquement épais ($\tau_{eff} > 1$) ou bien dans le cas optiquement mince  ($\tau_{eff} < 1$).
 Cependant nous ne l' avons pas utilisé comme critère pour le choix de l' expression du flux pour éviter de tomber sur des solutions stables artificielles qui seraient le fruit d' interpolations aux alentours de $\tau_{efff}$ = 1 où a lieu le basculement entre les deux approximations utilisées. 
 \\
 Nous avons donc calculé \ref{eq:qplus-qmoins} dans deux cas où on a imposé l' expression du flux radiatif. Ainsi, nous avons un algorithme où l' on peut fixer les valeurs de T et $\Omega$ pour obtenir une fonction ne dépendant que de $\Sigma$.
@@ -41,31 +41,14 @@ Nous avons donc calculé \ref{eq:qplus-qmoins} dans deux cas où on a imposé l'
 La résolution de la courbe en S nécessite de se placer dans un intervalle de température relativement restreint correspondant à la valeur de basculement de $\tau$ entre le cas optiquement épais et le cas optiquement mince.
 Pour avoir un premier ordre de grandeur, nous nous sommes basés sur l'équation donnant la luminosité d'Eddington \ref{eq::} puis celle permettant de définir le taux d'accretion critique \ref{eq::} qui nous a donné la valeur de la température caractéristique $T_0$ de $1,40.10^6$ K. Nous avons ensuite, par paliers successifs, déterminé les intervalles de température permettant de représenter ce basculement d'état. Les deux valeurs que nous avons prises sont : $T_{min}$ = 2,94.$10^5 K$ et $T_{max}$ 6,2.$10^6 K$ 
 \\
-\subsection{Résolution des équations}
-
-En première partie, nous avons calculé la demi-hauteur H en utilisant la résolution d' une équation quadratique ne dépendant que de (T,$\Sigma,\Omega$) (Voir \ref{Equation}).
-\\
-Ensuite, la densité volumique $\rho$, la vitesse du son $c_s$ et la viscosité $\nu$. ( ref)
-\\
-De plus $\kappa_{ff}$, $\kappa_{e}$ et $\epsilon_{ff}$ pour pouvoir calculer le flux radiatif $F_z$ et déduire la différence des deux termes de chaleurs (en ne prenant pas en compte le terme d' advection) :
-\\
-\begin{equation} 
-\label{eq:qplus-qmoins}
-Q^+ - Q^- = 0. 
-\end{equation}
-\\
-Nous avons aussi déterminé la profondeur optique effective $\tau_{eff}$. Selon sa valeur, nous pouvons nous placer dans un cas dit optiquement épais ($\tau_{eff}$ > 1) ou bien dans le cas optiquement mince  ($\tau_{eff}$ < 1).
-Cependant nous ne l' avons pas utilisé comme critère pour le choix de l' expression du flux pour éviter de tomber sur des solutions stables artificielles qui seraient le fruit d' interpolations aux alentours de $\tau_{efff}$ = 1 où a lieu le basculement entre les deux approximations utilisées. 
-\\
-Nous avons donc calculé \ref{eq:qplus-qmoins} dans deux cas où on a imposé l' expression du flux radiatif. Ainsi, nous avons un algorithme où l' on peut fixer les valeurs de T et $\Omega$ pour obtenir une fonction ne dépendant que de $\Sigma$.
 
 
 \subsubsection{Méthode de la dichotomie}
 
 Pour déterminer la densité de surface associée à une valeur de température précise, nous avons procédé par dichotomie.
-Cette méthode consiste à trouver les coordonnées où s' annule une fonction continue en partant d' un intervalle de départ (voir \ref{}) et en le divisant successivement pour cerner l' intervalle le plus petit possible où se trouve la solution.  
+Cette méthode consiste à trouver les coordonnées où s' annule une fonction continue en partant d' un intervalle de départ et en le divisant successivement pour cerner l' intervalle le plus petit possible où se trouve la solution.  
 \\
-Soit f(T,$\Sigma$) = $Q^+$ - $Q^-$ = 0,  une fonction continue et strictement monotone dans un intervalle [$\Sigma_{min}$ ; $\Sigma_{max}$] pour un T donné. Si f(T,[$\Sigma_{min}$ ) et  f(T,$\Sigma_{max}$ ) sont de signes opposés, alors d' après le théorème de la bijection il existe une solution unique comprise dans cette intervalle. 
+Soit f(T,$\Sigma$) = $Q^+$ - $Q^-$ = 0,  une fonction continue et strictement monotone dans un intervalle [$\Sigma_{min}$ ; $\Sigma_{max}$] pour un T donné. Si f(T,$\Sigma_{min}$ ) et  f(T,$\Sigma_{max}$ ) sont de signes opposés, alors d' après le théorème de la bijection il existe une solution unique comprise dans cette intervalle. 
 \\
 Nous avons appliqué cette bissection en divisant à chaque fois l' intervalle en deux jusqu' à obtenir une solution avec une précision de $10^-6$ et en limitant le nombre d' itérations pour des raisons pratiques. Nous avons alors obtenu deux graphes, représentant T en fonction de $\Sigma$ pour un milieu optiquement épais (tracé courbé) et pour un milieu optiquement mince (relation linéaire).
 \\
@@ -84,7 +67,7 @@ Nous avons appliqué cette bissection en divisant à chaque fois l' intervalle e
 
 
 \subsubsection{Méthode de Brent}
-La méthode de Brent est une méthode de recherche de "zéros" d'une fonction combinant les méthodes de la dichotomie, de la sécante et l'interpolation quadratique inverse pour en utiliser tous leurs avantages. La méthode de l'interpolation quadratique inverse est une méthode de convergence rapide (ordre 2)
+La méthode de Brent est une méthode de recherche de "zéros" d'une fonction combinant les méthodes de la dichotomie, de la sécante et l'interpolation quadratique inverse pour en utiliser tous leurs avantages. La méthode de l'interpolation quadratique inverse est une méthode de convergence rapide (ordre 2).
 \begin{equation}
 f(b) \ne f(a) \text{ et } f(b) \ne f(c) 
 \end{equation}
@@ -98,7 +81,7 @@ Sinon, nous utilisons la méthode de la sécante vue précédemment. Si la méth
 La méthode de la dichotomie est une méthode simple et robuste pour trouver les "zéros" d'une fonction mais elle demande un grand nombre de d'itérations. En effet cette méthode converge linéairement.
 \\
 %%%%[A VERIFIER]
-Le nombre d'itérations par une méthode de dichotomie est donnée par la formule suivante
+Le nombre d'itérations par une méthode de dichotomie est donnée par la formule suivante : 
 \begin{equation}
 n = \frac{log(borne_{sup} - borne_{inf}) + log(\epsilon)}{log(2)} 
 \end{equation}
@@ -106,7 +89,7 @@ n = \frac{log(borne_{sup} - borne_{inf}) + log(\epsilon)}{log(2)}
 Nous avons donc regardé s' il existait des méthodes qui convergeaient plus rapidement et de manière tout aussi robuste. 
 
 \subsubsection{Méthode de Newton}
-La méthode de Newton parfois appelée méthode de Newton-Raphson, décrite dans le \textit{De analysi per aequationes numero terminorum infinitas} en 1669....
+La méthode de Newton parfois appelée méthode de Newton-Raphson, décrite dans le \textit{De analysi per aequationes numero terminorum infinitas} en 1669.
 
 \begin{equation}
 x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)}
@@ -151,13 +134,13 @@ Cette méthode converge plus rapidement que la méthode de la dichotomie mais mo
 
 
 \subsection{Détermination des points critiques}
-Afin de déterminer la propagation de l' instabilité thermique, il faut trouver le point critique où le système devient instable. Au niveau de la courbe en S, ceci a lieu sur la branche inférieure au niveau de la courbure : au-delà de ce point la densité surfacique diminue tandis que la température continue à s' élever. Sur la figure (ref) la zone d'instabilité est représentée en bleue.
+Afin de déterminer la propagation de l' instabilité thermique, il faut trouver le point critique où le système devient instable. Au niveau de la courbe en S, ceci a lieu sur la branche inférieure au niveau de la courbure : au-delà de ce point la densité surfacique diminue tandis que la température continue à s' élever. Sur la figure \ref{Fig::stable} la zone d'instabilité est représentée en bleue.
 
 \begin{figure}[htb!]
 	\centering
 	\includegraphics[height=0.7\textwidth]{stable.pdf}
 	\caption{Zones stables et instables de la courbe en S}
-	\label{Fig::bench}
+	\label{Fig::stable}
 \end{figure}
 %\FloatBarrier
 
@@ -195,9 +178,10 @@ Nous avons donc pour chaque rayon une courbe en S représenté sur le graphe ci-
 
 D' après nos calculs nous trouvons un $\tau_eff$ aux alentours de 0,06 lors de la transition d'un milieu dit optiquement épais à un milieu optiquement mince. Cette valeur ne correspond pas à la valeur théorique où $\tau_eff$ = 1. 
 Celà pose un problème au niveau de la partie d'intégration car notre branche linéaire est translatée par rapport à celle définie par la théorie. 
-Cette différence de valeurs peut être expliquée par une erreur au niveau de l’adimensionnement ou bien dans les équations que nous avons utilisées ainsi que par une faute cachée dans nos paramètres ou nos constantes. 
+Cette différence de valeurs peut être expliquée par une erreur au niveau de l’adimensionnement ou bien dans les équations que nous avons utilisées ainsi que peut-être par une faute cachée dans nos paramètres ou nos constantes. 
 \\
-En fonction du rayon r, la valeur de $\tau_eff$ semble  
+En fonction du rayon r, les coordonnées dans l' espace {T,$\Sigma$} des points ayant une valeur critique de $\tau_eff$ semblent évoluer de manière à ce que la température diminue et la densité surfacique augmente.
+%%%manque d'inspiration  
 
 \begin{figure}[htb!]
 	\centering
@@ -215,8 +199,7 @@ Pour définir la température T en fonction de $\Sigma$, nous avons d' abord ess
 La résolution n' étant pas plus simple qu' avant le changement et afin d' éviter toute erreur induite lors du remplacement des différentes variables impliquées, nous avons préféré de calculer indépendamment chaque variable dans un ordre bien choisi. 
 \\
 
-\item Calcul des points critiques par derivation de la fonction T($\Sigma$)
+\item Calcul des points critiques par dérivation de la fonction T($\Sigma$)
 Comme nous n'avions pas à notre disposition une expression explicite d' allure T = f($\Sigma$), la dérivation des solutions issues d' une série d'équations ne semblait pas l'approche la plus efficace pour trouver le point critique d' instabilité. De plus, en dérivant nous aurions eu un problème au niveau du deuxième point critique qui est un point anguleux.
 \end{enumerate}
 
-\subsection{Conclusion}
