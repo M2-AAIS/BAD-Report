@@ -6,16 +6,17 @@
 Les différentielles découlent directement des adimensionnements :
 \begin{subequations}
     \begin{align}
-        \label{eq:dt_star}
+        \label{eq:dt_adim}
         \partial t &= t_0 \partial t^{\star} \\
-        \label{eq:dr_star}
+        \label{eq:dr_adim}
         \partial r &= 2 r_s x \partial x \\
-        \label{eq:dT_star}
+        \label{eq:dT_adim}
         \partial T &= T_0 \partial T^{\star}
     \end{align}
 \end{subequations}
 
 \subsection{Évolution de la densité de surface}
+\label{app:densite_surface}
 
 Nous partons de l’\cref{eq:densite_surface} :
 \begin{equation}
@@ -23,7 +24,7 @@ Nous partons de l’\cref{eq:densite_surface} :
 \end{equation}
 
 Et nous remplaçons $\Sigma$ dans le membre de gauche à l’aide de
-l’\cref{eq:definition_S} et $t$ en vertu de l’\cref{eq:dt_star} :
+l’\cref{eq:definition_S} et $t$ en vertu de l’\cref{eq:dt_adim} :
 \begin{align}
     \frac{\partial \Sigma}{\partial t} &= \frac{1}{t_0} \frac{\partial}{\partial t^\star} \left( \frac{S}{x} \right) = \frac{1}{x t_0} \frac{\partial S}{\partial t^\star} \\
     \hookrightarrow \frac{\partial S}{\partial t^\star} &= \frac{3 x t_0}{r} \frac{\partial}{\partial r} \left( r^\frac{1}{2} \frac{\partial}{\partial r} \left( \nu \Sigma r^\frac{1}{2} \right) \right)
@@ -38,7 +39,7 @@ Puis dans le membre de droite :
     \hookrightarrow \frac{\partial S}{\partial t^\star} &= \frac{3 x t_0}{r} \frac{\partial}{\partial r} \left( (r_s r)^\frac{1}{2} \frac{\partial}{\partial r} \left( \nu S \right) \right) \\
 \end{align}
 
-Nous remplaçons la première dérivée selon $r$ suivant \eqref{eq:dr_star} :
+Nous remplaçons la première dérivée selon $r$ suivant \eqref{eq:dr_adim} :
 \begin{align}
     \frac{\partial}{\partial r} = \frac{1}{2 r_s x} \frac{\partial}{\partial x}
     &\Rightarrow (r_s r)^\frac{1}{2} \frac{\partial}{\partial r} = \frac{1}{2} \left( \frac{r_s r}{r_s^2} \frac{r_s}{r} \right)^\frac{1}{2} \frac{\partial}{\partial x}
@@ -59,7 +60,8 @@ Enfin, en remplaçant $r$ d’après \eqref{eq:position_adim} :
 
 Ce qui est bien l’\cref{eq:rel_densite_surface}.
 
-\subsection{Vitesse radiale}
+\subsection{Vitesse d’accrétion}
+\label{app:vitesse_accretion}
 
 Nous partons de l’\cref{eq:vitesse_accretion} :
 \begin{equation}
@@ -77,7 +79,7 @@ Les $r_s^\frac{1}{2}$ se simplifient donc, de même que le font les $S_0$ en rem
     v = - \frac{3}{S^\star} \frac{\partial}{\partial r} \left(\nu S^\star \right)
 \end{equation}
 
-On utilise maintenant l’\cref{eq:dr_star} :
+On utilise maintenant l’\cref{eq:dr_adim} :
 \begin{align}
     \frac{\partial}{\partial r} \left(\nu S^\star \right) &= \frac{1}{2 r_s x} \frac{\partial}{\partial x} \left( \nu S^\star \right) \\
     \hookrightarrow v &= - \frac{3}{2 r_s S^\star x} \frac{\partial}{\partial x} \left(\nu S^\star \right)
@@ -89,7 +91,7 @@ On remplace $\nu = \nu^\star \nu_0$ grâce à l’\cref{eq:viscosite_adim} :
     \hookrightarrow v &= - \frac{2 r_s}{t_0 S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star \right)
 \end{align}
 
-Ce qui est bien l’\cref{eq:rel_vitesse_radiale}.
+Ce qui est bien l’\cref{eq:rel_vitesse_accretion}.
 
 \subsection{Vitesse du son}
 
@@ -113,15 +115,15 @@ On remplace alors les rapports $\chi/\chi^\star$ par $\chi_0$ :
     3 \nu_0 \Omega_0 = 2 {c_s^0}^2
 \end{equation}
 
-On remplace alors $\nu_0 = \frac{4 r_s^2}{3 t_0}$, divise par \num{2} et prend la racine carrée :
+On remplace alors $\nu_0 = \frac{4 r_s^2}{3 t_0}$, divise par 2 et prend la racine carrée :
 \begin{equation}
     c_s^0 = \sqrt{2 \frac{r_s^2}{t_0} \Omega_0}
 \end{equation}
 
-Ce qui est bien l’\cref{eq:rel_cs_0}.
+Ce qui est bien l’\cref{eq:rel_vitesse_son_zero}.
 
-\subsection{Demi-hauteur}
-
-\subsection{Évolution de la température}
-
+%\subsection{Demi-hauteur}
+%
+%\subsection{Évolution de la température, flux radiatif}
+%\label{app:temperature}
 
