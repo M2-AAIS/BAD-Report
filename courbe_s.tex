@@ -73,19 +73,13 @@ n = \frac{log(borne_{sup} - borne_{inf}) + log(\epsilon)}{log(2)}
 Nous avons donc regardé s' il existait des méthodes qui convergeaient plus rapidement et de manière tout aussi robuste. 
 
 \subsubsection{Méthode de Newton}
-La méthode de Newton parfois appelée méthode de Newton-Raphson, décrite dans le \textit{De analysi per aequationes numero terminorum infinitas} en 1669.
+La méthode de Newton parfois appelée méthode de Newton-Raphson, décrite dans le \textit{De analysi per aequationes numero terminorum infinitas} en 1669. Cette méthode à l'avantage de converger beaucoup plus rapidement que pour la méthode de la dichotomie (convergence d'ordre 2)
 
 \begin{equation}
 x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)}
 \end{equation}
 
-Convergence quadratique...
-
-Cependant il faut que f soit de classe $C^1$
-\\
-
-
-
+En revanche, cette méthode présente plusieurs inconvénients, tout d'abord, la fonction doit être obligatoirement de classe $C^1$ et le calcul de la dérivée de manière analytique est complexe.
 
 
 \subsubsection{Méthode de la sécante}
