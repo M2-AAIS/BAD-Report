@@ -13,16 +13,15 @@ avec $Cv$ la capacité calorifique à volume constant par unité de masse du mé
 \begin{equation}
 \frac{\partial T}{\partial t} = 0
 \end{equation}
-Cette équation est stationnaire, elle ne dépend pas du temps mais elle dépend de la distante par rapport au centre du disque. Nous avons donc dû générer 256 courbes en S différentes pour chaque position du disque.
+Cette équation est stationnaire, elle ne dépend pas du temps mais elle dépend de la distance par rapport au centre du disque. Nous avons donc dû générer 256 courbes en S différentes pour chaque position du disque.
 
 Nous avons voulu représenter sur un même graphique l'évolution de la température en fonction de densité de surface, c'est à dire représenter la fonction T($\Sigma$).
    
-
 \subsection{Établissement de la fonction}
 
 Au premier abord, pour obtenir une seule courbe en S, le rayon r a été fixé. Ainsi la vitesse angulaire $\Omega$ a été préalablement définie. Par la suite nous avons répété la démarche suivante pour 256 différentes valeurs du rayon.
 
-En première partie, nous avons calculé la demi-hauteur H en utilisant la résolution d'une équation quadratique ne dépendant que de ($T,\Sigma,\Omega$) (Voir \ref{Equation}).
+En première partie, nous avons calculé la demi-hauteur H en utilisant la résolution d'une équation quadratique ne dépendant que de ($T,\Sigma,\Omega$) (Voir \ref{ssec::resolution_H}).
 
 Ensuite, la densité volumique $\rho$, la vitesse du son $c_s$ et la viscosité $\nu$. 
 
@@ -54,7 +53,7 @@ ce qui nous donne une valeur de la température caractéristique $T_0$
 T_0 \approx 2,50.10^7\left(\frac{\dot{M}_0}{\dot{L}_\mathrm{crit}}\right)^{\frac{1}{4}}\left(\frac{M}{M_\odot}\right)^{-\frac{1}{4}} \mathrm{K}
 \end{equation}
 
-Nous obtenons $T_0 =1.40\ 10^6 \mathrm{K}$. Nous avons ensuite, par paliers successifs, déterminé les intervalles de température permettant de représenter ce basculement d'état. Les deux valeurs que nous avons retenues sont : $T_\textrm{min} = 2.94\ 10^5 \mathrm{K}$ et $T_\textrm{max} = 6.2\ 10^6 \mathrm{K}$. 
+Nous obtenons $T_0 =1.40\ 10^6 \mathrm{K}$. Nous avons ensuite, par paliers successifs, déterminé les intervalles de température permettant de représenter ce basculement d'état. Les deux valeurs que nous avons retenues sont : $T_\textrm{min} = 2.9\ 10^5 \mathrm{K}$ et $T_\textrm{max} = 6.2\ 10^6 \mathrm{K}$. 
 
 
 \subsubsection{Méthode de la dichotomie}
@@ -108,7 +107,7 @@ Cette méthode converge plus rapidement que la méthode de la dichotomie mais mo
 
 \begin{figure}[htb!]
 	\centering
-	\includegraphics[height=0.7\textwidth]{S_curve_secant.eps}
+	\includegraphics[height=0.6\textwidth]{S_curve_secant.eps}
 	\caption{méthode de la sécante}
 	\label{Fig::bench}
 \end{figure}
@@ -154,7 +153,7 @@ Afin de déterminer la propagation de l'instabilité thermique, il faut trouver 
 \begin{figure}[htb!]
 	\centering
 	\includegraphics[height=0.7\textwidth]{stable.pdf}
-	\caption{Zones stables et instables de la courbe en S dans un diagramme $\Sigma-T$. Les zones en rouge sont stables, la zone en bleue est instable. \FIXME{les labels des axes ne sont pas bons, ce n'est pas en log}}
+	\caption{Zones stables et instables de la courbe en S dans un diagramme $\Sigma-T$. Les zones en rouge sont stables, la zone en bleue est instable.}
 	\label{Fig::stable}
 \end{figure}
 %\FloatBarrier
@@ -196,14 +195,14 @@ En combinant les points trouvés dans le cas optiquement épais jusqu'au deuxiè
 D'après nos calculs nous trouvons un $\tau_\textrm{eff}$ aux alentours de $0.06$ lors de la transition d'un milieu dit optiquement épais à un milieu optiquement mince. Cette valeur ne correspond pas à la valeur théorique où $\tau_\textrm{eff} = 1$.
 Cela pose un problème au niveau de la partie d'intégration car notre branche linéaire est translatée par rapport à celle définie par la théorie. 
 Cette différence de valeurs peut être expliquée par une erreur au niveau de l’adimensionnement ou bien dans les équations que nous avons utilisées ainsi que peut-être par une faute cachée dans nos paramètres ou nos constantes. 
-En fonction du rayon $r$, les coordonnées dans l'espace $\left\lbrace T, \Sigma\right\rbrace$ points ayant une valeur critique de $\tau_\textrm{eff}$ semblent évoluer de manière à ce que la température diminue et la densité surfacique augmente..\ref{Fig::fctR}. Ceci explique le changement de forme de la courbe en S selon la position où l'on se place.\ref{Fig::3}
+En fonction du rayon $r$, les coordonnées dans l'espace $\left\lbrace T, \Sigma\right\rbrace$ des points ayant une valeur critique semblent évoluer de manière à ce que la température diminue et la densité surfacique augmente..\ref{Fig::fctR}. Ceci explique le changement de forme de la courbe en S selon la position où l'on se place.\ref{Fig::3}
 %%%manque d'inspiration
 
 \begin{figure}[htb!]
 \centering
 \begin{tabular}{cc} 
-\includegraphics[height=0.3\textwidth]{critical_2_T.eps} &
-\includegraphics[height=0.3\textwidth]{critical_2_sigma.eps} \\
+\includegraphics[height=0.3\textwidth]{critical_1_T.eps} &
+\includegraphics[height=0.3\textwidth]{critical_sigma.eps} \\
 \end{tabular}
   \caption{Température T du point critique en fonction du rayon r (gauche). Densité surfacique $\Sigma$ selon le rayon r(droite)}
 \label{Fig::fctR}
@@ -218,7 +217,7 @@ En fonction du rayon $r$, les coordonnées dans l'espace $\left\lbrace T, \Sigma
 \end{figure}
 
 \subsection{Pistes d'améliorations}
-
+\label{sec::pistes}
 \begin{itemize}
 
 \item Calcul direct $Q^+ = Q^-$

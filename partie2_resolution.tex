@@ -47,7 +47,7 @@ Les relations nous permettant d'apporter des conditions satisfaisantes au systè
 \end{equation} 
 
 \begin{equation}
-	T = 1.4 \times 10^{4} \alpha^{- \frac{1}{5}} \left[ \frac{\dot{M}}{10^{16} \mathrm{g.s}^{-1}} \right]^{\frac{3}{10}} \left[ \frac{M}{M_\odot}}\right]^{\frac{1}{4}} \left[ \frac{r}{10^{10}\mathrm{cm}}\right]^{- \frac{3}{4}} f^{\frac{3}{10}} \mathrm{K} 
+	T = 1.4 \times 10^{4} \alpha^{- \frac{1}{5}} \left[ \frac{\dot{M}}{10^{16} \mathrm{g.s}^{-1}} \right]^{\frac{3}{10}} \left[ \frac{M}{M_\odot}\right]^{\frac{1}{4}} \left[ \frac{r}{10^{10}\mathrm{cm}}\right]^{- \frac{3}{4}} f^{\frac{3}{10}} \mathrm{K} 
 \end{equation}
 
 \begin{align}
@@ -367,6 +367,8 @@ Soit :
 
 Pour chaque temps t donné, nous devons résoudre le système physique en chaque point du disque. Cela correspond à résoudre un système de 16 équations et 16 inconnus \ref{sec::eq_adim}. Nous avons vu précédemment que toutes ces quantités physiques nécessaires à  la simulation sont obtenues à  partir de formules simples et immédiates, à  l'exception de la vitesse locale d'accrétion $v$ ainsi que la demi-hauteur $H$ du disque.
 \subsubsection{Résolution de la demi-hauteur $H$}
+\label{ssec::resolution_H}
+
   $H$ fait en effet intervenir la résolution d'un trinôme du second degré dont nous avons détaillé le calcul ci dessous. \\
 
 Partons de la pression P : 
