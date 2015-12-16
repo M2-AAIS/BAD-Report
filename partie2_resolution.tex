@@ -16,6 +16,20 @@ effet une fois revenu dans le monde dimensionné d’avoir un $\mathrm{d} r$ par
 avec donc plus de points vers le bord intérieur du disque et moins vers le bord
 extérieur. Comme l'instabilité commence par se développer au niveau du bord intérieur, il est favorable d'y avoir un bon échantillonnage.
 
+La simulation commence dans le régime en évolution stable et avec des
+paramètres tels qu'un régime stationnaire existe. Le disque va alors rapidement
+se stabiliser thermiquement jusqu'à atteindre la courbe en S avant de converger
+sur un temps visqueux vers l'état stationnaire. Une fois l'état stationnaire
+atteint, le flux de matière est augmenté. On recommence alors à suivre la
+courbe en S jusqu'à atteindre un nouveau régime stationnaire.
+
+Lorsque le flux de matière entrant est trop élevé, il n'existe plus de régime
+stationnaire mais seulement un régime en évolution instable. Les points proches
+des points critiques commencent alors à effectuer des cycles d'amplitude
+croissante jusqu'à déclencher l'instabilité. Une fois l'instabilité terminée,
+la densité et la température sont de nouveau assez faible pour retomber dans un
+régime d'évolution stable.
+
 \subsubsection{Courbe en S}
 
 L’idée ici est de trouver les zones de stationnarité du système, c’est-à-dire
@@ -130,21 +144,21 @@ Les deux formes étant toutes deux approximatives, on ne peut que comparer leurs
 ordre de grandeurs qui sont compatibles. On supposera donc que les conditions
 initiales sont physiquement raisonnables.
 
-\subsubsection{Évolution du disque}
+\subsubsection{Considérations sur les dérivées numériques spatiales}
 
-La simulation commence dans le régime en évolution stable et avec des
-paramètres tels qu'un régime stationnaire existe. Le disque va alors rapidement
-se stabiliser thermiquement jusqu'à atteindre la courbe en S avant de converger
-sur un temps visqueux vers l'état stationnaire. Une fois l'état stationnaire
-atteint, le flux de matière est augmenté. On recommence alors à suivre la
-courbe en S jusqu'à atteindre un nouveau régime stationnaire.
+Dans un certain nombre d’équations interviennent plusieurs dérivées spatiales,
+du premier ou second ordre. Il existe plusieurs manières de les calculer
+numériquement, ayant des conséquences variées. Nous nous intéresserons à
+celles-ci dans cette partie afin d’expliquer les choix effectués.
 
-Lorsque le flux de matière entrant est trop élevé, il n'existe plus de régime
-stationnaire mais seulement un régime en évolution instable. Les points proches
-des points critiques commencent alors à effectuer des cycles d'amplitude
-croissante jusqu'à déclencher l'instabilité. Une fois l'instabilité terminée,
-la densité et la température sont de nouveau assez faible pour retomber dans un
-régime d'évolution stable.
+\subsubsection{Conditions aux bords}
+
+Toujours à propos des dérivées spatiales intervenant, l’existence de bords «
+numériques » au problème implique d’imposer des conditions aux bords pour ces
+dernières. Ces conditions dépendent des dérivées numériques utilisées, dans
+cette partie seront présentées uniquement celles intervenant pour les dérivées
+effectivement utilisées, les autres seront présentées en ANNEXE CL.
+%TODO: Annexe CL
 
 \subsubsection{Intégration numérique de $S^\star$ et $T^\star$}
 
@@ -212,8 +226,8 @@ où $k_{\nu}$ et $k_{T}$ sont des constantes que l'on à prise respectivement é
 Il est nécessaire dans cette simulation de faire intervenir un pas de temps
 adaptatif. En effet, l'approche du point critique que l'on peut voir en figure
 \ref{Fig::bench} est délicate. Le pas de temps visqueux est donc multiplier à
-chaque nouvelle intégration sur $S^\star$ par un facteur dépendant de la
-distance au point critique par rapport à la variable $S^\star$. 
+chaque nouvelle intégration sur $S^\star$ par un facteur $\alpha$ dépendant de la
+distance au point critique par rapport à la variable $S^\star$. L'évolution du facteur $\alpha$ en fonction de la densité de surface $\Sigma$ est représenté figure \ref{fig::alpha_fct_sig} 
 
 
 \begin{equation}
@@ -226,6 +240,7 @@ où $\alpha = 1 - \left( 0.99 \times \e^{- \left| \frac{S_\textrm{crit} - S}{D_\
 \begin{figure}
   \includegraphics{figures/alpha_fonction_de_sigma.pdf}
   \caption{Evolution du facteur de ralentissement $\alpha$ en fonction de la densité de surface $\Sigma$ - Le point de rupture représente la valeur de $\Sigma$ au point critique}
+  \label{fig::alpha_fct_sig}
 \end{figure}
 
 Le passage en shéma d'intégration explicite est soumis à deux conditions : $T
@@ -237,375 +252,5 @@ sur le même pas de temps :
 \Delta \tau_{T}^{exp} = 0.01 \times \Delta \tau_{T}^{imp}
 \end{equation}
 
-\subsubsection{Considérations sur les dérivées numériques spatiales}
-
-Dans un certain nombre d’équations interviennent plusieurs dérivées spatiales,
-du premier ou second ordre. Il existe plusieurs manières de les calculer
-numériquement, ayant des conséquences variées. Nous nous intéresserons à
-celles-ci dans cette partie afin d’expliquer les choix effectués.
-
-\subsubsection{Conditions aux bords}
-
-Toujours à propos des dérivées spatiales intervenant, l’existence de bords «
-numériques » au problème implique d’imposer des conditions aux bords pour ces
-dernières. Ces conditions dépendent des dérivées numériques utilisées, dans
-cette partie seront présentées uniquement celles intervenant pour les dérivées
-effectivement utilisées, les autres seront présentées en ANNEXE CL.
-%TODO: Annexe CL
-
 \subsubsection{Calcul des autres variables}
 
-
-%\subsection{Courbe en S}
-%\include{courbe_s}
-
-\subsection{Intégration numérique de S et T}\subsection{Intégration implicite de $S$}
-
-\label{ssec:integration_S_imp}
-
-L'intégration implicite revient à calculer $S^t$ en fonction de $S^{t+1}$, ce
-qui donne un système linéaire qu'il est ensuite possible d'inverser. Il est
-important de noter que cette méthode est plus coûteuse à chaque pas de temps
-qu'une méthode explicite, car elle nécessite l'inversion d'une matrice. Il faut
-donc vérifier que le gain de temps de calcul lié à une intégration sur un plus
-grand pas de temps est plus important que le surcoût lié à l'inversion du
-système.\FIXME{le faire …}. Dans la simulation, on vérifie systématiquement que
-le temps de relaxation de $T$ est plus faible que le temps visqueux.
-
-\paragraph{Linéarisation des équations}
-
-On souhaite intégrer $S^\star$, la densité surfacique adimensionnée. L'équation
-d'évolution est :
-
-\begin{equation}
-  \frac{\partial S^\star}{\partial t^\star} = \frac{1}{x^2}\frac{\partial^2}{\partial x^2}\left(\nu^\star S^\star\right)
-\end{equation}
-
-Pour alléger les notations, nous allons ommettre les étoiles dans les
-développements prochains. L'équation s'écrit alors en passant aux variables
-discrètes, au temps $t$ et à la case $1<n\leq n_\textrm{max}$
-
-\begin{equation}
-  \label{eq:S_discret_n}
-  \frac{S^{t+1}_n - S^t_n}{\Delta t} = \frac{1}{x_n^2}\frac{\nu^t_{n+1}S^{t+1}_{n+1} - 2 \nu^t_nS^{t+1}_n + \nu^t_{n-1}S^{t+1}_{n-1}}{\Delta x^2}
-\end{equation}
-
-À l'intérieur du disque, la densité de matière est supposée nulle
-($\nu^t_{0}S^{t+1}_{0} = 0$). Physiquement, il est en effet attendu qu'aucune
-orbite keplerienne circulaire ne soit stable en dessous de l'ISCO
-(\emph{\emph{I}nnermost \emph{S}table \emph{C}ircular \emph{O}rbit}), située en
-$r = 3M$. En approximation, on suppose donc que la densité de matière y est
-nulle.
-
-\begin{equation}
-  \label{eq:S_discret_1}
-  \frac{S^{t+1}_1 - S^t_1}{\Delta t} = \frac{1}{x_1^2}\frac{\nu^t_{2}S^{t+1}_{2} - 2 \nu^t_1S^{t+1}_1}{\Delta x^2}
-\end{equation}
-
-Pour la case $n = n_\textrm{max} = N$, on a d'après \eqref{eq:nuS_n_is_null}:
-
-\begin{equation}
-  \frac{\nu^{t}_{N+1}S^{t+1}_{N+1} - \nu^{t}_NS^{t+1}_N}{\Delta x} = \dot{M}^\star_N
-\end{equation}
-
-Il faut noter que $\dot{M}^\star_N$ vaut initialement $1$. Pour simuler
-l'arrivée de matière par l'extérieur du disque, cette quantité est incrémentée
-au fur et à mesure de la simulation. Donc l'équation \eqref{eq:S_discret_n}
-s'écrit en $N$:
-
-\begin{equation}
-  \label{eq:S_discret_N}
-  \frac{S^{t+1}_N - S^t_N}{\Delta t} = \frac{1}{x_N^2}\frac{\Delta x - \nu^{t}_NS^{t+1}_N + \nu^{t}_{N-1}S^{t+1}_{N-1}}{\Delta x^2}
-\end{equation}
-
-\paragraph{Écriture matricielle}
-
-On réécrit \eqref{eq:S_discret_n}, \eqref{eq:S_discret_1} et
-\eqref{eq:S_discret_N} pour exprimer $S^t$ en fonction de $S^{t+1}$:
-
-\begin{equation}
-  \left\lbrace\begin{array}{r l c l c l }
-    S^{t}_1 = &
-               & &S_1^{t+1}\left(1 + 2\frac{\Delta t}{\Delta x^2}\frac{\nu_1^t}{x_1^2}\right)
-               &+& S_{2}^{t+1}\left(-\frac{\Delta t}{\Delta x^2}\frac{\nu_{2}^t}{x_1^2}\right)\\
-    S^{t}_n = &S_{n-1}^{t+1}\left(-\frac{\Delta t}{\Delta x^2}\frac{\nu_{n-1}^t}{x_n^2}\right)
-               &+& S_n^{t+1}\left(1 + 2\frac{\Delta t}{\Delta x^2}\frac{\nu_n^t}{x_n^2}\right)
-               &+& S_{n+1}^{t+1}\left(-\frac{\Delta t}{\Delta x^2}\frac{\nu_{n+1}^t}{x_n^2}\right)\\
-    S^{t}_N + \frac{\Delta t}{\Delta x x_N^2} =
-               &S^{t+1}_{N-1} \left(-\frac{\Delta t}{\Delta x^2}\frac{\nu_{N-1}^t}{x_N^2}\right)
-               &+& S_N^{t+1} \left(1 + \frac{\Delta t}{\Delta x^2}\frac{\nu^t_N}{x_N^2}\right)
-               & &
-  \end{array}\right.
-\end{equation}
-
-Pour simplifier, on notera $A_k = 1 + 2 \frac{\Delta t}{\Delta x^2}\frac{\nu_k^t}{x_k^2}$ et $\Delta = \frac{\Delta t}{\Delta x^2}$
-Ce système d'équation s'écrit aussi sous forme matricielle :
-\begin{equation}
-  \left(S^t\middle) + 
-  \middle(\begin{matrix}
-    0 \\
-    \\
-    \\
-    \vdots \\
-    \\
-    \\
-    \\
-    0 \\
-    \frac{\Delta t}{\Delta x}\frac{1}{x_N^2}
-  \end{matrix}\middle)
-  =
-  \begin{pmatrix}
-A_1                            & -\Delta\frac{\nu_{2}^t}{x_1^2} &  & & & & 0\\
--\Delta \frac{\nu_{1}^t}{x_2^2} & A_2                           & -\Delta\frac{\nu_{3}^t}{x_2^2} & & & &\\
-    &        & \ddots                          &  & & & &\\
-    &        & -\Delta \frac{\nu_{k-1}^t}{x_k^2} & A_k    & -\Delta \frac{\nu_{k+1}^t}{x_k^2} & &\\
-    &        &                                 & & \ddots                          & & \\
-    & & & & -\Delta \frac{\nu_{N-2}^t}{x_{N-1}^2} & A_{N-1} & -\Delta \frac{\nu_{N}^t}{x_{N-1}^2}\\
-    0 & & & & & -\Delta \frac{\nu_{N-1}^t}{x_N^2} & 1 + \Delta \frac{\nu_N^t}{x_N^2}
-  \end{pmatrix} \middle(S^{t+1}\right)
-\end{equation}
-
-Qui s'écrit aussi :
-
-\begin{equation}
-  AS^{t+1} = S^t + X 
-\end{equation}
-
-$A$ est une matrice tri-diagonale qu'il est facile de résoudre en utilisant Lapack (\href{http://www.netlib.org/lapack/explore-html/d4/d62/group__double_g_tsolve.html#ga2bf93f2ddefa5e671866eb2191dc19d4}{routine DGTSV}).
-\FIXME{ajouter cela comme une référence}
-
-\subsection{Intégration explicite de $S$}
-\label{ssec:integration_S_exp}
-
-Au contraire de l'intégration implicite, l'intégration explicite permet une
-résolution directe d'une équation aux dérivées partielles. Il suffit de
-connaître les variables à un temps $t$ pour en déduire la nouvelle valeur au
-temps $t+1$ :
-
-\begin{equation}
-  S^{t+1} = S^t + \Delta t f(t)
-\end{equation}
-La solution au temps suivant est directement donnée.
-
-\subsection{Intégration explicite de $T$}
-\label{ssec:integration_T}
-
-Il est possible d'améliorer le schéma d'intégration explicite pour la
-température en donnant une meilleure estimation de $f(t)$.
-
-\begin{equation}
-  \frac{\partial T}{\partial t} = \frac{Q^+ - Q^- + Q_\textrm{adv}}{C_V} = f(T, S)
-\end{equation}
-
-On peut écrire un développement limité de $f(T) = f_0 + \frac{\partial
-f}{\partial T}\Delta T + \frac{\partial f}{\partial S}\Delta S$ Comme on a un
-temps thermique très petit devant le temps visqueux $\tau_\nu \gg \tau_T$
-\FIXME{ est-ce vraiment vrai ?} , les variations de $f$ par rapport à $S$ sont
-très faibles devant celles par rapport à $T$. On obtient alors $f(T) = f_0 +
-f'_T \Delta T$. En linéarisant, on obtient finalement: \begin{equation} T^{t+1}
-= T^t + \frac{f_0}{f'_T}\left[e^{f'_T\Delta t} - 1 \right] \end{equation} On
-peut facilement obtenir numériquement une approximation de $f'_T$ en calculant
-la quantité $\frac{f(T+\delta T) - f(T)}{\delta T}$, avec $\delta T = \lambda
-T,\ \lambda \ll 1$.
-
-\FIXME{ ajouter plot qui montre qu'on a bien df/dS << df/dT}
-\FIXME{ajouter plot qui montre que la courbe est suffisamment lisse, c'est-à-dire que f'T peut bien être approximé numériquement}
-
-\subsection{Considérations sur les dérivées numériques spatiales}
-
-\FIXME{peut être bouger cette partie pour la cohérence ?}
-
-Il existe un grand nombre de façon de dériver numériquement une variable $u$ en
-fonction de l’espace discrétisé selon $r$ (pas spatial $\Delta{r}$). La plus
-classique d’entre elles est celle des différences finies au premier ordre, qui
-admet trois expressions standards~\eqref{eq:differences_finies}, qui exprime
-$u_j = u(r,t)$ en fonctions des valeurs aux positions spatiales adjacentes
-$u_{j+1} = u(r+\Delta{r},t)$ et $u_{j-1} = u(r-\Delta{r},t)$.
-
-\begin{subequations}
-    \label{eq:differences_finies}
-    \begin{align}
-        \label{eq:diff_droite}
-        \frac{\partial u_j}{\partial r} &\approx \frac{u_{j+1} - u_j    }{  \Delta{r}}\\
-        \label{eq:diff_gauche}
-        \frac{\partial u_j}{\partial r} &\approx \frac{u_j     - u_{j-1}}{  \Delta{r}}\\
-        \label{eq:diff_centre}
-        \frac{\partial u_j}{\partial r} &\approx \frac{u_{j+1} - u_{j-1}}{2 \Delta{r}}
-    \end{align}
-\end{subequations}
-
-Elles sont appelées respectivement \textit{différence à
-droite}~\eqref{eq:diff_droite}, \textit{différence à
-gauche}~\eqref{eq:diff_gauche} et \textit{différence
-centrée}~\eqref{eq:diff_centre}. En pratique, la plus fidèle est celle des
-différences centrées, mais elle n’est pas toujours utilisable.
-
-En effet, considérons l’équation d’advection~\eqref{eq:advection_th} sous une
-forme assez générale, où $v$ représente la vitesse d’advection (et donc son
-signe le sens du gradient). 
-
-\begin{equation}
-    \label{eq:advection_th}
-    \frac{\partial u}{\partial t} + v \frac{\partial u}{\partial r} = 0
-\end{equation}
-
-L’\cref{eq:advection_th} étant linéaire, on peut étudier la stabilité des
-solutions numériques selon la méthode de Von Neumann. On considère $u(r,t)$ une
-solution du problème et on ajoute une perturbation $\delta{u}$ à celle-ci. On
-va alors regarder l’évolution de cette perturbation au cours du temps. La
-linéarité nous permet de plus de considérer uniquement un terme de la
-transformée de Fourier de $\delta{u}$, qu’on écrit alors $\delta{u} =
-\tilde{u}(t) \e^{ikr}$. En réinjectant dans \eqref{eq:advection_th} et en
-remplaçant $\frac{\partial u}{\partial r}$ par les expressions données
-\cref{eq:differences_finies}, on obtient respectivement :
-
-\begin{subequations}
-    \begin{align}
-        \frac{\partial \tilde{u}}{\partial t} \e^{ik\Delta{r}} &= - v \frac{\e^{ik(r+\Delta{r})} - \e^{ik r           }}{  \Delta{r}} \tilde{u}\\
-        \frac{\partial \tilde{u}}{\partial t} \e^{ik\Delta{r}} &= - v \frac{\e^{ik r           } - \e^{ik(r-\Delta{r})}}{  \Delta{r}} \tilde{u}\\
-        \frac{\partial \tilde{u}}{\partial t} \e^{ik\Delta{r}} &= - v \frac{\e^{ik(r+\Delta{r})} - \e^{ik(r-\Delta{r})}}{2 \Delta{r}} \tilde{u}
-    \end{align}
-\end{subequations}
-
-En simplifiant ces équations par $\e^{ik\Delta{r}}$, cela devient :
-
-\begin{subequations}
-    \begin{align}
-        \frac{\partial \tilde{u}}{\partial t} &= - v \frac{\e^{ik\Delta{r}} - 1                }{  \Delta{r}} \tilde{u}\\
-        \frac{\partial \tilde{u}}{\partial t} &= - v \frac{1                - \e^{-ik\Delta{r}}}{  \Delta{r}} \tilde{u}\\
-        \frac{\partial \tilde{u}}{\partial t} &= - v \frac{\e^{ik\Delta{r}} - \e^{-ik\Delta{r}}}{2 \Delta{r}} \tilde{u}
-    \end{align}
-\end{subequations}
-
-On fait alors un développement limité en $ik\Delta{r}$ :
-
-\begin{align}
-    \e^{ ik\Delta{r}} &= 1 + ik\Delta{r} + \frac{i^2 k^2 \Delta{r}^2}{2}\\
-    \e^{-ik\Delta{r}} &= 1 - ik\Delta{r} + \frac{i^2 k^2 \Delta{r}^2}{2}
-\end{align}
-
-Et on réinjecte :
-
-\begin{subequations}
-    \begin{align}
-        \frac{\partial \tilde{u}}{\partial t} &= \left(- vik + v\frac{k^2}{2}\right) \tilde{u}\\
-        \frac{\partial \tilde{u}}{\partial t} &= \left(- vik - v\frac{k^2}{2}\right) \tilde{u}\\
-        \frac{\partial \tilde{u}}{\partial t} &= \left(- vik + 0             \right) \tilde{u}
-    \end{align}
-\end{subequations}
-
-\begin{equation}
-    \frac{\partial \tilde{u}}{\partial t} = - v \frac{2ik\Delta{r}}{2\Delta{r}} \tilde{u} = - i k v \tilde{u}
-\end{equation}
-
-\begin{equation}
-    \tilde{u} = \tilde{u(0)} \exp(-i k v t)
-\end{equation}
-
-En fait, nous avons tout simplement :
-
-\begin{equation}
-    \frac{\exp(ik\Delta{r}) - \exp(-ik\Delta{r})}{2 \Delta{r}} = \frac{2 i \sin(k\Delta{r})}{2 \Delta{r}} = i k \sinc(k\Delta{r})
-\end{equation}
-
-Soit :
-\begin{equation}
-    \frac{\partial \tilde{u}}{\partial t} = - i k v \sinc(k\Delta{r}) \tilde{u}
-\end{equation}
-
-\begin{equation}
-    \tilde{u} = \tilde{u(0)} \exp(-i k v \sinc(k \Delta{r}) t)
-\end{equation}
-
-\subsection{Conditions aux bords}
-
-\subsection{Calcul des autres variables}
-
-Pour chaque temps t donné, nous devons résoudre le système physique en chaque
-point du disque. Cela correspond à résoudre un système de 16 équations et 16
-inconnus \ref{sec::eq_adim}. Nous avons vu précédemment que toutes ces
-quantités physiques nécessaires à  la simulation sont obtenues à  partir de
-formules simples et immédiates, à  l'exception de la vitesse locale d'accrétion
-$v$ ainsi que la demi-hauteur $H$ du disque.
-
-\subsubsection{Résolution de la demi-hauteur $H$}
-\label{ssec::resolution_H}
-
-  $H$ fait en effet intervenir la résolution d'un trinôme du second degré dont nous avons détaillé le calcul ci dessous. \\
-
-Partons de la pression P : 
-
-\begin{equation}
-	P = P_\textrm{gaz} + P_\textrm{rad}
-\end{equation}
-
-
-\begin{equation}
-	c_{s}^{2} \rho = \frac{R \rho T}{\mu} + \frac{1}{3} a T^{4}
-\end{equation}
-
-
-\begin{equation}
-	\Omega^{2} H^{2} \rho = \frac{R T}{\mu} \rho + \frac{1}{3} a T^{4}
-\end{equation}
-
-
-\begin{equation}
-	\frac{1}{2} \Omega^{2} \Sigma H = \frac{R T}{\mu} \frac{\Sigma}{2 H} + \frac{1}{3} a T^{4}
-\end{equation}
-
-H est donc solution d'un trinôme du second degré $ a H^{2} + b H + c = 0$. \\
-Compte tenu de l'adimensionnement considéré dans cette simulation, nous l'exprimons sous la forme suivante :  
-
-\begin{eqnarray}
-  a^{\prime} H^{* 2}+b^{\prime}H^{*}+c^{\prime}=0
-  \end{eqnarray}
-
-$\begin{cases}  
-      a^{\prime} &= \Omega^{*2} \Omega_{0}^{2} S^{*} S_{0}\\
-      b^{\prime} &= - \frac{2 a}{3 r_{s}} T^{*4} T_{0}^{4} x \\
-      c^{\prime}&=-\frac{RT_{0}}{\mu r_{s}^{2}} T^{*} S^{*} S_{0}
-     \end{cases}$ \\
-
-
-\begin{equation}
-	\Delta^{\prime} = b^{\prime 2} - 4a^{\prime}c^{\prime}
-\end{equation} 
-
-Il vient donc : 
-
-\begin{equation}
-	H^{*} = \frac{-b -sign(b) \sqrt{\Delta}}{2a}
-\end{equation}
-
-
-\subsubsection{Résolution de la vitesse locale d'accrétion $v$}
-\begin{equation}
-    v^\star = - \frac{1}{S^\star x} \frac{\partial}{\partial x} \left(\nu^\star S^\star\right)
-\end{equation} 
-
-Nous avons privilégié pour cette équation le calcul d'une moyenne des dérivées amonts et avales. La question de savoir lesquelles des dérivées (amonts ou avales) conduisent à  des solutions stables n'est pas nécessaire ici puisque en effet il ne s'agit pas d'une équation d'advection mais seulement d'une dérivée spatiale. Ci-dessous l'équation de la dérivée selon cette approximation : 
-
-\begin{equation}
-v^\star_{i} = - \frac{1}{S_{i}^\star x_{i}} \frac{( (\nu^{*}S^{*})_{i+1} - (\nu^{*}S^{*})_{i-1} )}{2 \Delta x_{i}}
-\end{equation} 
-
-Par contre ce choix de dérivée impose que nous mettions des conditions à  chaque bords du disque. La condition au bord intérieur est  $(\nu^{*}S^{*})_{0} = 0$, tandis que celle au bord extérieur est $v^\star_\textrm{max}   = - \dot{M^{*}}_\textrm{max} / (S^{*}x^{*})_\textrm{max}$.
-
-
-\subsubsection{Ordre de résolution des équations}
-
-Nous avons donc maintenant toutes les équations  nécessaires à  la résolution du système. L'ordre de résolution des équations est le suivant :  \\
-
- $\rightarrow$ Une foi le calcul de $H^{*}$ effectué, nous pouvons calculer les valeurs de la vitesse du son $cs^{*}$, de la viscosité $\nu^{*}$ ainsi que de la densité $\rho^{*}$ grâce aux formules décrites précédemment.   
-
- $\rightarrow$ Le calcul de $v$ nous permet quand à lui de trouver $\dot{M}$. Nous calculons également les valeurs de $\epsilon$,  $\kappa_\textrm{ff}$ et $\tau$, qui servent ensuite dans le calcul de $Fz$.
- 
- $\rightarrow$ Enfin nous résolvons les équations des pressions $P_\textrm{gaz}$ et $P_\textrm{rad}$, de $\beta$,  de la capacité $Cv$ ainsi que des termes du transfert thermique $Q^{+}$, $Q^{-}$ et $Q_\textrm{adv}$.
-
-
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "rapport"
-%%% End:
