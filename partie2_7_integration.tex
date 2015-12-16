@@ -7,11 +7,9 @@
 L'intégration implicite revient à calculer $S^t$ en fonction de $S^{t+1}$, ce
 qui donne un système linéaire qu'il est ensuite possible d'inverser. Il est
 important de noter que cette méthode est plus coûteuse à chaque pas de temps
-qu'une méthode explicite, car elle nécessite l'inversion d'une matrice. Il faut
-donc vérifier que le gain de temps de calcul lié à une intégration sur un plus
-grand pas de temps est plus important que le surcoût lié à l'inversion du
-système.\FIXME{le faire …}. Dans la simulation, on vérifie systématiquement que
-le temps de relaxation de $T$ est plus faible que le temps visqueux.
+qu'une méthode explicite, car elle nécessite l'inversion d'une matrice. Dans la simulation,
+on vérifie systématiquement que le temps de relaxation de $T$ est plus faible que le temps 
+visqueux.
 
 \paragraph{Linéarisation des équations}
 
@@ -113,7 +111,6 @@ Qui s'écrit aussi :
 \end{equation}
 
 $A$ est une matrice tri-diagonale qu'il est facile de résoudre en utilisant Lapack (\href{http://www.netlib.org/lapack/explore-html/d4/d62/group__double_g_tsolve.html#ga2bf93f2ddefa5e671866eb2191dc19d4}{routine DGTSV}).
-\FIXME{ajouter cela comme une référence}
 
 \subsubsection{Intégration explicite de $S$}
 \label{ssec:integration_S_exp}
